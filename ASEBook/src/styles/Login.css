@@ -1,0 +1,64 @@
+/* Login page styles */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Instead of fixed viewport sizing, fill the parent (.content) */
+    width: 100%;
+    min-height: 400px;  /* Use a min-height, or set height: 100% if desired */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no scrolling on the container */
+  }
+  
+  .login-form {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    box-sizing: border-box;
+  }
+  
+  .login-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .login-form p {
+    color: #fff;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+  
