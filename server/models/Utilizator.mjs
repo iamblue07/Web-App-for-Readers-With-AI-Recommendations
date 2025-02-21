@@ -38,7 +38,11 @@ export default (sequelize, DataTypes) => {
         },
         esteAdministrator: {
             type: DataTypes.BOOLEAN
-        }
+        },
+        caleImagineProfil: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     }, {
         timestamps: false
     })

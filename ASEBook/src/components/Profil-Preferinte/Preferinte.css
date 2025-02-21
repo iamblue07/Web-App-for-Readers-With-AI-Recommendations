@@ -1,0 +1,83 @@
+/* Preferinte.css */
+.preferinte-container {
+    width: 100%;
+    height: 60vh; /* Ocupă 60% din înălțimea paginii */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+
+.preferinte-table-container {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.tabel-preferinte {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Rândurile sunt mai mici */
+.tr-preferinte {
+    height: 30px; /* Reducem înălțimea rândurilor */
+}
+
+/* Diminuăm fontul și padding-ul */
+.th-preferinte, .td-preferinte {
+    padding: 6px; /* Reducem spațiul dintre elemente */
+    font-size: 12px; /* Facem textul mai mic */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+    color: white;
+}
+
+.th-preferinte {
+    background-color: rgba(0, 123, 255, 0.8);
+    color: white;
+}
+
+/* Butoanele de preferință mai compacte */
+.preferinta {
+    display: inline-block;
+    padding: 4px 10px; /* Mai mic decât înainte */
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    white-space: nowrap;
+}
+
+/* Preferințele mai compacte */
+.prefer {
+    background-color: green;
+    color: white;
+    border: 1px solid darkgreen;
+}
+
+.prefer:hover {
+    background-color: darkgreen;
+}
+
+.nu-prefer {
+    background-color: red;
+    color: white;
+    border: 1px solid darkred;
+}
+
+.nu-prefer:hover {
+    background-color: darkred;
+}
+
+.buton-preferinte {
+    padding: 8px;
+    cursor: pointer;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    margin: 5px;
+}

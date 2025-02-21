@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import config from '../utils/config';
 import { GlobalContext } from '../context/GlobalState';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import {createToast} from '../utils/createToast';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -45,34 +46,6 @@ const Login = () => {
         setIsLogin(!isLogin);
     };
 
-    const createToast = (message, success) => {
-        if (!success) {
-            toast.error(message, {
-                pauseOnHover: false,
-                style: {
-                    background: "rgba(255, 255, 255, 0.2)",
-                    backdropFilter: "blur(10px)",
-                    color: "#fff",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
-                    borderRadius: "10px",
-                    fontWeight: "bold",
-                },
-            });
-        } else {
-            toast.success(message, {
-                pauseOnHover: false,
-                style: {
-                    background: "rgba(255, 255, 255, 0.2)",
-                    backdropFilter: "blur(10px)",
-                    color: "#fff",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
-                    borderRadius: "10px",
-                    fontWeight: "bold",
-                },
-            });
-        }
-    };
-
     const conectare = async () => {
         if (email === "" || password === "") {
             createToast("Email sau parolă lipsă!", false);
@@ -97,9 +70,9 @@ const Login = () => {
 
             const data = await response.json();
             if (data) {
-                setAuthData({ token: data.token, userId: data.user.id });
+                setAuthData({ token: data.token });
                 createToast("Conectare reușită!", true);
-                navigate(`/utilizator/${data.user.id}`);
+                navigate(`/acasa`);
             }
         } catch (error) {
             createToast("A apărut o eroare la conectare!", false);
@@ -171,8 +144,8 @@ const Login = () => {
                 const registerData = await registerResponse.json();
                 if (registerData) {
                     createToast("Înregistrare reușită!", true);
-                    setAuthData({ token: registerData.token, userId: registerData.user.id });
-                    navigate(`/utilizator/${registerData.user.id}`);
+                    setAuthData({ token: registerData.token });
+                    navigate(`/acasa`);
                 }
             } catch (error) {
                 createToast("A apărut o eroare la înregistrare 6!", false);

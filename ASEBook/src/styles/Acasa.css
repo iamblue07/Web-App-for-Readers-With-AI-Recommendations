@@ -1,0 +1,77 @@
+.main-container-Acasa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Instead of fixed viewport sizing, fill the parent (.content) */
+    width: 100%;
+    min-height: 400px;  /* Use a min-height, or set height: 100% if desired */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no scrolling on the container */
+    flex-direction: column;
+}
+
+.containerOne, .containerTwo {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    align-items: flex-start; /* Align items at the start */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.containerOne .textBlock, .containerTwo .textBlock {
+    flex: 1;
+    margin: 10px 0; /* Add vertical margin for spacing */
+    padding: 15px 25px; /* Adjust padding for better spacing */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.pictureOne, .pictureTwo {
+    height: auto;
+    width: 100%;
+    max-width: 300px; /* Limit the width to a reasonable size */
+    max-height: 200px; /* Limit the height to a reasonable size */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.containerOne .pictureOne {
+    margin-left: 20px;
+}
+
+.containerTwo .pictureTwo {
+    margin-right: 20px;
+}
+
+.textBlock {
+    width: 100%;
+    color: white;
+    text-align: justify;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s; /* Add transition for hover effect */
+}
+
+.textBlock:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.textTypeOne {
+    background-color: rgba(240, 240, 240, 0.3);
+}
+
+.textTypeTwo {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.textThree {
+    padding: 10px;
+    margin-bottom: 10px;
+}

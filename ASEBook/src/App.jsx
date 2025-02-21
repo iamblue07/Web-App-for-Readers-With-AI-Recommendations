@@ -19,7 +19,7 @@ const App = () => {
 
     useEffect(() => {
         if (location.pathname === '/' && authData.userId !== 0) {
-            navigate(`/utilizator/${authData.userId}`);
+            navigate(`/acasa`);
         }
     }, [location, authData, navigate]);
 
@@ -27,16 +27,16 @@ const App = () => {
         <div className="main-container">
             <div className="header">ASEBook</div>
             <div className="navbar">
-                <button onClick={() => navigate(`utilizator/${authData.userId}`)}>Acasa</button>
-                <button onClick={() => navigate(`/utilizator/${authData.userId}/forumuri`)}>Forumuri</button>
-                <button onClick={() => navigate(`/utilizator/${authData.userId}/bazar`)}>Bazar</button>
-                <button onClick={() => navigate(`/utilizator/${authData.userId}/cauta`)}>Cauta</button>
-                <button onClick={() => navigate(`/utilizator/${authData.userId}/despre-noi`)}>Despre Noi</button>
-                <button onClick={() => navigate(`/utilizator/${authData.userId}/contact`)}>Contact</button>
-                {authData.userId === 0 ? (
+                <button onClick={() => navigate(`/Acasa`)}>Acasa</button>
+                <button onClick={() => navigate(`/forumuri`)}>Forumuri</button>
+                <button onClick={() => navigate(`/bazar`)}>Bazar</button>
+                <button onClick={() => navigate(`/cauta`)}>Cauta</button>
+                <button onClick={() => navigate(`/despre-noi`)}>Despre Noi</button>
+                <button onClick={() => navigate(`/contact`)}>Contact</button>
+                {authData.token === null ? (
                     <button onClick={() => navigate(`/conecteaza-te`)}>Conecteaza-te</button>
                 ) : (
-                    <button onClick={() => navigate(`/utilizator/${authData.userId}/profil`)}>Profil</button>
+                    <button onClick={() => navigate(`/profil`)}>Profil</button>
                 )}
             </div>
             <div className="content">
@@ -49,13 +49,13 @@ const App = () => {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/profil" element={<Profil />} />
                     <Route path="/conecteaza-te" element={<Login />} />
-                    <Route path="utilizator/:uid" element={<Acasa />} />
-                    <Route path="/utilizator/:uid/forumuri" element={<Forumuri />} />
-                    <Route path="utilizator/:uid/bazar" element={<Bazar />} />
-                    <Route path="/utilizator/:uid/cauta" element={<Cauta />} />
-                    <Route path="/utilizator/:uid/despre-noi" element={<DespreNoi />} />
-                    <Route path="/utilizator/:uid/contact" element={<Contact />} />
-                    <Route path="/utilizator/:uid/profil" element={<Profil />} />
+                    <Route path="acasa" element={<Acasa />} />
+                    <Route path="/forumuri" element={<Forumuri />} />
+                    <Route path="/bazar" element={<Bazar />} />
+                    <Route path="/cauta" element={<Cauta />} />
+                    <Route path="/despre-noi" element={<DespreNoi />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/profil" element={<Profil />} />
                 </Routes>
             </div>
         </div>

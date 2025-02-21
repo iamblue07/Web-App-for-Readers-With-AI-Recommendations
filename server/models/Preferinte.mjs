@@ -9,12 +9,28 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        genLiterar: {
-            type: DataTypes.STRING,
+        preferintaUnu: {
+            type:DataTypes.STRING,
             allowNull: false
-        },
-        estePreferat: {
-            type: DataTypes.BOOLEAN,
+        }
+        ,
+        preferintaDoi: {
+            type:DataTypes.STRING,
+            allowNull: false
+        }
+        ,
+        preferintaTrei: {
+            type:DataTypes.STRING,
+            allowNull: false
+        }
+        ,
+        preferintaPatru: {
+            type:DataTypes.STRING,
+            allowNull: false
+        }
+        ,
+        preferintaCinci: {
+            type:DataTypes.STRING,
             allowNull: false
         }
     }, {

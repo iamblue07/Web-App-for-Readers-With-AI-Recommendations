@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 
 const initialState = {
-    authData: JSON.parse(localStorage.getItem('authData')) || { userId: 0, token: null },
+    authData: JSON.parse(localStorage.getItem('authData')) || { token: null },
 };
 
 const GlobalContext = createContext(initialState);
@@ -16,7 +16,7 @@ const globalReducer = (state, action) => {
         case 'CLEAR_AUTH_DATA':
             return {
                 ...state,
-                authData: { userId: 0, token: null },
+                authData: { token: null },
             };
         default:
             return state;
