@@ -9,4 +9,5 @@ const router = express.Router();
 router.get('/:userId/getImagineProfil', utilizatorController.getImagineProfil);
 router.get('/:userId/getUtilizatorPreferinte', middleware.middlewareAuth, preferinteController.getUtilizatorPreferinte);
 router.post('/updateUtilizatorPreferinte', middleware.middlewareAuth, preferinteController.updateUtilizatorPreferinte);
+
 export default router

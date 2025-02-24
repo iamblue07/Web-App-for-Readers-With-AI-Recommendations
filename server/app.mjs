@@ -20,6 +20,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use('/auth', routers.AuthRouters)
 app.use('', routers.UtilizatorRouters)
+app.use('/api', routers.ForumRouters)
 
 // Use the authentication middleware for protected routes
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

@@ -180,7 +180,7 @@ const getImagineProfil = async(req, res) => {
     try {
         const userId = req.params.userId;
         if (!userId || isNaN(userId)) {
-            return res.status(400).json({ error: "ID utilizator invalid" });
+            return res.status(404).json({ error: "ID utilizator invalid" });
         }        
         const user = await models.Utilizator.findByPk(userId);
         if (!user || !user.caleImagineProfil) {

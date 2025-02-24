@@ -13,7 +13,6 @@ const Preferinte = ({ userId }) => {
     const fetchUpdateUtilizatorPreferinte = async () => {
         const token = authData?.token;
         if(!token) {
-            console.log("No token found");
             return;
         }
         try {
@@ -41,7 +40,6 @@ const Preferinte = ({ userId }) => {
     const fetchUtilizatorPreferinte = async () => {
         const token = authData?.token;
         if (!token) {
-            console.log("No token found");
             return;
         }
         try {
@@ -57,7 +55,6 @@ const Preferinte = ({ userId }) => {
                 return;
             }
             const data = await response.json();
-            console.log("Preferintele utilizatorului:", data); // Verifică ce primești
     
             if (!data) {
                 createToast("Eroare: preferintele au sosit goale!", false);
