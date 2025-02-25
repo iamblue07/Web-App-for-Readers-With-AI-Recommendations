@@ -1,5 +1,6 @@
 import models from "../models/index.mjs";
 import dotenv from 'dotenv';
+import path from 'path';
 import { Op } from "sequelize";
 
 dotenv.config();
@@ -74,8 +75,108 @@ const getUserForumRights = async (req, res) => {
 
 
 
+const getMesajeForum = async (req, res) => {
+    try {
+        const { idf } = req.params;
+        const { page = 1, limit = 10 } = req.query;
+        const pageNumber = parseInt(page, 10);
+        const limitNumber = parseInt(limit, 10);
+
+        const mesaje = await models.MesajForum.findAndCountAll({
+            where: { idForum: idf },
+            include: [{
+                model: models.Utilizator,
+                attributes: ['username', 'caleImagineProfil']
+            }],
+            limit: limitNumber,
+            offset: (pageNumber - 1) * limitNumber,
+            order: [['data', 'DESC']]
+        });
+
+        if (!mesaje) {
+            return res.status(404).json({ message: 'Ceva eroare' });
+        }
+
+        const mesajeFormatate = mesaje.rows.map(mesaj => {
+            const avatarPath = mesaj.Utilizator.caleImagineProfil 
+                ? `/uploads/${path.basename(mesaj.Utilizator.caleImagineProfil)}`
+                : null;
+
+            return {
+                continut: mesaj.continut,
+                username: mesaj.Utilizator.username,
+                data: mesaj.data,
+                avatar: avatarPath
+            };
+        });
+
+        return res.json({
+            messages: mesajeFormatate,
+            totalMessages: mesaje.count,
+            totalPages: Math.ceil(mesaje.count / limitNumber),
+            currentPage: pageNumber
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Eroare server.' });
+    }
+};
+
+const getForumTitle = async (req, res) => {
+    try {
+        const {idf} = req.params;
+        if(!idf) return res.status(404).json({message: "Missing forum id"});
+        const forum = await models.Forum.findByPk(idf);
+        if(!forum) return res.status(404).json({message: "Missing forum"});
+        return res.status(200).json({
+            title: forum.titluForum
+        })
+    } catch(error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Eroare server.' });
+    }
+}
+
+const createMesajForum = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const {idForum} = req.params;
+        if (!userId || isNaN(userId)) {
+            return res.status(400).json({ message: "ID utilizator invalid" });
+        }
+        
+        const user = await models.Utilizator.findByPk(userId);
+        if (!user) return res.status(404).json({ message: "Utilizatorul nu există" });
+        if (!user.poateTrimiteMesaj) {
+            return res.status(403).json({ message: "Nu ai dreptul de a trimite mesaje!" });
+        }
+
+        const { message } = req.body;
+        if (!idForum || !message.trim()) {
+            return res.status(400).json({ message: "Date invalide" });
+        }
+
+        await models.MesajForum.create({
+            idUtilizator: userId,
+            idForum,
+            continut:message,
+            data: new Date()
+        });
+
+        return res.status(201).json({ message: "Mesaj trimis cu succes" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Eroare internă a serverului" });
+    }
+};
+
+
+
 export default {
     getForumuri,
     createForum,
-    getUserForumRights
+    getUserForumRights,
+    getMesajeForum,
+    createMesajForum,
+    getForumTitle
 }

@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Profil from './pages/Profil';
 import Acasa from './pages/Acasa';
 import Bazar from './pages/Bazar';
+import Forum from './components/Forum/Forum';
 
 import { GlobalContext } from './context/GlobalState';
 
@@ -56,6 +57,7 @@ const App = () => {
                     <Route path="/despre-noi" element={<DespreNoi />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/profil" element={<Profil />} />
+                    <Route path='/forumuri/:idForum' element={<Forum/>}/>
                 </Routes>
             </div>
         </div>

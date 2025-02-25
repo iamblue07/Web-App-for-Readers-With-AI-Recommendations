@@ -42,46 +42,46 @@ const RecomandareAI = CreateRecomandareAIEntity(sequelize, Sequelize)
 const Utilizator = CreateUtilizatorEntity(sequelize, Sequelize)
 
 Forum.hasMany(MesajForum, { foreignKey: 'idForum' })
-MesajForum.belongsTo(Forum, { foreignKey: 'id' })
+MesajForum.belongsTo(Forum, { foreignKey: 'idForum' })
 
 ChatBazar.hasMany(MesajChat, { foreignKey: 'idChat' })
-MesajChat.belongsTo(ChatBazar, { foreignKey: 'id' })
+MesajChat.belongsTo(ChatBazar, { foreignKey: 'idChat' })
 
 AnuntBazar.hasMany(ChatBazar, { foreignKey: 'idAnunt' })
-ChatBazar.belongsTo(AnuntBazar, { foreignKey: 'id' })
+ChatBazar.belongsTo(AnuntBazar, { foreignKey: 'idAnunt' })
 
 Utilizator.hasMany(AnuntBazar, { foreignKey: 'idUtilizator' })
-AnuntBazar.belongsTo(Utilizator, { foreignKey: 'id' })
+AnuntBazar.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasOne(Preferinte, { foreignKey: 'idUtilizator' })
-Preferinte.belongsTo(Utilizator, { foreignKey: 'id' })
+Preferinte.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasMany(Raport, { foreignKey: 'idAdministrator' })
-Raport.belongsTo(Utilizator, { foreignKey: 'id' })
+Raport.belongsTo(Utilizator, { foreignKey: 'idAdministrator' })
 
 Utilizator.hasOne(RecomandareAI, { foreignKey: 'idUtilizator' })
-RecomandareAI.belongsTo(Utilizator, { foreignKey: 'id' })
+RecomandareAI.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasMany(CarteCitita, { foreignKey: 'idUtilizator' })
-CarteCitita.belongsTo(Utilizator, { foreignKey: 'id' })
+CarteCitita.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasMany(Forum, { foreignKey: 'idUtilizator' })
-Forum.belongsTo(Utilizator, { foreignKey: 'id' })
+Forum.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasMany(MesajForum, { foreignKey: 'idUtilizator' })
-MesajForum.belongsTo(Utilizator, { foreignKey: 'id' })
+MesajForum.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Utilizator.hasMany(MesajChat, { foreignKey: 'idUtilizator' })
-MesajChat.belongsTo(Utilizator, { foreignKey: 'id' })
+MesajChat.belongsTo(Utilizator, { foreignKey: 'idUtilizator' })
 
 Carte.hasMany(CarteCitita, { foreignKey: 'idCarte' })
-CarteCitita.hasOne(Carte, { foreignKey: 'id' })
+CarteCitita.hasOne(Carte, { foreignKey: 'idCarte' })
 
 Carte.hasMany(OfertaCarte, { foreignKey: 'idCarte' })
-OfertaCarte.hasOne(Carte, { foreignKey: 'id' })
+OfertaCarte.hasOne(Carte, { foreignKey: 'idCarte' })
 
 Carte.hasMany(RecomandareAI, { foreignKey: 'idCarte' })
-RecomandareAI.hasOne(Carte, { foreignKey: 'id' })
+RecomandareAI.hasOne(Carte, { foreignKey: 'idCarte' })
 
 try {
     await sequelize.sync({

@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import config from "../utils/config";
 import { ToastContainer } from 'react-toastify';
 import { createToast } from '../utils/createToast';
@@ -18,6 +19,8 @@ const Forumuri = () => {
     const [isCreatingForum, setIsCreatingForum] = useState(false)
     const [newForumTitle, setNewForumTitle] = useState("")
     const [userHasRights, setUserHasRights] = useState(true)
+
+    const navigate = useNavigate()
     
     const fetchForums = async () => {
         try {
@@ -37,7 +40,6 @@ const Forumuri = () => {
     
     const fetchCreateForum = async () => {
         if(!authData?.token) {
-            console.log("No token")
             return;}
         try {
             const response = await fetch(`${config.API_URL}/api/createForum`, {
@@ -65,7 +67,6 @@ const Forumuri = () => {
 
     const fetchUserRights = async () => {
         if(!authData?.token) {
-            console.log("No token")
             return;}
         try {
             const response = await fetch(`${config.API_URL}/api/getForumRights`, {
@@ -125,7 +126,7 @@ const Forumuri = () => {
                     {forums.map(forum => (
                         <tr key={forum.id} className="table-row">
                             <td className="table-cell">{forum.id}</td>
-                            <td className="table-cell">{forum.titluForum}</td>
+                            <td className="table-cell" onClick={() => navigate(`/forumuri/${forum.id}`)}>{forum.titluForum}</td>
                             <td className="table-cell">{new Date(forum.data).toLocaleDateString()}</td>
                             <td className="table-cell">{forum.esteDeschis ? "Da" : "Nu"}</td>
                             <td className="table-cell">{forum.idUtilizator}</td>
