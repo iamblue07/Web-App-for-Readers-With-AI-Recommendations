@@ -5,9 +5,13 @@ export default (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
         },
-        isbn: {
-            type: DataTypes.STRING,
-            allowNull: false
+        idCarte: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Cartes',
+                key: 'id'
+            }
         },
         magazin: {
             type: DataTypes.STRING,
@@ -17,7 +21,12 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        pretOferta: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: 0.0
+        }
     }, {
         timestamps: false
-    })
-}
+    });
+};

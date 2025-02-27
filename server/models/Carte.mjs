@@ -17,8 +17,16 @@ export default (sequelize, DataTypes) => {
         autor: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        genLiterar: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        caleImagine: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         timestamps: false
-    })
-}
+    });
+};

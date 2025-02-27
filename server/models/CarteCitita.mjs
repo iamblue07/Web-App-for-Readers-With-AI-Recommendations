@@ -7,13 +7,25 @@ export default (sequelize, DataTypes) => {
         },
         idUtilizator: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'Utilizators',
+                key: 'id'
+            }
         },
         idCarte: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'Cartes',
+                key: 'id'
+            }
+        },
+        dataCitire: {
+            type: DataTypes.DATE,
+            allowNull: true
         }
     }, {
         timestamps: false
-    })
-}
+    });
+};

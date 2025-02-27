@@ -8,10 +8,21 @@ const fillerTextFour =
 "Știi deja ce dorești să citești, dar nu ai idee unde o poți găsi? Alături de noi, poți vedea ultimele oferte din cele mai mari magazine din România!";
 const fillerTextFive = 
 "Dorești să vinzi o carte sau să o dai la schimb? În cadrul serviciului de bazar, poți să întâlnești persoane dornice de a-ți lua cartea din mâini!";
+const genuriLiterare = [
+    "AUDIOBOOKS", 'CULINARE', 'ARTA,ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
+    'LINGVISTICA, DICTIONARE', 'LIMBI STRAINE', 'POEZIE, TEATRU, STUDII LITERARE',
+    'FICTIUNE', 'BENZI DESENATE', 'GHIDURI SI HARTI TURISTICE, ATLASE', 'ISTORIE', 'RELIGIE', 'FILOSOFIE',
+    'PSIHOLOGIE', 'STIINTE SOCIALE. POLITICA', 'MARKETING SI COMUNICARE', 'BUSINESS SI ECONOMIE',
+    'DREPT', 'MEDICINA', 'STIINTE EXACTE. MATEMATICI', 'NATURA SI MEDIU', 'TEHNICA SI TEHNOLOGIE',
+    'COMPUTERE SI INTERNET', 'SANATATE, DEZVOLTARE PERSONALA', 'LIFESTYLE, SPORT, TIMP LIBER', 'PENTRU COPII, ADOLESCENTI',
+    'ROMANIA', 'SOFT EDUCATIONAL'
+];
+
 export default {
     fillerTextOne,
     fillerTextTwo,
     fillerTextThree,
     fillerTextFour,
-    fillerTextFive
+    fillerTextFive,
+    genuriLiterare
 }

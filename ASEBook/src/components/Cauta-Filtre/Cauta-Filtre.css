@@ -1,0 +1,109 @@
+/* Containerul pentru filtre */
+.cauta-filtre-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+/* Stil pentru titluri */
+.cauta-filtre-container h2 {
+    font-size: 1.5rem;
+    color: white; /* Textul va fi alb */
+    margin-bottom: 15px;
+}
+
+/* Filtrul pentru gen literar */
+.filtru-gen {
+    margin-bottom: 15px;
+}
+
+/* Header-ul pentru gen literar */
+.gen-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: white; /* Textul va fi alb */
+}
+
+/* Săgeata pentru deschiderea/închiderea genurilor */
+.sageta {
+    transition: transform 0.3s;
+}
+
+.sageta.rotated {
+    transform: rotate(180deg);
+}
+
+/* Containerele pentru genuri */
+.genuri-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    max-height: 200px; /* Limitează înălțimea */
+    overflow-y: auto; /* Permite scrollul pe verticală */
+}
+
+/* Tabelul pentru genuri literare */
+.genuri-tabel {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden; /* Ascunde scrollbar-ul */
+}
+
+/* Ascunde bara de scroll */
+.genuri-container::-webkit-scrollbar {
+    display: none;
+}
+
+.genuri-tabel td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: white; /* Textul va fi alb */
+}
+
+/* Stilul pentru genurile selectate */
+.gen-select {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #007BFF;
+}
+
+.gen-select.selectat {
+    color: green;
+}
+
+/* Filtrul pentru preț */
+.filtru-pret {
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: transparent; /* Fără fundal */
+}
+
+/* Textul pentru preț */
+.filtru-pret label {
+    font-size: 1rem;
+    color: white; /* Textul va fi alb */
+}
+
+/* Containerele pentru inputurile de preț */
+.pret-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start; /* Aliniere pe linie */
+    align-items: center;
+}
+
+/* Inputurile pentru preț */
+.pret-inputs input {
+    padding: 8px;
+    width: 80px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #007BFF;
+}

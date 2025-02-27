@@ -9,7 +9,6 @@ const getUtilizatorPreferinte = async (req, res) => {
             return res.status(404).json({message: "Utilizator not found"})
         }
         const preferinte = await models.Preferinte.findOne({where: {idUtilizator}})
-        console.log("Preferinte din baza de date: ", preferinte);
         if(!preferinte) {
             return res.status(404).json({message: "Preferinte not found"})
         }
@@ -21,7 +20,6 @@ const getUtilizatorPreferinte = async (req, res) => {
             PreferintaPatru: preferinte.preferintaPatru,
             PreferintaCinci: preferinte.preferintaCinci
         };
-        console.log("Trimis in front:", preferinteData);
         return res.status(200).json(preferinteData);
 
     }catch(error) {

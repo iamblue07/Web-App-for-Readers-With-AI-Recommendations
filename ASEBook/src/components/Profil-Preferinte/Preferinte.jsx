@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from '../../context/GlobalState';
 import config from '../../utils/config.js';
+import text from '../../utils/text.js';
 import { createToast } from '../../utils/createToast';
 import "./Preferinte.css";
 
@@ -82,15 +83,7 @@ const Preferinte = ({ userId }) => {
     }, [authData?.token, userId]);  // Reexecută efectul doar când authData sau userId se schimbă
     
 
-    const genuriLiterare = [
-        "AUDIOBOOKS", 'CULINARE', 'ARTA,ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
-        'LINGVISTICA, DICTIONARE', 'LIMBI STRAINE', 'POEZIE, TEATRU, STUDII LITERARE',
-        'FICTIUNE', 'BENZI DESENATE', 'GHIDURI SI HARTI TURISTICE, ATLASE', 'ISTORIE', 'RELIGIE', 'FILOSOFIE',
-        'PSIHOLOGIE', 'STIINTE SOCIALE. POLITICA', 'MARKETING SI COMUNICARE', 'BUSINESS SI ECONOMIE',
-        'DREPT', 'MEDICINA', 'STIINTE EXACTE. MATEMATICI', 'NATURA SI MEDIU', 'TEHNICA SI TEHNOLOGIE',
-        'COMPUTERE SI INTERNET', 'SANATATE, DEZVOLTARE PERSONALA', 'LIFESTYLE, SPORT, TIMP LIBER', 'PENTRU COPII, ADOLESCENTI',
-        'ROMANIA', 'SOFT EDUCATIONAL'
-    ];
+    const genuriLiterare = text.genuriLiterare
 
     const togglePreferinta = (gen) => {
         setUtilizatorPreferinte((prev) => {

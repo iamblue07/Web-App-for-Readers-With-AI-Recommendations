@@ -1,0 +1,116 @@
+/* Containerul principal pentru componenta Cauta */
+.Cauta-Main-Container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    align-items: stretch;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Containerele pentru butonul de căutare și input-ul de căutare */
+.container-Search-Button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-search {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.input-search:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btnCauta {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btnCauta:hover {
+    background: #0056b3;
+}
+
+/* Containerul pentru filtre și rezultate */
+.container-filtre-rezultate {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+/* Containerele pentru filtre și rezultate */
+.container-filtre {
+    flex: 1;
+}
+
+.container-rezultate-header {
+    flex: 3;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+/* Grid pentru rezultate - 3 coloane */
+.container-rezultate {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 coloane egale */
+    gap: 20px;
+    overflow-y: auto;
+}
+
+/* Paginare */
+.paginare {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.paginare button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.paginare button:hover {
+    background-color: #0056b3;
+}
+
+.paginare span {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white; /* Textul va fi alb */
+    margin-bottom: 15px;
+}
