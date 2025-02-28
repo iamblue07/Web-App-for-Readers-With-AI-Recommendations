@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
-import {useParams} from "react-router-dom";
+import React from "react";
 import config from "../../utils/config";
 import "./Carte.css";
 import stockimage from "../../assets/stock_book.jpg";
@@ -21,7 +20,7 @@ const Carte = (carteData) => {
             <div className="details-container">
                 <p className="titlu">{carteData.titlu}</p>
                 <p className="autor">{carteData.autor}</p>
-                <p className="pret">Începând de la:{carteData.pretMinim}</p>
+                <p className="pret">De la {carteData.pretMinim} RON</p>
             </div>
         </div>
     )

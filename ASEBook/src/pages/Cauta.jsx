@@ -4,6 +4,8 @@ import config from '../utils/config';
 import "../styles/Cauta.css";
 import Carte from '../components/Carte/Carte';
 
+const booksPerPage = 9;
+
 const Cauta = () => {
     const [searchWords, setSearchWords] = useState('');
     const [genuriSelectate, setGenuriSelectate] = useState([]);
@@ -12,8 +14,29 @@ const Cauta = () => {
     const [bookIds, setBookIds] = useState([]);
     const [booksDetails, setBooksDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const booksPerPage = 9;
+    const [totalPages, setTotalPages] = useState(1);
 
+    // Fetch book IDs based on search and filters for the current page
+    const handleSearch = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/postCartiIDs`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage, booksPerPage })
+            });
+            if (!response.ok) {
+                console.log('Eroare la preluarea datelor');
+                return;
+            }
+            const data = await response.json();
+            setBookIds(data.ids);
+            setTotalPages(data.totalPages);  // Update total pages based on the response
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // Fetch book details for the current page's book IDs
     const getBooksDetails = async (ids) => {
         if (ids.length === 0) return;
 
@@ -21,7 +44,7 @@ const Cauta = () => {
             const response = await fetch(`${config.API_URL}/api/postCartiData`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ids })  
+                body: JSON.stringify({ ids })
             });
             if (!response.ok) {
                 console.log("Eroare la preluarea detaliilor!");
@@ -29,58 +52,20 @@ const Cauta = () => {
             }
             const data = await response.json();
             setBooksDetails(data);
-            console.log("Book details: ", data);
         } catch (error) {
             console.error("Error fetching book details:", error);
         }
     };
 
-    const handleSearch = async () => {
-        try {
-            const response = await fetch(`${config.API_URL}/api/postCartiIDs`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                 },
-                body: JSON.stringify({ searchWords, genuriSelectate, pretMinim, pretMaxim })
-            });
-            if (!response.ok) {
-                console.log('Eroare la preluarea datelor');
-                return;
-            }
-            const data = await response.json();
-            setBookIds(data);
-            console.log("search: ", data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    useEffect(() => {
+        handleSearch(); // Fetch book IDs when search or filters change
+    }, [searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage]);  // Re-run search when filters or page change
 
     useEffect(() => {
-        handleSearch();
-    }, []);
+        getBooksDetails(bookIds); // Fetch book details for the current set of book IDs
+    }, [bookIds]);  // Only run when book IDs change
 
-    useEffect(() => {
-        getBooksDetails(bookIds);
-    }, [bookIds]);
-
-    // Calcularea paginilor
-    const indexOfLastBook = currentPage * booksPerPage;
-    const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    const currentBooks = booksDetails.slice(indexOfFirstBook, indexOfLastBook);
-
-    // Funcții de navigare între pagini
-    const nextPage = () => {
-        if (currentPage < Math.ceil(booksDetails.length / booksPerPage)) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const prevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    const currentBooks = booksDetails.slice(0, booksPerPage); // Slice books to only show the ones for the current page
 
     return (
         <div className="Cauta-Main-Container">
@@ -92,7 +77,7 @@ const Cauta = () => {
                     value={searchWords} 
                     onChange={(e) => setSearchWords(e.target.value)} 
                 />
-                <button className='btnCauta' onClick={ () => {setBooksDetails([]); handleSearch()}}>Caută</button>
+                <button className='btnCauta' onClick={() => { setBooksDetails([]); setCurrentPage(1); handleSearch(); }}>Caută</button>
             </div>
             <div className='container-filtre-rezultate'>
                 <div className='container-filtre'>
@@ -114,11 +99,18 @@ const Cauta = () => {
                             <Carte key={book.isbn} {...book} />
                         ))}
                     </div>
-                    {booksDetails.length > booksPerPage && (
-                        <div className="paginare">
-                            <button onClick={prevPage}>Prev</button>
-                            <span>{`Pagina ${currentPage} din ${Math.ceil(booksDetails.length / booksPerPage)}`}</span>
-                            <button onClick={nextPage}>Next</button>
+                    {totalPages > 1 && (
+                        <div className="pagination-container">
+                            {[...Array(totalPages)].map((_, i) => (
+                                <button 
+                                    key={i} 
+                                    onClick={() => setCurrentPage(i + 1)}
+                                    disabled={i + 1 === currentPage}
+                                    className={`pagination-button ${i + 1 === currentPage ? 'active' : ''}`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
                         </div>
                     )}
                 </div>

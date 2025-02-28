@@ -5,7 +5,8 @@
     justify-content: space-between;
     width: 100%; /* Permite cardului să ocupe tot spațiul disponibil în grid */
     max-width: 220px; /* Setează o lățime maximă pentru card */
-    background-color: #fff;
+    background-color: #0000005d;
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px; /* Micșorăm marginile pentru a da mai mult spațiu în grid */
@@ -47,7 +48,7 @@
 .titlu {
     font-size: 16px; /* Micșorăm dimensiunea textului pentru a încapă mai bine */
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 10px;
     text-align: center;
     max-width: 200px;
@@ -58,7 +59,7 @@
 
 .autor {
     font-size: 14px;
-    color: #777;
+    color: #c9c9c9;
     margin-bottom: 5px;
     text-align: center;
 }
@@ -66,15 +67,9 @@
 .pret {
     font-size: 16px;
     font-weight: bold;
-    color: #e74c3c;
+    color: #93f1a3;
     margin-top: 10px;
     text-align: center;
-}
-
-.pret::before {
-    content: '€';
-    font-size: 12px;
-    margin-right: 5px;
 }
 
 .book-main-container .details-container p {
