@@ -2,8 +2,12 @@ import models from "../models/index.mjs";
 import dotenv from 'dotenv';
 import path from 'path';
 import { Op } from "sequelize";
+import { fileURLToPath } from "url";
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // --- API to get book IDs based on search criteria ---
 const postCartiIDs = async (req, res) => {
@@ -82,15 +86,11 @@ const getCartiData = async (req, res) => {
                 ? Math.min(...oferte.map(oferta => oferta.pretOferta))
                 : 0;
 
-            const caleImagineAbsoluta = carte.caleImagine
-                ? path.resolve(__dirname, 'uploads', carte.caleImagine)
-                : null;
-
             return {
+                id: carte.id,
                 titlu: carte.titlu,
                 autor: carte.autor,
                 isbn: carte.isbn,
-                caleImagineAbsoluta: caleImagineAbsoluta,
                 pretMinim: pretMinim
             };
         }));
@@ -104,7 +104,25 @@ const getCartiData = async (req, res) => {
     }
 };
 
+const getCarteImagine = async(req, res) => {
+    try {
+        const carteId = req.params.carteId;
+        if(!carteId || isNaN(carteId)) {
+            return res.status(404).json({error: "ID carte invalid"})
+        }
+        const carte = await models.Carte.findByPk(carteId);
+        if(!carte || !carte.caleImagine) {
+            return res.status(404).json({error: "Cartea nu exista sau imaginea lipseste."})
+        }
+        const caleAbsoluta = path.resolve(carte.caleImagine);
+        return res.sendFile(caleAbsoluta);
+    }catch(error) {
+        return res.status(500).json({error: "Internal server error"})
+    }
+}
+
 export default {
+    getCarteImagine,
     postCartiIDs,
     getCartiData
 };

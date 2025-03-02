@@ -21,8 +21,8 @@ export default (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
-        dataCitire: {
-            type: DataTypes.DATE,
+        imiPlace: {
+            type: DataTypes.BOOLEAN,
             allowNull: true
         }
     }, {

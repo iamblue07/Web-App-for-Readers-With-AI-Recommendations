@@ -1,19 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import config from "../../utils/config";
 import "./Carte.css";
 import stockimage from "../../assets/stock_book.jpg";
 
 const Carte = (carteData) => {
 
+    const [imagePath, setImagePath] = useState(stockimage)
+
+    const fetchCarteImagine = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/${carteData.id}/getCarteImagine`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if(!response.ok) {
+                console.error("Eroare la preluarea imaginii cartii.");
+                return;
+            }
+            const contentType = response.headers.get("content-type");
+            if(contentType && contentType.indexOf("application/json") !== -1) {
+                const data = await response.json();
+                if(data.caleImagine) {
+                    setImagePath(`${config.API_URL}/${data.caleImagine}`);
+                }
+            } else if(contentType && contentType.indexOf("image/") !== -1) {
+                const imageBlob = await response.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+                setImagePath(imageUrl);
+            } else {
+                console.error("Raspunsul nu este de tip JSON sau imagine.");
+            }
+        } catch(error) {
+            console.error("Eroare la preluarea imaginii cartii: ", error);
+        }
+    };
+
+    useEffect( () => {
+        fetchCarteImagine();
+    }, [])
+
     return (
         <div className="book-main-container">
                 <div className="image-container">
                     <img
-                    src={
-                        carteData.caleImagineAbsoluta
-                        ? `${config.API_URL}${carteData.caleImagineAbsoluta}`
-                        : stockimage
-                    }
+                    src={imagePath}
                     alt={"Book image"}
                     className="bookImage"/>
             </div>

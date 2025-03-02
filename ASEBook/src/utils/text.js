@@ -9,7 +9,7 @@ const fillerTextFour =
 const fillerTextFive = 
 "Dorești să vinzi o carte sau să o dai la schimb? În cadrul serviciului de bazar, poți să întâlnești persoane dornice de a-ți lua cartea din mâini!";
 const genuriLiterare = [
-    "AUDIOBOOKS", 'CULINARE', 'ARTA,ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
+    "AUDIOBOOKS", 'CULINARE', 'ARTA, ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
     'LINGVISTICA, DICTIONARE', 'LIMBI STRAINE', 'POEZIE, TEATRU, STUDII LITERARE',
     'FICTIUNE', 'BENZI DESENATE', 'GHIDURI SI HARTI TURISTICE, ATLASE', 'ISTORIE', 'RELIGIE', 'FILOSOFIE',
     'PSIHOLOGIE', 'STIINTE SOCIALE. POLITICA', 'MARKETING SI COMUNICARE', 'BUSINESS SI ECONOMIE',

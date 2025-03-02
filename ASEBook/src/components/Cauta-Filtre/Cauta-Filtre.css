@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    max-height: 200px; /* Limitează înălțimea */
+    max-height: 500px; /* Limitează înălțimea */
     overflow-y: auto; /* Permite scrollul pe verticală */
 }
 

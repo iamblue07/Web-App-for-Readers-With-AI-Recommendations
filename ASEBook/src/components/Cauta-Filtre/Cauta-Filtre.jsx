@@ -11,21 +11,19 @@ const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMi
     };
 
     const handlePretChange = (setter) => (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // Elimină tot ce nu e cifră
-        setter(value === "" ? "" : parseInt(value, 10)); // Convertim în număr sau lăsăm gol
+        let value = e.target.value.replace(/\D/g, "");
+        setter(value === "" ? "" : parseInt(value, 10));
     };
 
     const handleKeyDown = (e) => {
         if (["-", "e", "+", "."].includes(e.key)) {
-            e.preventDefault(); // Blochează manual caracterele interzise
+            e.preventDefault();
         }
     };
 
     return (
         <div className="cauta-filtre-container">
             <h2>Filtre</h2>
-
-            {/* Gen Literar */}
             <div className="filtru-gen">
                 <div className="gen-header" onClick={() => setShowGenuri(!showGenuri)}>
                     <span>Gen Literar</span>

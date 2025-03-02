@@ -209,8 +209,9 @@ const Profil = () => {
         if (userData.id) {
             fetchUserProfileImage();
             setCanMountPreferinte(true);
+
         }
-    }, [userData?.id]); // Se va apela doar când userData se schimbă
+    }, [userData?.id]);
     
 
     return (
