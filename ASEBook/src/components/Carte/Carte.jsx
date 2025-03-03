@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import config from "../../utils/config";
 import "./Carte.css";
 import stockimage from "../../assets/stock_book.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Carte = (carteData) => {
 
     const [imagePath, setImagePath] = useState(stockimage)
+    const navigate = useNavigate();
 
     const fetchCarteImagine = async () => {
         try {
@@ -42,7 +44,9 @@ const Carte = (carteData) => {
     }, [])
 
     return (
-        <div className="book-main-container">
+        <div className="book-main-container" onClick={() => {
+            navigate(`carte/${carteData.id}`)            
+        }}>
                 <div className="image-container">
                     <img
                     src={imagePath}

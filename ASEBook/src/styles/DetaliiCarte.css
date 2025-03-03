@@ -1,0 +1,160 @@
+/* General Container Styling */
+.DetaliiCarte-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Instead of fixed viewport sizing, fill the parent (.content) */
+    width: 100%;
+    min-height: 400px;  /* Use a min-height, or set height: 100% if desired */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no scrolling on the container */
+    flex-direction: column;
+}
+
+/* Book Details Section */
+.div-detalii {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
+.div-emptyDiv-imagine-isbn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bookImage {
+    width: 220px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.bookImage:hover {
+    transform: scale(1.08);
+}
+
+.isbn {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Title, Author, and Genre Styling */
+.div-titlu-autor-gen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.DetaliiCarte-h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.DetaliiCarte-p {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 500;
+    display: inline;
+    margin-left: 10px;
+}
+
+/* Containerul de oferte */
+.oferte {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column; /* Asigură că fiecare ofertă este pe un rând */
+    gap: 15px;
+}
+
+/* Fiecare item de ofertă */
+.oferta-item {
+    display: flex;
+    flex-direction: row; /* Aliniere orizontală */
+    justify-content: space-between; /* Împărțirea spațiului între elemente */
+    align-items: center; /* Aliniere verticală */
+    padding: 12px 20px; /* Reducem padding-ul pentru a economisi spațiu */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+/* Schimbare la hover */
+.oferta-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-5px); /* Ușor ridicare la hover */
+}
+
+/* Aliniere pentru numele magazinului */
+.oferta-item h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Aliniere pentru preț */
+.oferta-item p {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Butonul pentru oferta */
+.oferta-item a {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 8px 15px; /* Reducem padding-ul pentru un buton compact */
+    border-radius: 5px;
+    text-align: center;
+    min-width: 120px; /* Dimensiune minimă pentru buton */
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+/* Schimbare culoare la hover pe buton */
+.oferta-item a:hover {
+    background-color: #0056b3;
+}
+
+/* Asigurăm distanță între item-uri */
+.oferte .oferta-item:not(:last-child) {
+    margin-bottom: 15px;
+}
+

@@ -121,8 +121,43 @@ const getCarteImagine = async(req, res) => {
     }
 }
 
+const getOneCarte = async(req, res) => {
+    try {
+        const carteId = req.params.idCarte;
+        if(!carteId || isNaN(carteId)) {
+            return res.status(404).json({error: "ID carte invalid"})
+        }
+        const carte = await models.Carte.findByPk(carteId);
+        if(!carte) {
+            return res.status(404).json({error: "Cartea nu exista"});
+        }
+        return res.status(200).json(carte);
+
+    } catch(error) {
+        return res.status(500).json({error: "Internal server error"})
+    }
+}
+
+const getOferteCarte = async(req, res) => {
+    try{
+        const carteId = req.params.idCarte;
+        if(!carteId || isNaN(carteId)) {
+            return res.status(404).json({error: "ID carte invalid"})
+        }
+        const oferte = await models.OfertaCarte.findAll({
+            where: {idCarte: carteId}
+        })
+        return res.status(200).json(oferte);
+
+    }catch(error) {
+        return res.status(500).json({error: "Internal server error"})
+    }
+}
+
 export default {
     getCarteImagine,
     postCartiIDs,
-    getCartiData
+    getCartiData,
+    getOneCarte,
+    getOferteCarte
 };
