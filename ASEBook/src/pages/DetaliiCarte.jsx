@@ -8,13 +8,14 @@ import '../styles/DetaliiCarte.css'
 const DetaliiCarte = () => {
 
     const {idCarte} = useParams()
-    const authData = useContext(GlobalContext);
+    const {authData} = useContext(GlobalContext);
     const [bookDetails, setBookDetails] = useState([])
     const [bookOffers, setBookOffers] = useState({})
     const [isLoading, setIsLoading] = useState(true)
 
     const [imagePath, setImagePath] = useState(stockimage)
-    
+    const [bookIsMarked, setBookIsMarked] = useState(true)
+
     const fetchLoadBook = async () => {
         try { 
             const response = await fetch(`${config.API_URL}/api/carte/${idCarte}`, {
@@ -23,10 +24,12 @@ const DetaliiCarte = () => {
             })
             if(!response.ok) {
                 console.log("Eroare la incarcarea datelor!")
+                return;
             }
             const data = await response.json();
             if(!data) {
-                console.log("Eroare: datele sunt goale")
+                console.log("Eroare: datele sunt goale");
+                return;
             }
             console.log(data);
             setBookDetails(data);
@@ -89,10 +92,81 @@ const DetaliiCarte = () => {
         }
     }
 
+    const fetchCheckIsRead = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/carte/${idCarte}/esteCitita`, {
+                method: "GET",
+                headers: {  
+                    "Authorization": `Bearer ${authData.token}`,
+                    'Content-Type': 'application/json' 
+                }
+            })
+            if(!response.ok) {
+                console.log("Eroare la verificarea cartii: response not ok");
+            }
+            const data = await response.json();
+            if(!data) {
+                console.log("Eroare la verificarea cartii: data is null");
+                return;
+            }
+            if(data.isRead === true) {
+                setBookIsMarked(true);
+                return;
+            }
+            setBookIsMarked(false);
+        } catch(error) {
+            console.log("Eroare la verificarea cartii");
+        }
+    }
+
+    const fetchMarkAsRead = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/carte/${idCarte}/marcheazaCitita`, {
+                method: "POST",
+                headers: {  
+                    "Authorization": `Bearer ${authData.token}`,
+                    'Content-Type': 'application/json' 
+                }
+            })
+            if(!response.ok) {
+                console.log("Eroare la verificarea cartii: response not ok");
+                return;
+            }
+            const data = await response.json();
+            setBookIsMarked(data.Marked);
+
+        } catch(error) {
+            console.log("Eroare la marcarea cartii")
+        }
+    }
+
+    const fetchUnmark = async () => {
+        try{
+            const response = await fetch(`${config.API_URL}/api/carte/${idCarte}/demarcheazaCitita`, {
+                method: "POST",
+                headers: {  
+                    "Authorization": `Bearer ${authData.token}`,
+                    'Content-Type': 'application/json' 
+                }
+            })
+            if(!response.ok) {
+                console.log("Eroare la verificarea cartii: response not ok");
+                return;
+            }
+            const data = await response.json();
+            setBookIsMarked(data.Marked);
+        }catch(error) {
+            console.log("Eroare la demarcarea cartii")
+        }
+    }
+
     useEffect( () => {
         fetchLoadBook();
         fetchCarteOferte();
-    }, [])
+        if(authData.token) {
+            fetchCheckIsRead();
+        }
+    }, [authData.token])
 
 
     return (
@@ -110,10 +184,18 @@ const DetaliiCarte = () => {
                                 className="bookImage"/>
                             <p className="isbn">ISBN: {bookDetails.isbn}</p>
                         </div>
+                        <div className="details-buttons">
                         <div className="div-titlu-autor-gen">
                             <h1 className="DetaliiCarte-h1">Titlu: <p className="DetaliiCarte-p">{bookDetails.titlu}</p></h1>
                             <h1 className="DetaliiCarte-h1">Autor: <p className="DetaliiCarte-p">{bookDetails.autor}</p></h1>
                             <h1 className="DetaliiCarte-h1">Gen literar: <p className="DetaliiCarte-p">{bookDetails.genLiterar}</p></h1>
+                        </div>
+                        {!!authData.token && (<div>
+                                {bookIsMarked ? (
+                                    <button className="btnMarked" onClick={ () => {fetchUnmark()}}>Sterge marcarea cărții</button>) : (
+                                    <button className="btnUnMarked" onClick={ () => {fetchMarkAsRead()}}>Marchează cartea ca citită</button>)
+                                }
+                            </div>)}
                         </div>
                     </div>
                     <div className="oferte">
@@ -130,8 +212,7 @@ const DetaliiCarte = () => {
                         ) : (
                             <p>Nu există oferte disponibile pentru această carte.</p>
                         )}
-</div>
-
+                    </div>
                 </div>
             )}
         </div>

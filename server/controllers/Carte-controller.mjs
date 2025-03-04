@@ -154,10 +154,86 @@ const getOferteCarte = async(req, res) => {
     }
 }
 
+const getCarteCitita = async(req, res) => {
+    try {
+        const userId = req.user.id;
+        const carteId = req.params.idCarte;
+        if(!carteId || isNaN(carteId) || !userId || isNaN(userId)) {
+            return res.status(404).json({error:"ID carte sau utilizator invalid"})
+        }
+        const rez = await models.CarteCitita.findAll({
+            where: {
+                idUtilizator : userId,
+                idCarte : carteId
+            }
+        })
+        if(rez.length > 0) {
+            return res.status(200).json({isRead: true})
+        }
+        return res.status(200).json({isRead: false})
+    } catch(error){
+        return res.status(500).json({error:"Internal server error"})
+    }
+}
+
+const postMarcheazaCarteCitita = async(req, res) => {
+    try {
+        const userId = req.user.id;
+        const carteId = req.params.idCarte;
+        if(!carteId || isNaN(carteId) || !userId || isNaN(userId)) {
+            return res.status(404).json({error:"ID carte sau utilizator invalid"})
+        }
+        const rez = await models.CarteCitita.findAll({
+            where: {
+                idUtilizator : userId,
+                idCarte : carteId
+            }
+        })
+        if(rez.length > 0) {
+            return res.status(400).json({error: "Book already marked"})
+        }
+        else {
+            await models.CarteCitita.create({
+                idUtilizator: userId,
+                idCarte: carteId
+            })
+            return res.status(200).json({Marked: true})
+        }
+    } catch(error) {
+        return res.status(500).json({error: "Internal server error"})
+    }
+}
+
+const postDemarcheazaCarteCitita = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        const carteId = req.params.idCarte;
+        if(!carteId || isNaN(carteId) || !userId || isNaN(userId)) {
+            return res.status(404).json({error:"ID carte sau utilizator invalid"})
+        }
+        const rez = await models.CarteCitita.destroy({
+            where: {
+                idUtilizator : userId,
+                idCarte : carteId
+            }
+        })
+        if(rez > 0) {
+            return res.status(200).json({Marked: false})
+        } else {
+            return res.status(400).json({error: "Inregistrarea nu exista!"})
+        }
+    }catch(error) {
+        return res.status(500).json({error: "Internal server error"})
+    }
+}
+
 export default {
     getCarteImagine,
     postCartiIDs,
     getCartiData,
     getOneCarte,
-    getOferteCarte
+    getOferteCarte,
+    getCarteCitita,
+    postMarcheazaCarteCitita,
+    postDemarcheazaCarteCitita
 };

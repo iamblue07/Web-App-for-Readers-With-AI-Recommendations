@@ -20,10 +20,6 @@ export default (sequelize, DataTypes) => {
                 model: 'Cartes',
                 key: 'id'
             }
-        },
-        imiPlace: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
         }
     }, {
         timestamps: false

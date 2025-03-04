@@ -116,7 +116,7 @@
 
 /* Schimbare la hover */
 .oferta-item:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-5px); /* Ușor ridicare la hover */
 }
 
@@ -158,3 +158,16 @@
     margin-bottom: 15px;
 }
 
+.btnMarked, .btnUnMarked {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.btnMarked:hover, .btnUnMarked:hover {
+    background: #0044ff;
+}
