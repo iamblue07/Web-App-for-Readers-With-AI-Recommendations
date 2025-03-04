@@ -1,0 +1,134 @@
+/* Container general */
+.istoric-container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabel cu dimensiuni fixe */
+.tabel-istoric {
+    width: 800px; /* Lățime fixă */
+    max-height: 400px; /* Înălțime maximă */
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    color: white;
+    overflow: hidden;
+}
+
+/* Înveliș scrollabil pentru tabel */
+.tabel-istoric-wrapper {
+    max-height: 350px; /* Ajustăm pentru a lăsa loc la header */
+    overflow-y: auto;
+    display: block;
+}
+
+/* Stiluri pentru header */
+.tabel-istoric-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-align: left;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Rânduri și celule */
+.tabel-istoric-body {
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabel-istoric-row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabel-istoric-row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tabel-istoric-row:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+/* Dimensiuni fixe pentru coloane */
+.tabel-istoric-head,
+.tabel-istoric-data {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Distribuirea corectă a lățimilor */
+.tabel-istoric-head:nth-child(1), 
+.tabel-istoric-data:nth-child(1) { 
+    width: 60%; 
+} /* Titlu */
+
+.tabel-istoric-head:nth-child(2), 
+.tabel-istoric-data:nth-child(2) { 
+    width: 30%; 
+} /* Autor */
+
+.tabel-istoric-head:nth-child(3), 
+.tabel-istoric-data:nth-child(3) { 
+    width: 10%; 
+    text-align: center; /* Buton centrat */
+}
+
+/* Ajustare buton */
+.tabel-istoric-buton {
+    display: block;
+    margin: 0 auto;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tabel-istoric-buton:hover {
+    background-color: #c82333;
+}
+
+/* Paginare */
+.pagination-istoric {
+    margin-top: 15px;
+    display: flex;
+    gap: 5px;
+}
+
+.pagination-istoric button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pagination-istoric button.active {
+    background-color: #0056b3;
+}
+
+.pagination-istoric button:hover {
+    background-color: #0056b3;
+}

@@ -1,3 +1,13 @@
+.big-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-istoric {
+    align-items: center;
+    align-self: center;
+}
+
 /* Face ca cele două div-uri să fie unul lângă altul și să aibă aceeași înălțime */
 .main-container-Profil {
     display: flex;

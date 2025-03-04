@@ -11,4 +11,5 @@ router.get('/carte/:idCarte/oferte', carteController.getOferteCarte);
 router.get('/carte/:idCarte/esteCitita', middleware.middlewareAuth, carteController.getCarteCitita);
 router.post('/carte/:idCarte/marcheazaCitita', middleware.middlewareAuth, carteController.postMarcheazaCarteCitita);
 router.post('/carte/:idCarte/demarcheazaCitita', middleware.middlewareAuth, carteController.postDemarcheazaCarteCitita);
+router.get('/getIstoric', middleware.middlewareAuth, carteController.getUtilizatorIstoric);
 export default router;

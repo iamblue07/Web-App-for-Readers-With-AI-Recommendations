@@ -227,6 +227,37 @@ const postDemarcheazaCarteCitita = async(req, res) => {
     }
 }
 
+const getUtilizatorIstoric = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        if (!userId || isNaN(userId)) {
+            return res.status(404).json({ error: "ID Utilizator invalid" });
+        }
+
+        const istoric = await models.CarteCitita.findAll({
+            where: { idUtilizator: userId },
+            include: [
+                {
+                    model: models.Carte,
+                    attributes: ['id', 'titlu', 'autor']
+                }
+            ]
+        });
+
+        const istoricFormatat = istoric.map(entry => ({
+            idCarte: entry.Carte.id,
+            titlu: entry.Carte.titlu,
+            autor: entry.Carte.autor
+        }));
+
+        return res.status(200).json(istoricFormatat);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
 export default {
     getCarteImagine,
     postCartiIDs,
@@ -235,5 +266,6 @@ export default {
     getOferteCarte,
     getCarteCitita,
     postMarcheazaCarteCitita,
-    postDemarcheazaCarteCitita
+    postDemarcheazaCarteCitita,
+    getUtilizatorIstoric
 };

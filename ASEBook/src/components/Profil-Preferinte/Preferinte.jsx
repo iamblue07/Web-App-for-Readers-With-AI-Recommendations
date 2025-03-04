@@ -5,7 +5,7 @@ import text from '../../utils/text.js';
 import { createToast } from '../../utils/createToast';
 import "./Preferinte.css";
 
-const Preferinte = ({ userId }) => {
+const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
     const { authData } = useContext(GlobalContext);
     const [utilizatorPreferinte, setUtilizatorPreferinte] = useState(["", "", "", "", ""]);
     const [showPreferinte, setShowPreferinte] = useState(false)
@@ -142,6 +142,7 @@ const Preferinte = ({ userId }) => {
                 )
             }
             <button className="buton-preferinte" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
+            <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>Vezi istoricul cartilor citite</button>
         </div>
     );
 };

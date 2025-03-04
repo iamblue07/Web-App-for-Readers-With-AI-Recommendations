@@ -7,7 +7,7 @@ import config from '../utils/config';
 import { createToast } from '../utils/createToast';
 import stockimage from '../assets/stock.jpg';
 import PreferinteComponent from '../components/Profil-Preferinte/Preferinte';
-
+import IstoricLecturaComponent from '../components/Istoric-Lectura/Istoric-Lectura';
 const Profil = () => {
     const { clearAuthData, authData } = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -19,6 +19,9 @@ const Profil = () => {
     const [isLoadingPassword, setIsLoadingPassword] = useState(false);  // State for loading status
     const [imagePath, setImagePath] = useState(stockimage);
     const [canMountPreferinte, setCanMountPreferinte] = useState(false);
+
+    const [mountIstoric, setMountIstoric] = useState(false);
+
 
     const fetchUtilizatorData = async () => {
         const token = authData?.token;
@@ -215,10 +218,11 @@ const Profil = () => {
     
 
     return (
-        <>
+        <div className='big-container'>
+            <ToastContainer />
             <div className='main-container-Profil'>
                 <div className='container-Preferinte'>
-                    {canMountPreferinte ? <PreferinteComponent userId = {userData.id}/> : <></>}
+                    {canMountPreferinte ? <PreferinteComponent userId = {userData.id} mountIstoric = {mountIstoric} setMountIstoric = {setMountIstoric}/> : <></>}
                 </div>
 
                 <div className='container-Profil'>
@@ -269,8 +273,10 @@ const Profil = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
-        </>
+            {mountIstoric && <div className='container-istoric'>
+                <IstoricLecturaComponent/>
+            </div>}
+        </div>
     );
 };
 
