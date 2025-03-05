@@ -1,71 +1,108 @@
 /* Global styles for the App */
 body {
-    margin: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    background-image: url('../assets/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    min-height: 100vh; /* Ensures body takes the full viewport height */
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif; /* Optional, for better typography */
-  }
-  
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    max-width: 1200px;    /* Optional: limits maximum width */
-    margin: 0 auto;       /* Centers the container horizontally */
-    padding: 0 20px;      /* Adds left and right spacing */
-  }
-  
-  .header {
-    text-align: center;
-    font-size: 2em;
-    padding: 20px 0;
-    background: rgba(117, 117, 117, 0.342);
-  }
-  
-  .arrow {
-    padding: 2px;
-    cursor: pointer;
-    border: none;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-  }
+  margin: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-image: url('../assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensures body takes the full viewport height */
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif; /* Optional, for better typography */
+}
 
-  .navbar-and-arrow {
-    display: flex;
-    flex-direction: column;
-  }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;  /* Optional: limits maximum width */
+  margin: 0 auto;     /* Centers the container horizontally */
+  padding: 0 20px;    /* Adds left and right spacing */
+}
 
+.header {
+  text-align: center;
+  font-size: 2em;
+  padding: 20px 0;
+  background: rgba(117, 117, 117, 0.342);
+}
+
+.navbar-and-arrow {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Default navbar (for large screens) */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(117, 117, 117, 0.342);
+  padding: 10px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.navbar button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background: #007BFF;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.arrow {
+  padding: 2px;
+  cursor: pointer;
+  border: none;
+  background: #007BFF;
+  color: #fff;
+  border-radius: 5px;
+}
+
+/* Content area remains unchanged */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Make navbar stack on tablets and smaller */
+@media (max-width: 1024px) {
   .navbar {
-    display: flex;
-    justify-content: space-around;
-    background: rgba(117, 117, 117, 0.342);
-    padding: 10px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+      flex-direction: column;
+      align-items: center;
   }
-  
+
   .navbar button {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: none;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 5px;
+      width: 100%;
+      padding: 5px;
+      margin: 5px;
   }
-  
-  .content {
-    flex: 1;
-    overflow-y: auto; /* Allows vertical scrolling if content overflows */
-    padding: 20px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.05); /* Optional subtle background for content area */
+
+  .arrow {
+      width: 100%;
+      padding: 10px;
   }
-  
+}
+
+/* Adjustments for very small phones */
+@media (max-width: 480px) {
+  .header {
+      font-size: 1.5em;
+      padding: 15px 0;
+  }
+
+  .navbar button {
+      padding: 8px;
+      font-size: 14px;
+  }
+
+  .arrow {
+      font-size: 14px;
+  }
+}

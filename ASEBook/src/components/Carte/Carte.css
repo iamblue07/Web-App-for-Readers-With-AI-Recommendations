@@ -54,8 +54,10 @@
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Ensure long words break */
 }
+
 
 .autor {
     font-size: 14px;
@@ -80,3 +82,49 @@
 .book-main-container .details-container .pret {
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    /* Adjust the grid layout for the search results */
+    .container-rezultate {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Flexible grid */
+        gap: 5px;
+        justify-items: center;
+    }
+
+    /* Adjust the book card size for mobile */
+    .book-main-container {
+        max-width: 120px;  /* Reduce the maximum card width */
+        margin: 5px;
+        padding: 5px;
+        box-sizing: border-box;  /* Make sure the padding doesn't affect the width */
+    }
+
+    .image-container {
+        height: 160px;  /* Reduce the image container height */
+    }
+
+    /* Adjust text sizes within the card */
+    .titlu {
+        font-size: 12px;
+        max-width: 100%; /* Allow title to occupy full width */
+        text-overflow: ellipsis;  /* Ensure the text is truncated */
+        overflow: hidden;
+        white-space: normal;  /* Allow text to wrap on mobile */
+        text-align: center;  /* Center align the title */
+        word-wrap: break-word;  /* Break words if needed */
+    }
+
+    .autor {
+        font-size: 10px;
+    }
+
+    .pret {
+        font-size: 12px;
+    }
+}
+
+
+
+
+  

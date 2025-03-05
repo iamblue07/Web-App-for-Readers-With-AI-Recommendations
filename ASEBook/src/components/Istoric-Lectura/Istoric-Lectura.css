@@ -132,3 +132,29 @@
 .pagination-istoric button:hover {
     background-color: #0056b3;
 }
+
+@media only screen and (max-width: 600px) {
+    .istoric-container {
+        padding: 10px;
+    }
+    
+    .tabel-istoric {
+        width: 100%;
+        table-layout: auto;  /* Allow table to adjust columns */
+    }
+    
+    .tabel-istoric-head,
+    .tabel-istoric-data {
+        padding: 10px;
+        font-size: 10px;
+        white-space: normal;   /* Allow text to wrap */
+        word-break: break-word; /* Break words if needed */
+    }
+    
+    .pagination-istoric button {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+  }
+  
+  

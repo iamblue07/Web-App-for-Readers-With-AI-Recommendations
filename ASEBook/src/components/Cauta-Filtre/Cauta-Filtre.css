@@ -107,3 +107,46 @@
     border-radius: 5px;
     border: 1px solid #007BFF;
 }
+
+@media (max-width: 768px) {
+    .cauta-filtre-container {
+      padding: 10px;
+    }
+    
+    .cauta-filtre-container h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .gen-header {
+      font-size: 1rem;
+      padding: 5px 0;
+    }
+    
+    /* Reduce cell padding and font size in the genres table */
+    .genuri-tabel td {
+      padding: 5px;
+      font-size: 0.9rem;
+    }
+    
+    /* Adjust the price filter section */
+    .filtru-pret {
+      padding: 10px;
+    }
+    
+    .filtru-pret label {
+      font-size: 0.9rem;
+    }
+    
+    .pret-inputs input {
+      width: 60px;
+      padding: 6px;
+      font-size: 0.9rem;
+    }
+    
+    /* Limit the height of the genres container on mobile */
+    .genuri-container {
+      max-height: 300px;
+    }
+  }
+  

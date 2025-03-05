@@ -108,7 +108,10 @@ const Forumuri = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
             />
-            {authData.token !== null ? (<button className="btnForum" onClick={ () => {setIsCreatingForum(!isCreatingForum)}}>Creaza forum nou</button>) : (<></>)}
+            {authData.token !== null ? (<>
+                {isCreatingForum === false ? (<button className="btnForum" onClick={ () => {setIsCreatingForum(!isCreatingForum)}}>Creaza forum nou</button>) : 
+                (<button className="btnForum" onClick={ () => {setIsCreatingForum(!isCreatingForum)}}>Anuleaza</button>)}
+                </>) : (<></>)}
             </div>
 
             {isCreatingForum === false ? (<>
@@ -148,7 +151,7 @@ const Forumuri = () => {
             </div></>) : (
                 userHasRights === true ? (
                     <div className="container-newForum">
-                        <input type="text" placeholder="Introduceti titlul noului forum!" value={newForumTitle} onChange={(e) => {setNewForumTitle(e.target.value)}}/>
+                        <input type="text" className="create-input" placeholder="Introduceti titlul noului forum!" value={newForumTitle} onChange={(e) => {setNewForumTitle(e.target.value)}}/>
                         <button className="btnForum" onClick={() => {fetchCreateForum()}}>Creeaza noul forum</button>
                     </div>) : (<div className="container-newForum"><p className="p-alert">In urma incalcarii regulamentului, nu mai aveti drepturile de a crea un forum! Pentru detalii, contactati un administrator.</p></div>)
             )}

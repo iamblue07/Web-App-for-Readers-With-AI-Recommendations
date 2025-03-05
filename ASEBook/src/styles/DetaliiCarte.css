@@ -171,3 +171,132 @@
 .btnMarked:hover, .btnUnMarked:hover {
     background: #0044ff;
 }
+
+@media only screen and (max-width: 768px) {
+
+    /* Main container adjustments */
+    .DetaliiCarte-main-container {
+        padding: 10px;
+    }
+
+    /* Book details layout */
+    .div-detalii {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .div-emptyDiv-imagine-isbn {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .bookImage {
+        width: 180px; /* Reduced image size for mobile */
+        height: auto;
+    }
+
+    .isbn {
+        font-size: 14px; /* Smaller font size for ISBN */
+    }
+
+    .div-titlu-autor-gen {
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .DetaliiCarte-h1 {
+        font-size: 20px;
+    }
+
+    .DetaliiCarte-p {
+        font-size: 16px;
+    }
+
+    .details-buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    /* Responsive Book Marking Button */
+    .btnMarked, .btnUnMarked {
+        padding: 10px 18px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    /* Offers Section Adjustments */
+    .oferte {
+        align-self: self-end;
+        align-items: center;
+        width: 80%;
+        margin-top: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column; /* Stack offers vertically */
+        gap: 10px;
+        max-height: 500px; /* Restrict height */
+        overflow-y: auto; /* Allow vertical scrolling if needed */
+    }
+
+    /* Offer Item Layout */
+    .oferta-item {
+        align-self: center;
+        flex-direction: column; /* Stack content vertically */
+        align-items: flex-start;
+        padding: 12px;
+        width: 80%; /* Ensure items take up the full width */
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    }
+
+    .oferta-item:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-5px); /* Slight raise effect on hover */
+    }
+
+    /* Offer Heading and Price Styling */
+    .oferta-item h2 {
+        font-size: 16px;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .oferta-item p {
+        font-size: 14px;
+        color: #ffffff;
+        margin: 5px 0;
+    }
+
+    /* Offer Button Styling */
+    .oferta-item a {
+        font-size: 14px;
+        padding: 6px 12px;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .oferta-item a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Adjust button spacing and sizes */
+    .oferte .oferta-item:not(:last-child) {
+        margin-bottom: 15px;
+    }
+}
+

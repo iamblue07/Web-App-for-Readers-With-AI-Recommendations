@@ -81,3 +81,39 @@
     border-radius: 5px;
     margin: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+    .preferinte-container {
+        height: 40vh; /* Reduced height for mobile */
+        padding: 10px;
+    }
+    
+    .preferinte-table-container {
+        max-height: 150px; /* Smaller table area */
+        overflow-y: auto;  /* Enable vertical scrolling */
+    }
+    
+    .tabel-preferinte {
+        font-size: 10px;
+        width: 100%;
+    }
+    
+    .th-preferinte,
+    .td-preferinte {
+        padding: 4px;
+        font-size: 10px;
+    }
+    
+    .preferinta {
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+    
+    .buton-preferinte {
+        padding: 6px;
+        font-size: 10px;
+        margin: 3px;
+    }
+  }
+  
+  

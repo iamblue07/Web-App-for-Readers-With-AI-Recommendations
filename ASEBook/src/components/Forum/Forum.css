@@ -123,6 +123,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px;
 }
 
 .input-message {
@@ -146,6 +147,11 @@
 @media (max-width: 768px) {
   .forumDetails-container {
     width: 95%;
+    padding: 20px; /* Reduced padding on mobile */
+  }
+
+  .forumDetails-title {
+    font-size: 28px; /* Slightly smaller title on mobile */
   }
 
   .forumDetails-posts {
@@ -168,14 +174,57 @@
     font-size: 14px;
   }
 
-  .forumDetails-paginationButton {
-    padding: 8px 16px;
+  .forumDetails-pagination {
+    flex-direction: column; /* Stack pagination vertically on mobile */
+    gap: 10px;
+  }
+
+  .pagination-button {
+    padding: 10px 20px; /* Bigger buttons for easier clicking */
     font-size: 14px;
   }
 
-  .forumDetails-paginationText {
-    font-size: 16px;
+  .div-input {
+    flex-direction: column; /* Stack input and button */
+    gap: 10px;
+  }
+
+  .input-message {
+    width: 100%;
+  }
+
+  .btnTrimite {
+    width: 100%; /* Make the button take full width on mobile */
   }
 }
 
+@media (max-width: 480px) {
+  .forumDetails-title {
+    font-size: 24px; /* Even smaller title on very small screens */
+  }
 
+  .forumDetails-postUsername {
+    font-size: 14px;
+  }
+
+  .forumDetails-postContent {
+    font-size: 12px;
+  }
+
+  .pagination-button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .div-input {
+    gap: 5px; /* Less space between input and button */
+  }
+
+  .input-message {
+    padding: 8px;
+  }
+
+  .btnTrimite {
+    padding: 8px;
+  }
+}

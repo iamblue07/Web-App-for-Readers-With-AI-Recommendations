@@ -1,41 +1,41 @@
+/* Main container styles */
 .main-container-Acasa {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Instead of fixed viewport sizing, fill the parent (.content) */
     width: 100%;
-    min-height: 400px;  /* Use a min-height, or set height: 100% if desired */
+    min-height: 400px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    overflow: hidden; /* Ensure no scrolling on the container */
+    overflow: hidden;
     flex-direction: column;
 }
 
 .containerOne, .containerTwo {
     display: flex;
-    flex-direction: row; /* Align items horizontally */
-    align-items: flex-start; /* Align items at the start */
+    flex-direction: row;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 20px;
 }
 
 .containerOne .textBlock, .containerTwo .textBlock {
     flex: 1;
-    margin: 10px 0; /* Add vertical margin for spacing */
-    padding: 15px 25px; /* Adjust padding for better spacing */
-    border-radius: 10px; /* Add border radius for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    margin: 10px 0;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pictureOne, .pictureTwo {
     height: auto;
     width: 100%;
-    max-width: 300px; /* Limit the width to a reasonable size */
-    max-height: 200px; /* Limit the height to a reasonable size */
+    max-width: 300px;
+    max-height: 200px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -55,12 +55,12 @@
     text-align: justify;
     box-sizing: border-box;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s, box-shadow 0.3s; /* Add transition for hover effect */
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .textBlock:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .textTypeOne {
@@ -74,4 +74,55 @@
 .textThree {
     padding: 10px;
     margin-bottom: 10px;
+}
+
+/* ONLY MODIFY ON SMALL SCREENS (Max Width 768px) */
+@media (max-width: 768px) {
+    .main-container-Acasa {
+        padding: 10px; /* Reduce padding for small screens */
+    }
+
+    .containerOne, .containerTwo {
+        flex-direction: column; /* Stack text and image vertically on small screens */
+        align-items: center;
+    }
+
+    .containerOne .textBlock, .containerTwo .textBlock {
+        padding: 10px 15px; /* Less padding for small screens */
+    }
+
+    .pictureOne, .pictureTwo {
+        max-width: 100%; /* Allow images to take full width of their container */
+        max-height: 250px; /* Adjust max height */
+        margin: 10px 0; /* Margin around images */
+    }
+
+    .textBlock {
+        font-size: 14px; /* Smaller font size for better readability */
+    }
+
+    .textTypeOne, .textTypeTwo {
+        background-color: rgba(240, 240, 240, 0.5); /* Slightly darker background */
+    }
+
+    .textThree {
+        font-size: 16px;
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+}
+
+/* Adjustments for very small screens (e.g. 480px or less) */
+@media (max-width: 480px) {
+    .containerOne .textBlock, .containerTwo .textBlock {
+        padding: 8px 12px; /* Smaller padding for really small screens */
+    }
+
+    .pictureOne, .pictureTwo {
+        max-height: 200px; /* Limit image size even more on tiny screens */
+    }
+
+    .textBlock {
+        font-size: 12px; /* Even smaller font for very small screens */
+    }
 }

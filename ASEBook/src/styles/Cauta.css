@@ -114,3 +114,42 @@
     color: white; /* Textul va fi alb */
     margin-bottom: 15px;
 }
+
+@media (max-width: 768px) {
+    /* Stack search input and button vertically */
+    .container-Search-Button {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .input-search,
+    .btnCauta {
+        align-self: center;
+      width: 100%;
+      margin: 5px 0;
+    }
+    
+    /* Stack filter and results containers vertically */
+    .container-filtre-rezultate {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    /* Change results grid from 3 columns to a single column */
+    .container-rezultate {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    
+    /* Slightly adjust the header font size */
+    .container-header {
+      font-size: 1.2rem;
+      padding: 10px 0;
+    }
+    
+    /* Make pagination buttons wrap and adjust spacing */
+    .pagination-container {
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+  }
+  
