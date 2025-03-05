@@ -29,6 +29,20 @@ body {
     background: rgba(117, 117, 117, 0.342);
   }
   
+  .arrow {
+    padding: 2px;
+    cursor: pointer;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  .navbar-and-arrow {
+    display: flex;
+    flex-direction: column;
+  }
+
   .navbar {
     display: flex;
     justify-content: space-around;

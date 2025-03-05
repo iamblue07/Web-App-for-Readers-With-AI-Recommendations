@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './styles/App.css';
 import Login from './pages/Login';
@@ -17,6 +17,7 @@ const App = () => {
     const navigate = useNavigate();
     const { authData } = useContext(GlobalContext);
     const location = useLocation();
+    const [showNavbar, setShowNavbar] = useState(true)
 
     useEffect(() => {
         if (location.pathname === '/' && authData.userId !== 0) {
@@ -26,20 +27,27 @@ const App = () => {
 
     return (
         <div className="main-container">
-            <div className="header">ASEBook</div>
-            <div className="navbar">
-                <button onClick={() => navigate(`/Acasa`)}>Acasa</button>
-                <button onClick={() => navigate(`/forumuri`)}>Forumuri</button>
-                <button onClick={() => navigate(`/bazar`)}>Bazar</button>
-                <button onClick={() => navigate(`/cauta`)}>Cauta</button>
-                <button onClick={() => navigate(`/despre-noi`)}>Despre Noi</button>
-                <button onClick={() => navigate(`/contact`)}>Contact</button>
-                {authData.token === null ? (
-                    <button onClick={() => navigate(`/conecteaza-te`)}>Conecteaza-te</button>
-                ) : (
-                    <button onClick={() => navigate(`/profil`)}>Profil</button>
-                )}
+            <div className="header">
+                <p className='header-title'>ASEBook</p>
             </div>
+
+            {showNavbar ? (
+                <div className='navbar-and-arrow'>
+                    <div className="navbar">
+                        <button onClick={() => navigate(`/Acasa`)}>Acasa</button>
+                        <button onClick={() => navigate(`/forumuri`)}>Forumuri</button>
+                        <button onClick={() => navigate(`/bazar`)}>Bazar</button>
+                        <button onClick={() => navigate(`/cauta`)}>Cauta</button>
+                        <button onClick={() => navigate(`/despre-noi`)}>Despre Noi</button>
+                        <button onClick={() => navigate(`/contact`)}>Contact</button>
+                        {authData.token === null ? (
+                            <button onClick={() => navigate(`/conecteaza-te`)}>Conecteaza-te</button>
+                            ) : (
+                            <button onClick={() => navigate(`/profil`)}>Profil</button>
+                        )}
+                    </div>
+                    <button className='arrow' onClick={() => {setShowNavbar(!showNavbar)}}>↑</button>
+                </div>) : (<div className='navbar-and-arrow'><button className='arrow' onClick={() => {setShowNavbar(!showNavbar)}}>↓</button></div>)}
             <div className="content">
                 <Routes>
                     <Route path="/" element={<Acasa />} />
