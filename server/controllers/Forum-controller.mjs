@@ -32,6 +32,37 @@ const getForumuri = async (req, res) => {
     }
 };
 
+const getUserForumuri = async(req, res) => {
+    try {
+        const userId = req.user.id;
+        if(!userId || isNaN(userId)){
+            return res.status(404).json({message: "ID utilizator invalid"})
+        }
+        const { page = 1, limit = 10, search = "" } = req.query;
+        const offset = (page - 1) * parseInt(limit);
+
+        const whereClause = search
+            ? { idUtilizator: userId
+                }
+            : {};
+        const { rows: forums, count } = await models.Forum.findAndCountAll({
+            where: whereClause,
+            limit: parseInt(limit),
+            offset: offset,
+            order: [["data", "DESC"]],
+        });
+
+        return res.status(200).json({
+            forums: forums || [], 
+            totalPages: Math.max(1, Math.ceil(count / limit)),
+        });
+
+    } catch (error) {
+        console.error("Eroare la preluarea forumurilor:", error);
+        return res.status(500).json({ message: "Eroare internă a serverului" });
+    }
+}
+
 const createForum = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -72,8 +103,6 @@ const getUserForumRights = async (req, res) => {
         return res.status(500).json({message: "Unauthorized!"})
     }
 }
-
-
 
 const getMesajeForum = async (req, res) => {
     try {
@@ -122,14 +151,15 @@ const getMesajeForum = async (req, res) => {
     }
 };
 
-const getForumTitle = async (req, res) => {
+const getForumTitleAndStatus = async (req, res) => {
     try {
         const {idf} = req.params;
         if(!idf) return res.status(404).json({message: "Missing forum id"});
         const forum = await models.Forum.findByPk(idf);
         if(!forum) return res.status(404).json({message: "Missing forum"});
         return res.status(200).json({
-            title: forum.titluForum
+            title: forum.titluForum,
+            status: forum.esteDeschis
         })
     } catch(error) {
         console.error(error);
@@ -170,7 +200,45 @@ const createMesajForum = async (req, res) => {
     }
 };
 
+const changeForumTitle = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        if(!userId || isNaN(userId)) {
+            return res.status(404).json({message: "ID Utilizator invalid"})
+        }
+        const {forumId, newTitle} = req.body;
+        const forum = await models.Forum.findByPk(forumId);
+        if(forum && forum.idUtilizator === userId) {
+            forum.titluForum = newTitle;
+            await forum.save();
+            return res.status(200).json({ message: "Titlul a fost schimbat cu succes!" });
+        }
+        return res.status(401).json({message:"Utilizatorul nu detine forumul!"})
+    } catch(error) {
+        console.log(error);
+        return res.status(500).json({message:"Eroare la schimbarea titlului!"})
+    }
+}
 
+const toggleForumStatus = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        if(!userId || isNaN(userId)) {
+            return res.status(404).json({message: "ID Utilizator invalid"})
+        }
+        const {newStatus, forumId} = req.body;
+        const forum = await models.Forum.findByPk(forumId);
+        if(forum && forum.idUtilizator === userId) {
+            forum.esteDeschis = newStatus;
+            await forum.save();
+            return res.status(200).json({message: "Status schimbat cu succes"})
+        }
+        return res.status(401).json({message: "Utilizatorul nu detine forumul!"});
+    }catch(error) {
+        console.log(error);
+        return res.status(500).json({message: "Internal server error"})
+    }
+}
 
 export default {
     getForumuri,
@@ -178,5 +246,8 @@ export default {
     getUserForumRights,
     getMesajeForum,
     createMesajForum,
-    getForumTitle
+    getForumTitleAndStatus,
+    getUserForumuri,
+    changeForumTitle,
+    toggleForumStatus
 }

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import config from "../../utils/config";
+import config from "../utils/config";
 import { ToastContainer } from "react-toastify";
-import { createToast } from "../../utils/createToast";
-import { GlobalContext } from "../../context/GlobalState";
-import "./Forum.css";
-import defaultavatar from "../../assets/stock.jpg";
+import { createToast } from "../utils/createToast";
+import { GlobalContext } from "../context/GlobalState";
+import "../styles/Forum.css";
+import defaultavatar from "../assets/stock.jpg";
 
 const Forum = () => {
   const { idForum } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
   const { authData } = useContext(GlobalContext);
   const [userHasRights, setUserHasRights] = useState(true);
   const [newMessage, setNewMessage] = useState("");
@@ -22,7 +23,7 @@ const Forum = () => {
 
   useEffect(() => {
     fetchMessages(currentPage);
-    fetchTitle();
+    fetchTitleAndStatus();
     if (authData.token) {
       checkRights();
     } else {
@@ -52,7 +53,7 @@ const Forum = () => {
     }
   };
 
-  const fetchTitle = async () => {
+  const fetchTitleAndStatus = async () => {
     try {
       const response = await fetch(
         `${config.API_URL}/api/forum/${idForum}/getTitle`,
@@ -64,6 +65,7 @@ const Forum = () => {
       }
       const data = await response.json();
       setForumTitle(data.title);
+      setIsOpen(data.status);
     } catch (error) {
       console.log("Error fetching title: ", error);
     }
@@ -120,6 +122,8 @@ const Forum = () => {
         setPText(
           "În urma încălcării regulamentului, drepturile dumneavoastră de a trimite mesaje au fost retrase."
         );
+      } else {
+        setPText("Forumul este inchis!");
       }
     } catch (error) {
       createToast("Eroare la verificarea drepturilor!", false);
@@ -189,7 +193,7 @@ const Forum = () => {
           </>
         )}
 
-        {userHasRights ? (
+        {userHasRights && isOpen ? (
           <div className="div-input">
             <input
               type="text"

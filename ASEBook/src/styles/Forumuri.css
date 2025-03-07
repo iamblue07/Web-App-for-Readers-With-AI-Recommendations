@@ -23,6 +23,11 @@
     transition: background-color 0.3s ease;
 }
 
+.forumuri-meniu-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .btnForum {
     padding: 10px 15px;
     border: none;

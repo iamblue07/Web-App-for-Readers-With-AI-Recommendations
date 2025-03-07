@@ -108,11 +108,21 @@ const Forumuri = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
             />
-            {authData.token !== null ? (<>
-                {isCreatingForum === false ? (<button className="btnForum" onClick={ () => {setIsCreatingForum(!isCreatingForum)}}>Creaza forum nou</button>) : 
-                (<button className="btnForum" onClick={ () => {setIsCreatingForum(!isCreatingForum)}}>Anuleaza</button>)}
-                </>) : (<></>)}
             </div>
+            {authData.token !== null && (
+                <div className="forumuri-meniu-container">
+                    {isCreatingForum === false ? (
+                        <div>
+                            <button className="btnForum" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Creaza forum nou</button>
+                        </div>
+                    ) : (
+                        <div>
+                            <button className="btnForum" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Anuleaza</button>
+                        </div>
+                    )}
+                    <button className="btnForum" onClick={() => {navigate('/forumuri/ForumurileMele')}}>Vezi forumurile tale</button>
+                </div>
+            )}
 
             {isCreatingForum === false ? (<>
                 <table className="forums-table">

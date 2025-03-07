@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import './styles/App.css';
 import Login from './pages/Login';
 import Forumuri from './pages/Forumuri';
@@ -9,8 +10,9 @@ import Contact from './pages/Contact';
 import Profil from './pages/Profil';
 import Acasa from './pages/Acasa';
 import Bazar from './pages/Bazar';
-import Forum from './components/Forum/Forum';
-import DetaliiCarte from './pages/DetaliiCarte';
+import Forum from './subpages/Forum';
+import DetaliiCarte from './subpages/DetaliiCarte';
+import ForumurileMele from './subpages/ForumurileMele';
 import { GlobalContext } from './context/GlobalState';
 
 const App = () => {
@@ -29,6 +31,7 @@ const App = () => {
         <div className="main-container">
             <div className="header">
                 <p className='header-title'>ASEBook</p>
+                <ToastContainer/>
             </div>
 
             {showNavbar ? (
@@ -67,6 +70,7 @@ const App = () => {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/profil" element={<Profil />} />
                     <Route path='/forumuri/:idForum' element={<Forum/>}/>
+                    <Route path='/forumuri/ForumurileMele' element={<ForumurileMele/>}/>
                 </Routes>
             </div>
         </div>

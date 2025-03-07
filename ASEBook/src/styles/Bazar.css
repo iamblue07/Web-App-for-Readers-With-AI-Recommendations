@@ -1,0 +1,163 @@
+/* Container bazar */
+.bazar-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    align-items: stretch;
+    height: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.filtre-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-filtre-container {
+    display: flex;
+    flex-direction: row;
+    flex: 0;
+}
+
+.actual-filters {
+    display: flex;
+    flex-direction: row;
+}
+
+.searchbar-anunturi {
+    flex: 1; /* Makes the input take up all available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cauta {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px; /* Rounded corners for a better look */
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cauta:hover {
+    background: #0056b3;
+}
+
+.input-pret {
+    align-self: center;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start; /* Aliniere pe linie */
+    align-items: center;
+    padding: 8px;
+    width: 80px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #007BFF;
+}
+
+/* Containere pentru diverse secțiuni */
+.searchbar-container, .p-filtre-container, .input-pret-container {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+}
+
+/* Containere pentru categorii, preț și sortare */
+.categorii-container, .pret-container, .sortare-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Containere dropdown */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 180px; /* Lățime fixă pentru dropdown */
+}
+
+/* Dropdown-uri (categorii și sortare) */
+.categorii-dropdown, .sortari-dropdown {
+    align-self: center;
+    width: 100%;
+    background-color: #f9f9f9;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    text-align: left;
+    white-space: nowrap; /* Previne trecerea textului pe linia următoare */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adaugă "..." dacă textul este prea lung */
+}
+
+/* Hover pentru dropdown */
+.categorii-dropdown:hover, .sortari-dropdown:hover {
+    background-color: #e0e0e0;
+}
+
+/* Continut dropdown */
+.categorii-content, .sortari-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    max-height: 150px; /* Limităm înălțimea pentru scroll */
+    overflow-y: auto; /* Permitem scroll pe verticală */
+}
+
+/* Stilizare link-uri din dropdown */
+.categorii-content a, .sortari-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.3s ease;
+    text-align: left;
+}
+
+/* Hover pentru link-uri în dropdown */
+.categorii-content a:hover, .sortari-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Afișarea conținutului dropdown la hover */
+.dropdown-container:hover .categorii-content,
+.dropdown-container:hover .sortari-content {
+    display: block;
+}
+
+/* Stilizare tabel în dropdown */
+.categorii-content table, .sortari-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.categorii-content td, .sortari-content td {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Hover pe celule din tabel */
+.categorii-content td:hover, .sortari-content td:hover {
+    background-color: #f1f1f1;
+}
