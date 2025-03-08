@@ -1,13 +1,14 @@
 const fillerTextOne = 
-"Ești în căutarea unei noi lecturi? Alături de noi, poți găsi atât următoarea carte pe care să o explorezi, cât și lista ofertelor disponibile din România!";
+"Esti in cautarea unei noi lecturi? Alaturi de noi, poti gasi atat urmatoarea carte pe care sa o explorezi, cat si lista ofertelor disponibile din Romania!";
 const fillerTextTwo =
-"Obține recomandări AI personalizate, prin intermediul sistemului nostru de recomandări! Vom analiza preferințele și istoricul tău de lectură ca să îți oferim ceea ce ți se potrivește!";
+"Obtine recomandari AI personalizate, prin intermediul sistemului nostru de recomandari! Vom analiza preferintele si istoricul tau de lectura ca sa iti oferim ceea ce ti se potriveste!";
 const fillerTextThree =
-"Discută cu membrii comunității noastre ultimele noutăți, cărțile tale favorite sau ce alte genuri literare dorești să descoperi!";
+"Discuta cu membrii comunitatii noastre ultimele noutati, cartile tale favorite sau ce alte genuri literare doresti sa descoperi!";
 const fillerTextFour =
-"Știi deja ce dorești să citești, dar nu ai idee unde o poți găsi? Alături de noi, poți vedea ultimele oferte din cele mai mari magazine din România!";
+"Stii deja ce doresti sa citesti, dar nu ai idee unde o poti gasi? Alaturi de noi, poti vedea ultimele oferte din cele mai mari magazine din Romania!";
 const fillerTextFive = 
-"Dorești să vinzi o carte sau să o dai la schimb? În cadrul serviciului de bazar, poți să întâlnești persoane dornice de a-ți lua cartea din mâini!";
+"Doresti sa vinzi o carte sau sa o dai la schimb? In cadrul serviciului de bazar, poti sa intalnesti persoane dornice de a-ti lua cartea din maini!";
+
 const genuriLiterare = [
     "AUDIOBOOKS", 'CULINARE', 'ARTA, ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
     'LINGVISTICA, DICTIONARE', 'LIMBI STRAINE', 'POEZIE, TEATRU, STUDII LITERARE',

@@ -104,7 +104,7 @@ const Forumuri = () => {
             <div className="search-subcontainer">
             <input
                 type="text"
-                placeholder="Caută forum..."
+                placeholder="Cauta forum..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
@@ -130,7 +130,7 @@ const Forumuri = () => {
                 <thead>
                     <tr>
                         <th className="table-header">Titlu Forum</th>
-                        <th className="table-header">Data Creării</th>
+                        <th className="table-header">Data Crearii</th>
                         <th className="table-header">Este Deschis</th>
                         <th className="table-header">Utilizator</th>
                     </tr>

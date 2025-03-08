@@ -71,7 +71,7 @@ const IstoricLectura = () => {
                     <tr className="tabel-istoric-row">
                         <th className="tabel-istoric-head">Titlu</th>
                         <th className="tabel-istoric-head">Autor</th>
-                        <th className="tabel-istoric-head">Acțiune</th>
+                        <th className="tabel-istoric-head">Actiune</th>
                     </tr>
                 </thead>
                 <tbody className="tabel-istoric-body">
@@ -80,7 +80,7 @@ const IstoricLectura = () => {
                             <td className="tabel-istoric-data">{item.titlu}</td>
                             <td className="tabel-istoric-data">{item.autor}</td>
                             <td className="tabel-istoric-data">
-                                <button className="tabel-istoric-buton" onClick={() => fetchUnmark(item.idCarte)}>Șterge</button>
+                                <button className="tabel-istoric-buton" onClick={() => fetchUnmark(item.idCarte)}>Sterge</button>
                             </td>
                         </tr>
                     ))}

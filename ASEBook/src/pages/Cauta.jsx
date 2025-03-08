@@ -75,7 +75,7 @@ const Cauta = () => {
                     value={searchWords} 
                     onChange={(e) => setSearchWords(e.target.value)} 
                 />
-                <button className='btnCauta' onClick={() => { setBooksDetails([]); setCurrentPage(1); handleSearch(); }}>Caută</button>
+                <button className='btnCauta' onClick={() => { setBooksDetails([]); setCurrentPage(1); handleSearch(); }}>Cauta</button>
             </div>
             <div className='container-filtre-rezultate'>
                 <div className='container-filtre'>

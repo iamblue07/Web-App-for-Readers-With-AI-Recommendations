@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+
+p, span, button, input, div {
+  font-family: 'Mochiy Pop P One', 'Times New Roman', Times, serif;
 }
 
 body {

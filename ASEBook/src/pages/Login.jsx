@@ -157,24 +157,24 @@ const Login = () => {
         <div className="login-form-container">
             {isLogin ? (
                 <div className="login-form">
-                    <h2>Conectează-te!</h2>
+                    <h2>Conecteaza-te!</h2>
                     <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     <input type="password" placeholder="Parola" onChange={(e) => setPassword(e.target.value)} />
-                    <button onClick={conectare}>Conectează-te!</button>
-                    <p onClick={toggleForm}>Nu ai cont? Înregistrează-te!</p>
+                    <button onClick={conectare}>Conecteaza-te!</button>
+                    <p onClick={toggleForm}>Nu ai cont? Inregistreaza-te!</p>
                     <ToastContainer />
                 </div>
             ) : (
                 <div className="login-form">
-                    <h2>Înregistrează-te!</h2>
+                    <h2>Inregistreaza-te!</h2>
                     <input type="text" placeholder="Username" onChange={(e) => setRegisterUsername(e.target.value)} />
                     <input type="email" placeholder="Email" onChange={(e) => setRegisterEmail(e.target.value)} />
                     <input type="password" placeholder="Parola" onChange={updateRegisterPass} />
                     <input type="password" placeholder="Confirmă Parola" onChange={updateRegisterPassConfirm} />
                     {!samePass && <p style={{ color: 'red' }}>Parolele nu se potrivesc!</p>}
-                    {!isPassLong && <p style={{ color: 'red' }}>Parola trebuie să aibă cel puțin 8 caractere!</p>}
-                    <button onClick={inregistrare} disabled={!samePass}>Creează cont!</button>
-                    <p onClick={toggleForm}>Deja ai cont? Conectează-te!</p>
+                    {!isPassLong && <p style={{ color: 'red' }}>Parola trebuie sa aiba cel putin 8 caractere!</p>}
+                    <button onClick={inregistrare} disabled={!samePass}>Creeaza cont!</button>
+                    <p onClick={toggleForm}>Deja ai cont? Conecteaza-te!</p>
                     <ToastContainer />
                 </div>
             )}

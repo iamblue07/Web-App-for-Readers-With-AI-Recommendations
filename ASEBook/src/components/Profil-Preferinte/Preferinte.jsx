@@ -110,7 +110,7 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
 
     return (
         <div className="preferinte-container">
-            <h2>Preferințele utilizatorului</h2>
+            <h2>Preferintele utilizatorului</h2>
             { showPreferinte ? (
                 <div className="preferinte-table-container">
                 <table className="tabel-preferinte">

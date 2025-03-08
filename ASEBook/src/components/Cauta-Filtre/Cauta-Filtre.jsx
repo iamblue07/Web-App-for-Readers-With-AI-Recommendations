@@ -54,7 +54,7 @@ const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMi
 
             {/* Preț */}
             <div className="filtru-pret">
-                <label>Preț:</label>
+                <label>Pret:</label>
                 <div className="pret-inputs">
                     <input 
                         type="text" 
