@@ -17,13 +17,28 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        dataAnunt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
         pretAnunt: {
             type: DataTypes.FLOAT,
             allowNull: false
         },
+        esteNegociabil: {
+            type: DataTypes.BOOLEAN,
+        },
         esteDisponibil: {
             type: DataTypes.BOOLEAN
         },
+        caleImagine: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        idCarte: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        }
     }, {
         timestamps: false
     })

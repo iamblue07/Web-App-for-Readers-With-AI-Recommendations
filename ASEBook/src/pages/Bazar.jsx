@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState'; 
 import "../styles/Bazar.css";
 
@@ -7,6 +8,7 @@ const Bazar = () => {
     const [pretMaxim, setPretMaxim] = useState(9999);
     const [stringCautare, setStringCautare] = useState("");
 
+    const navigate = useNavigate();
     const {authData} = useContext(GlobalContext);
 
     const [categorieSelectata, setCategorieSelectata] = useState("Alege categoria");
@@ -49,7 +51,7 @@ const Bazar = () => {
         <div className='bazar-container'>
 
             {authData.token && <div className='connected-menu'>
-                <button className='btn-creaza-anunt'>Publica un anunt</button>
+                <button className='btn-creaza-anunt' onClick={() => {navigate('/bazar/creeaza-anunt')}}>Publica un anunt</button>
                 <button className='btn-vezi-anunturi'>Vezi anunturile tale</button>
                 <button className='btn-conversatii'>Vezi conversatiile</button>
                 </div>}

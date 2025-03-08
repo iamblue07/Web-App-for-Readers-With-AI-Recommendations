@@ -104,6 +104,35 @@ const getCartiData = async (req, res) => {
     }
 };
 
+const getCartiDataShort = async (req, res) => {
+    try {
+        const { keywords } = req.body;
+
+        if (keywords && keywords.trim() !== "") {
+            const carti = await models.Carte.findAll({
+                where: {
+                    titlu: { [Op.like]: `%${keywords}%` }
+                },
+                attributes: ["id", "titlu", "autor", "genLiterar"],
+            });
+
+            const data = carti.map((carte) => ({
+                idCarte: carte.id,
+                titlu: carte.titlu,
+                autor: carte.autor,
+                gen: carte.genLiterar,
+            }));
+
+            return res.status(200).json(data);
+        }
+
+        return res.status(200).json([]);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 const getCarteImagine = async(req, res) => {
     try {
         const carteId = req.params.carteId;
@@ -267,5 +296,6 @@ export default {
     getCarteCitita,
     postMarcheazaCarteCitita,
     postDemarcheazaCarteCitita,
-    getUtilizatorIstoric
+    getUtilizatorIstoric,
+    getCartiDataShort
 };

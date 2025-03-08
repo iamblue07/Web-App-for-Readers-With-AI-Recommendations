@@ -1,0 +1,108 @@
+.CreeazaAnunt-Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.CreeazaAnunt-container-left, .CreeazaAnunt-container-right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 10px;
+}
+
+.CreeazaAnunt-container-titlu,
+.CreeazaAnunt-container-descriere,
+.CreeazaAnunt-container-pret,
+.CreeazaAnunt-container-cauta {
+    margin-bottom: 20px;
+}
+
+.CreeazaAnunt-container-descriere textarea {
+    height: 150px;
+    resize: none;
+}
+
+.CreeazaAnunt-container-pret input {
+    width: 60%;
+}
+
+.CreeazaAnunt-container-imagine {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.CreeazaAnunt-imagine-profil {
+    width: 200px; /* Increased size */
+    height: 250px; /* Increased size */
+    object-fit: cover;
+    margin: 0 auto; /* Centered the image */
+    display: block; /* Ensures the image is centered as a block element */
+}
+
+.CreeazaAnunt-buton-Incarca, .CreeazaAnunt-btn-cauta {
+    margin-bottom: 0px;
+}
+
+.CreeazaAnunt-container-cauta input {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.CreeazaAnunt-rezultate-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.CreeazaAnunt-rezultat-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.input-buton-container {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 768px) {
+    .CreeazaAnunt-Container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .CreeazaAnunt-container-left, .CreeazaAnunt-container-right {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .CreeazaAnunt-container-pret input {
+        width: 100%;
+    }
+
+    .CreeazaAnunt-imagine-profil {
+        width: 100px;
+        height: 100px;
+    }
+}

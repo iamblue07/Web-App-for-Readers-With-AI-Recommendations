@@ -14,32 +14,32 @@ const ForumurileMele = () => {
     const { authData } = useContext(GlobalContext);
 
     useEffect(() => {
-        const fetchForums = async () => {
-            try {
-                const response = await fetch(`${config.API_URL}/api/getUserForumuri?page=${currentPage}&limit=${rowsPerPage}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${authData.token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                setForumsData(data.forums || []);
-                setTotalPages(data.totalPages || 1);
-            } catch (error) {
-                console.error("Eroare la preluarea forumurilor:", error);
-                setForumsData([]);
-                setTotalPages(1);
-            }
-        };
-
         fetchForums();
     }, [authData.token, currentPage, rowsPerPage]);
+
+    const fetchForums = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/getUserForumuri?page=${currentPage}&limit=${rowsPerPage}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authData.token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setForumsData(data.forums || []);
+            setTotalPages(data.totalPages || 1);
+        } catch (error) {
+            console.error("Eroare la preluarea forumurilor:", error);
+            setForumsData([]);
+            setTotalPages(1);
+        }
+    };
 
     const handlePageChange = (newPage) => {
         if (newPage > 0 && newPage <= totalPages) {

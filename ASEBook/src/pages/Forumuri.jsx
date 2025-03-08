@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import config from "../utils/config";
-import { ToastContainer } from 'react-toastify';
 import { createToast } from '../utils/createToast';
 import '../styles/Forumuri.css';
 
@@ -26,7 +26,7 @@ const Forumuri = () => {
         try {
             const response = await fetch(`${config.API_URL}/api/getForumuri?page=${currentPage}&limit=${rowsPerPage}&search=${searchTerm}`);
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                console.log(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
             setForums(data.forums || []);
@@ -59,6 +59,7 @@ const Forumuri = () => {
                 createToast("Forum creat!", true)
                 setNewForumTitle('');
                 setIsCreatingForum(false)
+                fetchForums();
             }
         } catch(error) {
             createToast(error, false);
@@ -99,8 +100,8 @@ const Forumuri = () => {
     return (
 
         <div className="forum-container">
+            <ToastContainer />
             <div className="search-subcontainer">
-                <ToastContainer/>
             <input
                 type="text"
                 placeholder="Caută forum..."
@@ -128,21 +129,19 @@ const Forumuri = () => {
                 <table className="forums-table">
                 <thead>
                     <tr>
-                        <th className="table-header">ID</th>
                         <th className="table-header">Titlu Forum</th>
                         <th className="table-header">Data Creării</th>
                         <th className="table-header">Este Deschis</th>
-                        <th className="table-header">ID Utilizator</th>
+                        <th className="table-header">Utilizator</th>
                     </tr>
                 </thead>
                 <tbody>
                     {forums.map(forum => (
                         <tr key={forum.id} className="table-row">
-                            <td className="table-cell">{forum.id}</td>
                             <td className="table-cell" onClick={() => navigate(`/forumuri/${forum.id}`)}>{forum.titluForum}</td>
                             <td className="table-cell">{new Date(forum.data).toLocaleDateString()}</td>
                             <td className="table-cell">{forum.esteDeschis ? "Da" : "Nu"}</td>
-                            <td className="table-cell">{forum.idUtilizator}</td>
+                            <td className="table-cell">{forum.username}</td>
                         </tr>
                     ))}
                 </tbody>

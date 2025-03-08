@@ -13,6 +13,7 @@ import Bazar from './pages/Bazar';
 import Forum from './subpages/Forum';
 import DetaliiCarte from './subpages/DetaliiCarte';
 import ForumurileMele from './subpages/ForumurileMele';
+import CreeazaAnunt from './subpages/CreeazaAnunt';
 import { GlobalContext } from './context/GlobalState';
 
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
                     <Route path="acasa" element={<Acasa />} />
                     <Route path="/forumuri" element={<Forumuri />} />
                     <Route path="/bazar" element={<Bazar />} />
+                    <Route path="/bazar/creeaza-anunt" element={<CreeazaAnunt/>}/>
                     <Route path="/cauta" element={<Cauta />} />
                     <Route path="/cauta/carte/:idCarte" element={<DetaliiCarte />} />
                     <Route path="/despre-noi" element={<DespreNoi />} />

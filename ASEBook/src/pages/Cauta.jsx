@@ -16,7 +16,6 @@ const Cauta = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    // Fetch book IDs based on search and filters for the current page
     const handleSearch = async () => {
         try {
             const response = await fetch(`${config.API_URL}/api/postCartiIDs`, {
@@ -30,13 +29,12 @@ const Cauta = () => {
             }
             const data = await response.json();
             setBookIds(data.ids);
-            setTotalPages(data.totalPages);  // Update total pages based on the response
+            setTotalPages(data.totalPages);
         } catch (error) {
             console.error(error);
         }
     };
 
-    // Fetch book details for the current page's book IDs
     const getBooksDetails = async (ids) => {
         if (ids.length === 0) return;
 
@@ -58,14 +56,14 @@ const Cauta = () => {
     };
 
     useEffect(() => {
-        handleSearch(); // Fetch book IDs when search or filters change
-    }, [searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage]);  // Re-run search when filters or page change
+        handleSearch();
+    }, [searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage]);
 
     useEffect(() => {
-        getBooksDetails(bookIds); // Fetch book details for the current set of book IDs
-    }, [bookIds]);  // Only run when book IDs change
+        getBooksDetails(bookIds);
+    }, [bookIds]);
 
-    const currentBooks = booksDetails.slice(0, booksPerPage); // Slice books to only show the ones for the current page
+    const currentBooks = booksDetails.slice(0, booksPerPage);
 
     return (
         <div className="Cauta-Main-Container">

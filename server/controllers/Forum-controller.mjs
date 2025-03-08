@@ -17,13 +17,23 @@ const getForumuri = async (req, res) => {
         const { rows: forums, count } = await models.Forum.findAndCountAll({
             where: whereClause,
             limit: parseInt(limit),
-            offset: offset,
+            offset,
             order: [["data", "DESC"]],
         });
 
+        const forumsWithUsernames = await Promise.all(
+            forums.map(async (forum) => {
+                const utilizator = await models.Utilizator.findByPk(forum.idUtilizator);
+                return {
+                    ...forum.toJSON(),
+                    username: utilizator ? utilizator.username : "deletedUser",
+                };
+            })
+        );
+
         return res.status(200).json({
-            forums: forums || [], // Dacă nu sunt forumuri, trimite un array gol
-            totalPages: Math.max(1, Math.ceil(count / limit)), // Evită 0 pagini
+            forums: forumsWithUsernames,
+            totalPages: Math.max(1, Math.ceil(count / limit)),
         });
 
     } catch (error) {
@@ -32,28 +42,31 @@ const getForumuri = async (req, res) => {
     }
 };
 
-const getUserForumuri = async(req, res) => {
+const getUserForumuri = async (req, res) => {
     try {
         const userId = req.user.id;
-        if(!userId || isNaN(userId)){
-            return res.status(404).json({message: "ID utilizator invalid"})
+
+        if (!userId) {
+            return res.status(404).json({ message: "ID utilizator invalid" });
         }
+
         const { page = 1, limit = 10, search = "" } = req.query;
         const offset = (page - 1) * parseInt(limit);
 
-        const whereClause = search
-            ? { idUtilizator: userId
-                }
-            : {};
+        const whereClause = {
+            idUtilizator: userId,
+            ...(search ? { titlu: { [Op.like]: `%${search}%` } } : {}) // Search by title if provided
+        };
+
         const { rows: forums, count } = await models.Forum.findAndCountAll({
             where: whereClause,
             limit: parseInt(limit),
-            offset: offset,
+            offset,
             order: [["data", "DESC"]],
         });
 
         return res.status(200).json({
-            forums: forums || [], 
+            forums,
             totalPages: Math.max(1, Math.ceil(count / limit)),
         });
 
@@ -61,7 +74,7 @@ const getUserForumuri = async(req, res) => {
         console.error("Eroare la preluarea forumurilor:", error);
         return res.status(500).json({ message: "Eroare internă a serverului" });
     }
-}
+};
 
 const createForum = async (req, res) => {
     try {
@@ -237,6 +250,23 @@ const toggleForumStatus = async(req, res) => {
     }catch(error) {
         console.log(error);
         return res.status(500).json({message: "Internal server error"})
+    }
+}
+
+const checkAnuntRights = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        if(!userId || isNaN(userId)) {
+            return res.status(404).json({message: "ID Utilizator invalid"});
+        }
+        const user = models.Utilizator.findByPk(userId);
+        if(!user) {
+            return res.status(404).json({message: "Missing user"});
+        }
+        return res.status(200).json({rights: user.poateCreaAnunt});
+    }catch(error) {
+        console.log(error);
+        return res.status(500).json({message: "Internal server error"});
     }
 }
 
