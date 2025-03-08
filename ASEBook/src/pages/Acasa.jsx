@@ -7,7 +7,7 @@ const Acasa = () => {
     return (
         <div className='main-container-Acasa'>
             <div className='containerOne'>
-                <div>
+                <div className='container-texts'>
                     <div className='textTypeOne textBlock'>
                         {text.fillerTextOne}
                     </div>
@@ -24,7 +24,7 @@ const Acasa = () => {
 
             <div className='containerTwo'>
                 <img src={pictures.PictureTwo} alt="Library" className='pictureTwo'/>
-                <div>
+                <div className='container-texts'>
                     <div className='textTypeTwo textBlock'>
                         {text.fillerTextFour}
                     </div>

@@ -1,185 +1,124 @@
-/* General Container Styling */
 .DetaliiCarte-main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Instead of fixed viewport sizing, fill the parent (.content) */
     width: 100%;
-    min-height: 400px;  /* Use a min-height, or set height: 100% if desired */
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 400px;
     box-sizing: border-box;
-    overflow: hidden; /* Ensure no scrolling on the container */
+    overflow: hidden;
     flex-direction: column;
+    background-color: #FFFBFE;
+    padding: 10px;
 }
 
-/* Book Details Section */
 .div-detalii {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 40px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .div-emptyDiv-imagine-isbn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 10px;
 }
 
-.bookImage {
-    width: 220px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out;
+.div-emptyDiv-imagine-isbn:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
-.bookImage:hover {
-    transform: scale(1.08);
-}
-
-.isbn {
-    font-weight: bold;
-    color: #ffffff;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-/* Title, Author, and Genre Styling */
 .div-titlu-autor-gen {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Ensures text and button align vertically */
+    align-items: flex-start; /* Prevents shifting */
     width: 100%;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     text-align: left;
+    color: #090C08;
+    flex-grow: 1;  /* Ensures text area grows to fill space */
 }
 
-.DetaliiCarte-h1 {
-    font-size: 22px;
+.div-titlu-autor-gen h1 {
+    font-size: 24px;
+    margin: 5px 0;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffffff;
+    color: #090C08;
 }
 
-.DetaliiCarte-p {
+.div-titlu-autor-gen p {
     font-size: 18px;
-    color: #ffffff;
-    font-weight: 500;
-    display: inline;
-    margin-left: 10px;
+    margin: 5px 0;
+    font-weight: normal;
+    color: #090C08;
 }
 
-/* Containerul de oferte */
 .oferte {
     width: 100%;
     max-width: 900px;
-    margin-top: 30px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     display: flex;
-    flex-direction: column; /* Asigură că fiecare ofertă este pe un rând */
+    flex-direction: column;
     gap: 15px;
 }
 
-/* Fiecare item de ofertă */
 .oferta-item {
     display: flex;
-    flex-direction: row; /* Aliniere orizontală */
-    justify-content: space-between; /* Împărțirea spațiului între elemente */
-    align-items: center; /* Aliniere verticală */
-    padding: 12px 20px; /* Reducem padding-ul pentru a economisi spațiu */
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #090C08;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
-}
-
-/* Schimbare la hover */
-.oferta-item:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-5px); /* Ușor ridicare la hover */
-}
-
-/* Aliniere pentru numele magazinului */
-.oferta-item h2 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-    margin: 0;
-}
-
-/* Aliniere pentru preț */
-.oferta-item p {
-    font-size: 16px;
-    color: #ffffff;
-    margin: 0;
-}
-
-/* Butonul pentru oferta */
-.oferta-item a {
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    padding: 8px 15px; /* Reducem padding-ul pentru un buton compact */
-    border-radius: 5px;
-    text-align: center;
-    min-width: 120px; /* Dimensiune minimă pentru buton */
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-
-/* Schimbare culoare la hover pe buton */
-.oferta-item a:hover {
-    background-color: #0056b3;
-}
-
-/* Asigurăm distanță între item-uri */
-.oferte .oferta-item:not(:last-child) {
-    margin-bottom: 15px;
-}
-
-.btnMarked, .btnUnMarked {
     padding: 10px;
-    cursor: pointer;
-    border: none;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-    margin: 5px;
+    transition: all 0.3s ease;
 }
 
-.btnMarked:hover, .btnUnMarked:hover {
-    background: #0044ff;
+.oferta-item:hover {
+    border-color: #EE2E31;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.5);
+}
+
+.details-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures button is centered with text */
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.details-buttons button {
+    padding: 10px 30px; /* Increased padding for button */
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 250px;  /* Fixed width for the button */
+    text-align: center;
+    align-self: center;  /* Ensures button stays centered */
+}
+
+.details-buttons button:hover {
+    background-color: transparent;
+    color: #EE2E31;
+    border-color: #EE2E31;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.5);
 }
 
 @media only screen and (max-width: 768px) {
-
-    /* Main container adjustments */
     .DetaliiCarte-main-container {
         padding: 10px;
     }
 
-    /* Book details layout */
     .div-detalii {
         flex-direction: column;
         align-items: center;
@@ -193,110 +132,61 @@
         width: 100%;
     }
 
-    .bookImage {
-        width: 180px; /* Reduced image size for mobile */
-        height: auto;
-    }
-
-    .isbn {
-        font-size: 14px; /* Smaller font size for ISBN */
-    }
-
     .div-titlu-autor-gen {
-        padding: 15px;
         width: 100%;
         text-align: center;
     }
 
-    .DetaliiCarte-h1 {
-        font-size: 20px;
-    }
-
-    .DetaliiCarte-p {
-        font-size: 16px;
-    }
-
     .details-buttons {
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        gap: 10px;
         align-items: center;
-        gap: 15px;
-        margin-top: 15px;
     }
 
-    /* Responsive Book Marking Button */
-    .btnMarked, .btnUnMarked {
-        padding: 10px 18px;
-        font-size: 14px;
-        width: 100%;
-    }
-
-    /* Offers Section Adjustments */
     .oferte {
         align-self: self-end;
         align-items: center;
         width: 80%;
-        margin-top: 20px;
-        padding: 10px;
         display: flex;
-        flex-direction: column; /* Stack offers vertically */
+        flex-direction: column;
         gap: 10px;
-        max-height: 500px; /* Restrict height */
-        overflow-y: auto; /* Allow vertical scrolling if needed */
+        max-height: 500px;
+        overflow-y: auto;
     }
 
-    /* Offer Item Layout */
     .oferta-item {
         align-self: center;
-        flex-direction: column; /* Stack content vertically */
+        flex-direction: column;
         align-items: flex-start;
-        padding: 12px;
-        width: 80%; /* Ensure items take up the full width */
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, background-color 0.3s ease;
-    }
-
-    .oferta-item:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-5px); /* Slight raise effect on hover */
-    }
-
-    /* Offer Heading and Price Styling */
-    .oferta-item h2 {
-        font-size: 16px;
-        color: #ffffff;
-        margin: 0;
-    }
-
-    .oferta-item p {
-        font-size: 14px;
-        color: #ffffff;
-        margin: 5px 0;
-    }
-
-    /* Offer Button Styling */
-    .oferta-item a {
-        font-size: 14px;
-        padding: 6px 12px;
-        text-decoration: none;
-        color: white;
-        background-color: #007bff;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        margin-top: 10px;
-    }
-
-    .oferta-item a:hover {
-        background-color: #0056b3;
-    }
-
-    /* Adjust button spacing and sizes */
-    .oferte .oferta-item:not(:last-child) {
-        margin-bottom: 15px;
+        width: 80%;
     }
 }
 
+@media (min-width: 769px) {
+    .div-emptyDiv-imagine-isbn img {
+        width: 250px;
+        height: auto;
+    }
+
+    .div-titlu-autor-gen {
+        width: 60%;
+    }
+
+    .oferte {
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .oferta-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .details-buttons {
+        width: 100%;
+    }
+}

@@ -8,16 +8,14 @@
     align-self: center;
 }
 
-/* Face ca cele două div-uri să fie unul lângă altul și să aibă aceeași înălțime */
 .main-container-Profil {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Face ca elementele să aibă aceeași înălțime */
+    align-items: stretch;
     gap: 20px;
     padding: 20px;
 }
 
-/* Preferințele sunt afișate vertical, centrate */
 .container-Preferinte {
     display: flex;
     flex-direction: column;
@@ -25,24 +23,15 @@
     justify-content: center;
     padding: 20px;
     flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
 }
 
-/* Containerul profilului se afișează pe verticală */
 .container-Profil {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 2;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
 }
-
-/* Imaginea și butonul pe aceeași linie, aliniate stânga-dreapta */
 
 .container-Imagine-Deconectare-Profil {
     display: flex;
@@ -58,13 +47,18 @@
 }
 
 .imagine-profil {
-    width: 100px; /* Scalare corespunzătoare */
+    width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-/* Descrierea aliniată stânga-dreapta */
+.imagine-profil:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
 .container-descriere-Profil {
     display: flex;
     flex-direction: column;
@@ -78,7 +72,6 @@
     align-items: left;
 }
 
-/* Parola într-o coloană centrată */
 .container-schimbare-parola {
     display: flex;
     flex-direction: column;
@@ -93,11 +86,57 @@
 .buton-Profil {
     padding: 10px;
     cursor: pointer;
-    border: none;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 5px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
     margin: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+}
+
+.buton-Profil:hover {
+    background-color: transparent;
+    color: #EE2E31;
+    border-color: #EE2E31;
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+.textarea-profil {
+    padding: 10px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    resize: none;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.textarea-profil:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+/* Updated Input Field Styles */
+input[type="password"], input[type="text"], input[type="email"], input[type="number"], input[type="search"] {
+    padding: 10px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    margin-bottom: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+input[type="password"]:hover, input[type="text"]:hover, input[type="email"]:hover, input[type="number"]:hover, input[type="search"]:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+input[type="password"]:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus {
+    outline: none;
+    border-color: #EE2E31;
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 @media only screen and (max-width: 600px) {
@@ -106,32 +145,30 @@
         gap: 10px;
         padding: 10px;
     }
-    
+
     .container-Preferinte,
     .container-Profil {
         padding: 10px;
         width: 100%;
     }
-  
+
     .container-descriere-Profil {
         padding: 20px;
     }
-  
+
     .container-Imagine-Deconectare-Profil {
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-    
+
     .imagine-profil {
         width: 80px;
         height: 80px;
     }
-    
+
     .container-schimbare-parola {
         padding-left: 10px;
         padding-right: 10px;
     }
-  }
-  
-  
+}

@@ -1,179 +1,180 @@
-/* General Styling */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .forum-container {
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+  padding: 20px;
+  background-color: #FFFBFE;
+  color: #090C08;
 }
 
 .search-subcontainer {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
-.search-input, .create-input {
-    flex: 1; /* Makes the input take up all available space */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+.search-input,
+.create-input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.search-input:hover,
+.create-input:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .forumuri-meniu-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .btnForum {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px; /* Rounded corners for a better look */
-    background: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    margin: 5px;
-    transition: background-color 0.3s ease;
+  padding: 10px 15px;
+  margin: 5px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
 .btnForum:hover {
-    background: #0056b3; /* Darker shade on hover */
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
-.search-input:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Forum Table */
 .forums-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    table-layout: fixed; /* Ensures the table respects the container's width */
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
 
-.table-header {
-    padding: 12px;
-    background-color: rgba(0, 0, 0, 0.1);
-    text-align: left;
-    font-weight: bold;
+.forums-table thead,
+.forums-table tbody {
+  display: block;
 }
 
-.table-row {
-    transition: background-color 0.3s ease;
+.forums-table thead tr,
+.forums-table tbody tr {
+  display: flex;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
 }
 
-.table-row:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.forums-table thead tr:hover,
+.forums-table tbody tr:hover {
+  box-shadow: 0 4px 15px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
-.table-cell {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.forums-table thead tr th,
+.forums-table tbody tr td {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
 }
 
 .pagination-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .pagination-button {
-    padding: 8px 16px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 8px 16px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
 .pagination-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.pagination-button:disabled {   
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.pagination-button.active {
-    background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .container-newForum {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1vh;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1vh;
+  gap: 10px;
 }
 
 .container-newForum input {
-    flex-grow: 1;
-    margin-right: 10vh;
+  flex-grow: 1;
+  margin-right: 10vh;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-/* ONLY MODIFY ON SMALL SCREENS (Max Width 768px) */
+.container-newForum input:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
 @media (max-width: 768px) {
-    /* General */
-    .forum-container {
-        padding: 10px; /* Adjust padding for small screens */
-    }
-
-    .search-subcontainer {
-        flex-direction: column; /* Stack search input and button */
-        gap: 10px;
-    }
-
-    .search-input .create-input{
-        align-self: center;
-        width: 90%; /* Make the search input take up full width */
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .btnForum {
-        width: 100%; /* Make the button take up full width on small screens */
-        padding: 10px;
-        font-size: 14px;
-        align-self: center;
-    }
-
-    /* Forum Table */
-    .forums-table {
-        width: 100%;
-        font-size: 14px; /* Smaller font size for mobile */
-        margin: 0 auto; /* Center the table */
-    }
-
-    .table-header, .table-cell {
-        padding: 10px; /* Adjust padding for better fitting on mobile */
-    }
-
-    /* Handle long text in table cells */
-    .table-cell {
-        word-wrap: break-word; /* Allow long words to break and fit */
-    }
-
-    .pagination-container {
-        margin-top: 15px;
-    }
-
-    .pagination-button {
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-
-    .container-newForum input {
-        flex-grow: 1;
-        margin-right: 10px; /* Reduce right margin for better fit */
-    }
-
-    .container-newForum {
-        flex-direction: column;
-        gap: 10px;
-    }
+  .forum-container {
+    padding: 10px;
+  }
+  .search-subcontainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .search-input,
+  .create-input {
+    width: 90%;
+    padding: 8px;
+  }
+  .btnForum {
+    width: 100%;
+    padding: 10px;
+    align-self: center;
+  }
+  .forums-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .forums-table thead tr th,
+  .forums-table tbody tr td {
+    padding: 10px;
+  }
+  .pagination-container {
+    margin-top: 15px;
+  }
+  .pagination-button {
+    padding: 6px 12px;
+  }
+  .container-newForum {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .container-newForum input {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
 }

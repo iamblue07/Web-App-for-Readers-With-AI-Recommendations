@@ -1,86 +1,92 @@
-/* Forum Details Container */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .forumDetails-container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   width: 80%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  background-color: #FFFBFE;
+  color: #090C08;
 }
 
 .p-no-rights {
-  color: #ffffff;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-/* Forum Title */
-.forumDetails-title {
-  font-size: 36px;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-/* Posts Container */
 .forumDetails-posts {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Individual Post */
 .forumDetails-post {
-  background: rgba(19, 19, 19, 0.425);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 3px;
+  padding: 20px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-/* Post Header */
+.forumDetails-post:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
 .forumDetails-postHeader {
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-/* Post Avatar */
 .forumDetails-postAvatar {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
   padding-right: 5px;
+  border: 2px solid #090C08;
+  border-radius: 50%;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
   object-fit: cover;
 }
 
-/* Post Username */
+.forumDetails-postAvatar:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.forumDetails-postUserDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .forumDetails-postUsername {
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Post Date */
 .forumDetails-postDate {
-  color: #ffffff;
+  margin-left: auto;
   padding-left: 10px;
-  font-size: 14px;
 }
 
-/* Post Content */
 .forumDetails-postContent {
-  font-size: 16px;
-  color: #ffffff;
-  line-height: 1.6;
+  padding-top: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Pagination */
 .forumDetails-pagination {
   display: flex;
   flex-direction: row;
@@ -92,31 +98,17 @@
 
 .pagination-button {
   padding: 8px 16px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
 .pagination-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.pagination-button:disabled {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.pagination-button.active {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Loading Text */
-.forumDetails-loadingText {
-  font-size: 18px;
-  text-align: center;
-  color: #555;
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .div-input {
@@ -124,106 +116,79 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .input-message {
   width: 100%;
   padding: 10px;
-  padding-right: 20px;
-  box-sizing: border-box;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.input-message:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .btnTrimite {
-  padding: 10px;
-  cursor: pointer;
-  border: none;
-  background: #007BFF;
-  color: #fff;
-  border-radius: 5px;
-  margin: 5px;
+  padding: 10px 20px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-/* Responsive Design */
+.btnTrimite:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
 @media (max-width: 768px) {
   .forumDetails-container {
     width: 95%;
-    padding: 20px; /* Reduced padding on mobile */
+    padding: 20px;
   }
-
-  .forumDetails-title {
-    font-size: 28px; /* Slightly smaller title on mobile */
-  }
-
   .forumDetails-posts {
     gap: 15px;
   }
-
   .forumDetails-post {
     padding: 15px;
   }
-
-  .forumDetails-postUsername {
-    font-size: 16px;
-  }
-
-  .forumDetails-postDate {
-    font-size: 12px;
-  }
-
-  .forumDetails-postContent {
-    font-size: 14px;
-  }
-
   .forumDetails-pagination {
-    flex-direction: column; /* Stack pagination vertically on mobile */
+    flex-direction: column;
     gap: 10px;
   }
-
   .pagination-button {
-    padding: 10px 20px; /* Bigger buttons for easier clicking */
-    font-size: 14px;
+    padding: 10px 20px;
   }
-
   .div-input {
-    flex-direction: column; /* Stack input and button */
+    flex-direction: column;
     gap: 10px;
   }
-
-  .input-message {
-    width: 100%;
-  }
-
   .btnTrimite {
-    width: 100%; /* Make the button take full width on mobile */
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .forumDetails-title {
-    font-size: 24px; /* Even smaller title on very small screens */
+  .forumDetails-pagination {
+    gap: 5px;
   }
-
-  .forumDetails-postUsername {
-    font-size: 14px;
-  }
-
-  .forumDetails-postContent {
-    font-size: 12px;
-  }
-
   .pagination-button {
     padding: 8px 15px;
-    font-size: 12px;
   }
-
   .div-input {
-    gap: 5px; /* Less space between input and button */
+    gap: 5px;
   }
-
   .input-message {
     padding: 8px;
   }
-
   .btnTrimite {
     padding: 8px;
   }

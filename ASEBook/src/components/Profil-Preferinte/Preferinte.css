@@ -1,17 +1,16 @@
-/* Preferinte.css */
 .preferinte-container {
     width: 100%;
-    height: 60vh; /* Ocupă 60% din înălțimea paginii */
+    height: 70vh;  /* Increased height to make the table longer */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent;
+    padding: 20px;
 }
 
 .preferinte-table-container {
     width: 100%;
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-y: auto;  /* Allow vertical scrolling when content overflows */
 }
 
 .tabel-preferinte {
@@ -19,101 +18,95 @@
     border-collapse: collapse;
 }
 
-/* Rândurile sunt mai mici */
 .tr-preferinte {
-    height: 30px; /* Reducem înălțimea rândurilor */
+    height: 40px;
 }
 
-/* Diminuăm fontul și padding-ul */
 .th-preferinte, .td-preferinte {
-    padding: 6px; /* Reducem spațiul dintre elemente */
-    font-size: 12px; /* Facem textul mai mic */
+    padding: 10px;
+    font-size: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-align: left;
-    color: white;
 }
 
-.th-preferinte {
-    background-color: rgba(0, 123, 255, 0.8);
-    color: white;
-}
-
-/* Butoanele de preferință mai compacte */
 .preferinta {
     display: inline-block;
-    padding: 4px 10px; /* Mai mic decât înainte */
-    font-size: 12px;
+    padding: 6px 12px;
+    font-size: 14px;
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    min-width: 100px; /* Ensure buttons are wide enough to fit the text */
     white-space: nowrap;
+    border: 2px solid; /* Add border */
 }
 
-/* Preferințele mai compacte */
-.prefer {
-    background-color: green;
-    color: white;
-    border: 1px solid darkgreen;
+.preferinta:hover {
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3);
 }
 
-.prefer:hover {
-    background-color: darkgreen;
+.preferinta.prefer {
+    border-color: #4CAF50; /* Green border for Prefer */
+    color: #4CAF50; /* Green text for Prefer */
 }
 
-.nu-prefer {
-    background-color: red;
-    color: white;
-    border: 1px solid darkred;
-}
-
-.nu-prefer:hover {
-    background-color: darkred;
+.preferinta.nu-prefer {
+    border-color: #EE2E31; /* Red border for Nu prefer */
+    color: #EE2E31; /* Red text for Nu prefer */
 }
 
 .buton-preferinte {
-    padding: 8px;
+    padding: 10px 20px;
     cursor: pointer;
-    border: none;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-    margin: 5px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    margin: 10px;
+    transition: all 0.3s ease;
+    min-width: 130px; /* Slightly wider button */
+    text-align: center;
+}
+
+.buton-preferinte:hover {
+    background-color: transparent;
+    color: #EE2E31;
+    border-color: #EE2E31;
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 @media only screen and (max-width: 600px) {
     .preferinte-container {
-        height: 40vh; /* Reduced height for mobile */
+        height: 60vh;  /* Adjusted height for smaller screens */
         padding: 10px;
     }
-    
+
     .preferinte-table-container {
-        max-height: 150px; /* Smaller table area */
-        overflow-y: auto;  /* Enable vertical scrolling */
+        max-height: 180px; /* Increase table height for mobile */
+        overflow-y: auto;
     }
-    
+
     .tabel-preferinte {
-        font-size: 10px;
-        width: 100%;
+        font-size: 12px;
     }
-    
+
     .th-preferinte,
     .td-preferinte {
-        padding: 4px;
-        font-size: 10px;
-    }
-    
-    .preferinta {
-        padding: 2px 6px;
-        font-size: 10px;
-    }
-    
-    .buton-preferinte {
         padding: 6px;
-        font-size: 10px;
-        margin: 3px;
+        font-size: 12px;
     }
-  }
-  
-  
+
+    .preferinta {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .buton-preferinte {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin: 5px;
+        min-width: 140px; /* Slightly wider button for mobile */
+    }
+}

@@ -1,4 +1,3 @@
-/* Container general */
 .istoric-container {
     align-self: center;
     display: flex;
@@ -7,44 +6,28 @@
     justify-content: center;
     width: 100%;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Tabel cu dimensiuni fixe */
 .tabel-istoric {
-    width: 800px; /* Lățime fixă */
-    max-height: 400px; /* Înălțime maximă */
+    width: 100%;
+    max-height: 500px;  /* Increased height to make the table longer */
     border-collapse: collapse;
     margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    color: white;
-    overflow: hidden;
 }
 
-/* Înveliș scrollabil pentru tabel */
 .tabel-istoric-wrapper {
-    max-height: 350px; /* Ajustăm pentru a lăsa loc la header */
+    max-height: 450px; /* Increased max height */
     overflow-y: auto;
     display: block;
 }
 
-/* Stiluri pentru header */
 .tabel-istoric-header {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: white;
     text-align: left;
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-/* Rânduri și celule */
 .tabel-istoric-body {
     display: block;
     width: 100%;
@@ -57,16 +40,6 @@
     table-layout: fixed;
 }
 
-.tabel-istoric-row:nth-child(even) {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.tabel-istoric-row:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transition: 0.3s;
-}
-
-/* Dimensiuni fixe pentru coloane */
 .tabel-istoric-head,
 .tabel-istoric-data {
     padding: 15px;
@@ -74,41 +47,41 @@
     text-align: left;
 }
 
-/* Distribuirea corectă a lățimilor */
 .tabel-istoric-head:nth-child(1), 
 .tabel-istoric-data:nth-child(1) { 
-    width: 60%; 
-} /* Titlu */
+    width: 60%;
+}
 
 .tabel-istoric-head:nth-child(2), 
 .tabel-istoric-data:nth-child(2) { 
-    width: 30%; 
-} /* Autor */
+    width: 30%;
+}
 
 .tabel-istoric-head:nth-child(3), 
 .tabel-istoric-data:nth-child(3) { 
-    width: 10%; 
-    text-align: center; /* Buton centrat */
+    width: 10%;
+    text-align: center;
 }
 
-/* Ajustare buton */
 .tabel-istoric-buton {
-    display: block;
-    margin: 0 auto;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 8px 15px; /* Increased padding to make button slightly longer */
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
     cursor: pointer;
-    transition: background 0.3s;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-width: 100px; /* Ensuring the button is wide enough */
 }
 
 .tabel-istoric-buton:hover {
-    background-color: #c82333;
+    background-color: transparent;
+    color: #EE2E31;
+    border-color: #EE2E31;
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
-/* Paginare */
 .pagination-istoric {
     margin-top: 15px;
     display: flex;
@@ -118,19 +91,12 @@
 .pagination-istoric button {
     padding: 8px 12px;
     border: none;
-    background-color: #007BFF;
-    color: white;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
 }
 
 .pagination-istoric button.active {
-    background-color: #0056b3;
-}
-
-.pagination-istoric button:hover {
-    background-color: #0056b3;
+    background-color: #4CAF50;
+    color: white;
 }
 
 @media only screen and (max-width: 600px) {
@@ -140,21 +106,24 @@
     
     .tabel-istoric {
         width: 100%;
-        table-layout: auto;  /* Allow table to adjust columns */
+        table-layout: auto;
     }
     
     .tabel-istoric-head,
     .tabel-istoric-data {
         padding: 10px;
         font-size: 10px;
-        white-space: normal;   /* Allow text to wrap */
-        word-break: break-word; /* Break words if needed */
+        white-space: normal;
+        word-break: break-word;
     }
     
     .pagination-istoric button {
         padding: 6px 8px;
         font-size: 10px;
     }
-  }
-  
-  
+
+    .tabel-istoric-buton {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

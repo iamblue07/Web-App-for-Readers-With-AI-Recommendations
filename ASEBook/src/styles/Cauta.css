@@ -1,155 +1,136 @@
-/* Containerul principal pentru componenta Cauta */
-.Cauta-Main-Container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    align-items: stretch;
-    height: 100%;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* Containerele pentru butonul de căutare și input-ul de căutare */
+.Cauta-Main-Container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #FFFBFE;
+  color: #090C08;
+  padding: 20px;
+}
+
 .container-Search-Button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 .input-search {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-.input-search:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.2);
+.input-search:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .btnCauta {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    margin: 5px;
-    transition: background-color 0.3s ease;
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
 .btnCauta:hover {
-    background: #0056b3;
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
-/* Containerul pentru filtre și rezultate */
 .container-filtre-rezultate {
-    display: flex;
-    gap: 20px;
-    flex: 1;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto;
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
 }
 
-/* Containerele pentru filtre și rezultate */
 .container-filtre {
-    flex: 1;
+  flex: 1;
 }
 
 .container-rezultate-header {
-    flex: 3;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    overflow-y: auto;
-}
-
-/* Grid pentru rezultate - 3 coloane */
-.container-rezultate {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 coloane egale */
-    gap: 20px;
-    overflow-y: auto;
-}
-
-/* Paginare */
-.paginare {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.paginare button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.paginare button:hover {
-    background-color: #0056b3;
-}
-
-.paginare span {
-    color: white;
-    font-size: 1.2rem;
+  flex: 3;
+  overflow-y: auto;
 }
 
 .container-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: white; /* Textul va fi alb */
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.container-rezultate {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.pagination-button:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
-    /* Stack search input and button vertically */
-    .container-Search-Button {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .input-search,
-    .btnCauta {
-        align-self: center;
-      width: 100%;
-      margin: 5px 0;
-    }
-    
-    /* Stack filter and results containers vertically */
-    .container-filtre-rezultate {
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    /* Change results grid from 3 columns to a single column */
-    .container-rezultate {
-      grid-template-columns: 1fr;
-      gap: 5px;
-    }
-    
-    /* Slightly adjust the header font size */
-    .container-header {
-      font-size: 1.2rem;
-      padding: 10px 0;
-    }
-    
-    /* Make pagination buttons wrap and adjust spacing */
-    .pagination-container {
-      flex-wrap: wrap;
-      gap: 5px;
-    }
+  .container-Search-Button {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
+  .container-filtre-rezultate {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .container-rezultate {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .container-header {
+    font-size: 1.2rem;
+  }
+  .pagination-container {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}

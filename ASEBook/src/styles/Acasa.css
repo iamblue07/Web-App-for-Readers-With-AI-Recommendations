@@ -1,128 +1,123 @@
-/* Main container styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .main-container-Acasa {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 400px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    overflow: hidden;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 400px;
+  flex-direction: column;
+  background-color: #FFFBFE;
+  color: #090C08;
+  padding: 20px;
 }
 
-.containerOne, .containerTwo {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-    margin-bottom: 20px;
+.container-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
-.containerOne .textBlock, .containerTwo .textBlock {
-    flex: 1;
-    margin: 10px 0;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.containerOne,
+.containerTwo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: space-between;
 }
 
-.pictureOne, .pictureTwo {
-    height: auto;
-    width: 100%;
-    max-width: 300px;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.containerOne .textBlock,
+.containerTwo .textBlock,
+.textTypeOne,
+.textTypeTwo,
+.textThree {
+  flex: 1;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.containerOne .textBlock:hover,
+.containerTwo .textBlock:hover,
+.textTypeOne:hover,
+.textTypeTwo:hover,
+.textThree:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-5px);
+}
+
+.pictureOne,
+.pictureTwo {
+  height: auto;
+  width: 100%;
+  max-width: 300px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
 .containerOne .pictureOne {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .containerTwo .pictureTwo {
-    margin-right: 20px;
+  margin-right: 20px;
+}
+
+.containerTwo {
+  padding-top: 20px;
+}
+
+.pictureOne:hover,
+.pictureTwo:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .textBlock {
-    width: 100%;
-    color: white;
-    text-align: justify;
-    box-sizing: border-box;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+  text-align: justify;
 }
 
-.textBlock:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.textTypeOne {
-    background-color: rgba(240, 240, 240, 0.3);
-}
-
-.textTypeTwo {
-    background-color: rgba(217, 217, 217, 0.3);
-}
-
-.textThree {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-/* ONLY MODIFY ON SMALL SCREENS (Max Width 768px) */
 @media (max-width: 768px) {
-    .main-container-Acasa {
-        padding: 10px; /* Reduce padding for small screens */
-    }
-
-    .containerOne, .containerTwo {
-        flex-direction: column; /* Stack text and image vertically on small screens */
-        align-items: center;
-    }
-
-    .containerOne .textBlock, .containerTwo .textBlock {
-        padding: 10px 15px; /* Less padding for small screens */
-    }
-
-    .pictureOne, .pictureTwo {
-        max-width: 100%; /* Allow images to take full width of their container */
-        max-height: 250px; /* Adjust max height */
-        margin: 10px 0; /* Margin around images */
-    }
-
-    .textBlock {
-        font-size: 14px; /* Smaller font size for better readability */
-    }
-
-    .textTypeOne, .textTypeTwo {
-        background-color: rgba(240, 240, 240, 0.5); /* Slightly darker background */
-    }
-
-    .textThree {
-        font-size: 16px;
-        padding: 8px;
-        margin-bottom: 8px;
-    }
+  .main-container-Acasa {
+    padding: 10px;
+  }
+  .containerOne,
+  .containerTwo {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pictureOne,
+  .pictureTwo {
+    max-width: 100%;
+    max-height: 250px;
+    margin: 10px 0;
+  }
 }
 
-/* Adjustments for very small screens (e.g. 480px or less) */
 @media (max-width: 480px) {
-    .containerOne .textBlock, .containerTwo .textBlock {
-        padding: 8px 12px; /* Smaller padding for really small screens */
-    }
-
-    .pictureOne, .pictureTwo {
-        max-height: 200px; /* Limit image size even more on tiny screens */
-    }
-
-    .textBlock {
-        font-size: 12px; /* Even smaller font for very small screens */
-    }
+  .containerOne .textBlock,
+  .containerTwo .textBlock {
+    padding: 8px 12px;
+  }
+  .pictureOne,
+  .pictureTwo {
+    max-height: 200px;
+  }
+  .textBlock {
+    font-size: 12px;
+  }
 }

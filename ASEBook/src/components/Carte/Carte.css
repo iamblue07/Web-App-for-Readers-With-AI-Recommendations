@@ -3,39 +3,37 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Permite cardului să ocupe tot spațiul disponibil în grid */
-    max-width: 220px; /* Setează o lățime maximă pentru card */
-    background-color: #0000005d;
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px; /* Micșorăm marginile pentru a da mai mult spațiu în grid */
+    width: 100%;
+    max-width: 220px;
+    margin: 10px;
     padding: 15px;
-    transition: all 0.3s ease;
-    cursor: pointer;
     box-sizing: border-box;
+    cursor: pointer;
+    background-color: #FFFBFE; /* Soft background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .book-main-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+    transform: translateY(-2px); /* Lift the card slightly on hover */
 }
 
 .image-container {
-    width: 100%; /* Asigurăm că imaginea se va adapta la lățimea containerului */
-    height: 220px; /* Dimensiunea fixă a imaginii */
+    width: 100%;
+    height: 220px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     border-radius: 8px;
-    background-color: #f5f5f5;
 }
 
 .bookImage {
-    width: 100%; /* Asigurăm că imaginea se ajustează complet la container */
+    width: 100%;
     height: 100%;
-    object-fit: cover; /* Fără deformări ale imaginii */
+    object-fit: cover;
 }
 
 .details-container {
@@ -46,32 +44,31 @@
 }
 
 .titlu {
-    font-size: 16px; /* Micșorăm dimensiunea textului pentru a încapă mai bine */
+    font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
     margin-bottom: 10px;
     text-align: center;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal; /* Allow text to wrap */
-    word-wrap: break-word; /* Ensure long words break */
+    white-space: normal;
+    word-wrap: break-word;
+    color: #090C08; /* Dark text color for title */
 }
-
 
 .autor {
     font-size: 14px;
-    color: #c9c9c9;
     margin-bottom: 5px;
     text-align: center;
+    color: #090C08; /* Dark text color for author */
 }
 
 .pret {
     font-size: 16px;
     font-weight: bold;
-    color: #93f1a3;
     margin-top: 10px;
     text-align: center;
+    color: #EE2E31; /* Red color for price */
 }
 
 .book-main-container .details-container p {
@@ -84,35 +81,32 @@
 }
 
 @media (max-width: 768px) {
-    /* Adjust the grid layout for the search results */
     .container-rezultate {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Flexible grid */
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
         gap: 5px;
         justify-items: center;
     }
 
-    /* Adjust the book card size for mobile */
     .book-main-container {
-        max-width: 120px;  /* Reduce the maximum card width */
+        max-width: 120px;
         margin: 5px;
         padding: 5px;
-        box-sizing: border-box;  /* Make sure the padding doesn't affect the width */
+        box-sizing: border-box;
     }
 
     .image-container {
-        height: 160px;  /* Reduce the image container height */
+        height: 160px;
     }
 
-    /* Adjust text sizes within the card */
     .titlu {
         font-size: 12px;
-        max-width: 100%; /* Allow title to occupy full width */
-        text-overflow: ellipsis;  /* Ensure the text is truncated */
+        max-width: 100%;
+        text-overflow: ellipsis;
         overflow: hidden;
-        white-space: normal;  /* Allow text to wrap on mobile */
-        text-align: center;  /* Center align the title */
-        word-wrap: break-word;  /* Break words if needed */
+        white-space: normal;
+        text-align: center;
+        word-wrap: break-word;
     }
 
     .autor {
@@ -123,8 +117,3 @@
         font-size: 12px;
     }
 }
-
-
-
-
-  

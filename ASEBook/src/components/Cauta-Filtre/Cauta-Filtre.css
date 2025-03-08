@@ -1,152 +1,148 @@
-/* Containerul pentru filtre */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .cauta-filtre-container {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  color: #090C08;
 }
 
-/* Stil pentru titluri */
 .cauta-filtre-container h2 {
-    font-size: 1.5rem;
-    color: white; /* Textul va fi alb */
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #090C08;
 }
 
-/* Filtrul pentru gen literar */
 .filtru-gen {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
-/* Header-ul pentru gen literar */
 .gen-header {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 1.1rem;
-    color: white; /* Textul va fi alb */
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #090C08;
 }
 
-/* Săgeata pentru deschiderea/închiderea genurilor */
 .sageta {
-    transition: transform 0.3s;
+  transition: transform 0.3s;
 }
 
 .sageta.rotated {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
-/* Containerele pentru genuri */
 .genuri-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    max-height: 500px; /* Limitează înălțimea */
-    overflow-y: auto; /* Permite scrollul pe verticală */
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
-/* Tabelul pentru genuri literare */
 .genuri-tabel {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden; /* Ascunde scrollbar-ul */
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Ascunde bara de scroll */
 .genuri-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .genuri-tabel td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    color: white; /* Textul va fi alb */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Stilul pentru genurile selectate */
 .gen-select {
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #007BFF;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.gen-select:hover {
+  color: #EE2E31;
 }
 
 .gen-select.selectat {
-    color: green;
+  color: green;
 }
 
-/* Filtrul pentru preț */
 .filtru-pret {
-    padding: 15px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    background: transparent; /* Fără fundal */
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Textul pentru preț */
 .filtru-pret label {
-    font-size: 1rem;
-    color: white; /* Textul va fi alb */
+  font-size: 1rem;
+  color: #090C08;
 }
 
-/* Containerele pentru inputurile de preț */
 .pret-inputs {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-start; /* Aliniere pe linie */
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-/* Inputurile pentru preț */
 .pret-inputs input {
-    padding: 8px;
-    width: 80px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #007BFF;
+  padding: 8px;
+  width: 80px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #007BFF;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+}
+
+.pret-inputs input:hover {
+  box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
-    .cauta-filtre-container {
-      padding: 10px;
-    }
-    
-    .cauta-filtre-container h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-    
-    .gen-header {
-      font-size: 1rem;
-      padding: 5px 0;
-    }
-    
-    /* Reduce cell padding and font size in the genres table */
-    .genuri-tabel td {
-      padding: 5px;
-      font-size: 0.9rem;
-    }
-    
-    /* Adjust the price filter section */
-    .filtru-pret {
-      padding: 10px;
-    }
-    
-    .filtru-pret label {
-      font-size: 0.9rem;
-    }
-    
-    .pret-inputs input {
-      width: 60px;
-      padding: 6px;
-      font-size: 0.9rem;
-    }
-    
-    /* Limit the height of the genres container on mobile */
-    .genuri-container {
-      max-height: 300px;
-    }
+  .cauta-filtre-container {
+    padding: 10px;
   }
-  
+
+  .cauta-filtre-container h2 {
+    margin-bottom: 10px;
+  }
+
+  .gen-header {
+    font-size: 1rem;
+    padding: 5px 0;
+  }
+
+  .genuri-tabel td {
+    padding: 5px;
+    font-size: 0.9rem;
+  }
+
+  .filtru-pret {
+    padding: 10px;
+  }
+
+  .filtru-pret label {
+    font-size: 0.9rem;
+  }
+
+  .pret-inputs input {
+    width: 60px;
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+
+  .genuri-container {
+    max-height: 300px;
+  }
+}
