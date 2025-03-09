@@ -2,7 +2,7 @@ import models from '../models/index.mjs';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import path from 'path'; // Add this import
+import path from 'path';
 import fs from 'fs';
 dotenv.config();
 
@@ -192,6 +192,8 @@ const getImagineProfil = async(req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
 
 export default { checkEmailExists, 
     checkUsernameTaken, 

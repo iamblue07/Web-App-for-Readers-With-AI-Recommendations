@@ -1,10 +1,12 @@
-import AuthRouters from './Auth-routers.mjs';
-import UtilizatorRouters from './Utilizator-routers.mjs';
-import ForumRouters from './Forum-routers.mjs';
+import AuthRouter from './Auth-routers.mjs';
+import UtilizatorRouter from './Utilizator-routers.mjs';
+import ForumRouter from './Forum-routers.mjs';
 import CarteRouter from './Carte-routers.mjs';
+import BazarRouter from './Bazar-routers.mjs';
 export default {
-  AuthRouters,
-  UtilizatorRouters,
-  ForumRouters,
-  CarteRouter
+  AuthRouter,
+  UtilizatorRouter,
+  ForumRouter,
+  CarteRouter,
+  BazarRouter
 }
