@@ -1,51 +1,235 @@
-.CreeazaAnunt-Container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    min-height: 400px;
-    box-sizing: border-box;
-    overflow: hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.CreeazaAnunt-container-left, .CreeazaAnunt-container-right {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+.CreeazaAnunt-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #FFFBFE;
+  padding: 20px;
+}
+
+.CreeazaAnunt-container-left,
+.CreeazaAnunt-container-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+}
+
+.CreeazaAnunt-container-titlu,
+.CreeazaAnunt-container-descriere,
+.CreeazaAnunt-container-pret {
+  margin-bottom: 20px;
+}
+
+.CreeazaAnunt-container-titlu p,
+.CreeazaAnunt-container-descriere p,
+.CreeazaAnunt-container-pret p {
+  font-size: 1rem;
+  color: #090C08;
+  margin-bottom: 10px;
+}
+
+.CreeazaAnunt-input {
+  width: 100%;
+  max-width: 30vw;
+  padding: 10px;
+  height: 40px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-input:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-textarea {
+  width: 100%;
+  max-width: 28vw;
+  height: 160px;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  resize: none;
+  overflow: auto;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-textarea:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-negociabil,
+.CreeazaAnunt-btn-publica,
+.CreeazaAnunt-btn-anuleaza,
+.CreeazaAnunt-buton-Incarca,
+.CreeazaAnunt-btn-Sterge {
+    max-width: 30vw;
+    padding: 10px 15px;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.CreeazaAnunt-btn-negociabil:hover,
+.CreeazaAnunt-btn-publica:hover,
+.CreeazaAnunt-btn-anuleaza:hover,
+.CreeazaAnunt-buton-Incarca:hover,
+.CreeazaAnunt-btn-Sterge:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 .CreeazaAnunt-container-imagine {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .CreeazaAnunt-imagine-profil {
-    display: block;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  margin: 0 auto;
 }
 
-.CreeazaAnunt-rezultate-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-height: 200px;
-    overflow-y: auto;
+.CreeazaAnunt-imagine-profil:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-file-input {
+  display: none;
+}
+
+.CreeazaAnunt-container-cauta {
+  margin-top: 6px;
 }
 
 .input-buton-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Ensures equal height for input/button */
+  gap: 10px;
+}
+
+.CreeazaAnunt-input-cauta {
+  flex: 1; /* Takes remaining space */
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  height: 40px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1; /* Fix text vertical alignment */
+}
+
+.CreeazaAnunt-input-cauta:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-cauta {
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1; /* Fix text vertical alignment */
+  flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+.CreeazaAnunt-btn-cauta:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-rezultat-card {
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  cursor: pointer;
+}
+
+.CreeazaAnunt-rezultat-card:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
 }
 
 @media screen and (max-width: 768px) {
-    .CreeazaAnunt-Container {
-        flex-direction: column;
-        align-items: center;
+  .CreeazaAnunt-Container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .CreeazaAnunt-container-left,
+  .CreeazaAnunt-container-right {
+    width: 100%;
+    justify-items: stretch;
+  }
+
+    .CreeazaAnunt-container-titlu,
+    .CreeazaAnunt-container-descriere,
+    .CreeazaAnunt-container-pret {
+        justify-items: stretch;
     }
 
-    .CreeazaAnunt-container-left, .CreeazaAnunt-container-right {
-        width: 100%;
+    .CreeazaAnunt-btn-negociabil,
+    .CreeazaAnunt-btn-publica,
+    .CreeazaAnunt-btn-anuleaza,
+    .CreeazaAnunt-buton-Incarca,
+    .CreeazaAnunt-btn-Sterge,
+    .CreeazaAnunt-input { 
+        max-width: 100vw;
+    }
+
+    .CreeazaAnunt-textarea {
+        max-width: 70vw;
     }
 }

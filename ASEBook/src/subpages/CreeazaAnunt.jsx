@@ -101,24 +101,24 @@ const CreeazaAnunt = () => {
                     {esteNegociabil ? "Negociabil" : "Nu e negociabil"}
                 </button>
                 <button className="CreeazaAnunt-btn-publica">
-                    Publică anuntul!
+                    Publica anuntul!
                 </button>
                 <button className="CreeazaAnunt-btn-anuleaza">
-                    Anulează
+                    Anuleaza
                 </button>
             </div>
             <div className="CreeazaAnunt-container-right">
                 <div className="CreeazaAnunt-container-imagine">
-                    <p>Încarcă o imagine!</p>
+                    <p>Incarca o imagine!</p>
                     <img src={image} alt="imagine-carte" className="CreeazaAnunt-imagine-profil" />
                     <input type="file" id="fileInput" accept="image/*" style={{ display: "none" }} onChange={uploadImage} className="CreeazaAnunt-file-input"/>
                     <button className="CreeazaAnunt-buton-Incarca" onClick={() => document.getElementById("fileInput").click()}>
-                        Încarcă
+                        Incarca
                     </button>
                     {image !== stock_book && (<button className="CreeazaAnunt-btn-Sterge" onClick={() => { setImage(stock_book) }}>Sterge imaginea</button>)}
                 </div>
                 <div className="CreeazaAnunt-container-cauta">
-                    <p>Este disponibilă în magazinele deja-existente?</p>
+                    <p>Este disponibila in magazinele deja-existente?</p>
                     {storedId === null ? (
                         <div className="CreeazaAnunt-dropdown-rezultate">
                             <div className="input-buton-container">
@@ -130,7 +130,7 @@ const CreeazaAnunt = () => {
                                     onChange={(e) => { setCautareBD(e.target.value); }}
                                     className="CreeazaAnunt-input-cauta"
                                 />
-                                <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">Caută</button>
+                                <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">Cauta</button>
                             </div>
                             {viewRezultate && (
                                 Array.isArray(rezultateBD) && rezultateBD.length > 0 ? (
@@ -142,13 +142,13 @@ const CreeazaAnunt = () => {
                                         </div>
                                     ))
                                 ) : (
-                                    <p>Nu s-au găsit rezultate.</p>
+                                    <p>Nu s-au gasit rezultate.</p>
                                 )
                             )}
                         </div>
                     ) : (
                         <div>
-                            <p>Carte selectată:</p>
+                            <p>Carte selectata:</p>
                             <div className="CreeazaAnunt-rezultat-card">
                                 {rezultateBD.filter(carte => carte.idCarte === storedId).map((carte) => (
                                     <div key={carte.idCarte}>
@@ -158,7 +158,7 @@ const CreeazaAnunt = () => {
                                     </div>
                                 ))}
                             </div>
-                            <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">Caută din nou</button>
+                            <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">Cauta din nou</button>
                         </div>
                     )}
                 </div>
