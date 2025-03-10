@@ -144,14 +144,15 @@ const ForumurileMele = () => {
                                 </button>
                             </>
                         )}
-
-                        <button
+                        {forum.esteDeschis ? (<button
                             onClick={() => handleToggleStatus(forum, forum.id)}
                             disabled={editingForumId !== null}
-                            className="ForumurileMele-statusButton"
-                        >
-                            {forum.esteDeschis ? "Deschis" : "Inchis"}
-                        </button>
+                            className="ForumurileMele-statusButton-Deschis"
+                        >Deschis</button>) : (                        <button
+                            onClick={() => handleToggleStatus(forum, forum.id)}
+                            disabled={editingForumId !== null}
+                            className="ForumurileMele-statusButton-Inchis"
+                        >Inchis</button>)}
                     </div>
                 ))}
             </div>

@@ -95,11 +95,63 @@
     box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
 }
 
+.buton-Deconectare {
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #090C08;
+    color: #FFFBFE;
+    margin: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+}
+
+.buton-Deconectare:hover {
+    color: #EE2E31;
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+.buton-Schimba {
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #090C08;
+    color: #FFFBFE;
+    margin: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(84, 238, 46, 0.3);
+}
+
+.buton-Schimba:hover {
+    color: rgb(84, 238, 46);
+    box-shadow: 0 8px 12px rgba(84, 238, 46, 0.6);
+}
+
 .buton-Profil:hover {
     background-color: transparent;
     color: #EE2E31;
     border-color: #EE2E31;
     box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+.buton-Actualizeaza {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    margin: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.buton-Actualizeaza:hover {
+    color: #4CAF50;
+    border-color: #4CAF50;
+    box-shadow: 0 8px 12px #4CAF50;
 }
 
 .textarea-profil {

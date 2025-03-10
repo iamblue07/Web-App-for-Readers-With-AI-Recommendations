@@ -117,7 +117,7 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
                     <thead>
                         <tr>
                             <th className="th-preferinte">Gen Literar</th>
-                            <th className="th-preferinte">Preferință</th>
+                            <th className="th-preferinte">Preferinta</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,7 +141,7 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
                     <p>Please wait...</p>
                 )
             }
-            <button className="buton-preferinte" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
+            <button className="buton-Actualizeaza" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
             <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>Vezi istoricul cartilor citite</button>
         </div>
     );

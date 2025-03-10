@@ -230,12 +230,12 @@ const Profil = () => {
                         <div className='container-Imagine-Profil'>
                             <img src={imagePath} alt="imagine-profil" className='imagine-profil' />
                             <input type="file" id="fileInput" accept="image/*" style={{ display: "none" }} onChange={handleImageUpload} />
-                            <button className='buton-Profil' onClick={() => document.getElementById("fileInput").click()}>
+                            <button className='buton-Schimba' onClick={() => document.getElementById("fileInput").click()}>
                                 Schimba imaginea
                             </button>
                         </div>
                         <p>Salut, {userData.username}</p>
-                        <button className='buton-Profil' onClick={handleLogout}>Deconecteaza-te</button>
+                        <button className='buton-Deconectare' onClick={handleLogout}>Deconecteaza-te</button>
                     </div>
                     <div className='container-descriere-Profil'>
                         {
@@ -255,8 +255,8 @@ const Profil = () => {
                                     rows="4"
                                     className="textarea-profil"
                                 />
-                                <button className='buton-Profil' onClick={handleSaveDescription}>Salveaza descrierea</button>
-                                <button className='buton-Profil' onClick={handleCancelEdit}>Anuleaza</button>
+                                <button className='buton-Schimba' onClick={handleSaveDescription}>Salveaza descrierea</button>
+                                <button className='buton-Deconectare' onClick={handleCancelEdit}>Anuleaza</button>
                             </>
                         ) : (
                             <>
@@ -267,7 +267,7 @@ const Profil = () => {
                     <div className='container-schimbare-parola'>
                         <div className='div-inputs'><p>Parola curenta:</p><input type='password' placeholder='Parola curenta' value={currentPass} onChange={(e) => { setCurrentPass(e.target.value) }} /></div>
                         <div className='div-inputs'><p>Parola Noua:</p><input type='password' placeholder='Parola noua' value={newPass} onChange={(e) => { setNewPass(e.target.value) }} /></div>
-                        <button className='buton-Profil' onClick={FetchUpdatePassword} disabled={isLoadingPassword}>
+                        <button className='buton-Actualizeaza' onClick={FetchUpdatePassword} disabled={isLoadingPassword}>
                             {isLoadingPassword ? 'Se actualizeaza...' : 'Actualizeaza parola'}
                         </button>
                     </div>

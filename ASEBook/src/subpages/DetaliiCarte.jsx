@@ -192,8 +192,8 @@ const DetaliiCarte = () => {
                         </div>
                         {!!authData.token && (<div>
                                 {bookIsMarked ? (
-                                    <button className="btnMarked" onClick={ () => {fetchUnmark()}}>Sterge marcarea cărții</button>) : (
-                                    <button className="btnUnMarked" onClick={ () => {fetchMarkAsRead()}}>Marchează cartea ca citită</button>)
+                                    <button className="btnMarked" onClick={ () => {fetchUnmark()}}>Sterge marcarea cartii</button>) : (
+                                    <button className="btnUnMarked" onClick={ () => {fetchMarkAsRead()}}>Marcheaza cartea ca citita</button>)
                                 }
                             </div>)}
                         </div>
@@ -203,14 +203,14 @@ const DetaliiCarte = () => {
                             bookOffers.map((oferta) => (
                                 <div key={oferta.id} className="oferta-item">
                                     <h2>{oferta.magazin}</h2>
-                                    <p>Preț: {oferta.pretOferta} RON</p>
+                                    <p>Pret: {oferta.pretOferta} RON</p>
                                     <a href={oferta.linkOferta} target="_blank" rel="noopener noreferrer">
                                         Vezi oferta
                                     </a>
                                 </div>
                             ))
                         ) : (
-                            <p>Nu există oferte disponibile pentru această carte.</p>
+                            <p>Nu exista oferte disponibile pentru aceasta carte.</p>
                         )}
                     </div>
                 </div>

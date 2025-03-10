@@ -51,6 +51,40 @@
   box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
+.btnAnuleaza {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238, 46, 46, 0.6);
+}
+
+.btnCreeaza {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
+}
+
+.btnCreeaza:hover {
+  box-shadow: 0 4px 10px rgba(84, 238, 46,0.9);
+  transform: translateY(-3px);
+  color:rgb(84, 238, 46);
+}
+
+.btnAnuleaza:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+  color:rgb(238,46,49);
+}
+
 .btnForum:hover {
   box-shadow: 0 4px 10px rgba(238,46,49,0.9);
   transform: translateY(-3px);

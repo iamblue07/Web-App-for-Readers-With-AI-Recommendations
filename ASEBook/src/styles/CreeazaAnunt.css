@@ -80,7 +80,6 @@
 }
 
 .CreeazaAnunt-btn-negociabil,
-.CreeazaAnunt-btn-publica,
 .CreeazaAnunt-btn-anuleaza,
 .CreeazaAnunt-buton-Incarca,
 .CreeazaAnunt-btn-Sterge {
@@ -98,8 +97,95 @@
     font-size: inherit;
 }
 
-.CreeazaAnunt-btn-negociabil:hover,
-.CreeazaAnunt-btn-publica:hover,
+.CreeazaAnunt-btn-publica {
+  max-width: 30vw;
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-btn-publica:hover {
+  box-shadow: 0 4px 10px rgba(84, 238, 46, 0.9);
+  color: rgb(84, 238, 46);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-anuleaza {
+  max-width: 30vw;
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49, 0.6);
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-btn-anuleaza:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49, 0.9);
+  color: rgb(238,46,49);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-negociabil-da {
+  max-width: 30vw;
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: rgb(84, 238, 46);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-btn-negociabil-da:hover {
+  box-shadow: 0 4px 10px rgba(84, 238, 46, 0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-negociabil-nu {
+  max-width: 30vw;
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #090C08;
+  color: rgb(238,46,49);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49, 0.6);
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.CreeazaAnunt-btn-negociabil-nu:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49, 0.9);
+  transform: translateY(-3px);
+}
+
+.CreeazaAnunt-btn-anuleaza:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49, 0.9);
+  color: rgb(238,46,49);
+  transform: translateY(-3px);
+}
+
+
 .CreeazaAnunt-btn-anuleaza:hover,
 .CreeazaAnunt-buton-Incarca:hover,
 .CreeazaAnunt-btn-Sterge:hover {

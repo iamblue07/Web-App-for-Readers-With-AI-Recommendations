@@ -154,8 +154,12 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(238,46,49,0.6);
   z-index: 100;
+  max-height: 200px; /* Ajustează în funcție de dimensiunea rândurilor */
+  overflow-y: auto; /* Permite scroll */
+  overflow-x: hidden;
 }
 
+/* Asigură că fiecare celulă a tabelului are o înălțime corespunzătoare */
 .categorii-content table,
 .sortari-content table {
   width: 100%;
@@ -167,12 +171,14 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  white-space: nowrap; /* Previne textul să fie pe mai multe linii */
 }
 
 .categorii-content td:hover,
 .sortari-content td:hover {
   background-color: rgba(238,46,49,0.1);
 }
+
 
 .input-pret-container {
   display: flex;

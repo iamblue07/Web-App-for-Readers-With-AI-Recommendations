@@ -203,9 +203,12 @@ const CreeazaAnunt = () => {
                     />
                 </div>
                 {validationError && <p style={{ color: "red" }}>{validationError}</p>} {/* Display validation error */}
-                <button className="CreeazaAnunt-btn-negociabil" onClick={() => setEsteNegociabil(!esteNegociabil)}>
-                    {esteNegociabil ? "Negociabil" : "Nu e negociabil"}
-                </button>
+                
+                {esteNegociabil ? (<button className="CreeazaAnunt-btn-negociabil-da" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                    Negociabil
+                </button>) : (<button className="CreeazaAnunt-btn-negociabil-nu" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                    Nu e negociabil
+                </button>)}
                 <button className="CreeazaAnunt-btn-publica" disabled={!canSubmit} onClick={fetchCreateAnunt}>
                     Publica anuntul!
                 </button>

@@ -118,7 +118,7 @@ const Forumuri = () => {
                         </div>
                     ) : (
                         <div>
-                            <button className="btnForum" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Anuleaza</button>
+                            <button className="btnAnuleaza" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Anuleaza</button>
                         </div>
                     )}
                     <button className="btnForum" onClick={() => {navigate('/forumuri/ForumurileMele')}}>Vezi forumurile tale</button>
@@ -161,7 +161,7 @@ const Forumuri = () => {
                 userHasRights === true ? (
                     <div className="container-newForum">
                         <input type="text" className="create-input" placeholder="Introduceti titlul noului forum!" value={newForumTitle} onChange={(e) => {setNewForumTitle(e.target.value)}}/>
-                        <button className="btnForum" onClick={() => {fetchCreateForum()}}>Creeaza noul forum</button>
+                        <button className="btnCreeaza" onClick={() => {fetchCreateForum()}}>Creeaza noul forum</button>
                     </div>) : (<div className="container-newForum"><p className="p-alert">In urma incalcarii regulamentului, nu mai aveti drepturile de a crea un forum! Pentru detalii, contactati un administrator.</p></div>)
             )}
 

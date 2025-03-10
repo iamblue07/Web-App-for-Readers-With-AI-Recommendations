@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState'; 
 import "../styles/Bazar.css";
+import textData from "../utils/text.js";
 
 const Bazar = () => {
     const [pretMinim, setPretMinim] = useState(0);
@@ -15,6 +16,8 @@ const Bazar = () => {
     const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
     const [dropdownCategorie, setDropdownCategorie] = useState(false);
     const [dropdownSortare, setDropdownSortare] = useState(false);
+
+    const genuriLiterare = textData.genuriLiterare;
 
     const selectCategorie = (categorie) => {
         setCategorieSelectata(categorie);
@@ -67,27 +70,27 @@ const Bazar = () => {
 
                 </div>
                 <div className='actual-filters'>
-                    <div className='categorii-container'>
-                        <p>Categoria: </p>
-                        <div className='dropdown-container'>
-                            <button className='categorii-dropdown' onClick={() => setDropdownCategorie(!dropdownCategorie)}>
-                                {categorieSelectata} <i className='fa fa-caret-down' />
-                            </button>
-                            {dropdownCategorie && (
-                                <div className='categorii-content'>
-                                    <table>
-                                        <tbody>
-                                            <tr onClick={() => selectCategorie("Electronice")}><td>Electronice</td></tr>
-                                            <tr onClick={() => selectCategorie("Mobilă")}><td>Mobilă</td></tr>
-                                            <tr onClick={() => selectCategorie("Haine")}><td>Haine</td></tr>
-                                            <tr onClick={() => selectCategorie("Auto")}><td>Auto</td></tr>
-                                            <tr onClick={() => selectCategorie("Sport")}><td>Sport</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
-                        </div>
+                <div className='categorii-container'>
+                    <p>Categorie:</p>
+                    <div className='dropdown-container'>
+                        <button className='categorii-dropdown' onClick={() => setDropdownCategorie(!dropdownCategorie)}>
+                            {categorieSelectata} <i className='fa fa-caret-down' />
+                        </button>
+                        {dropdownCategorie && (
+                            <div className='categorii-content'>
+                                <table>
+                                    <tbody>
+                                        {genuriLiterare.map((gen, index) => (
+                                            <tr key={index} onClick={() => selectCategorie(gen)}>
+                                                <td>{gen}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
+                </div>
                     <div className='pret-container'>
                         <div className='p-pret-container'>
                             <p>Pret:</p>
