@@ -1,0 +1,115 @@
+.anunt-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 99.9%;
+    background-color: #FFFBFE;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 10px 0; /* Add some vertical spacing */
+}
+
+.anunt-main-container:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+.anunt-imagine img {
+    width: 180px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.anunt-subcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.anunt-titlu-pret {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anuntData-titlu {
+    font-size: 20px;
+    font-weight: bold;
+    color: #090C08;
+}
+
+.anunt-pret-negociabil {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.anuntData-pret {
+    font-size: 18px;
+    font-weight: bold;
+    color: #090C08;
+}
+
+.negociabil {
+    color: #4CAF50
+}
+
+.non-negociabil {
+    color: #EE2E31
+}
+
+.anunt-descriere p {
+    font-size: 16px;
+    color: #090C08;
+}
+
+.anuntData-descriere {
+    display: block;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+
+.anunt-utilizator-data {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+}
+
+@media only screen and (max-width: 768px) {
+    .anunt-main-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .anunt-imagine img {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .anunt-subcontainer {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .anunt-titlu-pret {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .anunt-pret-negociabil {
+        align-items: center;
+    }
+
+    .anunt-utilizator-data {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,19 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState'; 
 import "../styles/Bazar.css";
 import textData from "../utils/text.js";
+import config from "../utils/config.js";
+import Anunt from '../components/Anunt/Anunt.jsx';
 
 const Bazar = () => {
     const [pretMinim, setPretMinim] = useState(0);
     const [pretMaxim, setPretMaxim] = useState(9999);
     const [stringCautare, setStringCautare] = useState("");
+    const [categorieSelectata, setCategorieSelectata] = useState("Alege categoria");
+    const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
 
     const navigate = useNavigate();
     const {authData} = useContext(GlobalContext);
 
-    const [categorieSelectata, setCategorieSelectata] = useState("Alege categoria");
-    const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
     const [dropdownCategorie, setDropdownCategorie] = useState(false);
     const [dropdownSortare, setDropdownSortare] = useState(false);
 
@@ -50,6 +52,60 @@ const Bazar = () => {
         }
     };
 
+
+    const [anunturiPerPage, setAnunturiPerPage] = useState(15);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [anuntBazarIDs, setAnuntBazarIDs] = useState([]);
+
+    const [anunturiDetails, setAnunturiDetails] = useState([]);
+
+    const fetchAnuntBazarIDs = async () => {
+        try {
+            const response = await fetch(`${config.API_URL}/api/bazar/getAnuntIDs`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({stringCautare, pretMinim, pretMaxim, categorieSelectata, sortareSelectata, currentPage, anunturiPerPage })
+            });
+            if (!response.ok) {
+                console.log('Eroare la preluarea datelor');
+                return;
+            }
+            const data = await response.json();
+            setAnuntBazarIDs(data.ids);
+            setTotalPages(data.totalPages);
+            console.log(data);
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const fetchAnuntBazarData = async (ids) => {
+        if(ids.length === 0) return;
+        try {
+            const response = await fetch(`${config.API_URL}/api/bazar/getAnunturiData`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ids})
+            });
+            if(!response.ok) {
+                console.log("Eroare la preluarea detaliilor!");
+                return;
+            }
+            const data = await response.json();
+            setAnunturiDetails(data);
+            console.log("CON", data);
+        }catch(error){
+            console.error("Error fetching anunturi details: ", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchAnuntBazarData(anuntBazarIDs);
+    }, [anuntBazarIDs]);
+
+    const currentAnunturi = anunturiDetails.slice(0, anunturiPerPage);
+
     return (
         <div className='bazar-container'>
 
@@ -62,7 +118,7 @@ const Bazar = () => {
 
             <div className='searchbar-container'>
                 <input className='searchbar-anunturi' type='text' placeholder='Incepeti cautarea' value={stringCautare} onChange={(e) => setStringCautare(e.target.value)} />
-                <button className='btn-cauta'>Cauta</button>
+                <button className='btn-cauta' onClick={() => {fetchAnuntBazarIDs()}}>Cauta</button>
             </div>
             <div className='filtre-container'>
                 <div className='p-filtre-container'>
@@ -139,7 +195,28 @@ const Bazar = () => {
                 
             </div>
             <div className='tabel-container'>
-                {/* Aici vor fi listate anunțurile */}
+                <div className='container-rezultate-header'>
+                    <p>REZULTATE</p>
+                </div>
+                <div className='container-rezultate'>
+                    {currentAnunturi.map((anunt) => (
+                        <Anunt className="anunt-card" key={anunt.id} {...anunt} />
+                    ))}
+                </div>
+                {totalPages > 1 && (
+                    <div className='pagination-container'>
+                        {[...Array(totalPages)].map((_, i) => (
+                            <button 
+                                key={i}
+                                onClick={() => setCurrentPage(i+1)}
+                                disabled={i+1 === currentPage}
+                                className='pagination-button'
+                            >
+                                {i+1}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

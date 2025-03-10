@@ -25,6 +25,10 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.FLOAT,
             allowNull: false
         },
+        genLiterar: {
+            type:DataTypes.STRING,
+            allowNull: false
+        },
         esteNegociabil: {
             type: DataTypes.BOOLEAN,
         },

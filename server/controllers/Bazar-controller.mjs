@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { Op } from "sequelize";
 import { fileURLToPath } from "url";
+import Sequelize from "sequelize";
 
 dotenv.config();
 
@@ -83,8 +84,143 @@ const createAnunt = async(req, res) => {
     }
 }
 
+const postAnuntBazarIDs = async (req, res) => {
+  try {
+    console.log("Received data: ", req.body);
+    const {
+      stringCautare,
+      pretMinim,
+      pretMaxim,
+      categorieSelectata,
+      sortareSelectata,
+      currentPage,
+      anunturiPerPage
+    } = req.body;
+
+    if (isNaN(pretMinim) || isNaN(pretMaxim)) {
+      return res.status(400).json({ error: 'Preturile trebuie sa fie numere valide' });
+    }
+
+    // Build the filtering criteria
+    const whereClause = {
+      pretAnunt: { [Op.between]: [pretMinim, pretMaxim] },
+      esteDisponibil: true
+    };
+
+    // Only filter by category if a valid category is selected
+    if (categorieSelectata && categorieSelectata !== "Alege categoria") {
+      whereClause.genLiterar = categorieSelectata;
+    }
+
+    // Add search condition for titluAnunt if stringCautare is provided (non-empty)
+    if (stringCautare && stringCautare.trim() !== '') {
+      whereClause.titluAnunt = { [Op.like]: `%${stringCautare}%` };
+    }
+
+    // Build the ordering criteria
+    let orderClause = [];
+    if (sortareSelectata && sortareSelectata !== "Sorteaza dupa") {
+      switch (sortareSelectata) {
+        case "Pret - descrescator":
+          orderClause.push(['pretAnunt', 'DESC']);
+          break;
+        case "Pret - crescator":
+          orderClause.push(['pretAnunt', 'ASC']);
+          break;
+        case "Cele mai vechi anunturi":
+          orderClause.push(['dataAnunt', 'ASC']);
+          break;
+        case "Cele mai noi anunturi":
+          orderClause.push(['dataAnunt', 'DESC']);
+          break;
+        default:
+          // If none of the expected values match, no ordering is applied.
+          break;
+      }
+    }
+
+    // Calculate offset for pagination (currentPage is assumed to be 1-indexed)
+    const offset = (currentPage - 1) * anunturiPerPage;
+
+    // Use findAndCountAll to both fetch rows and count the total results for pagination
+    const result = await models.AnuntBazar.findAndCountAll({
+      attributes: ['id'],
+      where: whereClause,
+      order: orderClause,
+      limit: anunturiPerPage,
+      offset: offset
+    });
+
+    const idList = result.rows.map(anunt => anunt.id);
+    const totalPages = Math.ceil(result.count / anunturiPerPage);
+
+    // Return the fetched ids and total pages
+    return res.status(200).json({ ids: idList, totalPages });
+  } catch (error) {
+    console.error("Error in postAnuntBazarIDs: ", error);
+    res.status(500).json({ error: 'Eroare la preluarea datelor' });
+  }
+};
+
+const getAnunturiData = async (req, res) => {
+  try {
+      const { ids } = req.body;
+      if (!Array.isArray(ids) || ids.length === 0) {
+          return res.status(400).json({ message: "IDs not an array, or empty" });
+      }
+
+      const anunturi = await models.AnuntBazar.findAll({
+          where: { id: ids },
+          order: [[Sequelize.fn('FIELD', Sequelize.col('AnuntBazar.id'), ...ids), 'ASC']],
+          include: [{ model: models.Utilizator, attributes: ['username'] }]
+      });
+
+      if (anunturi.length === 0) {
+          return res.status(404).json({ message: "No Anunturi found for the given IDs" });
+      }
+
+      const anunturiData = anunturi.map(anunt => ({
+          id: anunt.id,
+          titlu: anunt.titluAnunt,
+          descriere: anunt.descriereAnunt,
+          utilizator: anunt.Utilizator ? anunt.Utilizator.username : "Utilizator necunoscut",
+          data: anunt.dataAnunt,
+          negociabil: anunt.esteNegociabil,
+          pret: anunt.pretAnunt
+      }));
+
+      console.log("Final anunturi details: ", anunturiData);
+      return res.status(200).json(anunturiData);
+  } catch (error) {
+      console.error("Error in getAnunturiData:", error);
+      return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+const getAnuntImagine = async(req, res) => {
+  try {
+    const anuntId = req.params.anuntId;
+    if(!anuntId || isNaN(anuntId)) {
+      return res.status(404).json({error: "ID anunt invalid"})
+    }
+    const anunt = await models.AnuntBazar.findByPk(anuntId);
+    if(!anunt || !anunt.caleImagine) {
+      return res.status(404).json({error: "Imaginea nu exista sau imaginea lipseste"});
+    }
+    const caleAbsoluta = path.resolve(anunt.caleImagine);
+    return res.sendFile(caleAbsoluta);
+  }catch(error) {
+    return res.status(500).json({error: "Internal server error"})
+  }
+}
+
+
 export default {
     getCartiDataShort,
     getAnuntRights,
-    createAnunt
+    createAnunt,
+    postAnuntBazarIDs,
+    getAnunturiData,
+    getAnuntImagine
 }

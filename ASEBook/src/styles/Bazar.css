@@ -218,11 +218,7 @@
   padding: 20px;
   box-shadow: 0 2px 5px rgba(238,46,49,0.6);
   transition: all 0.3s ease;
-}
-
-.tabel-container:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
+  overflow: hidden; /* Prevent any unexpected overflow */
 }
 
 .pagination-container {
@@ -251,6 +247,37 @@
 .pagination-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.container-rezultate {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* This is crucial */
+  gap: 15px;
+  width: 100%;
+  padding: 0; /* Remove any padding that might cause horizontal scroll */
+}
+
+.anunt-container {
+  width: 100%; /* This should already be present */
+  /* Keep other styles but ensure no max-width constraints */
+  padding: 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  transition: all 0.3s ease;
+}
+
+.anunt-container:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+
+.anunt-card {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
