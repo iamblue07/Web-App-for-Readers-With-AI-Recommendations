@@ -78,7 +78,7 @@
   margin-bottom: 15px;
 }
 
-.container-rezultate {
+.container-cauta-rezultate {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;

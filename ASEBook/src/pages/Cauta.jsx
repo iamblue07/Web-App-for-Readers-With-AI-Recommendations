@@ -92,7 +92,7 @@ const Cauta = () => {
                     <div className='container-header'>
                         <p>REZULTATE</p>
                     </div>
-                    <div className='container-rezultate'>
+                    <div className='container-cauta-rezultate'>
                         {currentBooks.map((book) => (
                             <Carte key={book.isbn} {...book} />
                         ))}
