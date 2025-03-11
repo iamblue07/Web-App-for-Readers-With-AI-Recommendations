@@ -62,12 +62,13 @@ const createAnunt = async(req, res) => {
             return res.status(404).json({ error: "ID utilizator invalid" });
         }
         const {anuntTitle, anuntDescriere, anuntData,
-        anuntPret, anuntNegociabil, anuntIdCarte} = req.body;
+        anuntPret, anuntNegociabil, anuntIdCarte, genLiterar} = req.body;
         if(!req.file) {
             return res.status(400).json({message:"Niciun fisier incarcat!"});
         }
         const imagePath = `uploads/${req.file.filename}`;
         await models.AnuntBazar.create({
+            genLiterar: genLiterar, 
             idUtilizator: userId,
             titluAnunt: anuntTitle,
             descriereAnunt: anuntDescriere,

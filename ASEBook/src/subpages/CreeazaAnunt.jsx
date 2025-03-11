@@ -6,8 +6,10 @@ import stock_book from "../assets/stock_book.jpg";
 import config from "../utils/config";
 import { createToast } from "../utils/createToast";
 import "../styles/CreeazaAnunt.css";
+import text from "../utils/text";
 
 const CreeazaAnunt = () => {
+    const genuriLiterare = text.genuriLiterare;
     const { authData } = useContext(GlobalContext);
     const navigate = useNavigate();
     const [esteNegociabil, setEsteNegociabil] = useState(true);
@@ -23,7 +25,10 @@ const CreeazaAnunt = () => {
 
     const [hasRights, setHasRights] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
-    const [validationError, setValidationError] = useState(""); // State for validation errors
+    const [validationError, setValidationError] = useState("");
+
+    const [genLiterar, setGenLiterar] = useState("Selecteaza genul literar");
+    const [dropdownGen, setDropdownGen] = useState(false);
 
     useEffect(() => {
         if (!authData) {
@@ -115,8 +120,8 @@ const CreeazaAnunt = () => {
 
     const fetchCreateAnunt = async () => {
         // Validate required fields
-        if (!titlu || !descriere || !pret || (image === stock_book)) {
-            setValidationError("Titlul, imaginea, descrierea si pretul sunt obligatorii!");
+        if (!titlu || !descriere || !pret || (image === stock_book) || (genLiterar === "Selecteaza genul literar")) {
+            setValidationError("Titlul, imaginea, descrierea, genul literar si pretul sunt obligatorii!");
             return;
         }
 
@@ -137,6 +142,7 @@ const CreeazaAnunt = () => {
             formData.append("anuntPret", pret);
             formData.append("anuntNegociabil", esteNegociabil);
             formData.append("anuntIdCarte", storedId);
+            formData.append("genLiterar", genLiterar);
 
             // Append the image file
             const fileInput = document.getElementById("fileInput");
@@ -191,6 +197,31 @@ const CreeazaAnunt = () => {
                         className="CreeazaAnunt-textarea"
                     />
                 </div>
+
+                <div className="CreeazaAnunt-container-genLiterar">
+                    <div className="p-genLiterar-container">
+                        <p className="p-genLiterar">Gen literar:</p>
+                        <div className="genLiterar-dropdown-container">
+                            <button className="genuri-dropdown" onClick={() => setDropdownGen(!dropdownGen)}>
+                                {genLiterar} <i className="fa fa-caret-down" />
+                            </button>
+                            {dropdownGen && (
+                                <div className="genuri-content">
+                                    <table>
+                                        <tbody>
+                                            {genuriLiterare.map((gen, index) => (
+                                                <tr key = {index} onClick={() => {setGenLiterar(gen); setDropdownGen(!dropdownGen)}}>
+                                                    <td>{gen}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
                 <div className="CreeazaAnunt-container-pret">
                     <p>Pret:</p>
                     <input

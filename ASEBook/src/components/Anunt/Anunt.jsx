@@ -54,8 +54,8 @@ const Anunt = (anuntData) => {
                     <p className="anuntData-titlu">{anuntData.titlu}</p>
                     <div className="anunt-pret-negociabil">
                         <p className="anuntData-pret">{anuntData.pret} RON</p>
-                        {anuntData.esteNegociabil ? 
-                            <p className="negociabil">Negociabil </p> :
+                        {anuntData.negociabil ? 
+                            <p className="negociabil">Negociabil</p> :
                             <p className="non-negociabil">Nu e negociabil</p>
                         }
                     </div>
