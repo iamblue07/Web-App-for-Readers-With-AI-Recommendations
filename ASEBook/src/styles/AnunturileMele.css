@@ -1,0 +1,83 @@
+/* AnunturileMele.css */
+.AnunturileMele-main-container {
+    padding: 20px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    min-height: 100vh;
+  }
+  
+  .anunturi-list {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .anunturi-list > * {
+    padding: 15px;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    background-color: #FFFBFE;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+  }
+  
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .pagination button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px;
+  }
+  
+  .pagination button:hover {
+    box-shadow: 0 4px 10px;
+    transform: translateY(-3px);
+  }
+  
+  .pagination button.active {
+    background-color: #090C08;
+    color: #FFFBFE;
+    box-shadow: 0 2px 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .AnunturileMele-main-container {
+      padding: 15px;
+    }
+    
+    .anunturi-list {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 15px;
+    }
+  
+    .pagination {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .anunturi-list {
+      grid-template-columns: 1fr;
+    }
+  
+    .pagination button {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+  }

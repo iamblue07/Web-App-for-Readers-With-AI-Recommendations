@@ -1,0 +1,26 @@
+.connected-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+.btn-creaza-anunt,
+.btn-vezi-anunturi,
+.btn-conversatii {
+  padding: 10px 15px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.btn-creaza-anunt:hover,
+.btn-vezi-anunturi:hover,
+.btn-conversatii:hover {
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}

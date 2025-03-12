@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import config from "../utils/config";
 import {createToast} from "../utils/createToast";
@@ -13,7 +14,13 @@ const ForumurileMele = () => {
     const [newTitle, setNewTitle] = useState('');
     const { authData } = useContext(GlobalContext);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
+        if(!authData.token) {
+            navigate('/Forumuri');
+            return;
+        }
         fetchForums();
     }, [authData.token, currentPage, rowsPerPage]);
 

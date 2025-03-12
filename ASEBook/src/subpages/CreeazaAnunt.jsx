@@ -7,6 +7,7 @@ import config from "../utils/config";
 import { createToast } from "../utils/createToast";
 import "../styles/CreeazaAnunt.css";
 import text from "../utils/text";
+import HeaderBazar from "../components/HeaderBazar/HeaderBazar";
 
 const CreeazaAnunt = () => {
     const genuriLiterare = text.genuriLiterare;
@@ -175,150 +176,153 @@ const CreeazaAnunt = () => {
     };
 
     return (
-        <div className="CreeazaAnunt-Container">
-            <ToastContainer />
-            <div className="CreeazaAnunt-container-left">
-                <div className="CreeazaAnunt-container-titlu">
-                    <p>Introdu titlul anuntului:</p>
-                    <input
-                        type="text"
-                        placeholder="Introdu titlul"
-                        value={titlu}
-                        onChange={(e) => setTitlu(e.target.value)}
-                        className="CreeazaAnunt-input"
-                    />
-                </div>
-                <div className="CreeazaAnunt-container-descriere">
-                    <p>Descrierea anuntului:</p>
-                    <textarea
-                        placeholder="Introdu Descrierea"
-                        value={descriere}
-                        onChange={(e) => setDescriere(e.target.value)}
-                        className="CreeazaAnunt-textarea"
-                    />
-                </div>
+        <>
+            <HeaderBazar/>
+            <div className="CreeazaAnunt-Container">
+                <ToastContainer />
+                <div className="CreeazaAnunt-container-left">
+                    <div className="CreeazaAnunt-container-titlu">
+                        <p>Introdu titlul anuntului:</p>
+                        <input
+                            type="text"
+                            placeholder="Introdu titlul"
+                            value={titlu}
+                            onChange={(e) => setTitlu(e.target.value)}
+                            className="CreeazaAnunt-input"
+                        />
+                    </div>
+                    <div className="CreeazaAnunt-container-descriere">
+                        <p>Descrierea anuntului:</p>
+                        <textarea
+                            placeholder="Introdu Descrierea"
+                            value={descriere}
+                            onChange={(e) => setDescriere(e.target.value)}
+                            className="CreeazaAnunt-textarea"
+                        />
+                    </div>
 
-                <div className="CreeazaAnunt-container-genLiterar">
-                    <div className="p-genLiterar-container">
-                        <p className="p-genLiterar">Gen literar:</p>
-                        <div className="genLiterar-dropdown-container">
-                            <button className="genuri-dropdown" onClick={() => setDropdownGen(!dropdownGen)}>
-                                {genLiterar} <i className="fa fa-caret-down" />
-                            </button>
-                            {dropdownGen && (
-                                <div className="genuri-content">
-                                    <table>
-                                        <tbody>
-                                            {genuriLiterare.map((gen, index) => (
-                                                <tr key = {index} onClick={() => {setGenLiterar(gen); setDropdownGen(!dropdownGen)}}>
-                                                    <td>{gen}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
+                    <div className="CreeazaAnunt-container-genLiterar">
+                        <div className="p-genLiterar-container">
+                            <p className="p-genLiterar">Gen literar:</p>
+                            <div className="genLiterar-dropdown-container">
+                                <button className="genuri-dropdown" onClick={() => setDropdownGen(!dropdownGen)}>
+                                    {genLiterar} <i className="fa fa-caret-down" />
+                                </button>
+                                {dropdownGen && (
+                                    <div className="genuri-content">
+                                        <table>
+                                            <tbody>
+                                                {genuriLiterare.map((gen, index) => (
+                                                    <tr key = {index} onClick={() => {setGenLiterar(gen); setDropdownGen(!dropdownGen)}}>
+                                                        <td>{gen}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="CreeazaAnunt-container-pret">
-                    <p>Pret:</p>
-                    <input
-                        type="text"
-                        placeholder="Introdu pretul"
-                        value={pret}
-                        onInput={handleInputChange}
-                        onChange={handlePretChange}
-                        className="CreeazaAnunt-input"
-                    />
-                </div>
-                {validationError && <p style={{ color: "red" }}>{validationError}</p>} {/* Display validation error */}
-                
-                {esteNegociabil ? (<button className="CreeazaAnunt-btn-negociabil-da" onClick={() => setEsteNegociabil(!esteNegociabil)}>
-                    Negociabil
-                </button>) : (<button className="CreeazaAnunt-btn-negociabil-nu" onClick={() => setEsteNegociabil(!esteNegociabil)}>
-                    Nu e negociabil
-                </button>)}
-                <button className="CreeazaAnunt-btn-publica" disabled={!canSubmit} onClick={fetchCreateAnunt}>
-                    Publica anuntul!
-                </button>
-                <button className="CreeazaAnunt-btn-anuleaza" onClick={() => navigate('/bazar')}>
-                    Anuleaza
-                </button>
-            </div>
-            <div className="CreeazaAnunt-container-right">
-                <div className="CreeazaAnunt-container-imagine">
-                    <p>Incarca o imagine!</p>
-                    <img src={image} alt="imagine-carte" className="CreeazaAnunt-imagine-profil" />
-                    <input
-                        type="file"
-                        id="fileInput"
-                        accept="image/*"
-                        style={{ display: "none" }}
-                        onChange={uploadImage}
-                        className="CreeazaAnunt-file-input"
-                    />
-                    <button className="CreeazaAnunt-buton-Incarca" onClick={() => document.getElementById("fileInput").click()}>
-                        Incarca
+                    <div className="CreeazaAnunt-container-pret">
+                        <p>Pret:</p>
+                        <input
+                            type="text"
+                            placeholder="Introdu pretul"
+                            value={pret}
+                            onInput={handleInputChange}
+                            onChange={handlePretChange}
+                            className="CreeazaAnunt-input"
+                        />
+                    </div>
+                    {validationError && <p style={{ color: "red" }}>{validationError}</p>} {/* Display validation error */}
+                    
+                    {esteNegociabil ? (<button className="CreeazaAnunt-btn-negociabil-da" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                        Negociabil
+                    </button>) : (<button className="CreeazaAnunt-btn-negociabil-nu" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                        Nu e negociabil
+                    </button>)}
+                    <button className="CreeazaAnunt-btn-publica" disabled={!canSubmit} onClick={fetchCreateAnunt}>
+                        Publica anuntul!
                     </button>
-                    {image !== stock_book && (
-                        <button className="CreeazaAnunt-btn-Sterge" onClick={() => setImage(stock_book)}>
-                            Sterge imaginea
-                        </button>
-                    )}
+                    <button className="CreeazaAnunt-btn-anuleaza" onClick={() => navigate('/bazar')}>
+                        Anuleaza
+                    </button>
                 </div>
-                <div className="CreeazaAnunt-container-cauta">
-                    <p>Este disponibila in magazinele deja-existente?</p>
-                    {storedId === null ? (
-                        <div className="CreeazaAnunt-dropdown-rezultate">
-                            <div className="input-buton-container">
-                                <input
-                                    type="text"
-                                    placeholder="Caută în baza de date"
-                                    value={cautareBD}
-                                    onFocus={() => setViewRezultate(true)}
-                                    onChange={(e) => setCautareBD(e.target.value)}
-                                    className="CreeazaAnunt-input-cauta"
-                                />
-                                <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">
-                                    Cauta
-                                </button>
+                <div className="CreeazaAnunt-container-right">
+                    <div className="CreeazaAnunt-container-imagine">
+                        <p>Incarca o imagine!</p>
+                        <img src={image} alt="imagine-carte" className="CreeazaAnunt-imagine-profil" />
+                        <input
+                            type="file"
+                            id="fileInput"
+                            accept="image/*"
+                            style={{ display: "none" }}
+                            onChange={uploadImage}
+                            className="CreeazaAnunt-file-input"
+                        />
+                        <button className="CreeazaAnunt-buton-Incarca" onClick={() => document.getElementById("fileInput").click()}>
+                            Incarca
+                        </button>
+                        {image !== stock_book && (
+                            <button className="CreeazaAnunt-btn-Sterge" onClick={() => setImage(stock_book)}>
+                                Sterge imaginea
+                            </button>
+                        )}
+                    </div>
+                    <div className="CreeazaAnunt-container-cauta">
+                        <p>Este disponibila in magazinele deja-existente?</p>
+                        {storedId === null ? (
+                            <div className="CreeazaAnunt-dropdown-rezultate">
+                                <div className="input-buton-container">
+                                    <input
+                                        type="text"
+                                        placeholder="Caută în baza de date"
+                                        value={cautareBD}
+                                        onFocus={() => setViewRezultate(true)}
+                                        onChange={(e) => setCautareBD(e.target.value)}
+                                        className="CreeazaAnunt-input-cauta"
+                                    />
+                                    <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">
+                                        Cauta
+                                    </button>
+                                </div>
+                                {viewRezultate && (
+                                    Array.isArray(rezultateBD) && rezultateBD.length > 0 ? (
+                                        rezultateBD.map((carte) => (
+                                            <div key={carte.idCarte} className="CreeazaAnunt-rezultat-card" onClick={() => handleCarteClick(carte.idCarte)}>
+                                                <h4>{carte.titlu}</h4>
+                                                <p><strong>Autor:</strong> {carte.autor}</p>
+                                                <p><strong>Gen:</strong> {carte.gen}</p>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>Nu s-au gasit rezultate.</p>
+                                    )
+                                )}
                             </div>
-                            {viewRezultate && (
-                                Array.isArray(rezultateBD) && rezultateBD.length > 0 ? (
-                                    rezultateBD.map((carte) => (
-                                        <div key={carte.idCarte} className="CreeazaAnunt-rezultat-card" onClick={() => handleCarteClick(carte.idCarte)}>
+                        ) : (
+                            <div>
+                                <p>Carte selectata:</p>
+                                <div className="CreeazaAnunt-rezultat-card">
+                                    {rezultateBD.filter(carte => carte.idCarte === storedId).map((carte) => (
+                                        <div key={carte.idCarte}>
                                             <h4>{carte.titlu}</h4>
                                             <p><strong>Autor:</strong> {carte.autor}</p>
                                             <p><strong>Gen:</strong> {carte.gen}</p>
                                         </div>
-                                    ))
-                                ) : (
-                                    <p>Nu s-au gasit rezultate.</p>
-                                )
-                            )}
-                        </div>
-                    ) : (
-                        <div>
-                            <p>Carte selectata:</p>
-                            <div className="CreeazaAnunt-rezultat-card">
-                                {rezultateBD.filter(carte => carte.idCarte === storedId).map((carte) => (
-                                    <div key={carte.idCarte}>
-                                        <h4>{carte.titlu}</h4>
-                                        <p><strong>Autor:</strong> {carte.autor}</p>
-                                        <p><strong>Gen:</strong> {carte.gen}</p>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                                <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">
+                                    Cauta din nou
+                                </button>
                             </div>
-                            <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">
-                                Cauta din nou
-                            </button>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

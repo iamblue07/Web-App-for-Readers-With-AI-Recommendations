@@ -5,6 +5,7 @@ import "../styles/Bazar.css";
 import textData from "../utils/text.js";
 import config from "../utils/config.js";
 import Anunt from '../components/Anunt/Anunt.jsx';
+import HeaderBazar from '../components/HeaderBazar/HeaderBazar.jsx';
 
 const Bazar = () => {
     const [pretMinim, setPretMinim] = useState(0);
@@ -12,9 +13,6 @@ const Bazar = () => {
     const [stringCautare, setStringCautare] = useState("");
     const [categorieSelectata, setCategorieSelectata] = useState("Alege categoria");
     const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
-
-    const navigate = useNavigate();
-    const {authData} = useContext(GlobalContext);
 
     const [dropdownCategorie, setDropdownCategorie] = useState(false);
     const [dropdownSortare, setDropdownSortare] = useState(false);
@@ -94,7 +92,6 @@ const Bazar = () => {
             }
             const data = await response.json();
             setAnunturiDetails(data);
-            console.log("CON", data);
         }catch(error){
             console.error("Error fetching anunturi details: ", error);
         }
@@ -104,16 +101,16 @@ const Bazar = () => {
         fetchAnuntBazarData(anuntBazarIDs);
     }, [anuntBazarIDs]);
 
+    useEffect( () => {
+        fetchAnuntBazarIDs();
+    },[])
+
     const currentAnunturi = anunturiDetails.slice(0, anunturiPerPage);
 
     return (
         <div className='bazar-container'>
 
-            {authData.token && <div className='connected-menu'>
-                <button className='btn-creaza-anunt' onClick={() => {navigate('/bazar/creeaza-anunt')}}>Publica un anunt</button>
-                <button className='btn-vezi-anunturi'>Vezi anunturile tale</button>
-                <button className='btn-conversatii'>Vezi conversatiile</button>
-                </div>}
+            <HeaderBazar/>
 
 
             <div className='searchbar-container'>

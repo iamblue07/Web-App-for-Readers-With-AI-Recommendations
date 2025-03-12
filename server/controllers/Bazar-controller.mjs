@@ -1,6 +1,7 @@
 import models from "../models/index.mjs";
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { Op } from "sequelize";
 import { fileURLToPath } from "url";
 import Sequelize from "sequelize";
@@ -216,6 +217,129 @@ const getAnuntImagine = async(req, res) => {
   }
 }
 
+const getAnunturileMeleIDs = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: "ID utilizator invalid" });
+    }
+
+    const { count, rows } = await models.AnuntBazar.findAndCountAll({
+      where: { idUtilizator: userId },
+      attributes: ["id"],
+      order: [["dataAnunt", "DESC"]]
+    });
+
+    return res.status(200).json({ totalAnunturi: count, anunturiIds: rows.map(anunt => anunt.id) });
+
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const getAnuntData = async (req, res) => {
+  try{
+    const userId = req.user.id;
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: "ID utilizator invalid" });
+    }
+    const anuntId = req.params.anuntId;
+    const anunt = await models.AnuntBazar.findByPk(anuntId);
+    if(!anunt){
+      return res.status(404).json({error:"Could not find requested anunt"});
+    }
+    if(anunt.idUtilizator !== userId) {
+      return res.status(400).json({error: "User ID not matching with the connected users'"});
+    }
+    return res.status(200).json(anunt);
+  }catch(error){
+    return res.status(500).json({error: "Internal Server Error"});
+  }
+}
+
+const postUpdateAnunt = async (req, res) => {
+  try{
+    const userId = req.user.id;
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: "ID utilizator invalid" });
+    }
+    const {id, pretNou, esteNegociabil } = req.body;
+    if(!id) {
+      return res.status(404).json({error:"Missing ID"});
+    }
+    const anunt = await models.AnuntBazar.findByPk(id);
+    if(!anunt){
+      return res.status(404).json({error:"Could not find requested anunt"});
+    }
+    if(anunt.idUtilizator !== userId) {
+      return res.status(400).json({error: "User ID not matching with the connected users'"});
+    }
+    anunt.esteNegociabil = esteNegociabil;
+    anunt.pretAnunt = pretNou;
+    await anunt.save();
+    return res.status(200).json({message:"Succes"});
+  }catch(error){
+    return res.status(500).json({error: "Internal server error"});
+  }
+}
+
+const postInchideAnunt = async(req, res) => {
+  try{
+    const userId = req.user.id;
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: "ID utilizator invalid" });
+    }
+    const anuntID = req.params.anuntId;
+    if(!anuntID) {
+      return res.status(404).json({error:"Missing ID"});
+    }
+    const anunt = await models.AnuntBazar.findByPk(anuntID);
+    if(!anunt){
+      return res.status(404).json({error:"Could not find requested anunt"});
+    }
+    if(anunt.idUtilizator !== userId) {
+      return res.status(400).json({error: "User ID not matching with the connected users'"});
+    }
+    anunt.esteDisponibil = false;
+    await anunt.save();
+    console.log(anunt);
+    return res.status(200).json({message: "Succes"});
+  }catch(error){
+    return res.status(500).json({error: "Internal server error"});
+  }
+}
+
+const postStergeAnunt = async(req, res) => {
+  try{
+    const userId = req.user.id;
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: "ID utilizator invalid" });
+    }
+    const anuntID = req.params.anuntId;
+    if(!anuntID) {
+      return res.status(404).json({error:"Missing ID"});
+    }
+    const anunt = await models.AnuntBazar.findByPk(anuntID);
+    if(!anunt){
+      return res.status(404).json({error:"Could not find requested anunt"});
+    }
+    if(anunt.idUtilizator !== userId) {
+      return res.status(400).json({error: "User ID not matching with the connected users'"});
+    }
+    if(anunt.caleImagine) {
+      const caleVeche = path.join(__dirname, '..', anunt.caleImagine);
+      if(fs.existsSync(caleVeche)) {
+        fs.unlinkSync(caleVeche);
+      }
+    }
+    await anunt.destroy();
+    console.log(anunt);
+    return res.status(200).json({message: "Succes"});
+  }catch(error){
+    return res.status(500).json({error: "Internal server error"});
+  }
+}
 
 export default {
     getCartiDataShort,
@@ -223,5 +347,10 @@ export default {
     createAnunt,
     postAnuntBazarIDs,
     getAnunturiData,
-    getAnuntImagine
+    getAnuntImagine,
+    getAnunturileMeleIDs,
+    getAnuntData,
+    postUpdateAnunt,
+    postInchideAnunt,
+    postStergeAnunt
 }
