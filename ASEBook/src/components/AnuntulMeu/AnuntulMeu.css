@@ -128,6 +128,11 @@
     font-weight: 700;
     color: #090C08;
   }
+
+  .AnuntulMeu-pret-curent-schimba-buton{
+    display: flex;
+    flex-direction: row;
+  }
   
   .AnuntulMeu-input {
     padding: 8px 15px;
@@ -213,19 +218,21 @@
   
   .AnuntulMeu-schimba-button {
     padding: 8px 15px;
+    margin-left: 10px;
     border: 2px solid #090C08;
     border-radius: 15px;
     background-color: #090C08;
     color: #FFFBFE;
     cursor: pointer;
     transition: all 0.3s ease;
+    transform: translateY(-2px);
   }
   
   .AnuntulMeu-schimba-button:hover {
     background-color: #090C08;
     color: rgb(84, 238, 46);
     box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
   
   .AnuntulMeu-p-inchis {

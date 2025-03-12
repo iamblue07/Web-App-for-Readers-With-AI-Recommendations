@@ -183,10 +183,12 @@ const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
                         <p className="AnuntulMeu-descriere">{anuntData.descriereAnunt}</p>
                     </div>
                     <div className="AnuntulMeu-side-buttons">
-                        {anuntData.esteNegociabil ? (<p className="p-negociabil">Negociabil</p>) : (<p className="p-nonNegociabil">Nu e negociabil</p>)}
-                            {!anuntData.esteDisponibil ? (<p className="AnuntulMeu-p-inchis">Anuntul este inchis!</p>) : (<button className="AnuntulMeu-inchide-button" onClick={()=>{fetchInchideAnunt()}} disabled={editingAnuntID !== 0}>Inchide Anuntul</button>)}
-
-                            <button className="AnuntulMeu-sterge-button" onClick={() => {fetchStergeAnunt()}} disabled={editingAnuntID !== 0}>Sterge Anuntul</button>
+                        {anuntData.esteNegociabil && anuntData.esteDisponibil ? (<p className="p-negociabil">Negociabil</p>) : (anuntData.esteDisponibil && <p className="p-nonNegociabil">Nu e negociabil</p>)}
+                            {!anuntData.esteDisponibil ? (<p className="AnuntulMeu-p-inchis">Anuntul este inchis!</p>) : 
+                            (<>
+                                <button className="AnuntulMeu-inchide-button" onClick={()=>{fetchInchideAnunt()}} disabled={editingAnuntID !== 0}>Inchide Anuntul</button>
+                                <button className="AnuntulMeu-sterge-button" onClick={() => {fetchStergeAnunt()}} disabled={editingAnuntID !== 0}>Sterge Anuntul</button>
+                            </>)}
                     </div>
                 </div>
                 <div className="AnuntulMeu-bottom-right-container">
@@ -204,11 +206,11 @@ const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
                             (<button className="AnuntulMeu-nonNegociabil-button" onClick={() => {setEsteNegociabil(!esteNegociabil)}}>Nu e negociabil</button>)}
                         <button className="AnuntulMeu-salveaza-button" disabled={editingAnuntID !== id} onClick={() => {handleSalveazaPretButton()}}>Salveaza</button>
                         <button className="AnuntulMeu-anuleaza-button" disabled={editingAnuntID !== id} onClick={() => {handleAnuleazaPretButton()}}>Anuleaza</button>
-                    </>) :(<div className="AnuntulMeu-pret-curent-schimba-buton">
-                        <p className="AnuntulMeu-pret-curent">Pret: {anuntData.pretAnunt} RON</p>
-                        <button className="AnuntulMeu-schimba-button" disabled={editingAnuntID !== 0} onClick={() => {handleSchimbaPretButton()}}>Schimba pretul</button>
-                    </div>)}
-
+                        </>) :
+                        (anuntData.esteDisponibil && <div className="AnuntulMeu-pret-curent-schimba-buton">
+                            <p className="AnuntulMeu-pret-curent">Pret: {anuntData.pretAnunt} RON</p>
+                            <button className="AnuntulMeu-schimba-button" disabled={editingAnuntID !== 0} onClick={() => {handleSchimbaPretButton()}}>Schimba pretul</button>
+                        </div>)}
                 </div>
             </div>
         </div>
