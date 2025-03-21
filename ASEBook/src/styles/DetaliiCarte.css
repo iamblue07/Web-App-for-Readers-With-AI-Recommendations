@@ -38,12 +38,12 @@
 .div-titlu-autor-gen {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Ensures text and button align vertically */
-    align-items: flex-start; /* Prevents shifting */
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     text-align: left;
     color: #090C08;
-    flex-grow: 1;  /* Ensures text area grows to fill space */
+    flex-grow: 1;
 }
 
 .div-titlu-autor-gen h1 {
@@ -87,7 +87,7 @@
 .details-buttons {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Ensures button is centered with text */
+    align-items: center;
     gap: 15px;
     margin-top: 20px;
     justify-content: center;
@@ -95,16 +95,16 @@
 }
 
 .details-buttons button {
-    padding: 10px 30px; /* Increased padding for button */
+    padding: 10px 30px;
     border: 2px solid #090C08;
     border-radius: 8px;
     background-color: #FFFBFE;
     color: #090C08;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 250px;  /* Fixed width for the button */
+    width: 250px;
     text-align: center;
-    align-self: center;  /* Ensures button stays centered */
+    align-self: center;
 }
 
 .details-buttons button:hover {
@@ -112,6 +112,30 @@
     color: #EE2E31;
     border-color: #EE2E31;
     box-shadow: 0 4px 6px rgba(238, 46, 49, 0.5);
+}
+
+.container-oferte-bazar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.DetaliiCarte-btn-oferte-bazar {
+    gap: 10px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    border: 2px solid #090C08;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.DetaliiCarte-btn-oferte-bazar:hover {
+    box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+    transform: translateY(-3px);
 }
 
 @media only screen and (max-width: 768px) {

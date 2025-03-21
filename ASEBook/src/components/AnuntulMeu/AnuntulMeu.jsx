@@ -30,7 +30,6 @@ const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${authData.token}`,
                 }
             })
             if(!response.ok) {

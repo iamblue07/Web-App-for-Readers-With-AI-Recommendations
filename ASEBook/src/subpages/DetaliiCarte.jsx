@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 import stockimage from "../assets/stock_book.jpg";
 import config from "../utils/config";
 import '../styles/DetaliiCarte.css'
+import CautaAnunturi from "../components/Cauta-Anunturi/Cauta-Anunturi.jsx";
 
 const DetaliiCarte = () => {
 
@@ -15,6 +16,34 @@ const DetaliiCarte = () => {
 
     const [imagePath, setImagePath] = useState(stockimage)
     const [bookIsMarked, setBookIsMarked] = useState(true)
+
+    const [viewBazarOffers, setViewBazarOffers] = useState(false);
+    const [isLoadingAnunturi, setIsLoadingAnunturi] = useState(true);
+    const [totalAnunturi, setTotalAnunturi] = useState(0);
+    const [bazarAnunturiIDs, setBazarAnunturiIDs] = useState([]);
+
+    const fetchBazarAnunturiIDs = async () => {
+        try{
+            const response = await fetch(`${config.API_URL}/api/bazar/anunturiIDs/${idCarte}`, {
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            })
+            if(!response.ok) {
+                console.log("Eroare la incarcarea datelor!");
+                return;
+            }
+            const data = await response.json();
+            if(!data) {
+                console.log("Eroare: ID-urile ofertelor din bazar lipsesc!");
+                return;
+            }
+            setBazarAnunturiIDs(data.anunturiIds);
+            setTotalAnunturi(data.totalAnunturi);
+            setIsLoadingAnunturi(false);
+        } catch(error) {
+            console.log("Failed loading offers data");
+        }
+    }
 
     const fetchLoadBook = async () => {
         try { 
@@ -31,7 +60,6 @@ const DetaliiCarte = () => {
                 console.log("Eroare: datele sunt goale");
                 return;
             }
-            console.log(data);
             setBookDetails(data);
             fetchCarteImagine();
             setIsLoading(false);
@@ -212,7 +240,20 @@ const DetaliiCarte = () => {
                         ) : (
                             <p>Nu exista oferte disponibile pentru aceasta carte.</p>
                         )}
+                        {viewBazarOffers === true ? 
+                        (<button className="DetaliiCarte-btn-oferte-bazar" onClick={() => {setViewBazarOffers(false)}}>Ascunde ofertele din bazar</button>) 
+                        : (<button className="DetaliiCarte-btn-oferte-bazar" onClick={() => {setViewBazarOffers(true); fetchBazarAnunturiIDs();}}>Vezi ofertele din bazar</button>) }
                     </div>
+                </div>
+            )}
+            {viewBazarOffers === true && (
+                <div className="container-oferte-bazar">
+                    
+                    {isLoadingAnunturi === true ? (<>Data is loading...</>) :
+                        (<div className="DetaliiCarte-oferte-bazar">
+                            <p className="DetaliiCarte-p">Oferte disponibile in bazar: {totalAnunturi} oferte</p>
+                            <CautaAnunturi anunturiIds={bazarAnunturiIDs}/>
+                        </div>)}
                 </div>
             )}
         </div>

@@ -103,23 +103,19 @@ const postAnuntBazarIDs = async (req, res) => {
       return res.status(400).json({ error: 'Preturile trebuie sa fie numere valide' });
     }
 
-    // Build the filtering criteria
     const whereClause = {
       pretAnunt: { [Op.between]: [pretMinim, pretMaxim] },
       esteDisponibil: true
     };
 
-    // Only filter by category if a valid category is selected
     if (categorieSelectata && categorieSelectata !== "Alege categoria") {
       whereClause.genLiterar = categorieSelectata;
     }
 
-    // Add search condition for titluAnunt if stringCautare is provided (non-empty)
     if (stringCautare && stringCautare.trim() !== '') {
       whereClause.titluAnunt = { [Op.like]: `%${stringCautare}%` };
     }
 
-    // Build the ordering criteria
     let orderClause = [];
     if (sortareSelectata && sortareSelectata !== "Sorteaza dupa") {
       switch (sortareSelectata) {
@@ -136,15 +132,12 @@ const postAnuntBazarIDs = async (req, res) => {
           orderClause.push(['dataAnunt', 'DESC']);
           break;
         default:
-          // If none of the expected values match, no ordering is applied.
           break;
       }
     }
 
-    // Calculate offset for pagination (currentPage is assumed to be 1-indexed)
     const offset = (currentPage - 1) * anunturiPerPage;
 
-    // Use findAndCountAll to both fetch rows and count the total results for pagination
     const result = await models.AnuntBazar.findAndCountAll({
       attributes: ['id'],
       where: whereClause,
@@ -156,7 +149,6 @@ const postAnuntBazarIDs = async (req, res) => {
     const idList = result.rows.map(anunt => anunt.id);
     const totalPages = Math.ceil(result.count / anunturiPerPage);
 
-    // Return the fetched ids and total pages
     return res.status(200).json({ ids: idList, totalPages });
   } catch (error) {
     console.error("Error in postAnuntBazarIDs: ", error);
@@ -240,17 +232,10 @@ const getAnunturileMeleIDs = async (req, res) => {
 
 const getAnuntData = async (req, res) => {
   try{
-    const userId = req.user.id;
-    if (!userId || isNaN(userId)) {
-      return res.status(400).json({ error: "ID utilizator invalid" });
-    }
     const anuntId = req.params.anuntId;
     const anunt = await models.AnuntBazar.findByPk(anuntId);
     if(!anunt){
       return res.status(404).json({error:"Could not find requested anunt"});
-    }
-    if(anunt.idUtilizator !== userId) {
-      return res.status(400).json({error: "User ID not matching with the connected users'"});
     }
     return res.status(200).json(anunt);
   }catch(error){
@@ -341,6 +326,25 @@ const postStergeAnunt = async(req, res) => {
   }
 }
 
+const getAnunturiIDs = async(req, res) => {
+  try {
+    const carteID = req.params.carteID;
+    if(!carteID) {
+      return res.status(404).json({error:"Missing carte ID"});
+    }
+    const { count, rows } = await models.AnuntBazar.findAndCountAll({
+      where: { idCarte: carteID },
+      attributes: ["id"],
+      order: [["dataAnunt", "DESC"]]
+    });
+
+    return res.status(200).json({ totalAnunturi: count, anunturiIds: rows.map(anunt => anunt.id) });
+
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 export default {
     getCartiDataShort,
     getAnuntRights,
@@ -352,5 +356,6 @@ export default {
     getAnuntData,
     postUpdateAnunt,
     postInchideAnunt,
-    postStergeAnunt
+    postStergeAnunt,
+    getAnunturiIDs
 }

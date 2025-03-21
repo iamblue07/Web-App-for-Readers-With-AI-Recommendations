@@ -13,8 +13,10 @@ router.post('/bazar/getAnuntIDs', bazarController.postAnuntBazarIDs);
 router.post('/bazar/getAnunturiData', bazarController.getAnunturiData);
 router.get('/bazar/:anuntId/getAnuntImagine', bazarController.getAnuntImagine);
 router.get('/bazar/getAnunturileMeleIDs', middleware.middlewareAuth, bazarController.getAnunturileMeleIDs);
-router.get('/bazar/anunt/:anuntId', middleware.middlewareAuth, bazarController.getAnuntData);
+router.get('/bazar/anunt/:anuntId', bazarController.getAnuntData);
 router.post('/bazar/updateAnunt', middleware.middlewareAuth, bazarController.postUpdateAnunt);
 router.post('/bazar/InchideAnunt/:anuntId', middleware.middlewareAuth, bazarController.postInchideAnunt);
 router.post('/bazar/StergeAnunt/:anuntId', middleware.middlewareAuth, bazarController.postStergeAnunt);
+router.get('/bazar/anunturiIDs/:carteID', bazarController.getAnunturiIDs);
+
 export default router;
