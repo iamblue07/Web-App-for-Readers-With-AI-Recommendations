@@ -235,6 +235,7 @@ const getAnuntData = async (req, res) => {
     const anuntId = req.params.anuntId;
     const anunt = await models.AnuntBazar.findByPk(anuntId);
     if(!anunt){
+      console.log(anuntId);
       return res.status(404).json({error:"Could not find requested anunt"});
     }
     return res.status(200).json(anunt);
@@ -345,6 +346,27 @@ const getAnunturiIDs = async(req, res) => {
   }
 }
 
+const getSellerData = async(req, res) => {
+  try{
+    const anuntID = req.params.idAnunt;
+    if(!anuntID) {
+      return res.status(404).json({error:"Missing Anunt ID"});
+    }
+    const anunt = await models.AnuntBazar.findByPk(anuntID, {
+      attributes: ["idUtilizator"]
+    })
+    if(!anunt.idUtilizator) {
+      return res.status(404).json({error:"Missing utilizator ID"});
+    }
+    const utilizatorData = await models.Utilizator.findByPk(anunt.idUtilizator, {
+      attributes: ["username"]
+    })
+    return res.status(200).json(utilizatorData);
+  }catch(error){
+    return res.status(500).json({error:"Internal Server Error"})
+  }
+}
+
 export default {
     getCartiDataShort,
     getAnuntRights,
@@ -357,5 +379,6 @@ export default {
     postUpdateAnunt,
     postInchideAnunt,
     postStergeAnunt,
-    getAnunturiIDs
+    getAnunturiIDs,
+    getSellerData
 }

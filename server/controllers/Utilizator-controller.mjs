@@ -59,7 +59,6 @@ const createUtilizator = async (req, res) => {
             preferintaCinci: ""
         });
 
-        // Crearea unui token JWT
         const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
         return res.status(201).json({ user: newUser, token });
@@ -159,7 +158,6 @@ const uploadImagineProfil = async(req, res) => {
             return res.status(404).json({error:"Utilizatorul nu exista"});
         }
 
-        // Dacă utilizatorul are deja o imagine de profil, ștergem imaginea veche
         if (user.caleImagineProfil) {
             const caleVeche = path.join(__dirname, '..', user.caleImagineProfil);
             if (fs.existsSync(caleVeche)) {
@@ -186,7 +184,7 @@ const getImagineProfil = async(req, res) => {
         if (!user || !user.caleImagineProfil) {
             return res.status(404).json({ error: "Utilizatorul nu există sau nu are o imagine de profil." });
         }
-        const caleAbsoluta = path.resolve(user.caleImagineProfil); // Use path.resolve
+        const caleAbsoluta = path.resolve(user.caleImagineProfil);
         return res.sendFile(caleAbsoluta);
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });

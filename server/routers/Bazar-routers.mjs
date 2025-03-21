@@ -18,5 +18,6 @@ router.post('/bazar/updateAnunt', middleware.middlewareAuth, bazarController.pos
 router.post('/bazar/InchideAnunt/:anuntId', middleware.middlewareAuth, bazarController.postInchideAnunt);
 router.post('/bazar/StergeAnunt/:anuntId', middleware.middlewareAuth, bazarController.postStergeAnunt);
 router.get('/bazar/anunturiIDs/:carteID', bazarController.getAnunturiIDs);
+router.get('/bazar/anunt/:idAnunt/sellerData', bazarController.getSellerData);
 
 export default router;

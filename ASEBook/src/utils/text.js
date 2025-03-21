@@ -19,11 +19,15 @@ const genuriLiterare = [
     'ROMANIA', 'SOFT EDUCATIONAL'
 ];
 
+const consumerRights = 
+"In cadrul marketplace-ului, respectam drepturile consumatorilor si incurajam tranzactii sigure. Pentru protectia ta, iti recomandam sa NU comunici informatii sensibile, cum ar fi datele cardului bancar. Pastreaza discutiile si detaliile tranzactiilor in cadrul aplicatiei pentru a beneficia de un mediu sigur si controlat. In cazul in care intampini probleme, raporteaza activitatea!"
+
 export default {
     fillerTextOne,
     fillerTextTwo,
     fillerTextThree,
     fillerTextFour,
     fillerTextFive,
-    genuriLiterare
+    genuriLiterare,
+    consumerRights
 }
