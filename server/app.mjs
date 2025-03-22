@@ -16,13 +16,14 @@ const corsOptions = {
     allowedHeaders: 'Content-Type, Authorization'
 }
 
-app.use(cors(corsOptions))
-app.use(express.json())
-app.use('/auth', routers.AuthRouter)
-app.use('', routers.UtilizatorRouter)
-app.use('/api', routers.ForumRouter)
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use('/auth', routers.AuthRouter);
+app.use('', routers.UtilizatorRouter);
+app.use('/api', routers.ForumRouter);
 app.use('/api', routers.CarteRouter);
 app.use('/api', routers.BazarRouter);
+app.use('/api', routers.ChatRouter);
 // Use the authentication middleware for protected routes
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(middleware.middlewareAuth)

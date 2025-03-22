@@ -13,9 +13,17 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        esteMedia: {
+            type:DataTypes.BOOLEAN,
+            allowNull: false
+        },
         continut: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
+        },
+        caleMedia: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         data: {
             type: DataTypes.DATE,

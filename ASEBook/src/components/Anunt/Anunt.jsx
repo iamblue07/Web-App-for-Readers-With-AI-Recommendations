@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import stockimage from "../../assets/stock_book.jpg";
 import config from "../../utils/config";
 import "./Anunt.css";
@@ -6,6 +7,7 @@ import "./Anunt.css";
 const Anunt = (anuntData) => {
 
     const [imagePath, setImagePath] = useState(stockimage)
+    const navigate = useNavigate();
 
     const fetchAnuntImagine = async () => {
         try{
@@ -52,7 +54,7 @@ const Anunt = (anuntData) => {
             </div>
             <div className="anunt-subcontainer">
                 <div className="anunt-titlu-pret">
-                    <p className="anuntData-titlu">{anuntData.titlu}</p>
+                    <p className="anuntData-titlu" onClick={() => {navigate(`/bazar/anunt/${anuntData.id}`)}}>{anuntData.titlu}</p>
                     <div className="anunt-pret-negociabil">
                         <p className="anuntData-pret">{anuntData.pret} RON</p>
                         {anuntData.negociabil ? 

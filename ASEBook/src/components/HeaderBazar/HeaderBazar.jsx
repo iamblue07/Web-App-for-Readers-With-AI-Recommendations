@@ -12,7 +12,7 @@ const HeaderBazar = () => {
             {authData.token && <div className='connected-menu'>
                 <button className='btn-creaza-anunt' onClick={() => {navigate('/bazar/creeaza-anunt')}}>Publica un anunt</button>
                 <button className='btn-vezi-anunturi' onClick={() => {navigate('/bazar/AnunturileMele')}}>Vezi anunturile tale</button>
-                <button className='btn-conversatii'>Vezi conversatiile</button>
+                <button className='btn-conversatii' onClick={() => {navigate('/bazar/conversatii')}}>Vezi conversatiile</button>
             </div>}
         </>
     )

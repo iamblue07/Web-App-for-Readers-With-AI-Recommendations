@@ -1,0 +1,65 @@
+.MesajChat-main-container {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+    align-items: center;
+}
+
+/* Other user messages (left aligned) */
+.MesajChat-otherUser {
+    justify-content: flex-start;
+    margin-right: auto;
+}
+
+/* Same user messages (right aligned) */
+.MesajChat-sameUser {
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.MesajChat-ImagineUser {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #090C08;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.MesajChat-Continut,
+.MesajChat-MediaImage {
+    max-width: 70%;
+    padding: 12px;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    background-color: #FFFBFE;
+    box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+    word-break: break-word;
+}
+
+/* Same user message styling */
+.MesajChat-sameUser .MesajChat-Continut,
+.MesajChat-sameUser .MesajChat-MediaImage {
+    background-color: #FFFBFE;
+    color: #090C08;
+    border-color: #090C08;
+    order: -1;
+}
+
+.MesajChat-MediaImage {
+    padding: 0;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .MesajChat-Continut,
+    .MesajChat-MediaImage {
+        max-width: 80%;
+        padding: 10px;
+    }
+    
+    .MesajChat-MediaImage {
+        max-height: 250px;
+    }
+}

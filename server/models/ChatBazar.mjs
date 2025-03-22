@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-return sequelize.define('ChatBazar', {
+    return sequelize.define('ChatBazar', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -17,5 +17,11 @@ return sequelize.define('ChatBazar', {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-})
+        data: {
+            type: DataTypes.DATE,
+            allowNull:false
+        }
+    },  {
+        timestamps: false
+    })
 }
