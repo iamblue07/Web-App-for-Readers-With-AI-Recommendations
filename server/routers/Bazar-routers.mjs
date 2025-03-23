@@ -1,7 +1,7 @@
 import express from "express";
 import bazarController from "../controllers/Bazar-controller.mjs";
 import middleware from '../middleware/index.mjs';
-import upload from "../middleware/multerUpload.mjs";
+import {upload} from "../middleware/multerUpload.mjs";
 
 const router = express.Router();
 
@@ -19,5 +19,6 @@ router.post('/bazar/InchideAnunt/:anuntId', middleware.middlewareAuth, bazarCont
 router.post('/bazar/StergeAnunt/:anuntId', middleware.middlewareAuth, bazarController.postStergeAnunt);
 router.get('/bazar/anunturiIDs/:carteID', bazarController.getAnunturiIDs);
 router.get('/bazar/anunt/:idAnunt/sellerData', bazarController.getSellerData);
+router.get('/bazar/:anuntID/checkOwning', middleware.middlewareAuth, bazarController.checkOwning);
 
 export default router;

@@ -1,8 +1,11 @@
 import React, {useState, useContext, useEffect} from "react";
 import config from "../../utils/config";
 import { GlobalContext } from "../../context/GlobalState";
-const ListaChaturi = () => {
+import Chat from "../ListaChaturi-Chat/ListaChaturi-Chat";
 
+const ListaChaturi = ({setCurrentChat}) => {
+
+    const [canDisplay, setCanDisplay] = useState(false);
     const [chatIDs, setChatIDs] = useState([]);
     const {authData} = useContext(GlobalContext);
 
@@ -20,8 +23,8 @@ const ListaChaturi = () => {
                 return;
             }
             const data = await response.json();
-            console.log("Chat IDs", data);
             setChatIDs(data);
+            setCanDisplay(true);
         }catch(error){
             console.log(error);
         }
@@ -33,6 +36,13 @@ const ListaChaturi = () => {
 
     return (
         <div>
+            {canDisplay === true && (
+                <>
+                {chatIDs.map((ID) => (
+                    <Chat key={ID} idChat={ID} setCurrentChat={setCurrentChat}/>
+                ))}
+                </>
+            )}
 
         </div>
     )

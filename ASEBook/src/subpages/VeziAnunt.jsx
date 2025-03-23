@@ -29,7 +29,6 @@ const VeziAnunt = () => {
             }
             const data = await response.json();
             setAnuntData(data);
-            console.log(data);
             fetchAnuntImagine()
         }catch(error){
             console.log(error);
@@ -85,8 +84,6 @@ const VeziAnunt = () => {
                 return;
             }
             setUtilizatorData(data);
-            console.log(data);
-
         } catch(error) {
             console.log(error);
         }
@@ -125,17 +122,37 @@ const VeziAnunt = () => {
     }
 
     const [alreadyContacted, setAlreadyContacted] = useState(false);
+    const [chatID, setChatID] = useState(0);
     const fetchCheckAnuntContactat = async () => {
-
+        try{
+            const response = await fetch(`${config.API_URL}/api/chat/checkAnuntContactat/${idAnunt}`, {
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authData.token}`
+                }
+            });
+            if(!response.ok) {
+                console.log("Eroare la verificarea contactarii anuntului!");
+                return;
+            }
+            const data = await response.json();
+            setAlreadyContacted(data.hasContacted);
+            setChatID(data.chatID);
+        }catch(error){
+            console.log(error);
+        }
     }
 
     useEffect(() => {
         fetchAnuntData();
+        fetchCheckAnuntContactat();
     }, [])
 
     useEffect(()=> {
         fetchAnuntData();
         fetchUtilizatorData();
+        checkOwning();
     }, [idAnunt])
 
     useEffect(() => {
@@ -143,6 +160,55 @@ const VeziAnunt = () => {
             fetchUtilizatorImagine();
         }
     }, [anuntData.idUtilizator]);
+
+    const [newMessage, setNewMessage] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
+    const fetchCreateChat = async () => {
+        try{
+            const response = await fetch(`${config.API_URL}/api/chat/${idAnunt}/createChat`, {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": `Bearer ${authData.token}`
+                },
+                body: JSON.stringify({newMessage})
+            });
+            if(!response.ok){
+                console.log("Eroare la crearea chatului!");
+                setIsDisabled(false);
+                return;
+            }
+            setNewMessage("");
+            setAlreadyContacted(true);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const [isOwningAnunt, setIsOwningAnunt] = useState(true);
+    const checkOwning = async () => {
+        if(authData) {
+            try{
+                const response = await fetch(`${config.API_URL}/api/bazar/${idAnunt}/checkOwning`, {
+                    method: "GET",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization": `Bearer ${authData.token}`
+                    }
+                });
+                if(!response.ok) {
+                    console.log("Eroare la verificarea detinerii anuntului!");
+                }
+                const data = await response.json();
+                setIsOwningAnunt(data.isOwning);
+            }catch(error){
+                console.log(error);
+            }
+        } else {
+            setIsOwningAnunt(false);
+        }
+
+    }
 
     return(
         <div className="VeziAnunt-main-container">
@@ -175,9 +241,15 @@ const VeziAnunt = () => {
                     className="VeziAnunt-seller-image"/>
                     <p className="VeziAnunt-p-utilizator">{utilizatorData.username}</p>
                 </div>
-                {alreadyContacted === true ? (
-                    <button className="VeziAnunt-Send-Message">Vezi conversatia</button>) : (
-                    <button className="VeziAnunt-Send-Message">Trimite mesaj</button>)}
+                {isOwningAnunt === false ? (<>
+                    {alreadyContacted === true ? (
+                    <button className="VeziAnunt-Send-Message" onClick={() => {navigate('/bazar/conversatii', {state: {chatID: chatID}})}}>Vezi conversatia</button>)
+                    : (<>
+                    <input type="text" value={newMessage} onChange={(e) => {setNewMessage(e.target.value)}}/>
+                    <button className="VeziAnunt-Send-Message" onClick={()=>{setIsDisabled(true); fetchCreateChat()}} disabled={isDisabled}>Trimite mesaj</button>
+                    </>)}
+                </>) : (<></>)}
+
                 <p className="VeziAnunt-p-ConsumerRights">Drepturile consumatorilor si siguranta in aplicatie</p>
                 <p className="VeziAnunt-p-Text">{text.consumerRights}</p>
             </div>

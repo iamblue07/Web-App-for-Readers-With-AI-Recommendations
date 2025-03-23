@@ -25,7 +25,7 @@ const getChatIDs = async (req, res) => {
                     { idVanzator: userId }
                 ]
             },
-            order: [['data', 'DESC']]
+            order: [['data', 'ASC']]
         });
 
         return res.status(200).json(chatIDs.map(chat => chat.id));
@@ -57,7 +57,7 @@ const getChatMessagesIDs = async(req, res) => {
         const messagesIDs = await models.MesajChat.findAll({
             where: {idChat: chatID},
             attributes: ["id"],
-            order: [["data", "DESC"]]
+            order: [["data", "ASC"]]
         });
         return res.status(200).json(messagesIDs);
 
@@ -105,9 +105,161 @@ const getMesajMedia = async(req, res) => {
     }
 }
 
+const getChatData = async (req, res) => {
+    try {
+        const chatID = req.params.chatID;
+        if (!chatID || isNaN(chatID)) {
+            return res.status(404).json({ error: "ID Chat invalid" });
+        }
+
+        const chat = await models.ChatBazar.findByPk(chatID);
+        if (!chat) {
+            return res.status(404).json({ error: "Missing chat" });
+        }
+
+        const vanzator = await models.Utilizator.findByPk(chat.idVanzator);
+        const cumparator = await models.Utilizator.findByPk(chat.idCumparator);
+
+        if (!vanzator || !cumparator) {
+            return res.status(404).json({ error: "Missing user(s)" });
+        }
+        const userId = req.user.id;
+        const userVinde = vanzator.id === userId; 
+        const anunt = await models.AnuntBazar.findByPk(chat.idAnunt);
+
+        if (!anunt) {
+            return res.status(404).json({ error: "Missing anunt" });
+        }
+
+        return res.status(200).json({
+            userVinde: userVinde,
+            vanzatorUsername: vanzator.username,
+            cumparatorUsername: cumparator.username,
+            idAnunt: anunt.id,
+            titluAnunt: anunt.titluAnunt
+        });
+
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const sendMessage = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const {chatID, newMessage} = req.body;
+        if (!userId || isNaN(userId)) {
+            return res.status(400).json({ message: "ID utilizator invalid" });
+        }
+        const user = await models.Utilizator.findByPk(userId);
+        if (!user) return res.status(404).json({ message: "Utilizatorul nu există" });
+        if(!chatID || isNaN(chatID)) {
+            return res.status(400).json({message: "Missing chat ID"});
+        }
+        await models.MesajChat.create({
+            idUtilizator: userId,
+            idChat: chatID,
+            esteMedia: false,
+            continut: newMessage,
+            caleMedia: null,
+            data: new Date()
+        })
+        return res.status(200).json({message: "Succes"});
+    }catch(error){
+        return res.status(500).json({error:"Internal Server Error"});
+    }
+}
+
+const sendMedia = async (req, res) => {
+    try{
+        if(!req.file) {
+            return res.status(400).json({message:"Niciun fisier incarcat!"});
+        }
+        const userId = req.user.id;
+        const {chatID} = req.body;
+        const caleMedia = `uploadsMessages/${req.file.filename}`;
+        const user = await models.Utilizator.findByPk(userId);
+        if(!user) {
+            return res.status(404).json({message:"Utilizatorul nu exista"});
+        }
+        await models.MesajChat.create({
+            idUtilizator: userId,
+            idChat: chatID,
+            esteMedia: true,
+            continut:null,
+            caleMedia: caleMedia,
+            data: new Date()
+        })
+        return res.status(200).json({message: "Succes!"});
+    }catch(error){
+        return res.status(500).json({message:"Internal Server Error"});
+    }
+}
+
+const checkAnuntContactat = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const anuntID = req.params.anuntID;
+        if(!userId || !anuntID) {
+            return res.status(400).json({error:"Missing IDs"});
+        }
+        const chatBazar = await models.ChatBazar.findOne({
+            where: {idAnunt: anuntID, idCumparator: userId}
+        })
+        return res.status(200).json({ hasContacted: !!chatBazar, chatID: chatBazar.id});
+    }catch(error){
+        return res.status(500).json({error:"Internal Server Error"});
+    }
+}
+
+const createChat = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const anuntID = req.params.anuntID;
+        if(!userId || !anuntID) {
+            return res.status(400).json({message:"Missing IDs"});
+        }
+        const anunt = await models.AnuntBazar.findByPk(anuntID);
+        if(!anunt) {
+            return res.status(404).json({message:"Missing anunt"});
+        }
+        const chatBazar = await models.ChatBazar.findOne({
+            where: {idAnunt: anuntID, idCumparator: userId}
+        })
+        const exists = !!chatBazar;
+        if(exists){
+            return res.status(400).json({message:"Chat already exists"});
+        }
+        const newChat = await models.ChatBazar.create({
+            idAnunt: anunt.id,
+            idVanzator: anunt.idUtilizator,
+            idCumparator: userId,
+            data: new Date()
+        })
+        const {newMessage} = req.body;
+        await models.MesajChat.create({
+            idUtilizator: userId,
+            idChat: newChat.id,
+            esteMedia: false,
+            continut: newMessage,
+            caleMedia: null,
+            data: new Date()
+        })
+        return res.status(200).json({message: "Success"})
+
+    }catch(error){
+        return res.status(500).json({message:"Internal Server Error"});
+    }
+}
+
 export default {
     getChatIDs,
     getChatMessagesIDs,
     getMesajData,
-    getMesajMedia
+    getMesajMedia,
+    getChatData,
+    sendMessage,
+    sendMedia,
+    checkAnuntContactat,
+    createChat
 };

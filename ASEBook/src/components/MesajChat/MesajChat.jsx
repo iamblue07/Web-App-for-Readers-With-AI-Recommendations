@@ -23,7 +23,6 @@ const MesajChat = ({idMesaj}) => {
                 console.log("Eroare la preluarea datelor mesajului!");
             }
             const data = await response.json();
-            console.log(data);
             setMesajData(data);
         }catch(error){
             console.log(error);
@@ -75,7 +74,6 @@ const MesajChat = ({idMesaj}) => {
                 const imageBlob = await response.blob();
                 const imageUrl = URL.createObjectURL(imageBlob);
                 setMessageMedia(imageUrl);
-                console.log(imageUrl);
             } else {
                 console.error("Răspunsul nu este de tip JSON sau imagine.");
             }

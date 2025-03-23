@@ -367,6 +367,31 @@ const getSellerData = async(req, res) => {
   }
 }
 
+const checkOwning = async (req, res) => {
+    try{
+      const userId = req.user.id;
+      const {anuntID} = req.params;
+
+      if(!userId || !anuntID) {
+        return res.status(404).json({error:"Missing IDs"});
+      }
+
+      const anunt = await models.AnuntBazar.findByPk(anuntID);
+      if(!anunt) {
+        return res.status(404).json({error:"Missing Anunt"});
+      }
+
+      const isOwning = anunt.idUtilizator === userId;
+      console.log(isOwning);
+      console.log(anunt.idUtilizator)
+      console.log(userId);
+      return res.status(200).json({isOwning});
+
+    }catch(error){
+      return res.status(500).json({error:"Internal Server Error"})
+    }
+}
+
 export default {
     getCartiDataShort,
     getAnuntRights,
@@ -380,5 +405,6 @@ export default {
     postInchideAnunt,
     postStergeAnunt,
     getAnunturiIDs,
-    getSellerData
+    getSellerData,
+    checkOwning
 }

@@ -194,7 +194,7 @@ const Profil = () => {
             }
     
             createToast("Imaginea a fost actualizată cu succes!", true);
-            fetchUserProfileImage(); // Reîncarcă imaginea după actualizare
+            fetchUserProfileImage();
         } catch (error) {
             console.error("Eroare la încărcarea imaginii:", error);
         }
