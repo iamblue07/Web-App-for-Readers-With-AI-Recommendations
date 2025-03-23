@@ -20,6 +20,10 @@ export default (sequelize, DataTypes) => {
         data: {
             type: DataTypes.DATE,
             allowNull:false
+        },
+        esteDeschis: {
+            type: DataTypes.BOOLEAN,
+            allowNull:false
         }
     },  {
         timestamps: false

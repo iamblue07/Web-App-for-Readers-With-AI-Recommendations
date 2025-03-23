@@ -12,4 +12,7 @@ router.post('/chat/sendMessage', middleware.middlewareAuth, chatController.sendM
 router.post('/chat/uploadMedia', middleware.middlewareAuth, middleware.secondUpload.single("media"), chatController.sendMedia);
 router.get('/chat/checkAnuntContactat/:anuntID', middleware.middlewareAuth, chatController.checkAnuntContactat);
 router.post('/chat/:anuntID/createChat', middleware.middlewareAuth, chatController.createChat);
+router.get('/chat/checkIsOpen/:chatID', chatController.checkIsOpen);
+router.get('/chat/openCloseChat/:chatID', middleware.middlewareAuth, chatController.openCloseChat);
+
 export default router;

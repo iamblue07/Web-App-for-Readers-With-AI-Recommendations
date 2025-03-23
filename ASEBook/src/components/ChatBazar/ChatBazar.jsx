@@ -46,7 +46,10 @@ const ChatBazar = ({ chatID }) => {
   }, [chatMessagesIDs]);
 
   useEffect(() => {
-    fetchChatMessagesIDs();
+    if(chatID !== 0) {
+      fetchChatMessagesIDs();
+      checkIsOpen();
+    }
   }, [chatID]);
 
   const fetchSendMessage = async () => {
@@ -103,6 +106,48 @@ const ChatBazar = ({ chatID }) => {
     }
   }
 
+  const [isOpen, setIsOpen] = useState(true);
+  const checkIsOpen = async () => {
+    try{
+      const response = await fetch(`${config.API_URL}/api/chat/checkIsOpen/${chatID}`,{
+        method:"GET"
+      });
+      if(!response.ok){
+        console.log("Eroare la verificarea statusului chatului!");
+        return;
+      }
+      const data = await response.json();
+      setIsOpen(data.isOpen);
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  const fetchOpenCloseChat = async () => {
+    try{
+      const response = await fetch(`${config.API_URL}/api/chat/openCloseChat/${chatID}`,{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":`Bearer ${authData.token}`
+        }
+      });
+      if(!response.ok){
+        console.log("Eroare la inchiderea sau deschiderea chatului!");
+        return;
+      }
+      const data = await response.json();
+      if(data.success === true) {
+        createToast("Status chat schimbat cu succes!", true);
+        setIsOpen(!isOpen);
+        return;
+      }
+      createToast("Eroare: vanzatorii nu pot inchide sau inchide chatul!", false);
+    }catch(error){
+      console.log(error);
+    }
+  }
+
   return (
     <div className="ChatBazar-main-container">
       <ToastContainer/>
@@ -114,18 +159,24 @@ const ChatBazar = ({ chatID }) => {
               ))}
               <div ref={messagesEndRef} />
           </div>
-          <div className="ChatBazar-sendMessage">
-            <input
-              type="text"
-              className="ChatBazar-inputMessage"
-              placeholder="Tasteaza..."
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-            />
-            <input type="file" id="fileInput" accept="image/*" style={{ display: "none" }} onChange={fetchSendMedia} />
-            <button className="ChatBazar-btn-Incarca" onClick={() => document.getElementById("fileInput").click()}>Incarca</button>
-            <button className="ChatBazar-btn-Trimite" onClick={()=>{fetchSendMessage()}}>Trimite</button>
-          </div>
+          {isOpen && (
+            <div className="ChatBazar-sendMessage">
+              <input
+                type="text"
+                className="ChatBazar-inputMessage"
+                placeholder="Tasteaza..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <input type="file" id="fileInput" accept="image/*" style={{ display: "none" }} onChange={fetchSendMedia} />
+              <button className="ChatBazar-btn-Incarca" onClick={() => document.getElementById("fileInput").click()}>Incarca</button>
+              <button className="ChatBazar-btn-Trimite" onClick={()=>{fetchSendMessage()}}>Trimite</button>
+            </div>
+          )}
+          {isOpen ? (<button className="chatBazar-btn-Inchide" onClick={()=>{fetchOpenCloseChat()}}>Inchide chatul</button>) : (
+            <button className="chatBazar-btn-Deschide" onClick={()=>{fetchOpenCloseChat()}}>Deschide chatul</button>
+          )}
+
         </>
       )}</>):(<p>Aici poti vedea conversatiile tale...
       </p>)}

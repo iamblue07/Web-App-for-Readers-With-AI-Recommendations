@@ -75,6 +75,46 @@
     box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
 }
 
+.chatBazar-btn-Inchide {
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #090C08;
+    color: #FFFBFE;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.chatBazar-btn-Inchide:hover{
+    box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+    color: rgb(238,46,49);
+    transform: translateY(-3px);
+}
+
+.chatBazar-btn-Deschide {
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #090C08;
+    color: #FFFBFE;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
+}
+
+.chatBazar-btn-Deschide:hover{
+    box-shadow: 0 4px 10px rgba(84, 238, 46, 0.9);
+    color: rgb(84, 238, 46);
+    transform: translateY(-3px);
+}
+
 @media (max-width: 480px) {
     .ChatBazar-sendMessage {
         flex-wrap: wrap;

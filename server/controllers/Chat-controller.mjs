@@ -206,8 +206,12 @@ const checkAnuntContactat = async (req, res) => {
         const chatBazar = await models.ChatBazar.findOne({
             where: {idAnunt: anuntID, idCumparator: userId}
         })
-        return res.status(200).json({ hasContacted: !!chatBazar, chatID: chatBazar.id});
+        if(!chatBazar) {
+            return res.status(200).json({hasContacted: false});
+        }
+        return res.status(200).json({ hasContacted: true, chatID: chatBazar.id});
     }catch(error){
+        console.log(error);
         return res.status(500).json({error:"Internal Server Error"});
     }
 }
@@ -234,7 +238,8 @@ const createChat = async (req, res) => {
             idAnunt: anunt.id,
             idVanzator: anunt.idUtilizator,
             idCumparator: userId,
-            data: new Date()
+            data: new Date(),
+            esteDeschis:true
         })
         const {newMessage} = req.body;
         await models.MesajChat.create({
@@ -248,7 +253,53 @@ const createChat = async (req, res) => {
         return res.status(200).json({message: "Success"})
 
     }catch(error){
+        console.log(error);
         return res.status(500).json({message:"Internal Server Error"});
+    }
+}
+
+const checkIsOpen = async(req, res) => {
+    try{
+        const chatID = req.params.chatID;
+        if(!chatID || isNaN(chatID)){
+            return res.status(404).json({error:"Missing ID"});
+        }
+        const chat = await models.ChatBazar.findByPk(chatID);
+        if(!chat){
+            return res.status(404).json({error:"Missing chat"});
+        }
+        return res.status(200).json({isOpen:chat.esteDeschis});
+    }catch(error){
+        return res.status(500).json({error:"Internal Server Error"});
+    }
+}
+
+const openCloseChat = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        if(!userId) {
+            return res.status(400).json({message:"Missing IDs"});
+        }
+        const chatID = req.params.chatID;
+        if(!chatID || isNaN(chatID)){
+            return res.status(404).json({error:"Missing ID"});
+        }
+        const chat = await models.ChatBazar.findByPk(chatID);
+        if(!chat){
+            return res.status(404).json({error:"Missing chat"});
+        }
+        if(chat.idVanzator === userId){
+            return res.status(200).json({success:false})
+        }
+        if(chat.idCumparator === userId) {
+            chat.esteDeschis = !chat.esteDeschis;
+            await chat.save();
+            return res.status(200).json({success:true})
+        }
+        return res.status(400).json({error:"Not buyer, nor seller!"});
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({error:"Internal Server Error"});
     }
 }
 
@@ -261,5 +312,7 @@ export default {
     sendMessage,
     sendMedia,
     checkAnuntContactat,
-    createChat
+    createChat,
+    checkIsOpen,
+    openCloseChat,
 };
