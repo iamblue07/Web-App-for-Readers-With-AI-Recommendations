@@ -4,9 +4,13 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from "url";
 dotenv.config();
 
 const salt = await bcrypt.genSalt(10);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const checkEmailExists = async (req, res) => {
     try {
@@ -170,6 +174,7 @@ const uploadImagineProfil = async(req, res) => {
         return res.status(200).json({message:"Imaginea a fost salvata!"});
 
     }catch(error){
+        console.log(error);
         return res.status(500).json({message:"Internal server error"});
     }
 }

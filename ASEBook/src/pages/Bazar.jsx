@@ -103,6 +103,10 @@ const Bazar = () => {
 
     useEffect( () => {
         fetchAnuntBazarIDs();
+        if(!genuriLiterare.includes("Alege categoria")) {
+            genuriLiterare.unshift("Alege categoria");
+        }
+
     },[])
 
     const currentAnunturi = anunturiDetails.slice(0, anunturiPerPage);
@@ -178,6 +182,7 @@ const Bazar = () => {
                                 <div className='sortari-content'>
                                     <table>
                                         <tbody>
+                                            <tr onClick={() => selectSortare("Sorteaza dupa")}><td>Sorteaza dupa</td></tr>
                                             <tr onClick={() => selectSortare("Pret - descrescator")}><td>Pret - descrescator</td></tr>
                                             <tr onClick={() => selectSortare("Pret - crescator")}><td>Pret - crescator</td></tr>
                                             <tr onClick={() => selectSortare("Cele mai vechi anunturi")}><td>Cele mai vechi anunturi</td></tr>

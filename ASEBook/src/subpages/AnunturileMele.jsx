@@ -68,7 +68,7 @@ const AnunturileMele = () => {
             <HeaderBazar />
             <div className="anunturi-list">
                 {currentAnunturi.map((id) => (
-                    <AnuntulMeu key={id} id={id} editingAnuntID={editingAnuntID} setEditingAnuntID={setEditingAnuntID} />
+                    <AnuntulMeu key={id} id={id} editingAnuntID={editingAnuntID} setEditingAnuntID={setEditingAnuntID} fetchAnunturileMeleIDs={fetchAnunturileMeleIDs} />
                 ))}
             </div>
             <div className="pagination">

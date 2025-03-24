@@ -5,7 +5,7 @@ import { createToast } from "../../utils/createToast";
 import config from "../../utils/config";
 import stock_book from "../../assets/stock_book.jpg";
 import "./AnuntulMeu.css";
-const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
+const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID, fetchAnunturileMeleIDs}) => {
 
     const {authData} = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -92,7 +92,8 @@ const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
             createToast("Anunt actualizat cu succes!", true);
             setAnuntData((prevData) => ({
                 ...prevData,
-                pretAnunt: pretNou
+                pretAnunt: pretNou,
+                esteNegociabil: esteNegociabil
             }));
             setEditingAnuntID(0);
             
@@ -138,7 +139,7 @@ const AnuntulMeu = ({id, editingAnuntID, setEditingAnuntID}) => {
                 return;
             }
             createToast("Anuntul a fost sters cu succes!", true);
-            setAnuntData(null);
+            fetchAnunturileMeleIDs();
         }catch(error){
             console.error(error);
         }

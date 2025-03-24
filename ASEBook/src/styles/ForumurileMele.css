@@ -99,6 +99,22 @@
   transform: translateY(-3px);
 }
 
+.ForumurileMele-btn-Inapoi {
+  padding: 10px 15px;
+  margin: 10px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.ForumurileMele-btn-Inapoi:hover{
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+  transform: translateY(-3px);
+}
+
 .ForumurileMele-cancelButton {
   padding: 8px 15px;
   font-size: 1rem;

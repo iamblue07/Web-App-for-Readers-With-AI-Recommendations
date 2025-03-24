@@ -118,7 +118,9 @@ const ForumurileMele = () => {
 
     return (
         <div className="ForumurileMele-container">
+            <button className="ForumurileMele-btn-Inapoi" onClick={() => {navigate("/forumuri")}}>Inapoi</button>
             <div className="ForumurileMele-forumsList">
+            {forumsData && forumsData.length > 0 ? (<>
                 {forumsData.map((forum) => (
                     <div key={forum.id} className="ForumurileMele-forumCard">
                         <div className="ForumurileMele-forumTitle">
@@ -161,7 +163,8 @@ const ForumurileMele = () => {
                             className="ForumurileMele-statusButton-Inchis"
                         >Inchis</button>)}
                     </div>
-                ))}
+                ))}</>) : (<p style={{ textAlign: "center", marginTop: "2px" }}>Nu ai creat nici un forum inca.</p>) }
+
             </div>
 
             <div className="ForumurileMele-pagination">
