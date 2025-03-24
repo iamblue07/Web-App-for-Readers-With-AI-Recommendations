@@ -51,6 +51,7 @@ const createUtilizator = async (req, res) => {
             poateCreaAnunt: true,
             poateCreaForum: true,
             poateTrimiteMesaj: true,
+            poateRaporta: true,
             esteAdministrator: false
         });
 

@@ -36,6 +36,9 @@ export default (sequelize, DataTypes) => {
         poateTrimiteMesaj: {
             type: DataTypes.BOOLEAN
         },
+        poateRaporta: {
+            type:DataTypes.BOOLEAN
+        },
         esteAdministrator: {
             type: DataTypes.BOOLEAN
         },

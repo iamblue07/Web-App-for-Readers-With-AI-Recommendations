@@ -17,6 +17,11 @@
     margin-left: auto;
 }
 
+.MesajChat-mesaj-raport {
+    display: flex;
+    flex-direction: row;
+}
+
 .MesajChat-ImagineUser {
     width: 40px;
     height: 40px;

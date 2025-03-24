@@ -6,12 +6,14 @@ import { createToast } from "../utils/createToast";
 import { GlobalContext } from "../context/GlobalState";
 import "../styles/Forum.css";
 import defaultavatar from "../assets/stock.jpg";
+import RaportareButon from "../components/RaportareButon/RaportareButon";
 
 const Forum = () => {
   const { idForum } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const { authData } = useContext(GlobalContext);
   const [userHasRights, setUserHasRights] = useState(true);
+  const [userHasReportRights, setUserHasReportRights] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [forumMessages, setForumMessages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -118,6 +120,7 @@ const Forum = () => {
 
       const data = await response.json();
       setUserHasRights(data.hasRights);
+      setUserHasReportRights(data.hasReportRights);
       if (!data.hasRights) {
         setPText(
           "În urma încălcării regulamentului, drepturile dumneavoastră de a trimite mesaje au fost retrase."
@@ -170,6 +173,10 @@ const Forum = () => {
                     <p className="forumDetails-postContent">
                       {message.continut}
                     </p>
+                    {userHasReportRights && (
+                      <RaportareButon idObiect={idForum} tipObiect={"MesajForum"} authData={authData}/>
+                    )}
+
                   </div>
                 ))}
               </div>

@@ -5,11 +5,11 @@ export default (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
         },
-        idAdministrator: {
-            type: DataTypes.INTEGER,
+        obiectRaport: {
+            type:DataTypes.STRING,
             allowNull: false
         },
-        idMesaj: {
+        idObiect: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -18,7 +18,12 @@ export default (sequelize, DataTypes) => {
             allowNull: false
         },
         esteDeschis: {
-            type: DataTypes.BOOLEAN
+            type:DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        idRaportor: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, {
         timestamps: false

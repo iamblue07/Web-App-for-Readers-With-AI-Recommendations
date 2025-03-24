@@ -3,6 +3,7 @@ import { GlobalContext } from "../../context/GlobalState";
 import config from "../../utils/config";
 import stockimage from '../../assets/stock.jpg';
 import "./MesajChat.css";
+import RaportareButon from "../RaportareButon/RaportareButon";
 const MesajChat = ({idMesaj}) => {
 
 
@@ -24,6 +25,7 @@ const MesajChat = ({idMesaj}) => {
             }
             const data = await response.json();
             setMesajData(data);
+            console.log(data);
         }catch(error){
             console.log(error);
         }
@@ -96,6 +98,9 @@ const MesajChat = ({idMesaj}) => {
         }
     },[mesajData])
 
+
+    const [viewReportButton, setViewReportButton] = useState(false);
+    
     return (
         <div className={`MesajChat-main-container ${mesajData.acelasiUser ? 'MesajChat-sameUser' : 'MesajChat-otherUser'}`}>
             {!mesajData.acelasiUser && (
@@ -106,8 +111,12 @@ const MesajChat = ({idMesaj}) => {
             {mesajData.esteMedia === true ? (
                 <img src={messageMedia}
                     className="MesajChat-MediaImage"
+                    onClick={() => {setViewReportButton(!viewReportButton)}}
                 />
-                ):(<p className="MesajChat-Continut">{mesajData.continut}</p>)}
+                ):(<p className="MesajChat-Continut" onClick={() => {setViewReportButton(!viewReportButton)}}>
+                        {mesajData.continut}</p>
+                    )}
+            {viewReportButton && (<RaportareButon idObiect={mesajData.idMesaj} tipObiect={"MesajChat"} authData={authData}/>)}
             {mesajData.acelasiUser && (
                 <img src={userImage}
                     className="MesajChat-ImagineUser"

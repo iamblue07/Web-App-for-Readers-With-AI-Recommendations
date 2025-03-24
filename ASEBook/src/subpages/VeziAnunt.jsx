@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import { createToast } from "../utils/createToast";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import config from "../utils/config";
@@ -6,6 +7,7 @@ import stock_book from "../assets/stock_book.jpg";
 import stock from "../assets/stock.jpg";
 import text from "../utils/text";
 import "../styles/VeziAnunt.css";
+import RaportareButon from "../components/RaportareButon/RaportareButon";
 
 const VeziAnunt = () => {
 
@@ -144,9 +146,37 @@ const VeziAnunt = () => {
         }
     }
 
+    const [userHasReportRights, setUserHasReportRights] = useState(true);
+    const fetchUserRights = async () => {
+        if(!authData?.token) {
+            return;}
+        try {
+            const response = await fetch(`${config.API_URL}/api/getForumRights`, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${authData.token}`,
+                    'Content-Type': 'application/json'
+                },
+            })
+            if(!response.ok) {
+                createToast("Eroare la verificarea drepturilor!", false);
+                setUserHasReportRights(false);
+            }
+            if(response.ok){
+                const data = await response.json();
+                setUserHasReportRights(data.hasReportRights);
+            }
+
+        } catch(error) {
+            createToast(error, false);
+            setUserHasRights(false);
+        }
+    } 
+
     useEffect(() => {
         fetchAnuntData();
         fetchCheckAnuntContactat();
+        fetchUserRights();
     }, [])
 
     useEffect(()=> {
@@ -235,6 +265,7 @@ const VeziAnunt = () => {
                 </div>
             </div>
             <div className="VeziAnunt-right-container">
+                {userHasReportRights && (<RaportareButon idObiect={idAnunt} tipObiect={"Anunt"} authData={authData}/>)}
                 <div className="VeziAnunt-utilizator">
                     <img src={userImage}
                     alt={"Seller Image"}

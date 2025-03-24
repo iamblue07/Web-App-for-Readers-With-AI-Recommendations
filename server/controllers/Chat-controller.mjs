@@ -79,9 +79,9 @@ const getMesajData = async(req, res) => {
         const mesaj = await models.MesajChat.findByPk(mesajID)
         const acelasiUser = mesaj.idUtilizator === userId;
         if(mesaj.esteMedia === false) {
-            return res.status(200).json({acelasiUser:acelasiUser, esteMedia:mesaj.esteMedia, continut:mesaj.continut, idUtilizator:mesaj.idUtilizator});
+            return res.status(200).json({idMesaj:mesaj.id, acelasiUser:acelasiUser, esteMedia:mesaj.esteMedia, continut:mesaj.continut, idUtilizator:mesaj.idUtilizator});
         }
-        return res.status(200).json({acelasiUser:acelasiUser, esteMedia:mesaj.esteMedia, idUtilizator:mesaj.idUtilizator});
+        return res.status(200).json({idMesaj:mesaj.id, acelasiUser:acelasiUser, esteMedia:mesaj.esteMedia, idUtilizator:mesaj.idUtilizator});
 
     }catch(error){
         return res.status(500).json({error:"Internal Server Error"});

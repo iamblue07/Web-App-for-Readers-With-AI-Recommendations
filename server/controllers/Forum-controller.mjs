@@ -110,7 +110,8 @@ const getUserForumRights = async (req, res) => {
         const user = await models.Utilizator.findByPk(userId)
         if(!user) return res.status(404).json({message: "Utilizatorul nu exista"})
         const hasRights = user.poateCreaForum;
-        return res.status(200).json({hasRights})
+        const hasReportRights = user.poateRaporta;
+        return res.status(200).json({hasRights, hasReportRights})
     } catch(error) {
         console.log(error);
         return res.status(500).json({message: "Unauthorized!"})

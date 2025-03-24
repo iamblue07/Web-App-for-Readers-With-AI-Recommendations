@@ -61,8 +61,8 @@ AnuntBazar.belongsTo(Utilizator, { foreignKey: 'idUtilizator' });
 Utilizator.hasOne(Preferinte, { foreignKey: 'idUtilizator' });
 Preferinte.belongsTo(Utilizator, { foreignKey: 'idUtilizator' });
 
-Utilizator.hasMany(Raport, { foreignKey: 'idAdministrator' });
-Raport.belongsTo(Utilizator, { foreignKey: 'idAdministrator' });
+Utilizator.hasMany(Raport, { foreignKey: 'idRaportor' });
+Raport.belongsTo(Utilizator, { foreignKey: 'idRaportor' });
 
 // --- Relații pentru Recomandare AI ---
 Utilizator.hasOne(RecomandareAI, { foreignKey: 'idUtilizator' });

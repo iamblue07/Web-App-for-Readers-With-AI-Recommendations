@@ -6,6 +6,7 @@ import { createToast } from '../utils/createToast';
 import '../styles/Forumuri.css';
 
 import { GlobalContext } from "../context/GlobalState";
+import RaportareButon from "../components/RaportareButon/RaportareButon";
 
 const rowsPerPage = 10;
 
@@ -19,7 +20,7 @@ const Forumuri = () => {
     const [isCreatingForum, setIsCreatingForum] = useState(false)
     const [newForumTitle, setNewForumTitle] = useState("")
     const [userHasRights, setUserHasRights] = useState(true)
-
+    const [userHasReportRights, setUserHasReportRights] = useState(true);
     const navigate = useNavigate()
     
     const fetchForums = async () => {
@@ -83,6 +84,7 @@ const Forumuri = () => {
             }
             if(response.ok){
                 const data = await response.json();
+                setUserHasReportRights(data.hasReportRights);
                 setUserHasRights(data.hasRights);
             }
 
@@ -133,6 +135,7 @@ const Forumuri = () => {
                         <th className="table-header">Data Crearii</th>
                         <th className="table-header">Este Deschis</th>
                         <th className="table-header">Utilizator</th>
+                        {userHasReportRights && (<th className="table-header"></th>)}
                     </tr>
                 </thead>
                 <tbody>
@@ -142,6 +145,7 @@ const Forumuri = () => {
                             <td className="table-cell">{new Date(forum.data).toLocaleDateString()}</td>
                             <td className="table-cell">{forum.esteDeschis ? "Da" : "Nu"}</td>
                             <td className="table-cell">{forum.username}</td>
+                            {userHasReportRights && (<td><RaportareButon idObiect={forum.id} tipObiect={"Forum"} authData={authData}/></td>)}
                         </tr>
                     ))}
                 </tbody>

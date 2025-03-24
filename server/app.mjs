@@ -24,6 +24,7 @@ app.use('/api', routers.ForumRouter);
 app.use('/api', routers.CarteRouter);
 app.use('/api', routers.BazarRouter);
 app.use('/api', routers.ChatRouter);
+app.use('/api', routers.RaportRouter);
 // Use the authentication middleware for protected routes
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(middleware.middlewareAuth)

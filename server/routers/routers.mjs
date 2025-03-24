@@ -4,11 +4,13 @@ import ForumRouter from './Forum-routers.mjs';
 import CarteRouter from './Carte-routers.mjs';
 import BazarRouter from './Bazar-routers.mjs';
 import ChatRouter from './Chat-routers.mjs';
+import RaportRouter from './Raport-routers.mjs';
 export default {
   AuthRouter,
   UtilizatorRouter,
   ForumRouter,
   CarteRouter,
   BazarRouter,
-  ChatRouter
+  ChatRouter,
+  RaportRouter
 }
