@@ -76,8 +76,61 @@ const getReportData = async(req, res) => {
     }
 }
 
+const getExtendedReportData = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        if(!userId || isNaN(userId)) {
+            return res.status(404).json({error:"Missing user ID"});
+        }
+        const user = await models.Utilizator.findByPk(userId);
+        if(!user) {
+            return res.status(404).json({error:"Missing user"});
+        }
+        if(user.esteAdministrator === false) {
+            return res.status(400).json({error:"ILEGAL REQUEST: USER NOT ADMINISTRATOR"})
+        }
+        const {raportID} = req.params;
+        if(!raportID || isNaN(raportID)) {
+            return res.status(404).json({error:"Missing raport ID"});
+        }
+        const raport = await models.Raport.findByPk(raportID);
+        var data;
+        if(raport.obiectRaport === "MesajChat") {
+            data = await models.MesajChat.findByPk(raport.idObiect, {
+                attributes: ['id', 'idUtilizator', 'idChat', 'esteMedia', 'continut', 'data']
+            });
+
+        }
+        if(raport.obiectRaport === "MesajForum") {
+            data = await models.MesajForum.findByPk(raport.idObiect, {
+                attributes: ['id', 'idUtilizator', 'continut', 'data']
+            });
+        }
+        if(raport.obiectRaport === "Forum") {
+            data = await models.Forum.findByPk(raport.idObiect, {
+                attributes: ['id', 'idUtilizator', 'titluForum', 'data']
+            });
+        }
+        if(raport.obiectRaport === "Anunt") {
+            data = await models.AnuntBazar.findByPk(raport.idObiect, {
+                attributes: ['id', 'idUtilizator', 'titluAnunt', 'descriereAnunt', 'dataAnunt']
+            })
+        }
+        const reportedUser = await models.Utilizator.findByPk(data.idUtilizator, {
+            attributes: ['username']
+        });
+        const reporterUser = await models.Utilizator.findByPk(raport.idRaportor, {
+            attributes: ['username']
+        });
+        return res.status(200).json({data, reportedUsername: reportedUser.username, reporterUsername: reporterUser.username});
+    }catch(error){
+        return res.status(500).json({error:"Internal Server Error"});
+    }
+}
+
 export default {
     creeazaRaport,
     getReportsIDs,
-    getReportData
+    getReportData,
+    getExtendedReportData
 }

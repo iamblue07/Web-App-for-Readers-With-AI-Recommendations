@@ -50,20 +50,24 @@ const DashboardComponent = ({isAdmin}) => {
     const totalPages = Math.ceil(totalReports / itemsPerPage);
 
     return(
-        <> {canShow && (<div className="Dashboard-main-container">
-            {isAdmin && <div className="Dashboard-reports-items-list">
+        <> {canShow && 
+        (<div className={`Dashboard-main-container ${reportData ? "with-details" : ""}`}>
+            {isAdmin && 
+            <div className="Dashboard-reports-items-list">
                 <div className="Dashboard-header">
-                    <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(true)}}>Vezi rapoartele deschise</button>
-                    <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(false)}}>Vezi rapoartele inchise</button>
+                    <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(true); setReportData(null)}}>Vezi rapoartele deschise</button>
+                    <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(false); setReportData(null)}}>Vezi rapoartele inchise</button>
                 </div>
                 {reportsIDs.map((reportID) => (
                     <DashboardRaportItem key={reportID} idRaport={reportID} setReportData={setReportData} />
                 ))}
             </div>}
-            {(isAdmin && reportData !== null) && <div className="Dashboard-Report-Data">
-                <DashboardRaportDetails data={reportData}/>
+            {(isAdmin && reportData !== null) && 
+            <div className="Dashboard-Report-Data">
+                <DashboardRaportDetails reportData={reportData}/>
             </div>}
-            <div className="pagination-container">
+        </div>)}
+        <div className="pagination-container">
                 {[...Array(totalPages)].map((_, i) => (
                     <button
                         key={i}
@@ -75,8 +79,6 @@ const DashboardComponent = ({isAdmin}) => {
                     </button>
                 ))}
             </div>
-            </div>)}
-
         </>
     )
 };
