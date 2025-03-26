@@ -5,7 +5,7 @@ import text from '../../utils/text.js';
 import { createToast } from '../../utils/createToast';
 import "./Preferinte.css";
 
-const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
+const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, mountIstoric, setMountIstoric }) => {
     const { authData } = useContext(GlobalContext);
     const [utilizatorPreferinte, setUtilizatorPreferinte] = useState(["", "", "", "", ""]);
     const [showPreferinte, setShowPreferinte] = useState(false)
@@ -80,7 +80,7 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
         if (authData?.token && userId) {
             fetchUtilizatorPreferinte();
         }
-    }, [authData?.token, userId]);  // Reexecută efectul doar când authData sau userId se schimbă
+    }, [authData?.token, userId]);
     
 
     const genuriLiterare = text.genuriLiterare
@@ -89,12 +89,10 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
         setUtilizatorPreferinte((prev) => {
             const index = prev.indexOf(gen);
             if (index !== -1) {
-                // Deselectăm preferința și o înlocuim cu ""
                 const newPreferinte = [...prev];
                 newPreferinte[index] = "";
                 return newPreferinte;
             } else {
-                // Verificăm dacă există un slot gol
                 const emptyIndex = prev.indexOf("");
                 if (emptyIndex !== -1) {
                     const newPreferinte = [...prev];
@@ -143,6 +141,7 @@ const Preferinte = ({ userId, mountIstoric, setMountIstoric }) => {
             }
             <button className="buton-Actualizeaza" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
             <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>Vezi istoricul cartilor citite</button>
+            <button className="buton-preferinte" onClick={() => {setCanMountDashboard(!canMountDashboard)}}>Vezi dashboard rapoarte</button>
         </div>
     );
 };

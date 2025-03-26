@@ -1,0 +1,62 @@
+.DashboardRaportItem-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 99.9%;
+    background-color: #FFFBFE;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 10px 0;
+    gap: 20px;
+}
+
+.DashboardRaportItem-main-container:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+}
+
+.Dashboard-p, .Dashboard-p-id {
+    font-size: 18px;
+    font-weight: bold;
+    color: #090C08;
+    margin: 0;
+    flex-grow: 1;
+
+}
+
+.Dashboard-p {
+    text-align: center;
+}
+
+.Dashboard-p-id {
+    text-align: left;
+}
+
+.DashboardRaportItem-vezi {
+    padding: 8px 15px;
+    border: 2px solid #090C08;
+    border-radius: 15px;
+    background-color: #090C08;
+    color: #FFFBFE;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+    box-shadow: 0 2px 5px rgba(84, 238, 46, 0.6);
+    height: 40px;
+}
+
+.DashboardRaportItem-vezi:hover {
+    color: rgb(84, 238, 46);
+    box-shadow: 0 4px 10px rgba(84, 238, 46, 0.9);
+    transform: translateY(-3px);
+}
+
+@media only screen and (max-width: 768px) {
+    .DashboardRaportItem-main-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

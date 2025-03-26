@@ -4,5 +4,6 @@ import middleware from '../middleware/index.mjs';
 const router = express.Router();
 
 router.post('/raport/creeazaRaport', middleware.middlewareAuth, raportController.creeazaRaport);
-
+router.post('/raport/getReportsIDs', middleware.middlewareAuth, raportController.getReportsIDs);
+router.get('/raport/getReportData/:raportID', middleware.middlewareAuth, raportController.getReportData);
 export default router

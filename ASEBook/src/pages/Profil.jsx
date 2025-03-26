@@ -8,6 +8,8 @@ import { createToast } from '../utils/createToast';
 import stockimage from '../assets/stock.jpg';
 import PreferinteComponent from '../components/Profil-Preferinte/Preferinte';
 import IstoricLecturaComponent from '../components/Istoric-Lectura/Istoric-Lectura';
+import DashboardComponent from '../components/DashboardRapoarte/DashboardComponent';
+
 const Profil = () => {
     const { clearAuthData, authData } = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -16,12 +18,14 @@ const Profil = () => {
     const [newDescription, setNewDescription] = useState(userData.descriere || "");
     const [currentPass, setCurrentPass] = useState("");
     const [newPass, setNewPass] = useState("");
-    const [isLoadingPassword, setIsLoadingPassword] = useState(false);  // State for loading status
+    const [isLoadingPassword, setIsLoadingPassword] = useState(false);
     const [imagePath, setImagePath] = useState(stockimage);
     const [canMountPreferinte, setCanMountPreferinte] = useState(false);
 
     const [mountIstoric, setMountIstoric] = useState(false);
+    const [canMountDashboard, setCanMountDashboard] = useState(false);
 
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const fetchUtilizatorData = async () => {
         const token = authData?.token;
@@ -44,6 +48,7 @@ const Profil = () => {
             }
             const data = await response.json();
             if (data && data.user) {
+                setIsAdmin(data.user.esteAdministrator);
                 setUserData(data.user);
                 setNewDescription(data.user.descriere || "");
             } else {
@@ -201,6 +206,7 @@ const Profil = () => {
     };
     
 
+
     useEffect(() => {
         const fetchData = async () => {
             await fetchUtilizatorData();
@@ -222,7 +228,12 @@ const Profil = () => {
             <ToastContainer />
             <div className='main-container-Profil'>
                 <div className='container-Preferinte'>
-                    {canMountPreferinte ? <PreferinteComponent userId = {userData.id} mountIstoric = {mountIstoric} setMountIstoric = {setMountIstoric}/> : <></>}
+                    {canMountPreferinte &&
+                    <PreferinteComponent 
+                        userId = {userData.id} isAdmin={isAdmin}
+                        canMountDashboard={canMountDashboard} setCanMountDashboard={setCanMountDashboard} 
+                        mountIstoric = {mountIstoric} setMountIstoric = {setMountIstoric}/>
+                     }
                 </div>
 
                 <div className='container-Profil'>
@@ -275,6 +286,9 @@ const Profil = () => {
             </div>
             {mountIstoric && <div className='container-istoric'>
                 <IstoricLecturaComponent/>
+            </div>}
+            {canMountDashboard && <div className='container-dashboard'>
+                <DashboardComponent isAdmin={isAdmin}/>    
             </div>}
         </div>
     );

@@ -24,7 +24,12 @@ export default (sequelize, DataTypes) => {
         idRaportor: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        dataRaport: {
+            type: DataTypes.DATE,
+            allowNull:false
         }
+
     }, {
         timestamps: false
     })
