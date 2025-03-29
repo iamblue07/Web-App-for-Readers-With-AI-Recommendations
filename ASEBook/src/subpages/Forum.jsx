@@ -45,6 +45,7 @@ const Forum = () => {
         return;
       }
       const data = await response.json();
+      console.log(data);
       setForumMessages(data.messages);
       setTotalPages(data.totalPages);
       setCurrentPage(data.currentPage);
@@ -117,13 +118,13 @@ const Forum = () => {
         createToast("Eroare la verificarea drepturilor!", false);
         return;
       }
-
       const data = await response.json();
+      console.log(data);
       setUserHasRights(data.hasRights);
       setUserHasReportRights(data.hasReportRights);
       if (!data.hasRights) {
         setPText(
-          "În urma încălcării regulamentului, drepturile dumneavoastră de a trimite mesaje au fost retrase."
+          "In urma incalcarii regulamentului, drepturile dumneavoastra de a trimite mesaje au fost retrase."
         );
       } else {
         setPText("Forumul este inchis!");
@@ -174,7 +175,7 @@ const Forum = () => {
                       {message.continut}
                     </p>
                     {userHasReportRights && (
-                      <RaportareButon idObiect={idForum} tipObiect={"MesajForum"} authData={authData}/>
+                      <RaportareButon idObiect={message.id} tipObiect={"MesajForum"} authData={authData}/>
                     )}
 
                   </div>

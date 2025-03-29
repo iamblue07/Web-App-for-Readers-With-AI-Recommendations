@@ -109,7 +109,7 @@ const getUserForumRights = async (req, res) => {
         }
         const user = await models.Utilizator.findByPk(userId)
         if(!user) return res.status(404).json({message: "Utilizatorul nu exista"})
-        const hasRights = user.poateCreaForum;
+        const hasRights = user.poateTrimiteMesaj;
         const hasReportRights = user.poateRaporta;
         return res.status(200).json({hasRights, hasReportRights})
     } catch(error) {
@@ -129,7 +129,7 @@ const getMesajeForum = async (req, res) => {
             where: { idForum: idf },
             include: [{
                 model: models.Utilizator,
-                attributes: ['username', 'caleImagineProfil']
+                attributes: ['id', 'username', 'caleImagineProfil']
             }],
             limit: limitNumber,
             offset: (pageNumber - 1) * limitNumber,
@@ -146,6 +146,7 @@ const getMesajeForum = async (req, res) => {
                 : null;
 
             return {
+                id: mesaj.id,
                 continut: mesaj.continut,
                 username: mesaj.Utilizator.username,
                 data: mesaj.data,

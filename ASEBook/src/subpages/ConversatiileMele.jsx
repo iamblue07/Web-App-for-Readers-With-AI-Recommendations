@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import ChatBazar from "../components/ChatBazar/ChatBazar";
 import ListaChaturi from "../components/ListaChaturi/ListaChaturi";
 import "../styles/ConversatiileMele.css";
+import HeaderBazar from "../components/HeaderBazar/HeaderBazar.jsx";
 const ConversatiileMele = ({}) => {
 
     const [currentChat, setCurrentChat] = useState(0);
@@ -14,6 +15,8 @@ const ConversatiileMele = ({}) => {
     },[])
 
     return (
+        <>
+        <HeaderBazar/>
         <div className="ConversatiileMele-main-container">
             <div className="ConversatiileMele-left-container">
                 <ListaChaturi setCurrentChat={setCurrentChat}/>
@@ -22,6 +25,8 @@ const ConversatiileMele = ({}) => {
                 <ChatBazar chatID={currentChat}/>
             </div>
         </div>
+        </>
+
     )
 }
 

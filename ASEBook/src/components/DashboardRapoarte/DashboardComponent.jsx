@@ -7,7 +7,7 @@ import "./DashboardComponent.css";
 
 const DashboardComponent = ({isAdmin}) => {
 
-    const [viewOpenClosedReports, setViewOpenClosedReports] = useState(false);
+    const [viewOpenClosedReports, setViewOpenClosedReports] = useState(true);
     const {authData} = useContext(GlobalContext);
     
     const [reportsIDs,setReportsIDs] = useState([]);
@@ -56,6 +56,7 @@ const DashboardComponent = ({isAdmin}) => {
             <div className="Dashboard-reports-items-list">
                 <div className="Dashboard-header">
                     <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(true); setReportData(null)}}>Vezi rapoartele deschise</button>
+                    {viewOpenClosedReports ? (<p className="Dashboard-p">RAPOARTE DESCHISE</p>) : (<p className="Dashboard-p">RAPOARTE INCHISE</p>)}
                     <button className="Dashboard-header-button" onClick={()=>{setViewOpenClosedReports(false); setReportData(null)}}>Vezi rapoartele inchise</button>
                 </div>
                 {reportsIDs.map((reportID) => (
@@ -64,7 +65,7 @@ const DashboardComponent = ({isAdmin}) => {
             </div>}
             {(isAdmin && reportData !== null) && 
             <div className="Dashboard-Report-Data">
-                <DashboardRaportDetails reportData={reportData}/>
+                <DashboardRaportDetails reportData={reportData} setReportData={setReportData} fetchReportsIDs={fetchReportsIDs}/>
             </div>}
         </div>)}
         <div className="pagination-container">
