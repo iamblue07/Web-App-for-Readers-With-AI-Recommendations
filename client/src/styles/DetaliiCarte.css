@@ -1,0 +1,215 @@
+/* Main Container */
+.DetaliiCarte-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    min-height: 400px;
+    padding: 10px;
+    background-color: #FFFBFE;
+    box-sizing: border-box;
+  }
+  
+  /* Image and ISBN Section */
+  .div-emptyDiv-imagine-isbn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .div-emptyDiv-imagine-isbn:hover {
+    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  }
+  
+  /* Book Image */
+  .bookImage {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Details Section */
+  .div-detalii {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .div-titlu-autor-gen {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  /* Typography */
+  .DetaliiCarte-h1 {
+    font-size: 24px;
+    margin: 5px 0;
+    font-weight: bold;
+    color: #090C08;
+  }
+  
+  .DetaliiCarte-p, .DetaliiCarte-paragraph {
+    text-align: justify;
+    text-justify: inter-word;
+    white-space: pre-line;
+    color: #090C08;
+    line-height: 1.5;
+  }
+
+  .DetaliiCarte-p {
+    font-size: 24px;
+  }
+  
+  .DetaliiCarte-paragraph {
+    text-indent: 2em;
+    margin-bottom: 0.8em;
+    line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
+    white-space: pre-wrap;
+    text-indent: -1em;
+    padding-left: 1em;
+  }
+
+  /* Description Section */
+  .descriere-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .sageta {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+  }
+  
+  .sageta.rotated {
+    transform: rotate(180deg);
+  }
+  
+  /* Offers Section */
+  .oferte {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .oferta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Buttons */
+  .details-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .btnMarked,
+  .btnUnMarked,
+  .DetaliiCarte-btn-oferte-bazar {
+    padding: 10px 30px;
+    border: 2px solid #090C08;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    color: #090C08;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .DetaliiCarte-btn-oferte-bazar {
+    width: 100%;
+    margin: 20px auto 0;
+  }
+  
+  /* Hover States */
+  .div-emptyDiv-imagine-isbn:hover,
+  .oferta-item:hover,
+  .btnMarked:hover,
+  .btnUnMarked:hover,
+  .DetaliiCarte-btn-oferte-bazar:hover {
+    border-color: #EE2E31;
+    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.5);
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .div-detalii {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    
+    .div-emptyDiv-imagine-isbn {
+      min-width: 300px;
+    }
+  
+    .oferta-item {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .details-buttons {
+      align-items: flex-start;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .div-detalii {
+      align-items: center;
+    }
+  
+    .div-titlu-autor-gen {
+      align-items: center;
+      text-align: center;
+    }
+  
+    .bookImage {
+      width: 200px;
+    }
+  
+    .details-buttons button {
+      width: 100%;
+    }
+  
+    .oferta-item {
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  /* Bazaar Offers Section */
+  .container-oferte-bazar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .DetaliiCarte-btn-oferte-bazar {
+    align-self: center;
+    margin-top: 20px;
+  }

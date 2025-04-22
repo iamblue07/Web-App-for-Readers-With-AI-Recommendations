@@ -19,6 +19,7 @@ const DetaliiCarte = () => {
 
     const [viewBazarOffers, setViewBazarOffers] = useState(false);
     const [isLoadingAnunturi, setIsLoadingAnunturi] = useState(true);
+    const [canViewDescription, setCanViewDescription] = useState(false);
     const [totalAnunturi, setTotalAnunturi] = useState(0);
     const [bazarAnunturiIDs, setBazarAnunturiIDs] = useState([]);
 
@@ -214,14 +215,21 @@ const DetaliiCarte = () => {
                         </div>
                         <div className="details-buttons">
                         <div className="div-titlu-autor-gen">
-                            <h1 className="DetaliiCarte-h1">Titlu: <p className="DetaliiCarte-p">{bookDetails.titlu}</p></h1>
-                            <h1 className="DetaliiCarte-h1">Autor: <p className="DetaliiCarte-p">{bookDetails.autor}</p></h1>
-                            <h1 className="DetaliiCarte-h1">Gen literar: <p className="DetaliiCarte-p">{bookDetails.genLiterar}</p></h1>
+                        <div className="detail-row">
+                                <h1 className="DetaliiCarte-h1">Titlu:</h1>
+                                <p className="DetaliiCarte-p">{bookDetails.titlu}</p>
+                            </div>
+                            
+                            <div className="detail-row">
+                                <h1 className="DetaliiCarte-h1">Autor:</h1>
+                                <p className="DetaliiCarte-p">{bookDetails.autor}</p>
+                            </div>
+
+                            <div className="detail-row">
+                                <h1 className="DetaliiCarte-h1">Gen literar:</h1>
+                                <p className="DetaliiCarte-p">{bookDetails.genLiterar}</p>
+                            </div>
                         </div>
-                        <div className="div-descriere-carte">
-                            <h1 className="DetaliiCarte-h1"> Descriere: </h1>
-                            <p>{bookDetails.descriere}</p>
-                        </div>    
                         {!!authData.token && (<div>
                                 {bookIsMarked ? (
                                     <button className="btnMarked" onClick={ () => {fetchUnmark()}}>Sterge marcarea cartii</button>) : (
@@ -230,6 +238,26 @@ const DetaliiCarte = () => {
                             </div>)}
                         </div>
                     </div>
+
+                    <div className='descriere-container' onClick={() => {setCanViewDescription(!canViewDescription)}}>
+                        <h1 className="DetaliiCarte-h1"> Descriere: </h1>
+                        <h1 className={`sageta ${canViewDescription ? "rotated" : ""}`}>&#9660;</h1>
+                    </div>
+                    <div className="div-descriere-carte">
+                    {canViewDescription && (
+                        <div className="div-descriere-carte">
+                            {bookDetails.descriere.split('\n').map((paragraph, index) => (
+                            paragraph.trim() && (
+                                <p key={index} className="DetaliiCarte-paragraph">
+                                {paragraph}
+                                </p>
+                            )
+                            ))}
+                        </div>
+                        )}
+                    </div> 
+                    
+                    <h1 className="DetaliiCarte-h1">Oferte:</h1>
                     <div className="oferte">
                         {bookOffers.length > 0 ? (
                             bookOffers.map((oferta) => (

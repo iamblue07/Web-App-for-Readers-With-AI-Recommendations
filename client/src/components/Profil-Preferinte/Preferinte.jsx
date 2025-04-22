@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState.jsx';
 import config from '../../utils/config.js';
 import text from '../../utils/text.js';
-import { createToast } from '../../utils/createToast';
+import { createToast } from '../../utils/createToast.js';
 import "./Preferinte.css";
 
 const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, mountIstoric, setMountIstoric }) => {
