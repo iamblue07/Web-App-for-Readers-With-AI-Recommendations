@@ -115,7 +115,6 @@ const DetaliiCarte = () => {
                 return;
             }
             setBookOffers(data);
-            console.log(data);
         }catch(error){
             console.log("Eroare la preluarea ofertelor cartii");
         }

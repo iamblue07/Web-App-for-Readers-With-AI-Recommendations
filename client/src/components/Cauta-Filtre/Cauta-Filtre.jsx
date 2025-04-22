@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Cauta-Filtre.css";
 import text from '../../utils/text.js';
 
-const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMinim, pretMaxim, setPretMaxim }) => {
+const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMinim, pretMaxim, setPretMaxim, sortareSelectata, setSortareSelectata }) => {
     const [showGenuri, setShowGenuri] = useState(false);
     const genuriLiterare = text.genuriLiterare;
 
@@ -19,6 +19,13 @@ const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMi
         if (["-", "e", "+", "."].includes(e.key)) {
             e.preventDefault();
         }
+    };
+
+    const [dropdownSortare, setDropdownSortare] = useState(false);
+    
+    const selectSortare = (sortare) => {
+        setSortareSelectata(sortare);
+        setDropdownSortare(false);
     };
 
     return (
@@ -74,6 +81,27 @@ const CautaFiltre = ({ genuriSelectate, setGenuriSelectate, pretMinim, setPretMi
                         placeholder="Max"
                     />
                 </div>
+                <div className='sortare-container'>
+                        <p>Sorteaza dupa:</p>
+                        <div className='dropdown-container'>
+                            <button className='sortari-dropdown' onClick={() => setDropdownSortare(!dropdownSortare)}>
+                                {sortareSelectata} <i className='fa fa-caret-down' />
+                            </button>
+                            {dropdownSortare && (
+                                <div className='sortari-content'>
+                                    <table>
+                                        <tbody>
+                                            <tr onClick={() => selectSortare("Sorteaza dupa")}><td>Sorteaza dupa</td></tr>
+                                            <tr onClick={() => selectSortare("Pret - crescator")}><td>Pret - crescator</td></tr>
+                                            <tr onClick={() => selectSortare("Pret - descrescator")}><td>Pret - descrescator</td></tr>
+                                            <tr onClick={() => selectSortare("Alfabetic - crescator")}><td>Alfabetic - crescator</td></tr>
+                                            <tr onClick={() => selectSortare("Alfabetic - descrescator")}><td>Alfabetic - descrescator</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
+                        </div>
+                    </div>
             </div>
         </div>
     );

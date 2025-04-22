@@ -47,11 +47,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+  transform: translateY(-4px);
 }
 
 .btnCauta:hover {
   box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
-  transform: translateY(-3px);
+  transform: translateY(-7px);
 }
 
 /* Filters & results layout */

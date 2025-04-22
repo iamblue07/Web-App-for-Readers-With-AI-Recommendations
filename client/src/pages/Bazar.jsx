@@ -17,7 +17,8 @@ const Bazar = () => {
     const [dropdownCategorie, setDropdownCategorie] = useState(false);
     const [dropdownSortare, setDropdownSortare] = useState(false);
 
-    const genuriLiterare = textData.genuriLiterare;
+    const genuriLiterare = [...textData.genuriLiterare];
+    genuriLiterare.unshift("Alege categoria");
 
     const selectCategorie = (categorie) => {
         setCategorieSelectata(categorie);
@@ -72,7 +73,6 @@ const Bazar = () => {
             const data = await response.json();
             setAnuntBazarIDs(data.ids);
             setTotalPages(data.totalPages);
-            console.log(data);
         } catch(error) {
             console.log(error);
         }

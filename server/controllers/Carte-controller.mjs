@@ -1,7 +1,7 @@
 import models from "../models/index.mjs";
 import dotenv from 'dotenv';
 import path from 'path';
-import { Op } from "sequelize";
+import { QueryTypes, Op } from "sequelize";
 import { fileURLToPath } from "url";
 
 dotenv.config();
@@ -11,52 +11,97 @@ const __dirname = path.dirname(__filename);
 
 const postCartiIDs = async (req, res) => {
     try {
-        const { searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage, booksPerPage } = req.body;
-
-        if (isNaN(pretMinim) || isNaN(pretMaxim)) {
-            return res.status(400).json({ error: 'Preturile trebuie să fie numere valide.' });
-        }
-
-        const ofertaCarti = await models.OfertaCarte.findAll({
-            attributes: ['idCarte'],
-            where: {
-                pretOferta: { [Op.between]: [pretMinim, pretMaxim] }
-            }
-        });
-
-        const idList = ofertaCarti.map(oferta => oferta.idCarte);
-
-        const whereClause = {
-            id: { [Op.in]: idList },
-            titlu: { [Op.like]: `%${searchWords}%` }
-        };
-
-        if (genuriSelectate.length > 0) {
-            whereClause.genLiterar = { [Op.in]: genuriSelectate };
-        }
-
-        const cartiFiltrate = await models.Carte.findAll({
-            attributes: ['id'],
-            where: whereClause,
-            limit: booksPerPage,  // Limit to booksPerPage
-            offset: (currentPage - 1) * booksPerPage  // Offset for pagination
-        });
-
-        const totalBooks = await models.Carte.count({
-            where: whereClause
-        });
-
-        const totalPages = Math.ceil(totalBooks / booksPerPage);  // Calculate total pages
-
-        res.json({
-            ids: cartiFiltrate.map(carte => carte.id),
-            totalPages: totalPages
-        });
+      const {
+        searchWords = '',
+        genuriSelectate = [],
+        pretMinim,
+        pretMaxim,
+        currentPage = 1,
+        booksPerPage = 10,
+        sortareSelectata
+      } = req.body;
+  
+      if (isNaN(pretMinim) || isNaN(pretMaxim)) {
+        return res.status(400).json({ error: 'Preturile trebuie să fie numere valide.' });
+      }
+  
+      const offset = (currentPage - 1) * booksPerPage;
+      const replacements = {
+        pretMinim,
+        pretMaxim,
+        searchWordsPattern: `%${searchWords}%`,
+        genres: genuriSelectate,
+        limit: booksPerPage,
+        offset
+      };
+  
+      const genreFilter = genuriSelectate.length
+        ? 'AND c.`genLiterar` IN (:genres)'
+        : '';
+  
+      let orderClause = '';
+      switch (sortareSelectata) {
+        case 'Pret - crescator':
+          orderClause = 'ORDER BY oferta_min.`minPret` ASC';
+          break;
+        case 'Pret - descrescator':
+          orderClause = 'ORDER BY oferta_min.`minPret` DESC';
+          break;
+        case 'Alfabetic - crescator':
+          orderClause = 'ORDER BY c.`titlu` ASC';
+          break;
+        case 'Alfabetic - descrescator':
+          orderClause = 'ORDER BY c.`titlu` DESC';
+          break;
+      }
+  
+      const sqlFetch = `
+        SELECT c.\`id\`
+        FROM \`Cartes\` AS c
+        JOIN (
+          SELECT \`idCarte\`, MIN(\`pretOferta\`) AS \`minPret\`
+          FROM \`OfertaCartes\`
+          GROUP BY \`idCarte\`
+          HAVING MIN(\`pretOferta\`) BETWEEN :pretMinim AND :pretMaxim
+        ) AS \`oferta_min\` ON \`oferta_min\`.\`idCarte\` = c.\`id\`
+        WHERE c.\`titlu\` LIKE :searchWordsPattern
+          ${genreFilter}
+          ${orderClause}
+        LIMIT :limit
+        OFFSET :offset;
+      `;
+      const rows = await models.sequelize.query(sqlFetch, {
+        replacements,
+        type: QueryTypes.SELECT
+      });
+      const ids = rows.map(r => r.id);
+  
+      const sqlCount = `
+        SELECT COUNT(*) AS \`count\`
+        FROM \`Cartes\` AS c
+        JOIN (
+          SELECT \`idCarte\`
+          FROM \`OfertaCartes\`
+          GROUP BY \`idCarte\`
+          HAVING MIN(\`pretOferta\`) BETWEEN :pretMinim AND :pretMaxim
+        ) AS \`oferta_min\` ON \`oferta_min\`.\`idCarte\` = c.\`id\`
+        WHERE c.\`titlu\` LIKE :searchWordsPattern
+          ${genreFilter};
+      `;
+      const countResult = await models.sequelize.query(sqlCount, {
+        replacements,
+        type: QueryTypes.SELECT
+      });
+      const totalBooks = parseInt(countResult[0].count, 10);
+      const totalPages = Math.ceil(totalBooks / booksPerPage);
+  
+      return res.json({ ids, totalPages });
     } catch (error) {
-        console.error("Error in postCartiIDs:", error);
-        res.status(500).json({ error: 'Eroare la preluarea datelor' });
+      console.error(error);
+      return res.status(500).json({ error: 'Eroare la preluarea datelor' });
     }
-};
+  };
+  
 
 
 const getCartiData = async (req, res) => {

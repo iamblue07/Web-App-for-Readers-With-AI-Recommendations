@@ -22,7 +22,7 @@ const Cauta = () => {
             const response = await fetch(`${config.API_URL}/api/postCartiIDs`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage, booksPerPage })
+                body: JSON.stringify({ searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage, booksPerPage, sortareSelectata })
             });
             if (!response.ok) {
                 console.log('Eroare la preluarea datelor');
@@ -100,6 +100,10 @@ const Cauta = () => {
         return isNaN(num) || num < 1 || num > totalPages;
     };
 
+
+    const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
+
+
     return (
         <div className="Cauta-Main-Container">
             <div className='container-Search-Button'>
@@ -126,6 +130,8 @@ const Cauta = () => {
                         setPretMinim={setPretMinim}
                         pretMaxim={pretMaxim} 
                         setPretMaxim={setPretMaxim}
+                        sortareSelectata={sortareSelectata}
+                        setSortareSelectata={setSortareSelectata}
                     />
                 </div>
                 <div className='container-rezultate-header'>
