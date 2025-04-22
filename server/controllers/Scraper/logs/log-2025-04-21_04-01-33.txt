@@ -1,0 +1,11 @@
+Scraping started at 2025-04-21T01:01:33.834Z
+[2025-04-21T03:39:43.167Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/tatal-meu-a-fost-un-mib-volumul-1-3551088333?p=47091
+[2025-04-21T03:50:20.244Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/sa-tai-in-piatra-vie-2398287111?p=47435
+[2025-04-21T03:55:57.598Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/recuperarea-245422082?p=47616
+[2025-04-21T04:00:33.849Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/prieteni-la-bine-si-la-greu-3064088921?p=47761
+[2025-04-21T04:00:43.967Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/despre-inlantuiri-in-general-panegiric-pentru-filip-educarea-principelui-crestin-283687?p=47768
+[2025-04-21T04:01:37.481Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/theodor-aman-2176405867?p=47795
+[2025-04-21T04:02:16.034Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/intuneric-la-amiaza-1992516357?p=47817
+[2025-04-21T04:03:58.821Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/psihologia-poporului-roman-926969936?p=47871
+[2025-04-21T04:06:03.295Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/cei-cinci-si-pasajul-secret-3064088965?p=47938
+Scraping completed at 2025-04-21T04:08:03.935Z

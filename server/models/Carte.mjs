@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
         },
         isbn: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique: true
         },
         titlu: {
@@ -17,6 +17,10 @@ export default (sequelize, DataTypes) => {
         autor: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        descriere: {
+            type:DataTypes.TEXT,
+            allowNull: true
         },
         genLiterar: {
             type: DataTypes.STRING,

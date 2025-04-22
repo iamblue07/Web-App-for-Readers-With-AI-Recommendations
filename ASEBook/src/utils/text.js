@@ -10,14 +10,39 @@ const fillerTextFive =
 "Doresti sa vinzi o carte sau sa o dai la schimb? In cadrul serviciului de bazar, poti sa intalnesti persoane dornice de a-ti lua cartea din maini!";
 
 const genuriLiterare = [
-    "AUDIOBOOKS", 'CULINARE', 'ARTA, ARHITECTURA', 'ENCICLOPEDII', 'BIOGRAFII, MEMORII, JURNALE',
-    'LINGVISTICA, DICTIONARE', 'LIMBI STRAINE', 'POEZIE, TEATRU, STUDII LITERARE',
-    'FICTIUNE', 'BENZI DESENATE', 'GHIDURI SI HARTI TURISTICE, ATLASE', 'ISTORIE', 'RELIGIE', 'FILOSOFIE',
-    'PSIHOLOGIE', 'STIINTE SOCIALE. POLITICA', 'MARKETING SI COMUNICARE', 'BUSINESS SI ECONOMIE',
-    'DREPT', 'MEDICINA', 'STIINTE EXACTE. MATEMATICI', 'NATURA SI MEDIU', 'TEHNICA SI TEHNOLOGIE',
-    'COMPUTERE SI INTERNET', 'SANATATE, DEZVOLTARE PERSONALA', 'LIFESTYLE, SPORT, TIMP LIBER', 'PENTRU COPII, ADOLESCENTI',
-    'ROMANIA', 'SOFT EDUCATIONAL'
-];
+    "RELIGIE",
+    "ISTORIE",
+    "ARTA, ARHITECTURA",
+    "SANATATE, DEZVOLTARE PERSONALA",
+    "CULINARE",
+    "LINGVISTICA, DICTIONARE",
+    "FICTIUNE",
+    "PENTRU COPII, ADOLESCENȚI",
+    "BIOGRAFII, MEMORII, JURNALE",
+    "PSIHOLOGIE",
+    "FILOSOFIE",
+    "POEZIE, TEATRU, STUDII LITERARE",
+    "STIINTE SOCIALE. POLITICA",
+    "STIINTE EXACTE. MATEMATICI",
+    "LIFESTYLE, SPORT, TIMP LIBER",
+    "BUSINESS SI ECONOMIE",
+    "BENZI DESENATE",
+    "REVISTE-LIMBA ROMANA",
+    "DREPT",
+    "LIMBI STRAINE",
+    "TEHNICA SI TEHNOLOGIE",
+    "ENCICLOPEDII",
+    "COMPUTERE SI INTERNET",
+    "NATURA SI MEDIU",
+    "MEDICINA",
+    "GHIDURI SI HARTI TURISTICE, ATLASE",
+    "ROMANIA",
+    "MARKETING SI COMUNICARE",
+    "SOFT EDUCATIONAL",
+    "AUDIOBOOKS",
+    "CULTURA URBANA SI TRADITIONALA",
+    "ALTELE"
+  ];
 
 const consumerRights = 
 "In cadrul marketplace-ului, respectam drepturile consumatorilor si incurajam tranzactii sigure. Pentru protectia ta, iti recomandam sa NU comunici informatii sensibile, cum ar fi datele cardului bancar. Pastreaza discutiile si detaliile tranzactiilor in cadrul aplicatiei pentru a beneficia de un mediu sigur si controlat. In cazul in care intampini probleme, raporteaza activitatea!"

@@ -4,7 +4,7 @@ import config from '../utils/config';
 import "../styles/Cauta.css";
 import Carte from '../components/Carte/Carte';
 
-const booksPerPage = 9;
+const booksPerPage = 16;
 
 const Cauta = () => {
     const [searchWords, setSearchWords] = useState('');
@@ -15,6 +15,7 @@ const Cauta = () => {
     const [booksDetails, setBooksDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [pageInput, setPageInput] = useState('');
 
     const handleSearch = async () => {
         try {
@@ -57,13 +58,47 @@ const Cauta = () => {
 
     useEffect(() => {
         handleSearch();
-    }, [searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage]);
+    }, [currentPage]);
 
     useEffect(() => {
         getBooksDetails(bookIds);
     }, [bookIds]);
 
     const currentBooks = booksDetails.slice(0, booksPerPage);
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+        }
+    };
+
+    const handlePageInputChange = (e) => {
+        const val = e.target.value;
+        // Allow only digits
+        if (/^\d*$/.test(val)) {
+            setPageInput(val);
+        }
+    };
+
+    const goToPage = () => {
+        const pageNumber = parseInt(pageInput, 10);
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
+        setPageInput('');
+    };
+
+    const isGoDisabled = () => {
+        if (pageInput === '') return true;
+        const num = parseInt(pageInput, 10);
+        return isNaN(num) || num < 1 || num > totalPages;
+    };
 
     return (
         <div className="Cauta-Main-Container">
@@ -75,7 +110,12 @@ const Cauta = () => {
                     value={searchWords} 
                     onChange={(e) => setSearchWords(e.target.value)} 
                 />
-                <button className='btnCauta' onClick={() => { setBooksDetails([]); setCurrentPage(1); handleSearch(); }}>Cauta</button>
+                <button 
+                    className='btnCauta' 
+                    onClick={() => { setBooksDetails([]); setCurrentPage(1); handleSearch(); }}
+                >
+                    Cauta
+                </button>
             </div>
             <div className='container-filtre-rezultate'>
                 <div className='container-filtre'>
@@ -98,19 +138,46 @@ const Cauta = () => {
                         ))}
                     </div>
                     {totalPages > 1 && (
-                        <div className="pagination-container">
-                            {[...Array(totalPages)].map((_, i) => (
-                                <button 
-                                    key={i} 
-                                    onClick={() => setCurrentPage(i + 1)}
-                                    disabled={i + 1 === currentPage}
-                                    className={`pagination-button ${i + 1 === currentPage ? 'active' : ''}`}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
+                    <div className="pagination-container">
+                        <div className="pagination-center">
+                        <button
+                            onClick={handlePrevPage}
+                            disabled={currentPage === 1}
+                            className="pagination-button"
+                        >
+                            &lt; Prev
+                        </button>
+                        <span className="pagination-current">
+                            Pagina {currentPage} din {totalPages}
+                        </span>
+                        <button
+                            onClick={handleNextPage}
+                            disabled={currentPage === totalPages}
+                            className="pagination-button"
+                        >
+                            Next &gt;
+                        </button>
                         </div>
+
+                        <div className="pagination-right">
+                        <input
+                            type="text"
+                            className="pagination-input"
+                            placeholder="Nr."
+                            value={pageInput}
+                            onChange={handlePageInputChange}
+                        />
+                        <button
+                            onClick={goToPage}
+                            disabled={isGoDisabled()}
+                            className="pagination-go"
+                        >
+                            Go
+                        </button>
+                        </div>
+                    </div>
                     )}
+
                 </div>
             </div>
         </div>

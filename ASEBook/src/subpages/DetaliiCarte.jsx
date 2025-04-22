@@ -218,6 +218,10 @@ const DetaliiCarte = () => {
                             <h1 className="DetaliiCarte-h1">Autor: <p className="DetaliiCarte-p">{bookDetails.autor}</p></h1>
                             <h1 className="DetaliiCarte-h1">Gen literar: <p className="DetaliiCarte-p">{bookDetails.genLiterar}</p></h1>
                         </div>
+                        <div className="div-descriere-carte">
+                            <h1 className="DetaliiCarte-h1"> Descriere: </h1>
+                            <p>{bookDetails.descriere}</p>
+                        </div>    
                         {!!authData.token && (<div>
                                 {bookIsMarked ? (
                                     <button className="btnMarked" onClick={ () => {fetchUnmark()}}>Sterge marcarea cartii</button>) : (

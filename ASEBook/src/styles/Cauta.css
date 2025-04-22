@@ -1,19 +1,21 @@
+/* Global reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Main container */
 .Cauta-Main-Container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  box-sizing: border-box;
   background-color: #FFFBFE;
   color: #090C08;
   padding: 20px;
 }
 
+/* Search bar layout */
 .container-Search-Button {
   display: flex;
   justify-content: space-between;
@@ -28,11 +30,11 @@
   border-radius: 15px;
   background-color: #FFFBFE;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
 }
 
 .input-search:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
   transform: translateY(-3px);
 }
 
@@ -42,23 +44,21 @@
   border-radius: 15px;
   background-color: #FFFBFE;
   color: #090C08;
-  transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
 }
 
 .btnCauta:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
   transform: translateY(-3px);
 }
 
+/* Filters & results layout */
 .container-filtre-rezultate {
   display: flex;
   gap: 20px;
   flex: 1;
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: auto;
 }
 
 .container-filtre {
@@ -72,7 +72,6 @@
 
 .container-header {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
   margin-bottom: 15px;
@@ -80,16 +79,39 @@
 
 .container-cauta-rezultate {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   overflow-y: auto;
 }
 
+/* Pagination container */
 .pagination-container {
+  overflow-x: hidden;
+  flex-wrap: wrap;
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  align-items: center;
   margin-top: 20px;
+  gap: 10px;
+}
+
+/* Centered prev/page info/next */
+.pagination-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Right-aligned page jump */
+.pagination-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
 }
 
 .pagination-button {
@@ -98,39 +120,86 @@
   border-radius: 15px;
   background-color: #FFFBFE;
   color: #090C08;
-  transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+  font-weight: 500;
 }
 
-.pagination-button:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+.pagination-button:hover:not(:disabled) {
+  box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
   transform: translateY(-3px);
 }
 
 .pagination-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
+.pagination-current {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.pagination-input, .pagination-go{
+  width: 40px;
+  padding: 6px;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #FFFBFE;
+  box-shadow: 0 2px 5px rgba(238, 46, 49, 0.6);
+  transition: all 0.3s ease;
+}
+
+.pagination-input:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(238, 46, 49, 0.9);
+}
+
+.pagination-go {
+  transform: translateY(-5px);
+}
+
+.pagination-go:focus {
+  transform: translateY(-10px);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .container-Search-Button {
     flex-direction: column;
     align-items: stretch;
   }
+
   .container-filtre-rezultate {
     flex-direction: column;
     gap: 10px;
   }
-  .container-rezultate {
+
+  .container-cauta-rezultate {
     grid-template-columns: 1fr;
     gap: 5px;
   }
+
   .container-header {
     font-size: 1.2rem;
   }
+
   .pagination-container {
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 8px;
+  }
+
+  .pagination-center {
+    gap: 12px;
+  }
+
+  .pagination-input {
+    width: 50px;
   }
 }

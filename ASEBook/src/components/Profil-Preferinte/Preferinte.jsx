@@ -106,6 +106,18 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
         });
     };
 
+    let canScrape = true;
+    const fetchStartScraping = async () => {
+        canScrape = false;
+        try {
+            const response = await fetch(`${config.API_URL}/scraper/startScraping`, {
+                method: "GET",
+            });
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     return (
         <div className="preferinte-container">
             <h2>Preferintele utilizatorului</h2>
@@ -141,7 +153,7 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
             }
             <button className="buton-Actualizeaza" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
             <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>Vezi istoricul cartilor citite</button>
-            <button className="buton-preferinte" onClick={() => {setCanMountDashboard(!canMountDashboard)}}>Vezi dashboard rapoarte</button>
+            {isAdmin && (<button className="buton-preferinte" onClick={() => {setCanMountDashboard(!canMountDashboard)}}>Vezi dashboard rapoarte</button>)}
         </div>
     );
 };

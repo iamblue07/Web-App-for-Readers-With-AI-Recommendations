@@ -9,10 +9,8 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// --- API to get book IDs based on search criteria ---
 const postCartiIDs = async (req, res) => {
     try {
-        console.log("Received data:", req.body);
         const { searchWords, genuriSelectate, pretMinim, pretMaxim, currentPage, booksPerPage } = req.body;
 
         if (isNaN(pretMinim) || isNaN(pretMaxim)) {
@@ -28,7 +26,6 @@ const postCartiIDs = async (req, res) => {
 
         const idList = ofertaCarti.map(oferta => oferta.idCarte);
 
-        // Construct where clause for book search
         const whereClause = {
             id: { [Op.in]: idList },
             titlu: { [Op.like]: `%${searchWords}%` }
@@ -95,8 +92,6 @@ const getCartiData = async (req, res) => {
             };
         }));
 
-        console.log("Final book details:", cartiData);
-
         return res.status(200).json(cartiData);
     } catch (error) {
         console.error("Error in getCartiData:", error);
@@ -106,22 +101,56 @@ const getCartiData = async (req, res) => {
 
 
 
-const getCarteImagine = async(req, res) => {
+import http from 'http';
+import https from 'https';
+import { URL } from 'url';
+
+const getCarteImagine = async (req, res) => {
     try {
         const carteId = req.params.carteId;
-        if(!carteId || isNaN(carteId)) {
-            return res.status(404).json({error: "ID carte invalid"})
+        if (!carteId || isNaN(carteId)) {
+            return res.status(404).json({ error: "ID carte invalid" });
         }
+
         const carte = await models.Carte.findByPk(carteId);
-        if(!carte || !carte.caleImagine) {
-            return res.status(404).json({error: "Cartea nu exista sau imaginea lipseste."})
+        if (!carte || !carte.caleImagine) {
+            return res.status(404).json({ error: "Cartea nu exista sau imaginea lipseste." });
         }
-        const caleAbsoluta = path.resolve(carte.caleImagine);
-        return res.sendFile(caleAbsoluta);
-    }catch(error) {
-        return res.status(500).json({error: "Internal server error"})
+
+        let isUrl = false;
+        let urlObj;
+
+        try {
+            urlObj = new URL(carte.caleImagine);
+            isUrl = urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+        } catch (_) {
+            isUrl = false;
+        }
+
+        if (isUrl) {
+            const client = urlObj.protocol === 'https:' ? https : http;
+            client.get(urlObj, (urlRes) => {
+                if (urlRes.statusCode !== 200) {
+                    return res.status(404).json({ error: "Imaginea nu a putut fi obținută de la URL." });
+                }
+
+                res.setHeader('Content-Type', urlRes.headers['content-type'] || 'image/jpeg');
+                urlRes.pipe(res);
+            }).on('error', (err) => {
+                console.error(err);
+                return res.status(500).json({ error: "Eroare la obținerea imaginii de la URL." });
+            });
+        } else {
+            const caleAbsoluta = path.resolve(carte.caleImagine);
+            return res.sendFile(caleAbsoluta);
+        }
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error" });
     }
-}
+};
+
 
 const getOneCarte = async(req, res) => {
     try {

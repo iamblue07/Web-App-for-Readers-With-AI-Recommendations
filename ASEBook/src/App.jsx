@@ -34,7 +34,7 @@ const App = () => {
     return (
         <div className="main-container">
             <div className="header">
-                <p className='header-title'>ASEBook</p>
+                <p className='header-title'>Aurora Codex</p>
                 <ToastContainer/>
             </div>
 

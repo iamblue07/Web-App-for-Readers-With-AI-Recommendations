@@ -1,0 +1,34 @@
+Scraping started at 2025-04-20T07:16:25.095Z
+[2025-04-20T07:16:30.385Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/invazii-si-stapaniri-rusesti-sovietice-in-romania-3256013681?p=6722
+[2025-04-20T07:16:30.753Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/basmele-imparatilor-daci-3256013912?p=6721
+[2025-04-20T07:16:34.170Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/ghidul-sigurantei-psihologice-3256012625?p=6723
+[2025-04-20T07:21:59.786Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/cand-parintele-bun-moare-3904535105?p=6902
+[2025-04-20T07:22:00.102Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/lucian-blaga-in-timp-si-in-etern-3904535285?p=6901
+[2025-04-20T07:22:03.238Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/parvenitul-3904534991?p=6903
+[2025-04-20T07:22:03.654Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/urgenta-medicala-in-familie-3902576534?p=6904
+[2025-04-20T07:22:26.802Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/note-zilnice-volumul-i-3896622626?p=6917
+[2025-04-20T07:28:23.980Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/filme-carti-vacante-si-o-pandemie-3767905122?p=7110
+[2025-04-20T07:40:03.800Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/un-cantec-pentru-irene-3507036742?p=7463
+[2025-04-20T07:45:34.057Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/de-la-unealta-la-instrument-muzical-3449842164?p=7629
+[2025-04-20T07:45:34.421Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/etnografia-satului-transilvanean-tilisca-3449842160?p=7630
+[2025-04-20T07:45:37.802Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/nedeia-din-poiana-muierii-1484-1947-3449842158?p=7631
+[2025-04-20T07:45:37.860Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/identitatea-aromanilor-din-albania-de-la-elenizare-si-dictatura-atee-la-interculturalism-3449841965?p=7632
+[2025-04-20T07:45:41.323Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/vatra-traditionala-in-conceptia-poporului-roman-3449841949?p=7634
+[2025-04-20T07:45:41.665Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/infrastructura-si-societate-3449841959?p=7633
+[2025-04-20T07:45:44.947Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/romanii-din-bulgaria-volumul-i-timoc-3449841940?p=7636
+[2025-04-20T07:45:45.031Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/colonizarea-macedoromanilor-in-cadrilater-3449841943?p=7635
+[2025-04-20T07:45:48.566Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/meglenoromana-actuala-in-contextual-limbilor-balcanice-3449841934?p=7637
+[2025-04-20T07:45:49.055Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/aromanii-si-meglenoromanii-din-banat-1945-1951-3449841928?p=7638
+[2025-04-20T07:45:51.886Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/elemente-de-geografie-mitica-a-romaniei-calusul-3449841922?p=7639
+[2025-04-20T07:45:52.486Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/revista-romania-literara-nr-31-2024-3449841919?p=7640
+[2025-04-20T07:45:55.707Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/apa-de-la-ordinea-practica-la-ordinea-metafizica-3449841916?p=7641
+[2025-04-20T07:45:55.856Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/vulnerabilitati-contemporane-pentru-comunitatile-de-aromani-si-meglenoromani-din-mediul-rural-al-judetului-tulcea-3449841913?p=7642
+[2025-04-20T07:45:59.054Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/asezarile-branene-3449841901?p=7644
+[2025-04-20T07:45:59.380Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/aspecte-ale-culturii-taranesti-din-starchiojd-3449841906?p=7643
+[2025-04-20T07:46:02.556Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/amintiri-cu-dumnezeu-3447915474?p=7646
+[2025-04-20T07:46:02.911Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/nathalia-regina-cartagenei-3447915479?p=7645
+[2025-04-20T07:46:06.157Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/dinozauri-deschide-si-descopera-3447915470?p=7648
+[2025-04-20T07:46:06.271Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/cauta-si-gaseste-dinozauri-3447915473?p=7647
+[2025-04-20T07:46:09.680Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/balene-deschide-si-descopera-3447915230?p=7649
+[2025-04-20T07:46:10.057Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/cauta-si-gaseste-animale-marine-3447915228?p=7650
+Scraping completed at 2025-04-20T07:46:12.089Z
