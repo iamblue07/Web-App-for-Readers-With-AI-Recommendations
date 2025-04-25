@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-import "../styles/Profil.css";
+import "../styles/ProfilPersonal.css";
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 import config from '../utils/config';
@@ -117,7 +117,7 @@ const Profil = () => {
             return;
         }
 
-        setIsLoadingPassword(true);  // Set loading state to true
+        setIsLoadingPassword(true);
 
         try {
             const response = await fetch(`${config.API_URL}/auth/updateUtilizatorParolaHash`, {
@@ -138,7 +138,7 @@ const Profil = () => {
         } catch (error) {
             createToast(error, false);
         } finally {
-            setIsLoadingPassword(false);  // Reset loading state
+            setIsLoadingPassword(false);
             setCurrentPass("");
             setNewPass("");
         }
@@ -227,7 +227,7 @@ const Profil = () => {
         <div className='big-container'>
             <ToastContainer />
             <div className='main-container-Profil'>
-                <div className='container-Preferinte'>
+                <div className='container-Profil-Preferinte'>
                     {canMountPreferinte &&
                     <PreferinteComponent 
                         userId = {userData.id} isAdmin={isAdmin}

@@ -76,6 +76,10 @@
   font-weight: bold;
 }
 
+.forumDetails-postUsername:hover {
+  cursor: pointer;
+}
+
 .forumDetails-postDate {
   margin-left: auto;
   padding-left: 10px;

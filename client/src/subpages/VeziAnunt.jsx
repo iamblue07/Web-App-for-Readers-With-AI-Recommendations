@@ -270,7 +270,7 @@ const VeziAnunt = () => {
                     <img src={userImage}
                     alt={"Seller Image"}
                     className="VeziAnunt-seller-image"/>
-                    <p className="VeziAnunt-p-utilizator">{utilizatorData.username}</p>
+                    <p className="VeziAnunt-p-utilizator" onClick={() => {navigate(`/utilizator/${utilizatorData.id}`)}}>{utilizatorData.username}</p>
                 </div>
                 {isOwningAnunt === false ? (<>
                     {alreadyContacted === true ? (

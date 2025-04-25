@@ -166,7 +166,7 @@ const getAnunturiData = async (req, res) => {
       const anunturi = await models.AnuntBazar.findAll({
           where: { id: ids },
           order: [[Sequelize.fn('FIELD', Sequelize.col('AnuntBazar.id'), ...ids), 'ASC']],
-          include: [{ model: models.Utilizator, attributes: ['username'] }]
+          include: [{ model: models.Utilizator, attributes: ['username', 'id'] }]
       });
 
       if (anunturi.length === 0) {
@@ -177,16 +177,14 @@ const getAnunturiData = async (req, res) => {
           id: anunt.id,
           titlu: anunt.titluAnunt,
           descriere: anunt.descriereAnunt,
+          idUtilizator: anunt.Utilizator.id,
           utilizator: anunt.Utilizator ? anunt.Utilizator.username : "Utilizator necunoscut",
           data: anunt.dataAnunt,
           negociabil: anunt.esteNegociabil,
           pret: anunt.pretAnunt
       }));
-
-      console.log("Final anunturi details: ", anunturiData);
       return res.status(200).json(anunturiData);
   } catch (error) {
-      console.error("Error in getAnunturiData:", error);
       return res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -359,7 +357,7 @@ const getSellerData = async(req, res) => {
       return res.status(404).json({error:"Missing utilizator ID"});
     }
     const utilizatorData = await models.Utilizator.findByPk(anunt.idUtilizator, {
-      attributes: ["username"]
+      attributes: ["username", "id"]
     })
     return res.status(200).json(utilizatorData);
   }catch(error){

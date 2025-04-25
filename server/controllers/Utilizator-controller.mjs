@@ -197,6 +197,96 @@ const getImagineProfil = async(req, res) => {
     }
 };
 
+const getProfile = async (req, res) => {
+    try {
+      const userID = req.params.userID;
+      if (!userID || isNaN(userID)) {
+        return res.status(404).json({ error: "ID utilizator invalid" });
+      }
+      const user = await models.Utilizator.findByPk(userID, {
+        attributes: [
+          "username",
+          "descriere",
+          "dataInregistrare",
+          "esteAdministrator",
+          "poateCreaAnunt",
+          "poateCreaForum",
+          "poateTrimiteMesaj",
+        ],
+      });
+      if (!user) {
+        return res.status(404).json({ error: "Utilizatorul nu exista" });
+      }
+      const prefRecord = await models.Preferinte.findOne({
+        where: { idUtilizator: userID },
+        attributes: [
+          "preferintaUnu",
+          "preferintaDoi",
+          "preferintaTrei",
+          "preferintaPatru",
+          "preferintaCinci",
+        ],
+        raw: true,
+      });
+
+      const preferences = prefRecord
+        ? Object.values(prefRecord).filter((p) => p && p.trim() !== "")
+        : [];
+      return res.status(200).json({ user, preferences });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+
+const getArticles = async(req, res) => {
+    try{
+        const userID = req.params.userID;
+        if (!userID || isNaN(userID)) {
+          return res.status(404).json({ error: "ID utilizator invalid" });
+        }
+        const rawArticles = await models.AnuntBazar.findAll({
+            where: {
+                idUtilizator: userID
+            }
+        })
+        const articles = rawArticles.map(anunt => ({
+            id: anunt.id,
+            titlu: anunt.titluAnunt,
+            descriere: anunt.descriereAnunt,
+            utilizator: anunt.Utilizator ? anunt.Utilizator.username : "Utilizator necunoscut",
+            data: anunt.dataAnunt,
+            negociabil: anunt.esteNegociabil,
+            pret: anunt.pretAnunt
+        }));
+        return res.status(200).json(articles);
+    }catch(error){
+        return res.status(500).json({error});
+    }
+}
+
+const getForums = async(req, res) => {
+    try{
+        const userID = req.params.userID;
+        if (!userID || isNaN(userID)) {
+          return res.status(404).json({ error: "ID utilizator invalid" });
+        }
+        const rawForums = await models.Forum.findAll({
+            where: {
+                idUtilizator: userID
+            }
+        })
+        const forums = rawForums.map(forum => ({
+            id:forum.id,
+            titluForum:forum.titluForum,
+            esteDeschis:forum.esteDeschis
+        }))
+        return res.status(200).json(forums);
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({error});
+    }
+}
 
 
 export default { checkEmailExists, 
@@ -207,6 +297,9 @@ export default { checkEmailExists,
     updateUtilizatorDescriere, 
     updateUtilizatorParola, 
     uploadImagineProfil, 
-    getImagineProfil
+    getImagineProfil,
+    getProfile,
+    getArticles,
+    getForums
 };
 

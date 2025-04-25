@@ -1,4 +1,4 @@
-.preferinte-container {
+.preferinte-profil-container {
     width: 20vw;
     height: 75vh;
     display: flex;
@@ -7,7 +7,7 @@
     padding: 20px;
 }
 
-.preferinte-table-container {
+.preferinte-profil-table-container {
     width: 100%;
     flex-grow: 1;
     overflow-y: auto;
@@ -15,13 +15,13 @@
 
 }
 
-.tabel-preferinte {
+.tabel-profil-preferinte {
     width: 100%;
     border-collapse: collapse;
     overflow-x: none;
 }
 
-.tr-preferinte {
+.tr-profil-preferinte {
     height: 40px;
 }
 

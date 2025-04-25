@@ -10,7 +10,6 @@ const MesajChat = ({idMesaj}) => {
     const {authData} = useContext(GlobalContext);
 
     const [mesajData, setMesajData] = useState({});
-    const [messageIsMedia, setMessageIsMedia] = useState(false);
     const fetchMesajData = async () => {
         try{
             const response = await fetch(`${config.API_URL}/api/chat/getMesajData/${idMesaj}`, {
@@ -25,7 +24,6 @@ const MesajChat = ({idMesaj}) => {
             }
             const data = await response.json();
             setMesajData(data);
-            console.log(data);
         }catch(error){
             console.log(error);
         }
@@ -90,7 +88,6 @@ const MesajChat = ({idMesaj}) => {
 
     useEffect(()=>{
         if (mesajData && Object.keys(mesajData).length !== 0) {
-            setMessageIsMedia(mesajData.esteMedia);
             if(mesajData.esteMedia === true) {
                 fetchMesajMedia();
             }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import config from "../utils/config";
 import { ToastContainer } from "react-toastify";
@@ -9,6 +10,9 @@ import defaultavatar from "../assets/stock.jpg";
 import RaportareButon from "../components/RaportareButon/RaportareButon";
 
 const Forum = () => {
+
+  const navigate = useNavigate();
+
   const { idForum } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const { authData } = useContext(GlobalContext);
@@ -163,7 +167,7 @@ const Forum = () => {
                         className="forumDetails-postAvatar"
                       />
                       <div className="forumDetails-postUserDate">
-                        <span className="forumDetails-postUsername">
+                        <span className="forumDetails-postUsername" onClick={() => navigate(`/utilizator/${message.idUser}`)}>
                           {message.username}
                         </span>
                         <span className="forumDetails-postDate">

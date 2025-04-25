@@ -119,14 +119,14 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
     }
 
     return (
-        <div className="preferinte-container">
+        <div className="preferinte-profil-container">
             <h2>Preferintele utilizatorului</h2>
             { showPreferinte ? (
-                <div className="preferinte-table-container">
-                <table className="tabel-preferinte">
+                <div className="preferinte-profil-table-container">
+                <table className="tabel-profil-preferinte">
                     <thead>
                         <tr>
-                            <th className="th-preferinte">Gen Literar</th>
+                            <th className="th-profil-preferinte">Gen Literar</th>
                             <th className="th-preferinte">Preferinta</th>
                         </tr>
                     </thead>

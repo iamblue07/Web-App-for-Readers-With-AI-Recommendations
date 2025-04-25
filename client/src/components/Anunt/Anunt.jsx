@@ -41,6 +41,7 @@ const Anunt = (anuntData) => {
 
 
     useEffect( () => {
+        console.log(anuntData);
         fetchAnuntImagine();
     }, [])
 
@@ -67,7 +68,7 @@ const Anunt = (anuntData) => {
                     <p className="anuntData-descriere">{anuntData.descriere}</p>
                 </div>
                 <div className="anunt-utilizator-data">
-                    <p className="anuntData-utilizator">{anuntData.utilizator}</p>
+                    <p className="anuntData-utilizator" onClick={() => {navigate(`/utilizator/${anuntData.idUtilizator}`)}}>{anuntData.utilizator}</p>
                     <p className="anuntData-data">Postat in data de {(new Date(anuntData.data)).toLocaleString()}</p>
                 </div>
             </div>

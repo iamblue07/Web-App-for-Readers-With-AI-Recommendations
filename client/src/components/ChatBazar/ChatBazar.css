@@ -1,7 +1,7 @@
 .ChatBazar-main-container {
     display: flex;
     flex-direction: column;
-    height: 53vh;
+    height: 70vh;
 }
 
 .ChatBazar-messages {

@@ -148,6 +148,7 @@ const getMesajeForum = async (req, res) => {
             return {
                 id: mesaj.id,
                 continut: mesaj.continut,
+                idUser: mesaj.Utilizator.id,
                 username: mesaj.Utilizator.username,
                 data: mesaj.data,
                 avatar: avatarPath
