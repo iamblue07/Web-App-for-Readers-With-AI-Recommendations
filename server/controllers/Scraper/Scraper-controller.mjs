@@ -24,13 +24,13 @@ const logFileName = path.join(
 );
 const logStream = fs.createWriteStream(logFileName, { flags: 'a' });
 
-const TOTAL_PAGES = 1650;
+const TOTAL_PAGES = 250;
 const BOOKS_PER_PAGE = 30;
 const REQUEST_DELAY = 2000;
 const PAGE_DELAY = 1000;
 const USER_AGENT = "Scraping project for my bachelor's degree. Sorry for the trouble.";
 
-let currentPage = 1601;
+let currentPage = 3;
 let totalBooksScraped = 0;
 let shouldContinue = true;
 
@@ -175,7 +175,7 @@ const getBookLinks = async (browser, pageNumber) => {
     const page = await browser.newPage();
     try {
         await page.setUserAgent(USER_AGENT);
-        await page.goto(`https://carturesti.ro/raft/carte-109?page=${pageNumber}`, {
+        await page.goto(`https://carturesti.ro/raft/carte-straina-1937?locations=44&limba=Engleza&page=${pageNumber}`, {
             waitUntil: "domcontentloaded",
             timeout: 60000
         });

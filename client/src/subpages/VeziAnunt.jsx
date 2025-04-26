@@ -272,14 +272,14 @@ const VeziAnunt = () => {
                     className="VeziAnunt-seller-image"/>
                     <p className="VeziAnunt-p-utilizator" onClick={() => {navigate(`/utilizator/${utilizatorData.id}`)}}>{utilizatorData.username}</p>
                 </div>
-                {isOwningAnunt === false ? (<>
+                {isOwningAnunt === false && (<>
                     {alreadyContacted === true ? (
                     <button className="VeziAnunt-Send-Message" onClick={() => {navigate('/bazar/conversatii', {state: {chatID: chatID}})}}>Vezi conversatia</button>)
                     : (<>
                     <input type="text" value={newMessage} onChange={(e) => {setNewMessage(e.target.value)}}/>
                     <button className="VeziAnunt-Send-Message" onClick={()=>{setIsDisabled(true); fetchCreateChat()}} disabled={isDisabled}>Trimite mesaj</button>
                     </>)}
-                </>) : (<></>)}
+                </>)}
 
                 <p className="VeziAnunt-p-ConsumerRights">Drepturile consumatorilor si siguranta in aplicatie</p>
                 <p className="VeziAnunt-p-Text">{text.consumerRights}</p>

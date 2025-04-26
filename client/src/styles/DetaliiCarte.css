@@ -1,215 +1,331 @@
-/* Main Container */
+/* DetaliiCarte.css */
+
 .DetaliiCarte-main-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    min-height: 400px;
-    padding: 10px;
-    background-color: #FFFBFE;
-    box-sizing: border-box;
-  }
-  
-  /* Image and ISBN Section */
-  .div-emptyDiv-imagine-isbn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  
-  .div-emptyDiv-imagine-isbn:hover {
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
-  }
-  
-  /* Book Image */
-  .bookImage {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  /* Details Section */
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #FFFBFE;
+}
+
+.div-detalii {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.book-image-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.isbn-display {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-meta-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.main-details {
+  margin-bottom: 2rem;
+}
+
+.book-title {
+  font-size: 2rem;
+  color: #090C08;
+  margin: 0 0 0.5rem;
+}
+
+.book-author {
+  font-size: 1.25rem;
+  color: #4B5563;
+  margin: 0 0 1rem;
+}
+
+.book-genre {
+  font-size: 1rem;
+  color: #EE2E31;
+  font-weight: 500;
+  margin: 0;
+}
+
+.google-details-card {
+  background: #F8F0F0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.google-metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metadata-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.metadata-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #EE2E31;
+  margin-bottom: 0.25rem;
+}
+
+.metadata-value {
+  display: block;
+  font-size: 1.1rem;
+  color: #090C08;
+  font-weight: 600;
+}
+
+.google-offer-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.offer-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.offer-source {
+  font-size: 0.9rem;
+  color: #4B5563;
+}
+
+.offer-price {
+  font-size: 1.25rem;
+  color: #090C08;
+  font-weight: 700;
+}
+
+.offer-button {
+  background: #EE2E31;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.offer-button:hover {
+  background: #C62528;
+}
+
+.interaction-section {
+  border-top: 1px solid #EEE;
+  padding-top: 1.5rem;
+}
+
+.bookmark-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-marked, .btn-unmarked {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-marked {
+  background: #EE2E31;
+  color: white;
+}
+
+.btn-unmarked {
+  background: #090C08;
+  color: white;
+}
+
+.description-section {
+  margin-bottom: 2rem;
+}
+
+.description-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.description-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.toggle-arrow {
+  transition: transform 0.3s ease;
+}
+
+.toggle-arrow.open {
+  transform: rotate(180deg);
+}
+
+.description-content {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.description-paragraph {
+  line-height: 1.6;
+  color: #4B5563;
+  margin: 0 0 1rem;
+}
+
+.offers-section {
+  margin-bottom: 2rem;
+}
+
+.offers-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.offer-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.offer-card.google-offer {
+  border: 2px solid #EE2E31;
+}
+
+.offer-store {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #090C08;
+}
+
+.offer-price {
+  font-size: 1.25rem;
+  color: #EE2E31;
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+.offer-link {
+  display: inline-block;
+  color: #090C08;
+  text-decoration: none;
+  border-bottom: 2px solid #EE2E31;
+  transition: all 0.3s ease;
+}
+
+.offer-link:hover {
+  color: #EE2E31;
+}
+
+.no-offers {
+  text-align: center;
+  padding: 2rem;
+  color: #6B7280;
+}
+
+.bazar-section {
+  margin-top: 2rem;
+}
+
+.bazar-toggle {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bazar-toggle.active {
+  background: #F8F0F0;
+  border-color: #EE2E31;
+}
+
+.bazar-results {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
   .div-detalii {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
+      grid-template-columns: 1fr;
   }
   
-  .div-titlu-autor-gen {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
+  .book-image-container {
+      max-width: 300px;
+      margin: 0 auto;
   }
+  
+  .google-metadata-grid {
+      grid-template-columns: 1fr 1fr;
+  }
+}
 
-  .detail-row {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    width: 100%;
+@media (max-width: 480px) {
+  .DetaliiCarte-main-container {
+      padding: 1rem;
   }
   
-  /* Typography */
-  .DetaliiCarte-h1 {
-    font-size: 24px;
-    margin: 5px 0;
-    font-weight: bold;
-    color: #090C08;
+  .google-metadata-grid {
+      grid-template-columns: 1fr;
   }
-  
-  .DetaliiCarte-p, .DetaliiCarte-paragraph {
-    text-align: justify;
-    text-justify: inter-word;
-    white-space: pre-line;
-    color: #090C08;
-    line-height: 1.5;
-  }
-
-  .DetaliiCarte-p {
-    font-size: 24px;
-  }
-  
-  .DetaliiCarte-paragraph {
-    text-indent: 2em;
-    margin-bottom: 0.8em;
-    line-height: 1.6;
-    text-align: justify;
-    text-justify: inter-word;
-    white-space: pre-wrap;
-    text-indent: -1em;
-    padding-left: 1em;
-  }
-
-  /* Description Section */
-  .descriere-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-  
-  .sageta {
-    font-size: 24px;
-    transition: transform 0.3s ease;
-  }
-  
-  .sageta.rotated {
-    transform: rotate(180deg);
-  }
-  
-  /* Offers Section */
-  .oferte {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-  }
-  
-  .oferta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
-  
-  /* Buttons */
-  .details-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  .btnMarked,
-  .btnUnMarked,
-  .DetaliiCarte-btn-oferte-bazar {
-    padding: 10px 30px;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    color: #090C08;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .DetaliiCarte-btn-oferte-bazar {
-    width: 100%;
-    margin: 20px auto 0;
-  }
-  
-  /* Hover States */
-  .div-emptyDiv-imagine-isbn:hover,
-  .oferta-item:hover,
-  .btnMarked:hover,
-  .btnUnMarked:hover,
-  .DetaliiCarte-btn-oferte-bazar:hover {
-    border-color: #EE2E31;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.5);
-  }
-  
-  /* Responsive Design */
-  @media (min-width: 768px) {
-    .div-detalii {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-    
-    .div-emptyDiv-imagine-isbn {
-      min-width: 300px;
-    }
-  
-    .oferta-item {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-  
-    .details-buttons {
-      align-items: flex-start;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .div-detalii {
-      align-items: center;
-    }
-  
-    .div-titlu-autor-gen {
-      align-items: center;
-      text-align: center;
-    }
-  
-    .bookImage {
-      width: 200px;
-    }
-  
-    .details-buttons button {
-      width: 100%;
-    }
-  
-    .oferta-item {
-      align-items: center;
-      text-align: center;
-    }
-  }
-  
-  /* Bazaar Offers Section */
-  .container-oferte-bazar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .DetaliiCarte-btn-oferte-bazar {
-    align-self: center;
-    margin-top: 20px;
-  }
+}

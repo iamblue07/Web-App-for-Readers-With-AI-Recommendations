@@ -1,6 +1,0 @@
-Scraping started at 2025-04-19T22:31:16.440Z
-[2025-04-19T22:49:54.284Z] ERROR (book scraping): net::ERR_NETWORK_CHANGED at https://carturesti.ro/carte/ce-va-ramane-4302575330?p=1295 | URL: https://carturesti.ro/carte/ce-va-ramane-4302575330?p=1295
-[2025-04-19T22:49:54.304Z] ERROR (book scraping): net::ERR_NETWORK_CHANGED at https://carturesti.ro/carte/tratat-despre-fiinta-4302575328?p=1296 | URL: https://carturesti.ro/carte/tratat-despre-fiinta-4302575328?p=1296
-[2025-04-19T22:49:56.445Z] ERROR (book scraping): net::ERR_INTERNET_DISCONNECTED at https://carturesti.ro/carte/etnosofia-4302575081?p=1297 | URL: https://carturesti.ro/carte/etnosofia-4302575081?p=1297
-[2025-04-19T22:49:56.450Z] ERROR (book scraping): net::ERR_INTERNET_DISCONNECTED at https://carturesti.ro/carte/pentru-o-spiritualitate-a-obisnuitului-4302575078?p=1298 | URL: https://carturesti.ro/carte/pentru-o-spiritualitate-a-obisnuitului-4302575078?p=1298
-Scraping completed at 2025-04-20T01:36:16.889Z

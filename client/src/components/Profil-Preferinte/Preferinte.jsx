@@ -106,9 +106,9 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
         });
     };
 
-    let canScrape = true;
+    const [canScrape, setCanScrape] = useState(true)
     const fetchStartScraping = async () => {
-        canScrape = false;
+        setCanScrape(false);
         try {
             const response = await fetch(`${config.API_URL}/scraper/startScraping`, {
                 method: "GET",
@@ -154,6 +154,7 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
             <button className="buton-Actualizeaza" onClick={()=> {fetchUpdateUtilizatorPreferinte()}}>Actualizeaza preferintele</button>
             <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>Vezi istoricul cartilor citite</button>
             {isAdmin && (<button className="buton-preferinte" onClick={() => {setCanMountDashboard(!canMountDashboard)}}>Vezi dashboard rapoarte</button>)}
+            {canScrape && isAdmin && <button className="buton-preferinte" onClick={() => fetchStartScraping()}>Start scraping</button>}
         </div>
     );
 };

@@ -1,6 +1,0 @@
-Scraping started at 2025-04-20T17:40:05.070Z
-[2025-04-20T18:25:04.980Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/lungul-poem-haiku-de-o-mie-de-strofe-3147050991?p=31388
-[2025-04-20T18:25:06.044Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/cobilita-cu-furnici-si-alte-proceduri-3147051189?p=31387
-[2025-04-20T18:25:08.440Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/povestiri-anapoda-3147050988?p=31390
-[2025-04-20T18:25:09.525Z] ERROR (adding to DB): Validation error | URL: https://carturesti.ro/carte/ce-incredintam-vantului-3147050989?p=31389
-Scraping completed at 2025-04-20T20:53:51.249Z
