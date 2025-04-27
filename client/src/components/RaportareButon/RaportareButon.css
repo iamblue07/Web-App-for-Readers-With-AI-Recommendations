@@ -1,13 +1,13 @@
 .RaportareButton-ReportButton, .RaportareButton-CancelButton, .RaportareButon-showButton  {
-    color:white;
+    color:#090C08;
     padding: 4px 5px;
     font-size: 0.8rem;
     cursor: pointer;
     border: 2px solid #090C08;
-    border-radius: 15px;
+    border-radius: 10px;
     margin-right: 2px;
     margin-top: 2px;
-    background-color: #090C08;
+    background-color: white;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
@@ -26,7 +26,7 @@
     color:rgba(238,46,49,0.9)
 }
 
-.RaportareButon-showButton:hover:disabled{
-    color:white;
+.RaportareButon-showButton:disabled{
+    display: none;
 }
 

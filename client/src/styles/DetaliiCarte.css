@@ -78,7 +78,7 @@
 }
 
 .google-details-card {
-  background: #F8F0F0;
+  background: white;
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 2rem;
@@ -94,6 +94,7 @@
 .metadata-item {
   background: white;
   padding: 1rem;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
   border-radius: 6px;
   text-align: center;
 }
@@ -169,14 +170,23 @@
   transition: all 0.3s ease;
 }
 
+.btn-marked, .btn-unmarked {
+  padding: 8px 16px;
+  border: 2px solid #090c08a6;
+  border-radius: 10px;
+  background: white;
+  background-color: #FFFBFE;
+  color: #090c08;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
 .btn-marked {
-  background: #EE2E31;
-  color: white;
+  box-shadow: 0 4px 5px rgba(84, 238, 46, 0.8);
 }
 
 .btn-unmarked {
-  background: #090C08;
-  color: white;
+  box-shadow: 0 4px 5px rgba(238,46,49,0.8);
 }
 
 .description-section {

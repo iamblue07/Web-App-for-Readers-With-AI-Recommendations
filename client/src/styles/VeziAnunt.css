@@ -35,7 +35,12 @@
 }
 
 .VeziAnunt-p-utilizator {
+  transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.VeziAnunt-p-utilizator:hover {
+  color: #4CAF50;
 }
 
 .VeziAnunt-p-date {
@@ -48,15 +53,8 @@
   display: block;
   margin: 0 auto;
   width: 100%;
-  max-width: 300px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(238,46,49,0.6);
-  transition: all 0.3s ease;
-}
-
-.VeziAnunt-image:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
 }
 
 .VeziAnunt-price-description {
@@ -179,7 +177,7 @@
     width: 100%;
   }
   .VeziAnunt-image {
-    max-width: 80%;
+    max-width: 100%;
   }
   .VeziAnunt-Send-Message {
     align-self: center;

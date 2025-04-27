@@ -233,7 +233,7 @@ const DetaliiCarte = () => {
                                                     </span>
                                                 </div>
                                             )}
-                                            {googleData.items[0].volumeInfo.pageCount && (
+                                            {googleData.items[0].volumeInfo.pageCount > 0 && (
                                                 <div className="metadata-item">
                                                     <span className="metadata-label">Pagini</span>
                                                     <span className="metadata-value">
@@ -274,11 +274,11 @@ const DetaliiCarte = () => {
                                         <div className="bookmark-buttons">
                                             {bookIsMarked ? (
                                                 <button className="btn-marked" onClick={fetchUnmark}>
-                                                    sterge marcarea
+                                                    Am citit aceasta carte
                                                 </button>
                                             ) : (
                                                 <button className="btn-unmarked" onClick={fetchMarkAsRead}>
-                                                    Marcheaza ca citita
+                                                    Nu am citit aceasta carte
                                                 </button>
                                             )}
                                         </div>
@@ -348,7 +348,11 @@ const DetaliiCarte = () => {
                                 {isLoadingAnunturi ? (
                                     <p>Se încarcă ofertele...</p>
                                 ) : (
-                                    <CautaAnunturi anunturiIds={bazarAnunturiIDs} />
+                                    <>
+                                        {totalAnunturi === 0 && (<p className="no-offers">Nu exista oferte in bazar pentru aceasta carte.</p>)}
+                                        <CautaAnunturi anunturiIds={bazarAnunturiIDs} />
+                                    </>
+
                                 )}
                             </div>
                         )}

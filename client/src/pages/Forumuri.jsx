@@ -141,10 +141,10 @@ const Forumuri = () => {
                 <tbody>
                     {forums.map(forum => (
                         <tr key={forum.id} className="table-row">
-                            <td className="table-cell" onClick={() => navigate(`/forumuri/${forum.id}`)}>{forum.titluForum}</td>
+                            <td className="table-cell table-forum" onClick={() => navigate(`/forumuri/${forum.id}`)}>{forum.titluForum}</td>
                             <td className="table-cell">{new Date(forum.data).toLocaleDateString()}</td>
                             <td className="table-cell">{forum.esteDeschis ? "Da" : "Nu"}</td>
-                            <td className="table-cell">{forum.username}</td>
+                            <td className="table-cell table-username" onClick={() => navigate(`/utilizator/${forum.idUtilizator}`)}>{forum.username}</td>
                             {userHasReportRights && (<td><RaportareButon idObiect={forum.id} tipObiect={"Forum"} authData={authData}/></td>)}
                         </tr>
                     ))}

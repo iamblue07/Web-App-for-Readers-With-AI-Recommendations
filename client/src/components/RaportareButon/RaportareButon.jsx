@@ -36,17 +36,19 @@ const RaportareButon = ({idObiect, tipObiect, authData}) => {
         }
     }
 
+    if(authData.token) {
+        return(<div className='RaportareButon-main-container'>
+            <button className='RaportareButon-showButton' onClick = {()=>{setShowRaportMeniu(true)}} disabled={showRaportMeniu}>Raporteaza</button>
+            {showRaportMeniu && (
+              <div>
+                <input type="text" placeholder="Motivul raportarii" value={descriereRaport} onChange={(e)=>{setDescriereRaport(e.target.value)}}/>
+                <button className='RaportareButton-ReportButton' onClick = {() => {fetchCreateReport()}} disabled = {!showRaportMeniu}>Raporteaza</button>
+                <button className='RaportareButton-CancelButton' onClick = {()=>{setShowRaportMeniu(false)}} disabled = {!showRaportMeniu}>Anuleaza</button>
+              </div>
+            )}
+          </div>)
+    }
 
-    return(<div className='RaportareButon-main-container'>
-      <button className='RaportareButon-showButton' onClick = {()=>{setShowRaportMeniu(true)}} disabled={showRaportMeniu}>Raporteaza</button>
-      {showRaportMeniu && (
-        <div>
-          <input type="text" placeholder="Motivul raportarii" value={descriereRaport} onChange={(e)=>{setDescriereRaport(e.target.value)}}/>
-          <button className='RaportareButton-ReportButton' onClick = {() => {fetchCreateReport()}} disabled = {!showRaportMeniu}>Raporteaza</button>
-          <button className='RaportareButton-CancelButton' onClick = {()=>{setShowRaportMeniu(false)}} disabled = {!showRaportMeniu}>Anuleaza</button>
-        </div>
-      )}
-    </div>)
 }
 
 export default RaportareButon;

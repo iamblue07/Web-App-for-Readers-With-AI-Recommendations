@@ -229,15 +229,14 @@
 .container-rezultate {
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* This is crucial */
+  align-items: stretch;
   gap: 15px;
   width: 100%;
-  padding: 0; /* Remove any padding that might cause horizontal scroll */
+  padding: 0;
 }
 
 .anunt-container {
-  width: 100%; /* This should already be present */
-  /* Keep other styles but ensure no max-width constraints */
+  width: 100%;
   padding: 15px;
   border: 2px solid #090C08;
   border-radius: 15px;

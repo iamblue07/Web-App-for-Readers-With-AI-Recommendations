@@ -9,7 +9,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
     transition: box-shadow 0.3s ease-in-out;
-    margin: 10px 0; /* Add some vertical spacing */
+    margin: 10px 0;
 }
 
 .anunt-main-container:hover {
@@ -41,6 +41,15 @@
     font-weight: bold;
     color: #090C08;
     cursor: pointer;
+}
+
+.anuntData-titlu, .anuntData-utilizator {
+    transition: all 0.3s ease;
+}
+
+.anuntData-titlu:hover, .anuntData-utilizator:hover {
+    transform: translateY(-3px);
+    color: #4CAF50
 }
 
 .anuntData-utilizator {

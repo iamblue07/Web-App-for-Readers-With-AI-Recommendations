@@ -113,10 +113,9 @@
   margin-bottom: 10px;
 }
 
-.forums-table thead tr:hover,
 .forums-table tbody tr:hover {
-  box-shadow: 0 4px 15px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(238,46,49,0.8);
+  transform: translateY(-1px);
 }
 
 .forums-table thead tr th,
@@ -131,6 +130,15 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+.table-username, .table-forum {
+  transition: all 0.2s ease;
+}
+
+.table-username:hover, .table-forum:hover {
+  color: #4CAF50;
+  cursor: pointer;
 }
 
 .pagination-button {
