@@ -29,6 +29,38 @@ export default (sequelize, DataTypes) => {
         caleImagine: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        english_description: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        anger_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },        
+        disgust_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },        
+        fear_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },        
+        joy_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },
+        sadness_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },
+        surprise_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
+        },
+        neutral_score: {
+            type:DataTypes.FLOAT,
+            allowNull: true
         }
     }, {
         timestamps: false

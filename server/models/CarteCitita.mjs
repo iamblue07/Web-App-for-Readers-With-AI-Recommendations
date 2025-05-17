@@ -20,6 +20,10 @@ export default (sequelize, DataTypes) => {
                 model: 'Cartes',
                 key: 'id'
             }
+        },
+        scor: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, {
         timestamps: false

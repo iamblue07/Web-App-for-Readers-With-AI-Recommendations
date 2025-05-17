@@ -37,11 +37,6 @@
   box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-.forumDetails-post:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
-}
-
 .forumDetails-postHeader {
   display: flex;
   align-items: center;
@@ -60,11 +55,6 @@
   object-fit: cover;
 }
 
-.forumDetails-postAvatar:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
-}
-
 .forumDetails-postUserDate {
   display: flex;
   justify-content: space-between;
@@ -74,10 +64,12 @@
 
 .forumDetails-postUsername {
   font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .forumDetails-postUsername:hover {
   cursor: pointer;
+  color: rgba(84, 238, 46,0.9);
 }
 
 .forumDetails-postDate {

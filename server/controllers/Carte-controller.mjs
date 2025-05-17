@@ -256,26 +256,34 @@ const postMarcheazaCarteCitita = async(req, res) => {
     try {
         const userId = req.user.id;
         const carteId = req.params.idCarte;
+        const rating = req.body.rating;
+        if(rating < 0 || rating > 5) {
+            return res.status(401).json({error:"Forbidden score"})
+        }
         if(!carteId || isNaN(carteId) || !userId || isNaN(userId)) {
             return res.status(404).json({error:"ID carte sau utilizator invalid"})
         }
-        const rez = await models.CarteCitita.findAll({
+        const rez = await models.CarteCitita.findOne({
             where: {
                 idUtilizator : userId,
                 idCarte : carteId
             }
         })
-        if(rez.length > 0) {
-            return res.status(400).json({error: "Book already marked"})
+        if(rez) {
+            rez.scor = rating;
+            await rez.save();
+            return res.status(200).json({Marked: true})
         }
         else {
             await models.CarteCitita.create({
                 idUtilizator: userId,
-                idCarte: carteId
+                idCarte: carteId,
+                scor: rating
             })
             return res.status(200).json({Marked: true})
         }
     } catch(error) {
+        console.log(error);
         return res.status(500).json({error: "Internal server error"})
     }
 }

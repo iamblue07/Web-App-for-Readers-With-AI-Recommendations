@@ -1,45 +1,39 @@
-# app.py
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from langchain_chroma import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+import torch.multiprocessing as mp
+from fastapi.middleware.cors import CORSMiddleware
 
+mp.set_start_method('spawn', force=True)
+from fastapi import FastAPI
 from apis import router
-from utils import initialize_vector_store
-
+from langchain.vectorstores import Chroma
+from utils import embeddings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("Service starting")
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    app.state.vector_store = Chroma(
+        persist_directory="./vectorstore",
+        embedding_function=embeddings
     )
-    try:
-        app.state.vector_store = Chroma(
-            persist_directory="./chroma_db",
-            embedding_function=embeddings
-        )
-        print("✅ Loaded existing Chroma DB")
-        query = "Carti cu gen literar psihologic sau filozofic despre stoicism"
-        docs = app.state.vector_store.similarity_search(query, k=10)
-        print(docs)
-    except:
-        print("⚠️ No Chroma DB found - initializing new one")
-        app.state.vector_store = initialize_vector_store()
-        print("✅ Created new Chroma DB from dataset")
     yield
-    print("Service closing")
 
+app = FastAPI(title="Book Recommender Service", lifespan=lifespan)
 
-FastApp = FastAPI(
-    title="Book Recommender Service",
-    lifespan=lifespan
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    # add your deployed front-end URLs here
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-FastApp.include_router(
-    router,
-    prefix="/api",
-    tags=["books"]
-)
+app.include_router(router, prefix="/api", tags=["books"])
 
 

@@ -114,18 +114,22 @@ const DetaliiCarte = () => {
         }
     };
 
-    const fetchMarkAsRead = async () => {
+    const [personalRating, setPersonalRating] = useState(0);
+
+    const fetchMarkAsRead = async (rating) => {
         try {
             const response = await fetch(`${config.API_URL}/api/carte/${idCarte}/marcheazaCitita`, {
                 method: "POST",
                 headers: {  
                     "Authorization": `Bearer ${authData.token}`,
                     'Content-Type': 'application/json' 
-                }
+                },
+                body: JSON.stringify({ rating })
             });
             if(response.ok) {
                 const data = await response.json();
                 setBookIsMarked(data.Marked);
+                setPersonalRating(rating);
             }
         } catch(error) {
             console.log("Eroare la marcarea cartii");
@@ -144,6 +148,7 @@ const DetaliiCarte = () => {
             if(response.ok) {
                 const data = await response.json();
                 setBookIsMarked(data.Marked);
+                setPersonalRating(0);
             }
         } catch(error) {
             console.log("Eroare la demarcarea cartii");
@@ -270,19 +275,49 @@ const DetaliiCarte = () => {
                                 )}
 
                                 <div className="interaction-section">
-                                    {!!authData.token && (
-                                        <div className="bookmark-buttons">
-                                            {bookIsMarked ? (
-                                                <button className="btn-marked" onClick={fetchUnmark}>
-                                                    Am citit aceasta carte
-                                                </button>
-                                            ) : (
-                                                <button className="btn-unmarked" onClick={fetchMarkAsRead}>
-                                                    Nu am citit aceasta carte
-                                                </button>
-                                            )}
+                                {!!authData.token && (
+                                    <div className="bookmark-buttons">
+                                    {bookIsMarked ? (
+                                        <div className="rating-display">
+                                        <div className="personal-rating">
+                                            Rating Personal: {personalRating}/5 ★
+                                            <button 
+                                            className="delete-rating"
+                                            onClick={fetchUnmark}
+                                            >
+                                            Demarcheaza cartea
+                                            </button>
+                                        </div>
+                                        <div className="rating-stars">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                            <span
+                                                key={star}
+                                                className={`star ${star <= personalRating ? 'active' : ''}`}
+                                                onClick={() => fetchMarkAsRead(star)}
+                                            >
+                                                ★
+                                            </span>
+                                            ))}
+                                        </div>
+                                        </div>
+                                    ) : (
+                                        <div className="rating-container">
+                                        <span className="rate-prompt">Ai citit cartea? Marcheaz-o printr-un scor:</span>
+                                        <div className="rating-stars">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                            <span
+                                                key={star}
+                                                className="star"
+                                                onClick={() => fetchMarkAsRead(star)}
+                                            >
+                                                ★
+                                            </span>
+                                            ))}
+                                        </div>
                                         </div>
                                     )}
+                                    </div>
+                                )}
                                 </div>
                             </div>
                         </div>

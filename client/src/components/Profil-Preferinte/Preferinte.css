@@ -46,21 +46,27 @@
     border: 2px solid; /* Add border */
 }
 
-.preferinta:hover {
-    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3);
+.preferinta.prefer {
+    border-color: #4CAF50;
+    color: #4CAF50;
 }
 
-.preferinta.prefer {
-    border-color: #4CAF50; /* Green border for Prefer */
-    color: #4CAF50; /* Green text for Prefer */
+.nu-prefer:hover {
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.8);
 }
+
+.prefer:hover {
+    box-shadow: 0 4px 8px rgba(238,46,49,0.8);
+}
+
 
 .preferinta.nu-prefer {
-    border-color: #EE2E31; /* Red border for Nu prefer */
-    color: #EE2E31; /* Red text for Nu prefer */
+    border-color: #EE2E31;
+    color: #EE2E31;
 }
 
 .buton-preferinte {
+    width: 100%;
     padding: 10px 20px;
     cursor: pointer;
     border: 2px solid #090C08;
@@ -69,34 +75,15 @@
     color: #090C08;
     margin: 10px;
     transition: all 0.3s ease;
-    min-width: 130px; /* Slightly wider button */
+    min-width: 130px;
     text-align: center;
 }
 
 .buton-preferinte:hover {
     background-color: transparent;
-    color: #EE2E31;
-    border-color: #EE2E31;
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
-}
-
-.buton-Actualizeaza {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    color: #090C08;
-    margin: 10px;
-    transition: all 0.3s ease;
-    min-width: 130px; /* Slightly wider button */
-    text-align: center;
-}
-
-.buton-Actualizeaza:hover {
-    color: #4CAF50;
-    border-color: #4CAF50;
-    box-shadow: 0 8px 12px #4CAF50;
+    color: rgba(76, 175, 80, 0.8);
+    border-color: rgba(76, 175, 80, 0.8);
+    box-shadow: 0 8px 12px rgba(76, 175, 80, 0.8);
 }
 
 @media only screen and (max-width: 768px) {

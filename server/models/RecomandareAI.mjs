@@ -12,11 +12,7 @@ export default (sequelize, DataTypes) => {
         idCarte: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
-        descriereAI: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
+        }        
     }, {
         timestamps: false
     })
