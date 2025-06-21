@@ -31,6 +31,11 @@ const CreeazaAnunt = () => {
     const [genLiterar, setGenLiterar] = useState("Selecteaza genul literar");
     const [dropdownGen, setDropdownGen] = useState(false);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
+    const itemsPerPage = 15;
+
     useEffect(() => {
         if (!authData) {
             navigate('/bazar');
@@ -39,7 +44,7 @@ const CreeazaAnunt = () => {
         }
     }, [authData, navigate]);
 
-    const fetchBooksShort = async () => {
+    const fetchBooksShort = async (page = 1) => {
         try {
             const response = await fetch(`${config.API_URL}/api/bazar/fetchBooksShort`, {
                 method: "POST",
@@ -47,21 +52,28 @@ const CreeazaAnunt = () => {
                     'Authorization': `Bearer ${authData.token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ keywords: cautareBD })
+                body: JSON.stringify({ 
+                    keywords: cautareBD,
+                    page: page,
+                    pageSize: itemsPerPage
+                })
             });
             if (!response.ok) {
                 console.log("Error fetching data!");
                 return;
             }
             const data = await response.json();
-            setRezultateBD(Array.isArray(data) ? data : []);
+            setRezultateBD(Array.isArray(data.books) ? data.books : []);
+            setTotalPages(Math.ceil(data.totalCount / itemsPerPage));
+            setTotalResults(data.totalCount);
         } catch (error) {
             console.log(error);
         }
     };
 
     const handleCautaClick = () => {
-        fetchBooksShort();
+        setCurrentPage(1);
+        fetchBooksShort(1);
     };
 
     const handleCarteClick = (carteId) => {
@@ -79,6 +91,13 @@ const CreeazaAnunt = () => {
         let value = e.target.value;
         if (value === "" || /^[0-9]+$/.test(value)) {
             setPret(value < 0 ? 0 : value);
+        }
+    };
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+            fetchBooksShort(newPage);
         }
     };
 
@@ -175,154 +194,189 @@ const CreeazaAnunt = () => {
         }
     };
 
-    return (
-        <>
-            <HeaderBazar/>
-            <div className="CreeazaAnunt-Container">
-                <ToastContainer />
-                <div className="CreeazaAnunt-container-left">
-                    <div className="CreeazaAnunt-container-titlu">
-                        <p>Introdu titlul anuntului:</p>
-                        <input
-                            type="text"
-                            placeholder="Introdu titlul"
-                            value={titlu}
-                            onChange={(e) => setTitlu(e.target.value)}
-                            className="CreeazaAnunt-input"
-                        />
-                    </div>
-                    <div className="CreeazaAnunt-container-descriere">
-                        <p>Descrierea anuntului:</p>
-                        <textarea
-                            placeholder="Introdu Descrierea"
-                            value={descriere}
-                            onChange={(e) => setDescriere(e.target.value)}
-                            className="CreeazaAnunt-textarea"
-                        />
-                    </div>
+    
 
-                    <div className="CreeazaAnunt-container-genLiterar">
-                        <div className="p-genLiterar-container">
-                            <p className="p-genLiterar">Gen literar:</p>
-                            <div className="genLiterar-dropdown-container">
-                                <button className="genuri-dropdown" onClick={() => setDropdownGen(!dropdownGen)}>
-                                    {genLiterar} <i className="fa fa-caret-down" />
-                                </button>
-                                {dropdownGen && (
-                                    <div className="genuri-content">
-                                        <table>
-                                            <tbody>
-                                                {genuriLiterare.map((gen, index) => (
-                                                    <tr key = {index} onClick={() => {setGenLiterar(gen); setDropdownGen(!dropdownGen)}}>
-                                                        <td>{gen}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                )}
-                            </div>
+    return (
+    <>
+        <HeaderBazar/>
+        <div className="CreeazaAnunt-Container">
+            <ToastContainer />
+            <div className="CreeazaAnunt-container-left">
+                <div className="CreeazaAnunt-container-titlu">
+                    <p>Introdu titlul anuntului:</p>
+                    <input
+                        type="text"
+                        placeholder="Introdu titlul"
+                        value={titlu}
+                        onChange={(e) => setTitlu(e.target.value)}
+                        className="CreeazaAnunt-input"
+                    />
+                </div>
+                <div className="CreeazaAnunt-container-descriere">
+                    <p>Descrierea anuntului:</p>
+                    <textarea
+                        placeholder="Introdu Descrierea"
+                        value={descriere}
+                        onChange={(e) => setDescriere(e.target.value)}
+                        className="CreeazaAnunt-textarea"
+                    />
+                </div>
+
+                <div className="CreeazaAnunt-container-genLiterar">
+                    <div className="p-genLiterar-container">
+                        <p className="p-genLiterar">Gen literar:</p>
+                        <div className="genLiterar-dropdown-container">
+                            <button className="genuri-dropdown" onClick={() => setDropdownGen(!dropdownGen)}>
+                                {genLiterar} <i className="fa fa-caret-down" />
+                            </button>
+                            {dropdownGen && (
+                                <div className="genuri-content">
+                                    <table>
+                                        <tbody>
+                                            {genuriLiterare.map((gen, index) => (
+                                                <tr key = {index} onClick={() => {setGenLiterar(gen); setDropdownGen(!dropdownGen)}}>
+                                                    <td>{gen}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
                         </div>
                     </div>
-
-                    <div className="CreeazaAnunt-container-pret">
-                        <p>Pret:</p>
-                        <input
-                            type="text"
-                            placeholder="Introdu pretul"
-                            value={pret}
-                            onInput={handleInputChange}
-                            onChange={handlePretChange}
-                            className="CreeazaAnunt-input"
-                        />
-                    </div>
-                    {validationError && <p style={{ color: "red" }}>{validationError}</p>} {/* Display validation error */}
-                    
-                    {esteNegociabil ? (<button className="CreeazaAnunt-btn-negociabil-da" onClick={() => setEsteNegociabil(!esteNegociabil)}>
-                        Negociabil
-                    </button>) : (<button className="CreeazaAnunt-btn-negociabil-nu" onClick={() => setEsteNegociabil(!esteNegociabil)}>
-                        Nu e negociabil
-                    </button>)}
-                    <button className="CreeazaAnunt-btn-publica" disabled={!canSubmit} onClick={fetchCreateAnunt}>
-                        Publica anuntul!
-                    </button>
-                    <button className="CreeazaAnunt-btn-anuleaza" onClick={() => navigate('/bazar')}>
-                        Anuleaza
-                    </button>
                 </div>
-                <div className="CreeazaAnunt-container-right">
-                    <div className="CreeazaAnunt-container-imagine">
-                        <p>Incarca o imagine!</p>
-                        <img src={image} alt="imagine-carte" className="CreeazaAnunt-imagine-profil" />
-                        <input
-                            type="file"
-                            id="fileInput"
-                            accept="image/*"
-                            style={{ display: "none" }}
-                            onChange={uploadImage}
-                            className="CreeazaAnunt-file-input"
-                        />
-                        <button className="CreeazaAnunt-buton-Incarca" onClick={() => document.getElementById("fileInput").click()}>
-                            Incarca
+
+                <div className="CreeazaAnunt-container-pret">
+                    <p>Pret:</p>
+                    <input
+                        type="text"
+                        placeholder="Introdu pretul"
+                        value={pret}
+                        onInput={handleInputChange}
+                        onChange={handlePretChange}
+                        className="CreeazaAnunt-input"
+                    />
+                </div>
+                {validationError && <p style={{ color: "red" }}>{validationError}</p>}
+                
+                {esteNegociabil ? (
+                    <button className="CreeazaAnunt-btn-negociabil-da" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                        Negociabil
+                    </button>
+                ) : (
+                    <button className="CreeazaAnunt-btn-negociabil-nu" onClick={() => setEsteNegociabil(!esteNegociabil)}>
+                        Nu e negociabil
+                    </button>
+                )}
+                <button className="CreeazaAnunt-btn-publica" disabled={!canSubmit} onClick={fetchCreateAnunt}>
+                    Publica anuntul!
+                </button>
+                <button className="CreeazaAnunt-btn-anuleaza" onClick={() => navigate('/bazar')}>
+                    Anuleaza
+                </button>
+            </div>
+            <div className="CreeazaAnunt-container-right">
+                <div className="CreeazaAnunt-container-imagine">
+                    <p>Incarca o imagine!</p>
+                    <img src={image} alt="imagine-carte" className="CreeazaAnunt-imagine-profil" />
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        style={{ display: "none" }}
+                        onChange={uploadImage}
+                        className="CreeazaAnunt-file-input"
+                    />
+                    <button className="CreeazaAnunt-buton-Incarca" onClick={() => document.getElementById("fileInput").click()}>
+                        Incarca
+                    </button>
+                    {image !== stock_book && (
+                        <button className="CreeazaAnunt-btn-Sterge" onClick={() => setImage(stock_book)}>
+                            Sterge imaginea
                         </button>
-                        {image !== stock_book && (
-                            <button className="CreeazaAnunt-btn-Sterge" onClick={() => setImage(stock_book)}>
-                                Sterge imaginea
-                            </button>
-                        )}
-                    </div>
-                    <div className="CreeazaAnunt-container-cauta">
-                        <p>Este disponibila in magazinele deja-existente?</p>
-                        {storedId === null ? (
-                            <div className="CreeazaAnunt-dropdown-rezultate">
-                                <div className="input-buton-container">
-                                    <input
-                                        type="text"
-                                        placeholder="Caută în baza de date"
-                                        value={cautareBD}
-                                        onFocus={() => setViewRezultate(true)}
-                                        onChange={(e) => setCautareBD(e.target.value)}
-                                        className="CreeazaAnunt-input-cauta"
-                                    />
-                                    <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">
-                                        Cauta
-                                    </button>
-                                </div>
-                                {viewRezultate && (
-                                    Array.isArray(rezultateBD) && rezultateBD.length > 0 ? (
-                                        rezultateBD.map((carte) => (
-                                            <div key={carte.idCarte} className="CreeazaAnunt-rezultat-card" onClick={() => handleCarteClick(carte.idCarte)}>
-                                                <h4>{carte.titlu}</h4>
-                                                <p><strong>Autor:</strong> {carte.autor}</p>
-                                                <p><strong>Gen:</strong> {carte.gen}</p>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>Nu s-au gasit rezultate.</p>
-                                    )
-                                )}
-                            </div>
-                        ) : (
-                            <div>
-                                <p>Carte selectata:</p>
-                                <div className="CreeazaAnunt-rezultat-card">
-                                    {rezultateBD.filter(carte => carte.idCarte === storedId).map((carte) => (
-                                        <div key={carte.idCarte}>
-                                            <h4>{carte.titlu}</h4>
-                                            <p><strong>Autor:</strong> {carte.autor}</p>
-                                            <p><strong>Gen:</strong> {carte.gen}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                                <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">
-                                    Cauta din nou
+                    )}
+                </div>
+                <div className="CreeazaAnunt-container-cauta">
+                    <p>Este disponibila in magazinele deja-existente?</p>
+                    {storedId === null ? (
+                        <div className="CreeazaAnunt-dropdown-rezultate">
+                            <div className="input-buton-container">
+                                <input
+                                    type="text"
+                                    placeholder="Caută în baza de date"
+                                    value={cautareBD}
+                                    onFocus={() => setViewRezultate(true)}
+                                    onChange={(e) => setCautareBD(e.target.value)}
+                                    className="CreeazaAnunt-input-cauta"
+                                />
+                                <button onClick={handleCautaClick} className="CreeazaAnunt-btn-cauta">
+                                    Cauta
                                 </button>
                             </div>
-                        )}
-                    </div>
+                            {viewRezultate && (
+                                Array.isArray(rezultateBD) && rezultateBD.length > 0 ? (
+                                    <>
+                                        <div className="CreeazaAnunt-rezultate-container">
+                                            {rezultateBD.map((carte) => (
+                                                <div key={carte.idCarte} className="CreeazaAnunt-rezultat-card" onClick={() => handleCarteClick(carte.idCarte)}>
+                                                    <h4>{carte.titlu}</h4>
+                                                    <p><strong>Autor:</strong> {carte.autor}</p>
+                                                    <p><strong>Gen:</strong> {carte.gen}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="pagination-controls">
+                                            <button 
+                                                className="pagination-btn" 
+                                                onClick={() => handlePageChange(currentPage - 1)}
+                                                disabled={currentPage === 1}
+                                            >
+                                                &lt;
+                                            </button>
+                                            
+                                            <span className="pagination-info">
+                                                Pagina {currentPage} din {totalPages}
+                                            </span>
+                                            
+                                            <button 
+                                                className="pagination-btn" 
+                                                onClick={() => handlePageChange(currentPage + 1)}
+                                                disabled={currentPage === totalPages}
+                                            >
+                                                &gt;
+                                            </button>
+                                            
+                                            <div className="pagination-total">
+                                                Total rezultate: {totalResults}
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <p>Nu s-au gasit rezultate.</p>
+                                )
+                            )}
+                        </div>
+                    ) : (
+                        <div>
+                            <p>Carte selectata:</p>
+                            <div className="CreeazaAnunt-rezultat-card">
+                                {rezultateBD.filter(carte => carte.idCarte === storedId).map((carte) => (
+                                    <div key={carte.idCarte}>
+                                        <h4>{carte.titlu}</h4>
+                                        <p><strong>Autor:</strong> {carte.autor}</p>
+                                        <p><strong>Gen:</strong> {carte.gen}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={handleCautaDinNou} className="CreeazaAnunt-btn-cauta">
+                                Cauta din nou
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
-        </>
+        </div>
+    </>
     );
 };
 

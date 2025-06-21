@@ -1,6 +1,7 @@
 import express from 'express';
 import utilizatorController from '../controllers/Utilizator-controller.mjs';
 import preferinteController from '../controllers/Preferinte-controller.mjs';
+import recommenderController from '../controllers/Recommender-controller.mjs';
 import middleware from '../middleware/index.mjs';
 const router = express.Router();
 
@@ -12,4 +13,5 @@ router.post('/updateUtilizatorPreferinte', middleware.middlewareAuth, preferinte
 router.get('/getProfile/:userID', utilizatorController.getProfile);
 router.get('/getUserArticles/:userID', utilizatorController.getArticles);
 router.get('/getUserForums/:userID', utilizatorController.getForums);
+router.get('/generateRecommendationsForProfile', middleware.middlewareAuth, recommenderController.buildAndSendRecommendations);
 export default router

@@ -132,6 +132,8 @@ const Cauta = () => {
                         setPretMaxim={setPretMaxim}
                         sortareSelectata={sortareSelectata}
                         setSortareSelectata={setSortareSelectata}
+                        setBookIds={setBookIds}
+                        setTotalPages={setTotalPages}
                     />
                 </div>
                 <div className='container-rezultate-header'>

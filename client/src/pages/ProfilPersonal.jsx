@@ -204,28 +204,6 @@ const Profil = () => {
             console.error("Eroare la încărcarea imaginii:", error);
         }
     };
-    
-    const handleRecommender = async () => {
-        try {
-            const response = await fetch(`${config.RECOMMENDER_API}/api/request-recommendations`, {
-                method:'POST',
-                headers: {
-                    'Authorization': `Bearer ${authData.token}`,
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify({"query":"Istorie tragica", "sentiment":"fear"})
-            })
-            if (!response.ok) {
-                console.error("Fetch failed:", response.status, await response.text());
-                } else {
-                    const data = await response.json();
-                    console.log("Recommendations:", data);
-                }
-        }
-        catch(error) {
-            console.log(error)
-        }
-    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -267,7 +245,6 @@ const Profil = () => {
                         </div>
                         <p>Salut, {userData.username}</p>
                         <button className='buton-Deconectare' onClick={handleLogout}>Deconecteaza-te</button>
-                        <button className='buton-Deconectare' onClick={handleRecommender}>Test</button>
                     </div>
                     <div className='container-descriere-Profil'>
                         {

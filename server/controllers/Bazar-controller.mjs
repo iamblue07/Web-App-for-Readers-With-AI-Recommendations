@@ -13,14 +13,26 @@ const __dirname = path.dirname(__filename);
 
 const getCartiDataShort = async (req, res) => {
     try {
-        const { keywords } = req.body;
+        const { keywords, page = 1, pageSize = 15 } = req.body;
+        const offset = (page - 1) * pageSize;
 
         if (keywords && keywords.trim() !== "") {
+            // Get total count for pagination
+            const totalCount = await models.Carte.count({
+                where: {
+                    titlu: { [Op.like]: `%${keywords}%` }
+                }
+            });
+
+            // Get paginated results
             const carti = await models.Carte.findAll({
                 where: {
                     titlu: { [Op.like]: `%${keywords}%` }
                 },
                 attributes: ["id", "titlu", "autor", "genLiterar"],
+                limit: parseInt(pageSize),
+                offset: parseInt(offset),
+                order: [['titlu', 'ASC']] // Add ordering for consistent pagination
             });
 
             const data = carti.map((carte) => ({
@@ -30,10 +42,16 @@ const getCartiDataShort = async (req, res) => {
                 gen: carte.genLiterar,
             }));
 
-            return res.status(200).json(data);
+            return res.status(200).json({
+                books: data,
+                totalCount: totalCount
+            });
         }
 
-        return res.status(200).json([]);
+        return res.status(200).json({
+            books: [],
+            totalCount: 0
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal Server Error" });

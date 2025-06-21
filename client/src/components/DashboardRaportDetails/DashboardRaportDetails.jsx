@@ -169,14 +169,12 @@ const DashboardRaportDetails = ({reportData, setReportData, fetchReportsIDs}) =>
             <p className="Dashboard-p">Utilizator raportat: {extendedData.reportedUsername}</p>
             <p className="Dashboard-p">Tip continut: {reportData.obiectRaport}</p>
             <p className="Dashboard-p">Continut: 
-                {reportData.obiectRaport === "MesajChat" && (
-                    <>
-                        {!mediaExists ? 
-                        (<>{extendedData.data.continut}</>) : 
-                        (<img src={messageMedia} 
-                        alt="Reported media"
-                        className="Dashboard-image"/>)}
-                    </>
+                {reportData.obiectRaport === "MesajChat" && (<>
+                    {!mediaExists ? 
+                    (<>{extendedData.data.continut}</>) : 
+                    (<img src={messageMedia} 
+                    alt="Reported media"
+                    className="Dashboard-image"/>)}</>
                 )}
                 {reportData.obiectRaport === "MesajForum" && (
                     <>{extendedData.data.continut}</>
@@ -188,15 +186,12 @@ const DashboardRaportDetails = ({reportData, setReportData, fetchReportsIDs}) =>
                     <>{extendedData.data.titluAnunt}</>
                 )}
             </p>
-            {reportData.obiectRaport === "Forum" && (
-                <>
+            {reportData.obiectRaport === "Forum" && (<>
                 <button className="Dashboard-buton" onClick={() => {navigate(`/forumuri/${extendedData.data.id}`)}}>Vezi Forumul</button>
                 <button className="Dashboard-buton" onClick={() => {fetchDeleteObject()}}>Sterge Forumul</button>
                 </>
-
             )}
-            {reportData.obiectRaport === "Anunt" && (
-                <>
+            {reportData.obiectRaport === "Anunt" && (<>
                 <button className="Dashboard-buton" onClick={()=>{navigate(`/bazar/anunt/${extendedData.data.id}`)}}>Vezi Anuntul</button>
                 <button className="Dashboard-buton" onClick={() => {fetchDeleteObject()}}>Sterge Anuntul</button>
                 </>

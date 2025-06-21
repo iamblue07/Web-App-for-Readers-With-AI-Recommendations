@@ -100,75 +100,124 @@ const Forumuri = () => {
     }, [currentPage, searchTerm]);
 
     return (
-
         <div className="forum-container">
-            <ToastContainer />
-            <div className="search-subcontainer">
-            <input
-                type="text"
-                placeholder="Cauta forum..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
+    <ToastContainer />
+    <div className="search-section">
+      <div className="search-box">
+        <i className="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          placeholder="Cauta un forum..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
+      
+      {authData.token !== null && (
+        <div className="forum-actions">
+          <button 
+            className={`action-btn ${isCreatingForum ? 'cancel-btn' : 'create-btn'}`}
+            onClick={() => setIsCreatingForum(!isCreatingForum)}
+          >
+            {isCreatingForum ? (
+              <><i className="fas fa-times"></i>Anuleaza</>
+            ) : (
+              <><i className="fas fa-plus"></i>Creeaza forum nou</>
+            )}
+          </button>
+          
+          <button 
+            className="action-btn view-btn"
+            onClick={() => navigate('/forumuri/ForumurileMele')}
+          >
+            <i className="fas fa-user"></i> Forumurile tale
+          </button>
+        </div>
+      )}
+    </div>
+
+    {isCreatingForum ? (
+      <div className="create-forum-section">
+        {userHasRights ? (
+          <div className="create-forum-card">
+            <input 
+              type="text" 
+              className="create-input"
+              placeholder="Introduceti titlul noului forum"
+              value={newForumTitle}
+              onChange={(e) => setNewForumTitle(e.target.value)}
             />
+            <button className="submit-btn" onClick={fetchCreateForum}>
+              <i className="fas fa-check"></i> Creeaza forum
+            </button>
+          </div>
+        ) : (
+          <div className="warning-card">
+            <i className="fas fa-exclamation-triangle"></i>
+            <p>În urma încălcării regulamentului, nu mai aveți drepturile de a crea un forum! Pentru detalii, contactați un administrator.</p>
+          </div>
+        )}
+      </div>
+    ) : (
+      <>
+        <div className="forums-grid">
+          {forums.map(forum => (
+            <div key={forum.id} className="forum-card">
+            <div className="card-header">
+                <h3 
+                className="forum-title"
+                onClick={() => navigate(`/forumuri/${forum.id}`)}
+                >
+                {forum.titluForum}
+                </h3>
             </div>
-            {authData.token !== null && (
-                <div className="forumuri-meniu-container">
-                    {isCreatingForum === false ? (
-                        <div>
-                            <button className="btnForum" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Creaza forum nou</button>
-                        </div>
-                    ) : (
-                        <div>
-                            <button className="btnAnuleaza" onClick={() => { setIsCreatingForum(!isCreatingForum) }}>Anuleaza</button>
-                        </div>
-                    )}
-                    <button className="btnForum" onClick={() => {navigate('/forumuri/ForumurileMele')}}>Vezi forumurile tale</button>
+            
+            <div className="card-meta">
+                <span className="creation-date">
+                <i className="far fa-calendar"></i> {new Date(forum.data).toLocaleDateString()}
+                </span>
+                
+                <div 
+                className="author-info"
+                onClick={() => navigate(`/utilizator/${forum.idUtilizator}`)}
+                >
+                <span>{forum.username}</span>
+                </div>
+            </div>
+            
+            {userHasReportRights && (
+                <div className="report-section">
+                <div className="report-container">
+                    <RaportareButon 
+                    idObiect={forum.id} 
+                    tipObiect={"Forum"} 
+                    authData={authData}
+                    />
+                    <span className={`status-badge ${forum.esteDeschis ? 'open' : 'closed'}`}>
+                    {forum.esteDeschis ? "Deschis" : "Închis"}
+                    </span>
+                </div>
                 </div>
             )}
-
-            {isCreatingForum === false ? (<>
-                <table className="forums-table">
-                <thead>
-                    <tr>
-                        <th className="table-header">Titlu Forum</th>
-                        <th className="table-header">Data Crearii</th>
-                        <th className="table-header">Este Deschis</th>
-                        <th className="table-header">Utilizator</th>
-                        {userHasReportRights && (<th className="table-header"></th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {forums.map(forum => (
-                        <tr key={forum.id} className="table-row">
-                            <td className="table-cell table-forum" onClick={() => navigate(`/forumuri/${forum.id}`)}>{forum.titluForum}</td>
-                            <td className="table-cell">{new Date(forum.data).toLocaleDateString()}</td>
-                            <td className="table-cell">{forum.esteDeschis ? "Da" : "Nu"}</td>
-                            <td className="table-cell table-username" onClick={() => navigate(`/utilizator/${forum.idUtilizator}`)}>{forum.username}</td>
-                            {userHasReportRights && (<td><RaportareButon idObiect={forum.id} tipObiect={"Forum"} authData={authData}/></td>)}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="pagination-container">
-                {[...Array(totalPages)].map((_, i) => (
-                    <button 
-                        key={i} 
-                        onClick={() => setCurrentPage(i + 1)}
-                        disabled={i + 1 === currentPage}
-                        className={`pagination-button ${i + 1 === currentPage ? 'active' : ''}`}
-                    >
-                        {i + 1}
-                    </button>
-                ))}
-            </div></>) : (
-                userHasRights === true ? (
-                    <div className="container-newForum">
-                        <input type="text" className="create-input" placeholder="Introduceti titlul noului forum!" value={newForumTitle} onChange={(e) => {setNewForumTitle(e.target.value)}}/>
-                        <button className="btnCreeaza" onClick={() => {fetchCreateForum()}}>Creeaza noul forum</button>
-                    </div>) : (<div className="container-newForum"><p className="p-alert">In urma incalcarii regulamentului, nu mai aveti drepturile de a crea un forum! Pentru detalii, contactati un administrator.</p></div>)
-            )}
-
+            </div>
+          ))}
+        </div>
+        
+        <div className="pagination-container">
+          {[...Array(totalPages)].map((_, i) => (
+            <button 
+              key={i} 
+              onClick={() => setCurrentPage(i + 1)}
+              disabled={i + 1 === currentPage}
+              className={`pagination-btn ${i + 1 === currentPage ? 'active' : ''}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      </>
+    )}
         </div>
     );
 };

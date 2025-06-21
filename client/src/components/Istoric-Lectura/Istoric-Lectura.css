@@ -47,6 +47,15 @@
     text-align: left;
 }
 
+.tabel-titlu {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tabel-titlu:hover {
+    transform: translateY(-3px);
+    color:#EE2E31;
+}
 .tabel-istoric-head:nth-child(1), 
 .tabel-istoric-data:nth-child(1) { 
     width: 60%;

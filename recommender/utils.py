@@ -1,7 +1,7 @@
 import asyncio
 
 import numpy as np
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 import pandas as pd
 import torch
 from langchain_chroma import Chroma
@@ -9,10 +9,14 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from sqlalchemy import text
 from fastapi.concurrency import run_in_threadpool
+from langchain.schema import Document
+from langchain.vectorstores import Chroma
+from tqdm.auto import tqdm
+from models import Utilizator
+from sqlalchemy.orm import Session
+from sqlalchemy import bindparam
 
-
-from database import engine, SessionLocal
-from old_utils import emotion_labels
+from database import engine, SessionLocal, get_db
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -148,26 +152,6 @@ embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
     model_kwargs={'device': 'cuda'})
 
-
-from fastapi import FastAPI
-from langchain.schema import Document
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
-from tqdm.auto import tqdm
-import pandas as pd
-
-# (re-use your existing splitter and embeddings)
-text_splitter = CharacterTextSplitter(
-    chunk_size=0,
-    chunk_overlap=0,
-    separator="\n"
-)
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={"device": "cuda"}
-)
-
 async def zero_shot_classification(app: FastAPI):
     df = await query_books()
     docs = [
@@ -185,66 +169,56 @@ async def zero_shot_classification(app: FastAPI):
     store.persist()
     app.state.vector_store = store
 
-from sqlalchemy import bindparam
-async def retrieve_semantic_recommendations(app: FastAPI, query:str, top_k: int = 5, user_id: int = None, sentiment: str = None) -> pd.DataFrame:
-    valid_sentiments = ['anger', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'neutral']
+
+async def retrieve_semantic_recommendations\
+                (app: FastAPI, query: str, top_k: int = 5, user_id: int = None, sentiment: str = None) \
+        -> pd.DataFrame:
+    valid_sentiments = ['anger','disgust','fear','joy','sadness','surprise','neutral']
     if sentiment not in valid_sentiments:
         raise ValueError(f"Invalid sentiment '{sentiment}'. Must be one of {valid_sentiments}")
-
     store = app.state.vector_store
-    recs = store.similarity_search(query, k = 50)
+    recs = store.similarity_search(query, k=50)
     ranked_isbns = [doc.metadata["isbn"] for doc in recs]
-    top_isbns = ranked_isbns[:top_k]
     sql = text("""
-            SELECT * FROM LicentaDB.cartes
-            WHERE isbn IN :isbns
-        """).bindparams(bindparam('isbns', expanding=True))
-    params = {"isbns": top_isbns}
-
+        SELECT * FROM LicentaDB.cartes
+        WHERE isbn IN :isbns
+    """).bindparams(bindparam('isbns', expanding=True))
+    params = {"isbns": ranked_isbns}
     with engine.connect() as conn:
-        transaction = conn.begin()
+        trans = conn.begin()
         try:
-            delete_sql = text("""
-                DELETE FROM RecomandareAIs 
-                WHERE idUtilizator = :user_id
-            """)
-            conn.execute(delete_sql, {"user_id": user_id})
-
+            conn.execute(
+                text("DELETE FROM RecomandareAIs WHERE idUtilizator = :user_id"),
+                {"user_id": user_id}
+            )
             result = conn.execute(sql, params)
             rows = result.fetchall()
             cols = result.keys()
             df = pd.DataFrame(rows, columns=cols)
-
             sentiment_column = f"{sentiment}_score"
-            df_sorted = df.sort_values(by=sentiment_column, ascending=False, na_position='last')
-            df_top = df_sorted.head(top_k)
+            df_sorted = df.sort_values(
+                by=sentiment_column,
+                ascending=False,
+                na_position='last'
+            )
 
+            df_top = df_sorted.head(top_k).copy()
+            top_isbns = df_top["isbn"].tolist()
             for _, row in df_top.iterrows():
-                insert_sql = text("""
-                    INSERT INTO RecomandareAIs (idUtilizator, idCarte)
-                    VALUES (:user_id, :carte_id)
-                """)
-                conn.execute(insert_sql, {
-                    "user_id": user_id,
-                    "carte_id": row['id']
-                })
-
-            transaction.commit()
-            df["__rank"] = df["isbn"].apply(lambda x: ranked_isbns.index(x))
-            df = df.sort_values("__rank").drop(columns="__rank").reset_index(drop=True)
+                conn.execute(
+                    text("""
+                        INSERT INTO RecomandareAIs (idUtilizator, idCarte)
+                        VALUES (:user_id, :carte_id)
+                    """),
+                    {"user_id": user_id, "carte_id": row["id"]}
+                )
+            trans.commit()
+            df_top.reset_index(drop=True)
             return {"status": "Succes"}
         except Exception as e:
-            transaction.rollback()
-            raise e
-            return {"status": f"Failure:{e}"}
+            trans.rollback()
+            raise
 
-
-
-from models import Utilizator
-from database import get_db
-from sqlalchemy.orm import Session
-from fastapi import Depends
-db = SessionLocal()
 async def verify_administrator(
                     user_id: int,
                     db: Session = Depends(get_db)) -> bool:

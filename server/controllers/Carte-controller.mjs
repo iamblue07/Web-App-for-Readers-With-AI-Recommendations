@@ -94,7 +94,7 @@ const postCartiIDs = async (req, res) => {
       });
       const totalBooks = parseInt(countResult[0].count, 10);
       const totalPages = Math.ceil(totalBooks / booksPerPage);
-  
+      console.log(sortareSelectata)
       return res.json({ ids, totalPages });
     } catch (error) {
       console.error(error);
@@ -112,7 +112,10 @@ const getCartiData = async (req, res) => {
         }
 
         const carti = await models.Carte.findAll({
-            where: { id: ids }
+            where: { id: ids },
+            order: [
+                [ models.sequelize.literal(`FIELD(id, ${ ids.join(',') })`), 'ASC' ]
+                ]
         });
 
         if (carti.length === 0) {
@@ -320,19 +323,26 @@ const getUtilizatorIstoric = async (req, res) => {
 
         const istoric = await models.CarteCitita.findAll({
             where: { idUtilizator: userId },
-            include: [
-                {
-                    model: models.Carte,
-                    attributes: ['id', 'titlu', 'autor']
-                }
-            ]
+            include: [{
+                model: models.Carte,
+                attributes: ['id', 'titlu', 'autor']
+            }],
+            attributes: ['id', 'scor']
         });
 
-        const istoricFormatat = istoric.map(entry => ({
-            idCarte: entry.Carte.id,
-            titlu: entry.Carte.titlu,
-            autor: entry.Carte.autor
-        }));
+        const istoricFormatat = istoric.map(entry => {
+            if (!entry.Carte) {
+                console.warn(`Carte lipsă pentru intrarea cu ID: ${entry.id}`);
+                return null;
+            }
+            return {
+                idIstoric: entry.id,
+                idCarte: entry.Carte.id,
+                titlu: entry.Carte.titlu,
+                autor: entry.Carte.autor,
+                scor: entry.scor
+            };
+        }).filter(entry => entry !== null);
 
         return res.status(200).json(istoricFormatat);
     } catch (error) {
@@ -341,6 +351,29 @@ const getUtilizatorIstoric = async (req, res) => {
     }
 };
 
+const getRecommendedBooks = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        if (!userId || isNaN(userId)) {
+            return res.status(404).json({ error: "ID Utilizator invalid" });
+        }
+
+        const recomandari = await models.RecomandareAI.findAll({
+            where: { idUtilizator: userId },
+            attributes: ['idCarte']
+        });
+
+        if (recomandari.length > 0) {
+            const ids = recomandari.map(r => r.idCarte);
+            return res.status(200).json({ recommendedBookIds: ids });
+        } else {
+            return res.status(200).json({ message: "Nu au fost gasite recomandari pentru utilizator." });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Eroare internă a serverului" });
+    }
+};
 
 export default {
     getCarteImagine,
@@ -351,5 +384,6 @@ export default {
     getCarteCitita,
     postMarcheazaCarteCitita,
     postDemarcheazaCarteCitita,
-    getUtilizatorIstoric
+    getUtilizatorIstoric,
+    getRecommendedBooks
 };

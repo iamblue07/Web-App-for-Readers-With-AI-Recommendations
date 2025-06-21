@@ -274,7 +274,7 @@
 .CreeazaAnunt-container-imagine {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -365,6 +365,84 @@
 .CreeazaAnunt-rezultat-card:hover {
   box-shadow: 0 4px 10px rgba(238,46,49,0.9);
   transform: translateY(-3px);
+}
+
+/* Add to your existing CSS file */
+.CreeazaAnunt-rezultate-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  border: 2px solid #090C08;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #090C08;
+  color: #FFFBFE;
+  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
+  transform: translateY(-3px);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-weight: bold;
+  color: #090C08;
+  margin: 0 10px;
+}
+
+.pagination-total {
+  font-size: 0.9rem;
+  color: #666;
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+  .pagination-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .pagination-info {
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .pagination-btn {
+    width: 100%;
+    margin-bottom: 5px;
+  }
 }
 
 @media screen and (max-width: 768px) {

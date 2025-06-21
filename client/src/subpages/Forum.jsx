@@ -210,7 +210,7 @@ const Forum = () => {
             <input
               type="text"
               className="input-message"
-              placeholder="Tastează un mesaj nou..."
+              placeholder="Tasteaza un mesaj..."
               value={newMessage}
               onChange={(e) => {
                 setNewMessage(e.target.value);

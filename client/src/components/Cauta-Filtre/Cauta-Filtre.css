@@ -9,6 +9,8 @@
   border-radius: 8px;
   background-color: #FFFBFE;
   color: #090C08;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cauta-filtre-container h2 {
@@ -31,6 +33,13 @@
 
 .sageta {
   transition: transform 0.3s;
+}
+
+.div-view-AI {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sageta.rotated {
@@ -124,6 +133,46 @@
   border-radius: 4px;
 }
 
+.info-bubble {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #090C08;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  cursor: help;
+  position: relative;
+}
+
+.info-tooltip {
+  visibility: hidden;
+  width: 260px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  padding: 0.8rem;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-size: 0.8rem;
+}
+
+
+
+.recomandari-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.info-bubble:hover .info-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 @media (max-width: 768px) {
   .cauta-filtre-container {
     padding: 10px;
