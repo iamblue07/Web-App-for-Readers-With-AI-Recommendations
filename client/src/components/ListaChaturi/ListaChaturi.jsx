@@ -2,12 +2,14 @@ import React, {useState, useContext, useEffect} from "react";
 import config from "../../utils/config";
 import { GlobalContext } from "../../context/GlobalState";
 import Chat from "../ListaChaturi-Chat/ListaChaturi-Chat";
+import LoadingScreen from "../Incarcare/Incarcare";
 
 const ListaChaturi = ({setCurrentChat}) => {
 
     const [canDisplay, setCanDisplay] = useState(false);
     const [chatIDs, setChatIDs] = useState([]);
     const {authData} = useContext(GlobalContext);
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
     const fetchChatIDs = async () => {
         try{
@@ -25,6 +27,7 @@ const ListaChaturi = ({setCurrentChat}) => {
             const data = await response.json();
             setChatIDs(data);
             setCanDisplay(true);
+            setDataFullyLoaded(true);
         }catch(error){
             console.log(error);
         }
@@ -33,6 +36,12 @@ const ListaChaturi = ({setCurrentChat}) => {
     useEffect(()=> {
         fetchChatIDs();
     },[])
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div>

@@ -20,7 +20,7 @@ import puppeteer from "puppeteer";
 const now = new Date();
 const logFileName = path.join(
     logsDir,
-    `log-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}.txt`
+    `log-scraper.txt`
 );
 const logStream = fs.createWriteStream(logFileName, { flags: 'a' });
 

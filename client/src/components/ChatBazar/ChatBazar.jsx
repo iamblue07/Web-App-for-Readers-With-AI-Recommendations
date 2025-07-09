@@ -5,7 +5,7 @@ import { GlobalContext } from "../../context/GlobalState";
 import config from "../../utils/config";
 import MesajChat from "../MesajChat/MesajChat";
 import "./ChatBazar.css";
-
+import LoadingScreen from "../Incarcare/Incarcare";
 const ChatBazar = ({ chatID }) => {
 
   const [canDisplay, setCanDisplay] = useState(false);
@@ -14,6 +14,7 @@ const ChatBazar = ({ chatID }) => {
   const [newMessage, setNewMessage] = useState("");
   const [chatMessagesIDs, setChatMessagesIDs] = useState([]);
   const messagesEndRef = useRef(null);
+  const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
   const fetchChatMessagesIDs = async () => {
     if(chatID !== 0) {
@@ -30,6 +31,7 @@ const ChatBazar = ({ chatID }) => {
         const data = await response.json();
         setChatMessagesIDs(data);
         setCanDisplay(true);
+        setDataFullyLoaded(true);
       } catch (error) {
         console.log(error);
       }
@@ -73,6 +75,7 @@ const ChatBazar = ({ chatID }) => {
         createToast("Mesaj trimis!", true);
         setNewMessage("");
         fetchChatMessagesIDs();
+        setDataFullyLoaded(true);
       }
     }catch(error){
       console.log(error);
@@ -147,6 +150,12 @@ const ChatBazar = ({ chatID }) => {
       console.log(error);
     }
   }
+
+      if(!dataFullyLoaded && chatID !== 0) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
   return (
     <div className="ChatBazar-main-container">

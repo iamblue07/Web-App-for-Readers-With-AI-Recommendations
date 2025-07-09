@@ -5,7 +5,7 @@ from fastapi import FastAPI, Depends
 import pandas as pd
 import torch
 from langchain_chroma import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from sqlalchemy import text
 from fastapi.concurrency import run_in_threadpool
@@ -147,10 +147,15 @@ def update_emotion_scores(df_scores: pd.DataFrame):
     with engine.begin() as conn:
         conn.execute(sql, records)
 
+
+from dotenv import load_dotenv
+load_dotenv()
+
 text_splitter = CharacterTextSplitter(chunk_size=0, chunk_overlap=0, separator="\n")
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={'device': 'cuda'})
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-large",
+    #model_kwargs={'device': 'cuda'}
+)
 
 async def zero_shot_classification(app: FastAPI):
     df = await query_books()

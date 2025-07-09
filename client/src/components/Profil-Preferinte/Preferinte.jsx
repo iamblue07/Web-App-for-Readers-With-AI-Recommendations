@@ -118,6 +118,25 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
         }
     }
 
+    const [canGenerateEmbeddings, setCanGenerateEmbeddings] = useState(false)
+    const fetchGenerateEmbeddings = async () => {
+        setCanGenerateEmbeddings(false);
+        if(canGenerateEmbeddings) {
+            try {
+                const response = await fetch(`${config.RECOMMENDER_API}/api/initialize-vector-store`, {
+                    method:"GET",
+                    headers: {
+                        "Authorization": `Bearer ${authData.token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+            }catch(error) {
+                console.log(error);
+            }
+        }
+
+    }
+
     return (
         <div className="preferinte-profil-container">
             <h2>Preferintele utilizatorului</h2>
@@ -155,6 +174,7 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
             <button className="buton-preferinte" onClick={()=> {setMountIstoric(!mountIstoric)}}>{!mountIstoric ? 'Vezi ' : 'Ascunde '}istoricul cartilor citite</button>
             {isAdmin && (<button className="buton-preferinte" onClick={() => {setCanMountDashboard(!canMountDashboard)}}>{!canMountDashboard ? 'Vezi ' : 'Ascunde '}dashboard rapoarte</button>)}
             {canScrape && isAdmin && <button className="buton-preferinte" onClick={() => fetchStartScraping()}>Start scraping</button>}
+            {canGenerateEmbeddings && isAdmin && <button className="buton-preferinte" onClick={() => fetchGenerateEmbeddings()}>Generate Embeddings</button>}
         </div>
     );
 };

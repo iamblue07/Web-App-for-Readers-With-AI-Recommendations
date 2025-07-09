@@ -5,6 +5,7 @@ import stockimage from "../assets/stock_book.jpg";
 import config from "../utils/config";
 import '../styles/DetaliiCarte.css';
 import CautaAnunturi from "../components/Cauta-Anunturi/Cauta-Anunturi.jsx";
+import LoadingScreen from "../components/Incarcare/Incarcare.jsx";
 
 const DetaliiCarte = () => {
     const {idCarte} = useParams();
@@ -198,7 +199,7 @@ const DetaliiCarte = () => {
     return (
         <div className="DetaliiCarte-main-container">
             {isLoading ? (
-                <p>Data is loading...</p>
+                <LoadingScreen/>
             ) : (
                 <div>
                     <div className="div-detalii">

@@ -9,6 +9,7 @@ import stockimage from '../assets/stock.jpg';
 import PreferinteComponent from '../components/Profil-Preferinte/Preferinte';
 import IstoricLecturaComponent from '../components/Istoric-Lectura/Istoric-Lectura';
 import DashboardComponent from '../components/DashboardRapoarte/DashboardComponent';
+import LoadingScreen from '../components/Incarcare/Incarcare';
 
 const Profil = () => {
     const { clearAuthData, authData } = useContext(GlobalContext);
@@ -26,6 +27,8 @@ const Profil = () => {
     const [canMountDashboard, setCanMountDashboard] = useState(false);
 
     const [isAdmin, setIsAdmin] = useState(false);
+
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
     const fetchUtilizatorData = async () => {
         const token = authData?.token;
@@ -54,6 +57,7 @@ const Profil = () => {
             } else {
                 createToast("Eroare la preluarea datelor", false);
             }
+            setDataFullyLoaded(true);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -220,6 +224,11 @@ const Profil = () => {
         }
     }, [userData?.id]);
     
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div className='big-container'>

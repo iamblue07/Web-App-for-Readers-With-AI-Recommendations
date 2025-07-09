@@ -47,7 +47,6 @@ const GlobalProvider = ({ children }) => {
         }
     }, [state.authData]);
 
-    // 🔴 Verifică expirarea tokenului periodic
     useEffect(() => {
         const checkTokenExpiration = () => {
             if (state.authData.token) {
@@ -64,10 +63,8 @@ const GlobalProvider = ({ children }) => {
             }
         };
 
-        // Verifică imediat la pornirea aplicației
         checkTokenExpiration();
 
-        // Setează un interval pentru a verifica la fiecare 60 de secunde
         const interval = setInterval(checkTokenExpiration, 60000);
 
         return () => clearInterval(interval);

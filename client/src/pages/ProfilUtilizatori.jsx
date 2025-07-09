@@ -7,6 +7,7 @@ import config from '../utils/config';
 import stockimage from '../assets/stock.jpg';
 import "../styles/ProfilUtilizatori.css";
 import Anunt from '../components/Anunt/Anunt';
+import LoadingScreen from '../components/Incarcare/Incarcare';
 const ProfilUtilizatori = () => {
     const {idUser} = useParams();
     const navigate = useNavigate();
@@ -164,7 +165,7 @@ const ProfilUtilizatori = () => {
 
     if(!isDataLoaded) {
         return (
-            <p>Data loading...</p>
+            <LoadingScreen/>
         )
     } else {
         return (

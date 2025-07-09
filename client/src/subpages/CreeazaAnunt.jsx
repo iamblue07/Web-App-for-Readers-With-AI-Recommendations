@@ -139,13 +139,10 @@ const CreeazaAnunt = () => {
     };
 
     const fetchCreateAnunt = async () => {
-        // Validate required fields
         if (!titlu || !descriere || !pret || (image === stock_book) || (genLiterar === "Selecteaza genul literar")) {
             setValidationError("Titlul, imaginea, descrierea, genul literar si pretul sunt obligatorii!");
             return;
         }
-
-        // Clear validation error if fields are valid
         setValidationError("");
 
         try {
@@ -164,7 +161,6 @@ const CreeazaAnunt = () => {
             formData.append("anuntIdCarte", storedId);
             formData.append("genLiterar", genLiterar);
 
-            // Append the image file
             const fileInput = document.getElementById("fileInput");
             if (fileInput.files[0]) {
                 formData.append("bookImage", fileInput.files[0]);

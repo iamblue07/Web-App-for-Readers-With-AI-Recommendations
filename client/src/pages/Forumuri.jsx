@@ -7,6 +7,7 @@ import '../styles/Forumuri.css';
 
 import { GlobalContext } from "../context/GlobalState";
 import RaportareButon from "../components/RaportareButon/RaportareButon";
+import LoadingScreen from "../components/Incarcare/Incarcare";
 
 const rowsPerPage = 10;
 
@@ -21,6 +22,9 @@ const Forumuri = () => {
     const [newForumTitle, setNewForumTitle] = useState("")
     const [userHasRights, setUserHasRights] = useState(true)
     const [userHasReportRights, setUserHasReportRights] = useState(true);
+
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
+
     const navigate = useNavigate()
     
     const fetchForums = async () => {
@@ -32,6 +36,7 @@ const Forumuri = () => {
             const data = await response.json();
             setForums(data.forums || []);
             setTotalPages(data.totalPages || 1);
+            setDataFullyLoaded(true);
         } catch (error) {
             console.error("Eroare la preluarea forumurilor:", error);
             setForums([]);
@@ -98,6 +103,13 @@ const Forumuri = () => {
         fetchForums();
         fetchUserRights();
     }, [currentPage, searchTerm]);
+
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div className="forum-container">

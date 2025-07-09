@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 import config from "../utils/config";
 import {createToast} from "../utils/createToast";
 import "../styles/ForumurileMele.css";
-
+import LoadingScreen from "../components/Incarcare/Incarcare";
 const ForumurileMele = () => {
     const [forumsData, setForumsData] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -13,7 +13,7 @@ const ForumurileMele = () => {
     const [editingForumId, setEditingForumId] = useState(null);
     const [newTitle, setNewTitle] = useState('');
     const { authData } = useContext(GlobalContext);
-
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,6 +41,7 @@ const ForumurileMele = () => {
             const data = await response.json();
             setForumsData(data.forums || []);
             setTotalPages(data.totalPages || 1);
+            setDataFullyLoaded(true);
         } catch (error) {
             console.error("Eroare la preluarea forumurilor:", error);
             setForumsData([]);
@@ -115,6 +116,12 @@ const ForumurileMele = () => {
             console.error("Eroare la schimbarea statusului:", error);
         }
     };
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div className="ForumurileMele-container">

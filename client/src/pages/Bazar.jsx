@@ -1,21 +1,39 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from '../context/GlobalState'; 
+import { useState, useContext, useEffect } from 'react';
+import {BazarContext} from '../context/BazarState.jsx';
 import "../styles/Bazar.css";
 import textData from "../utils/text.js";
 import config from "../utils/config.js";
 import Anunt from '../components/Anunt/Anunt.jsx';
 import HeaderBazar from '../components/HeaderBazar/HeaderBazar.jsx';
+import LoadingScreen from '../components/Incarcare/Incarcare.jsx'; 
 
 const Bazar = () => {
-    const [pretMinim, setPretMinim] = useState(0);
-    const [pretMaxim, setPretMaxim] = useState(9999);
-    const [stringCautare, setStringCautare] = useState("");
-    const [categorieSelectata, setCategorieSelectata] = useState("Alege categoria");
-    const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
+    const {
+    pretMinim,
+    setPretMinim,
+    pretMaxim,
+    setPretMaxim,
+    stringCautare,
+    setStringCautare,
+    categorieSelectata,
+    setCategorieSelectata,
+    sortareSelectata,
+    setSortareSelectata,
+    dropdownCategorie,
+    setDropdownCategorie,
+    dropdownSortare,
+    setDropdownSortare,
+    anunturiPerPage,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    setTotalPages,
+    anuntBazarIDs,
+    setAnuntBazarIDs,
+    anunturiDetails,
+    setAnunturiDetails
+  } = useContext(BazarContext);
 
-    const [dropdownCategorie, setDropdownCategorie] = useState(false);
-    const [dropdownSortare, setDropdownSortare] = useState(false);
 
     const genuriLiterare = [...textData.genuriLiterare];
     genuriLiterare.unshift("Alege categoria");
@@ -51,13 +69,7 @@ const Bazar = () => {
         }
     };
 
-
-    const [anunturiPerPage, setAnunturiPerPage] = useState(15);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [anuntBazarIDs, setAnuntBazarIDs] = useState([]);
-
-    const [anunturiDetails, setAnunturiDetails] = useState([]);
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
     const fetchAnuntBazarIDs = async () => {
         try {
@@ -92,6 +104,7 @@ const Bazar = () => {
             }
             const data = await response.json();
             setAnunturiDetails(data);
+            setDataFullyLoaded(true);
         }catch(error){
             console.error("Error fetching anunturi details: ", error);
         }
@@ -109,7 +122,19 @@ const Bazar = () => {
 
     },[])
 
+    useEffect( () => {
+        fetchAnuntBazarIDs();
+    }, [currentPage])
+
     const currentAnunturi = anunturiDetails.slice(0, anunturiPerPage);
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
+
+    
 
     return (
         <div className='bazar-container'>

@@ -6,6 +6,7 @@ import BazarRouter from './Bazar-routers.mjs';
 import ChatRouter from './Chat-routers.mjs';
 import RaportRouter from './Raport-routers.mjs';
 import ScraperRouter from './Scraper-router.mjs';
+import StatisticiRouter from './Statistici-routers.mjs';
 export default {
   AuthRouter,
   UtilizatorRouter,
@@ -14,5 +15,6 @@ export default {
   BazarRouter,
   ChatRouter,
   RaportRouter,
-  ScraperRouter
+  ScraperRouter,
+  StatisticiRouter
 }

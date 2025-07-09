@@ -7,6 +7,8 @@ import config from "../utils/config";
 import HeaderBazar from "../components/HeaderBazar/HeaderBazar";
 import AnuntulMeu from "../components/AnuntulMeu/AnuntulMeu";
 import "../styles/AnunturileMele.css";
+import LoadingScreen from "../components/Incarcare/Incarcare";
+
 const AnunturileMele = () => {
     const navigate = useNavigate();
     const [anunturiIDs, setAnunturiIDs] = useState([]);
@@ -14,6 +16,8 @@ const AnunturileMele = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
     const { authData } = useContext(GlobalContext);
+
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
     useEffect(() => {
         if (!authData.token) {
@@ -47,8 +51,7 @@ const AnunturileMele = () => {
     
             setAnunturiIDs(data.anunturiIds || []);
             setCountAnunturi(data.totalAnunturi || 0);
-            console.log(data);
-            console.log(anunturiIDs);
+            setDataFullyLoaded(true);
         } catch (error) {
             console.error("Error fetching anunturi:", error);
         }
@@ -61,6 +64,12 @@ const AnunturileMele = () => {
     const currentAnunturi = anunturiIDs.slice(indexOfFirstItem, indexOfLastItem);
 
     const [editingAnuntID, setEditingAnuntID] = useState(0);
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div className="AnunturileMele-main-container">

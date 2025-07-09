@@ -41,7 +41,6 @@ const Anunt = (anuntData) => {
 
 
     useEffect( () => {
-        console.log(anuntData);
         fetchAnuntImagine();
     }, [])
 

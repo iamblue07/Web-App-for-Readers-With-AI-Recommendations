@@ -19,12 +19,12 @@ import ConversatiileMele from './subpages/ConversatiileMele';
 import ProfilUtilizatori from './pages/ProfilUtilizatori';
 import { GlobalContext } from './context/GlobalState';
 import logo from './assets/AuroraCodex.png';
+import Statistici from './subpages/Statistici';
 
 const App = () => {
     const navigate = useNavigate();
     const { authData } = useContext(GlobalContext);
     const location = useLocation();
-    const [showNavbar, setShowNavbar] = useState(true)
 
     useEffect(() => {
         if (location.pathname === '/' && authData.userId !== 0) {
@@ -122,6 +122,7 @@ const App = () => {
             <Route path="/cauta/carte/:idCarte" element={<DetaliiCarte />} />
             <Route path='/forumuri/:idForum' element={<Forum/>}/>
             <Route path='/forumuri/ForumurileMele' element={<ForumurileMele/>}/>
+            <Route path='/statistici' element={<Statistici/>}/>
           </Routes>
         </div>
       </div>;

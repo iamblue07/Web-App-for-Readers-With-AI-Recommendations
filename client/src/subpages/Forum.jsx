@@ -8,7 +8,7 @@ import { GlobalContext } from "../context/GlobalState";
 import "../styles/Forum.css";
 import defaultavatar from "../assets/stock.jpg";
 import RaportareButon from "../components/RaportareButon/RaportareButon";
-
+import LoadingScreen from "../components/Incarcare/Incarcare";
 const Forum = () => {
 
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ const Forum = () => {
   const [forumTitle, setForumTitle] = useState("");
   const [pText, setPText] = useState("");
   const messagesPerPage = 10;
+
+  const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
   useEffect(() => {
     fetchMessages(currentPage);
@@ -49,10 +51,10 @@ const Forum = () => {
         return;
       }
       const data = await response.json();
-      console.log(data);
       setForumMessages(data.messages);
       setTotalPages(data.totalPages);
       setCurrentPage(data.currentPage);
+      setDataFullyLoaded(true);
     } catch (error) {
       console.log("Error fetching messages: ", error);
     } finally {
@@ -138,6 +140,12 @@ const Forum = () => {
       console.log("Error checking rights: ", error);
     }
   };
+
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
   return (
     <>

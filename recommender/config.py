@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     PORT: int
     SECRET_KEY: str
+    OPENAI_API_KEY: str
     class Config:
         env_file = ".env"
 

@@ -1,21 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import CautaFiltre from '../components/Cauta-Filtre/Cauta-Filtre';
 import config from '../utils/config';
 import "../styles/Cauta.css";
 import Carte from '../components/Carte/Carte';
+import LoadingScreen from '../components/Incarcare/Incarcare';
+import { BookContext } from '../context/CautaState';
 
 const booksPerPage = 16;
 
 const Cauta = () => {
-    const [searchWords, setSearchWords] = useState('');
-    const [genuriSelectate, setGenuriSelectate] = useState([]);
-    const [pretMinim, setPretMinim] = useState(0);
-    const [pretMaxim, setPretMaxim] = useState(9999);
-    const [bookIds, setBookIds] = useState([]);
-    const [booksDetails, setBooksDetails] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [pageInput, setPageInput] = useState('');
+const {
+    bookIds,
+    setBookIds,
+    booksDetails,
+    setBooksDetails,
+    currentPage,
+    setCurrentPage,
+    searchWords,
+    setSearchWords,
+    genuriSelectate,
+    setGenuriSelectate,
+    pretMinim,
+    setPretMinim,
+    pretMaxim,
+    setPretMaxim,
+    totalPages,
+    setTotalPages,
+    pageInput,
+    setPageInput,
+    sortareSelectata,
+    setSortareSelectata
+  } = useContext(BookContext);
+
+    const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
 
     const handleSearch = async () => {
         try {
@@ -51,6 +68,7 @@ const Cauta = () => {
             }
             const data = await response.json();
             setBooksDetails(data);
+            setDataFullyLoaded(true);
         } catch (error) {
             console.error("Error fetching book details:", error);
         }
@@ -101,8 +119,13 @@ const Cauta = () => {
     };
 
 
-    const [sortareSelectata, setSortareSelectata] = useState("Sorteaza dupa");
+    
 
+    if(!dataFullyLoaded) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
     return (
         <div className="Cauta-Main-Container">

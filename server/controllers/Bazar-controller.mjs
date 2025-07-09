@@ -82,6 +82,10 @@ const createAnunt = async(req, res) => {
         }
         const {anuntTitle, anuntDescriere, anuntData,
         anuntPret, anuntNegociabil, anuntIdCarte, genLiterar} = req.body;
+        let idCarte = null;
+        if (anuntIdCarte != null && !isNaN(anuntIdCarte)) {
+          idCarte = parseInt(req.body.anuntIdCarte, 10);
+        }
         if(!req.file) {
             return res.status(400).json({message:"Niciun fisier incarcat!"});
         }
@@ -96,10 +100,11 @@ const createAnunt = async(req, res) => {
             esteNegociabil: anuntNegociabil,
             esteDisponibil: true,
             caleImagine: imagePath,
-            idCarte: anuntIdCarte
+            idCarte: idCarte
         })
         return res.status(200).json({message: "Anunt creat cu succes!"});
     }catch(error){
+        console.log(error);
         return res.status(500).json({message: "Internal server error"});
     }
 }
