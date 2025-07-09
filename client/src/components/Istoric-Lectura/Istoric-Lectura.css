@@ -8,15 +8,33 @@
     padding: 20px;
 }
 
+.page-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
 .tabel-istoric {
     width: 100%;
-    max-height: 500px;  /* Increased height to make the table longer */
+    max-height: 500px;
     border-collapse: collapse;
     margin-top: 20px;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabel-istoric {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabel-istoric-wrapper {
-    max-height: 450px; /* Increased max height */
+    max-height: 450px;
     overflow-y: auto;
     display: block;
 }
@@ -54,26 +72,23 @@
 
 .tabel-titlu:hover {
     transform: translateY(-3px);
-    color:#EE2E31;
-}
-.tabel-istoric-head:nth-child(1), 
-.tabel-istoric-data:nth-child(1) { 
-    width: 60%;
+    color: #EE2E31;
 }
 
-.tabel-istoric-head:nth-child(2), 
-.tabel-istoric-data:nth-child(2) { 
-    width: 30%;
-}
+.tabel-istoric-head:nth-child(1),
+.tabel-istoric-data:nth-child(1) { width: 40%; }
 
-.tabel-istoric-head:nth-child(3), 
-.tabel-istoric-data:nth-child(3) { 
-    width: 10%;
+.tabel-istoric-head:nth-child(2),
+.tabel-istoric-data:nth-child(2) { width: 30%; }
+
+.tabel-istoric-head:nth-child(3),
+.tabel-istoric-data:nth-child(3) {
+    width: 20%;
     text-align: center;
 }
 
 .tabel-istoric-buton {
-    padding: 8px 15px; /* Increased padding to make button slightly longer */
+    padding: 8px 15px;
     border: 2px solid #090C08;
     border-radius: 8px;
     background-color: #FFFBFE;
@@ -81,7 +96,7 @@
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease;
-    min-width: 100px; /* Ensuring the button is wide enough */
+    min-width: 100px;
 }
 
 .tabel-istoric-buton:hover {
@@ -101,6 +116,7 @@
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .pagination-istoric button.active {
@@ -108,31 +124,86 @@
     color: white;
 }
 
+
+@media only screen and (max-width: 900px) {
+    .istoric-container {
+        padding: 15px;
+    }
+
+    .tabel-istoric-head:nth-child(1),
+    .tabel-istoric-data:nth-child(1) { width: 50%; }
+
+    .tabel-istoric-head:nth-child(2),
+    .tabel-istoric-data:nth-child(2) { width: 25%; }
+
+    .tabel-istoric-head:nth-child(3),
+    .tabel-istoric-data:nth-child(3) {
+        width: 15%;
+        text-align: center;
+    }
+
+    .tabel-istoric-head,
+    .tabel-istoric-data {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .tabel-istoric-buton {
+        padding: 7px 14px;
+        font-size: 0.9rem;
+        min-width: 90px;
+    }
+
+    .pagination-istoric button {
+        padding: 7px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+
 @media only screen and (max-width: 600px) {
     .istoric-container {
         padding: 10px;
     }
-    
-    .tabel-istoric {
-        width: 100%;
-        table-layout: auto;
-    }
-    
-    .tabel-istoric-head,
-    .tabel-istoric-data {
-        padding: 10px;
-        font-size: 10px;
-        white-space: normal;
-        word-break: break-word;
-    }
-    
-    .pagination-istoric button {
-        padding: 6px 8px;
-        font-size: 10px;
+
+    .tabel-istoric-header {
+        display: none;
     }
 
+    .tabel-istoric-row {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #FFF;
+    }
+
+    .tabel-istoric-data {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 0.85rem;
+    }
+
+    .tabel-istoric-data:nth-of-type(1)::before { content: "Titlu:"; font-weight: bold; }
+    .tabel-istoric-data:nth-of-type(2)::before { content: "Autor:"; font-weight: bold; }
+    .tabel-istoric-data:nth-of-type(3)::before { content: "Rating:"; font-weight: bold; }
+    .tabel-istoric-data:nth-of-type(4)::before { content: "Acțiune:"; font-weight: bold; }
+
     .tabel-istoric-buton {
-        padding: 6px 12px;
-        font-size: 12px;
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        width: auto;
+    }
+
+    .pagination-istoric {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination-istoric button {
+        padding: 6px 8px;
+        font-size: 0.85rem;
     }
 }

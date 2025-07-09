@@ -17,6 +17,8 @@ const VeziAnunt = () => {
     const [anuntData, setAnuntData] = useState({});
     const [imagePath, setImagePath] = useState(stock_book);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const fetchAnuntData = async () => {
         try{
             const response = await fetch(`${config.API_URL}/api/bazar/anunt/${idAnunt}`, {
@@ -245,9 +247,12 @@ const VeziAnunt = () => {
             <div className="VeziAnunt-left-container">
                 <div className="VeziAnunt-date-picture">
                     <p className="VeziAnunt-p-date">Publicat in data de: {new Date(anuntData.dataAnunt).toLocaleString()}</p>
-                    <img src={imagePath}
-                        alt={"Anunt Image"}
-                        className="VeziAnunt-image"/>
+                    <img
+                       src={imagePath}
+                       alt="Anunt Image"
+                       className="VeziAnunt-image"
+                       onClick={() => setIsModalOpen(true)}
+                   />
                 </div>
                 <div className="VeziAnunt-price-description">
                     <p className="VeziAnunt-title">Titlu: {anuntData.titluAnunt}</p>
@@ -284,6 +289,16 @@ const VeziAnunt = () => {
                 <p className="VeziAnunt-p-ConsumerRights">Drepturile consumatorilor si siguranta in aplicatie</p>
                 <p className="VeziAnunt-p-Text">{text.consumerRights}</p>
             </div>
+            {isModalOpen && (
+                <div className="VeziAnunt-modal-overlay" onClick={() => setIsModalOpen(false)}>
+                    <div className="VeziAnunt-modal-content" onClick={e => e.stopPropagation()}>
+                    <span className="VeziAnunt-modal-close" onClick={() => setIsModalOpen(false)}>
+                        &times;
+                    </span>
+                    <img src={imagePath} alt="Anunt full‑size" />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

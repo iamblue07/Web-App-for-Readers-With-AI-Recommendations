@@ -1,4 +1,3 @@
-// src/controllers/statisticiController.js
 import models from '../models/index.mjs';
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';

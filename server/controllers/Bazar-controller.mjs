@@ -17,14 +17,12 @@ const getCartiDataShort = async (req, res) => {
         const offset = (page - 1) * pageSize;
 
         if (keywords && keywords.trim() !== "") {
-            // Get total count for pagination
             const totalCount = await models.Carte.count({
                 where: {
                     titlu: { [Op.like]: `%${keywords}%` }
                 }
             });
 
-            // Get paginated results
             const carti = await models.Carte.findAll({
                 where: {
                     titlu: { [Op.like]: `%${keywords}%` }
@@ -32,7 +30,7 @@ const getCartiDataShort = async (req, res) => {
                 attributes: ["id", "titlu", "autor", "genLiterar"],
                 limit: parseInt(pageSize),
                 offset: parseInt(offset),
-                order: [['titlu', 'ASC']] // Add ordering for consistent pagination
+                order: [['titlu', 'ASC']]
             });
 
             const data = carti.map((carte) => ({

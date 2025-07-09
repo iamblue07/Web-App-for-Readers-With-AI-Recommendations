@@ -5,13 +5,11 @@
     align-items: center;
 }
 
-/* Other user messages (left aligned) */
 .MesajChat-otherUser {
     justify-content: flex-start;
     margin-right: auto;
 }
 
-/* Same user messages (right aligned) */
 .MesajChat-sameUser {
     justify-content: flex-end;
     margin-left: auto;
@@ -42,7 +40,6 @@
     word-break: break-word;
 }
 
-/* Same user message styling */
 .MesajChat-sameUser .MesajChat-Continut,
 .MesajChat-sameUser .MesajChat-MediaImage {
     background-color: #FFFBFE;

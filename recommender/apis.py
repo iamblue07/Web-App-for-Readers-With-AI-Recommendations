@@ -1,4 +1,3 @@
-# apis.py
 from fastapi import APIRouter, HTTPException, Request, status, Query, Depends
 from utils import (query_and_translate, start_sentiment_analysis,
                    zero_shot_classification, retrieve_semantic_recommendations,

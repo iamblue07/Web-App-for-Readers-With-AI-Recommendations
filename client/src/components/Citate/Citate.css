@@ -1,0 +1,57 @@
+.quotes-section {
+  width: 100%;
+  margin: 4px 0 8px;
+  padding: 5px 10px;
+  background: #FFFBFE;
+}
+
+.qr-container {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+}
+
+.qr-quote {
+  position: absolute;
+  width: 100%;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.qr-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none;
+}
+
+.qr-fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.qr-fade-in {
+  opacity: 1;
+  transform: translateY(-0px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Text styling */
+.qr-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #090C08;
+  margin-bottom: 10px;
+  max-width: 800px;
+}
+
+.qr-author {
+  font-size: 18px;
+  font-weight: bold;
+  color: #090C08;
+}

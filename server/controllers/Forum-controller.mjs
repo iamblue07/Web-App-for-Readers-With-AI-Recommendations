@@ -55,7 +55,7 @@ const getUserForumuri = async (req, res) => {
 
         const whereClause = {
             idUtilizator: userId,
-            ...(search ? { titlu: { [Op.like]: `%${search}%` } } : {}) // Search by title if provided
+            ...(search ? { titlu: { [Op.like]: `%${search}%` } } : {})
         };
 
         const { rows: forums, count } = await models.Forum.findAndCountAll({

@@ -32,6 +32,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .VeziAnunt-p-utilizator {
@@ -50,11 +51,70 @@
 }
 
 .VeziAnunt-image {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  width: 360px;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.VeziAnunt-image:hover {
+  transform: scale(1.05);
+}
+.VeziAnunt-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 0;
+}
+
+.VeziAnunt-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  z-index: 1001;
+  background: rgba(0,0,0,0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.VeziAnunt-modal-close:hover {
+  background: rgba(0,0,0,0.6);
+}
+.VeziAnunt-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.VeziAnunt-modal-content img {
+  max-width: 100%;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 .VeziAnunt-price-description {

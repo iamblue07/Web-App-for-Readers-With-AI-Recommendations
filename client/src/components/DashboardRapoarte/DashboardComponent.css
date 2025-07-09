@@ -1,12 +1,11 @@
-/* Ensure the whole component uses full available width */
+
 .Dashboard-main-container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 20px; /* space between items list and details */
+    gap: 20px;
 }
 
-/* Modifier class to apply two-column layout when report details exist */
 .Dashboard-main-container.with-details .Dashboard-reports-items-list {
     width: 66.66%;
 }
@@ -15,12 +14,10 @@
     width: 33.33%;
 }
 
-/* By default, the reports list takes full width */
 .Dashboard-reports-items-list {
     width: 100%;
 }
 
-/* Header container for buttons: left and right aligned */
 .Dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -28,7 +25,6 @@
     margin-bottom: 20px;
 }
 
-/* Styling for the header buttons (using your reference colors, borders, etc.) */
 .Dashboard-header-button {
     padding: 10px 15px;
     border: 2px solid #090C08;
@@ -45,7 +41,6 @@
     transform: translateY(-3px);
 }
 
-/* Pagination styling for consistency */
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -64,7 +59,6 @@
     box-shadow: 0 2px 5px rgba(238,46,49,0.6);
 }
 
-/* Active or disabled button state */
 .pagination-button.active,
 .pagination-button:disabled {
     background-color: #090C08;
@@ -73,7 +67,6 @@
     box-shadow: none;
 }
 
-/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .Dashboard-main-container.with-details {
         flex-direction: column;

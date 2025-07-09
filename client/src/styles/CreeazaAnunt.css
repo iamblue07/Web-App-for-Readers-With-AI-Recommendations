@@ -96,8 +96,8 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(238,46,49,0.6);
   z-index: 100;
-  max-height: 200px; /* Ajustează în funcție de dimensiunea rândurilor */
-  overflow-y: auto; /* Permite scroll */
+  max-height: 200px;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -110,7 +110,7 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  white-space: nowrap; /* Previne textul să fie pe mai multe linii */
+  white-space: nowrap;
 }
 
 .genuri-content td:hover{
@@ -304,12 +304,12 @@
 .input-buton-container {
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* Ensures equal height for input/button */
+  align-items: stretch;
   gap: 10px;
 }
 
 .CreeazaAnunt-input-cauta {
-  flex: 1; /* Takes remaining space */
+  flex: 1;
   padding: 10px;
   border: 2px solid #090C08;
   border-radius: 15px;
@@ -319,7 +319,7 @@
   height: 40px;
   font-family: inherit;
   font-size: inherit;
-  line-height: 1; /* Fix text vertical alignment */
+  line-height: 1;
 }
 
 .CreeazaAnunt-input-cauta:hover {
@@ -343,8 +343,8 @@
   white-space: nowrap;
   font-family: inherit;
   font-size: inherit;
-  line-height: 1; /* Fix text vertical alignment */
-  flex-shrink: 0; /* Prevents button from shrinking */
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .CreeazaAnunt-btn-cauta:hover {
@@ -367,7 +367,6 @@
   transform: translateY(-3px);
 }
 
-/* Add to your existing CSS file */
 .CreeazaAnunt-rezultate-container {
   max-height: 400px;
   overflow-y: auto;
@@ -427,7 +426,6 @@
   margin-top: 5px;
 }
 
-/* Responsive pagination */
 @media (max-width: 768px) {
   .pagination-controls {
     flex-direction: column;

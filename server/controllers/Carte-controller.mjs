@@ -1,7 +1,7 @@
 import models from "../models/index.mjs";
 import dotenv from 'dotenv';
 import path from 'path';
-import { QueryTypes, Op } from "sequelize";
+import { QueryTypes, Op, Sequelize } from "sequelize";
 import { fileURLToPath } from "url";
 
 dotenv.config();
@@ -375,6 +375,23 @@ const getRecommendedBooks = async (req, res) => {
     }
 };
 
+const getRandomBooks = async (req, res) => {
+    try{
+        const limit = 20;
+        const randomBooks = await models.Carte.findAll({
+            attributes: ['id'],
+            order: [[Sequelize.fn('RAND')]],
+            limit,
+        });
+        const ids = randomBooks.map(book => book.id);
+
+    return res.status(200).json({ ids });
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({error:"Internal server error"});
+    }
+}
 export default {
     getCarteImagine,
     postCartiIDs,
@@ -385,5 +402,6 @@ export default {
     postMarcheazaCarteCitita,
     postDemarcheazaCarteCitita,
     getUtilizatorIstoric,
-    getRecommendedBooks
+    getRecommendedBooks,
+    getRandomBooks
 };

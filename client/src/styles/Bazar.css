@@ -132,12 +132,11 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(238,46,49,0.6);
   z-index: 100;
-  max-height: 200px; /* Ajustează în funcție de dimensiunea rândurilor */
-  overflow-y: auto; /* Permite scroll */
+  max-height: 200px;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* Asigură că fiecare celulă a tabelului are o înălțime corespunzătoare */
 .categorii-content table,
 .sortari-content table {
   width: 100%;
@@ -149,7 +148,7 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  white-space: nowrap; /* Previne textul să fie pe mai multe linii */
+  white-space: nowrap;
 }
 
 .categorii-content td:hover,
@@ -196,7 +195,7 @@
   padding: 20px;
   box-shadow: 0 2px 5px rgba(238,46,49,0.6);
   transition: all 0.3s ease;
-  overflow: hidden; /* Prevent any unexpected overflow */
+  overflow: hidden;
 }
 
 .pagination-container {

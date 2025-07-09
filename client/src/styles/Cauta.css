@@ -1,11 +1,9 @@
-/* Global reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Main container */
 .Cauta-Main-Container {
   display: flex;
   flex-direction: column;
@@ -15,7 +13,6 @@
   padding: 20px;
 }
 
-/* Search bar layout */
 .container-Search-Button {
   display: flex;
   justify-content: space-between;
@@ -55,7 +52,6 @@
   transform: translateY(-7px);
 }
 
-/* Filters & results layout */
 .container-filtre-rezultate {
   display: flex;
   gap: 20px;
@@ -87,7 +83,6 @@
   overflow-y: auto;
 }
 
-/* Pagination container */
 .pagination-container {
   overflow-x: hidden;
   flex-wrap: wrap;
@@ -97,7 +92,6 @@
   gap: 10px;
 }
 
-/* Centered prev/page info/next */
 .pagination-center {
   display: flex;
   align-items: center;
@@ -106,7 +100,6 @@
   justify-content: center;
 }
 
-/* Right-aligned page jump */
 .pagination-right {
   display: flex;
   flex-direction: row;
@@ -170,7 +163,6 @@
   transform: translateY(-10px);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .container-Search-Button {
     flex-direction: column;

@@ -1,226 +1,299 @@
+/* src/styles/ProfilPersonal.css */
 .big-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .container-istoric {
-    align-items: center;
-    align-self: center;
+  align-items: center;
+  align-self: center;
 }
 
 .main-container-Profil {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px;
 }
 
 .container-Profil-Preferinte {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
 }
 
 .container-Profil {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 2;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 2;
+  padding: 20px;
 }
 
 .container-Imagine-Deconectare-Profil {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .container-Imagine-Profil {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .imagine-profil {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
-    transition: box-shadow 0.3s ease-in-out;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .imagine-profil:hover {
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 .container-descriere-Profil {
-    display: flex;
-    flex-direction: column;
-    text-align: justify;
-    padding: 100px;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  padding: 100px;
 }
 
 .div-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .container-schimbare-parola {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    gap: 10px;
-    margin: 5px;
-    border: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 10px;
+  margin: 5px;
+  border: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .buton-Profil {
-    padding: 10px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    color: #090C08;
-    margin: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  margin: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
 }
 
 .buton-Deconectare {
-    padding: 10px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #090C08;
-    color: #FFFBFE;
-    margin: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  margin: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
 }
 
 .buton-Deconectare:hover {
-    color: #EE2E31;
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  color: #EE2E31;
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 .buton-Schimba {
-    padding: 10px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #090C08;
-    color: #FFFBFE;
-    margin: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(84, 238, 46, 0.3);
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #090C08;
+  color: #FFFBFE;
+  margin: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(84, 238, 46, 0.3);
 }
 
 .buton-Schimba:hover {
-    color: rgb(84, 238, 46);
-    box-shadow: 0 8px 12px rgba(84, 238, 46, 0.6);
+  color: rgb(84, 238, 46);
+  box-shadow: 0 8px 12px rgba(84, 238, 46, 0.6);
 }
 
 .buton-Profil:hover {
-    background-color: transparent;
-    color: #EE2E31;
-    border-color: #EE2E31;
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  background-color: transparent;
+  color: #EE2E31;
+  border-color: #EE2E31;
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 .buton-Actualizeaza {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    color: #090C08;
-    margin: 10px;
-    transition: all 0.3s ease;
-    text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  margin: 10px;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .buton-Actualizeaza:hover {
-    color: #4CAF50;
-    border-color: #4CAF50;
-    box-shadow: 0 8px 12px #4CAF50;
+  color: #4CAF50;
+  border-color: #4CAF50;
+  box-shadow: 0 8px 12px #4CAF50;
 }
 
 .textarea-profil {
-    padding: 10px;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
-    resize: none;
-    margin-bottom: 10px;
-    transition: box-shadow 0.3s ease-in-out;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+  resize: none;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .textarea-profil:hover {
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
-/* Updated Input Field Styles */
 input[type="password"], input[type="text"], input[type="email"], input[type="number"], input[type="search"] {
-    padding: 10px;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
-    margin-bottom: 10px;
-    width: 100%;
-    transition: all 0.3s ease;
+  padding: 10px;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  box-shadow: 0 4px 6px rgba(238, 46, 49, 0.3);
+  margin-bottom: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 input[type="password"]:hover, input[type="text"]:hover, input[type="email"]:hover, input[type="number"]:hover, input[type="search"]:hover {
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
 input[type="password"]:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus {
-    outline: none;
-    border-color: #EE2E31;
-    box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
+  outline: none;
+  border-color: #EE2E31;
+  box-shadow: 0 8px 12px rgba(238, 46, 49, 0.6);
 }
 
-@media only screen and (max-width: 600px) {
-    .main-container-Profil {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
+/* Mobile Responsiveness */
+@media only screen and (max-width: 900px) {
+  .main-container-Profil {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .container-Profil-Preferinte,
+  .container-Profil {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .container-Imagine-Deconectare-Profil {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .container-descriere-Profil {
+    padding: 30px 0;
+    text-align: center;
+  }
+  
+  .imagine-profil {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .container-schimbare-parola {
+    padding-left: 10px;
+    padding-right: 10px;
+    align-self: center;
+  }
+  
+  .textarea-profil {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input[type="password"], 
+  input[type="text"], 
+  input[type="email"], 
+  input[type="number"], 
+  input[type="search"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .buton-Profil, 
+  .buton-Deconectare, 
+  .buton-Schimba, 
+  .buton-Actualizeaza {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .container-istoric {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .container-dashboard {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+}
 
-    .container-Preferinte,
-    .container-Profil {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .container-descriere-Profil {
-        padding: 20px;
-    }
-
-    .container-Imagine-Deconectare-Profil {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .imagine-profil {
-        width: 80px;
-        height: 80px;
-    }
-
-    .container-schimbare-parola {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+@media only screen and (max-width: 480px) {
+  .container-descriere-Profil {
+    padding: 20px 0;
+  }
+  
+  .buton-Profil, 
+  .buton-Deconectare, 
+  .buton-Schimba, 
+  .buton-Actualizeaza {
+    padding: 8px;
+    font-size: 14px;
+    align-self: center;
+  }
+  
+  .imagine-profil {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .textarea-profil {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  input[type="password"], 
+  input[type="text"], 
+  input[type="email"], 
+  input[type="number"], 
+  input[type="search"] {
+    padding: 8px;
+    font-size: 14px;
+  }
 }

@@ -9,7 +9,6 @@ const buildAndSendRecommendations = async (req, res) => {
             return res.status(404).json({ message: "Utilizator not found" });
         }
 
-        // 1. Load explicit genre preferences
         const preferinte = await models.Preferinte.findOne({
             where: { idUtilizator }
         });
@@ -24,7 +23,6 @@ const buildAndSendRecommendations = async (req, res) => {
             preferinte.preferintaCinci
         ].filter(g => g);
 
-        // 2. Load books the user has read with their scores and emotion data
         const cartiCitite = await models.CarteCitita.findAll({
             where: { idUtilizator },
             include: [{
@@ -37,7 +35,6 @@ const buildAndSendRecommendations = async (req, res) => {
             }]
         });
 
-        // 3. Compute implicit genre averages from their ratings
         const genreAcc = {};
         cartiCitite.forEach(({ scor, Carte }) => {
             const gen = Carte.genLiterar || 'Unknown';
@@ -52,7 +49,6 @@ const buildAndSendRecommendations = async (req, res) => {
             avgScore: sum / count
         }));
 
-        // 4. Merge explicit + implicit scores with a boost for explicit prefs
         const BOOST = 1.2;
         const merged = implicitGenres.reduce((acc, { genre, avgScore }) => {
             acc[genre] = avgScore;
@@ -63,12 +59,10 @@ const buildAndSendRecommendations = async (req, res) => {
             merged[g] = current * BOOST;
         });
 
-        // 5. Sort genres descending by merged score
         const sortedGenres = Object.entries(merged)
             .sort(([, a], [, b]) => b - a)
             .map(([genre]) => genre);
 
-        // 6. Optionally derive sentiment from top-rated books (scor >= 4)
         let sentiment;
         const highRated = cartiCitite.filter(rc => rc.scor >= 4).map(rc => rc.Carte);
         if (highRated.length) {
@@ -86,11 +80,9 @@ const buildAndSendRecommendations = async (req, res) => {
                 .sort(([, a], [, b]) => b - a)[0][0];
         }
 
-        // 7. Build the natural‑language query from top 3 genres
         const topGenres = sortedGenres.slice(0, 3);
         const query = `Literatura moderna despre ${topGenres.join(', ')}`;
 
-        // 8. Fire the recommendation API
         const payload = {
                 query,
                 top_k: 16,

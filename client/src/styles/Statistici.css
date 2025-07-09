@@ -45,7 +45,6 @@
   margin-bottom: 20px;
 }
 
-/* Chart container styling */
 .chart-box {
   background-color: #fff;
   padding: 10px;
@@ -54,7 +53,6 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-/* Filter box styling */
 .filter-box {
   background-color: #f9f9f9;
   padding: 15px;
@@ -80,7 +78,6 @@
   font-style: italic;
 }
 
-/* Responsive tweaks */
 @media (max-width: 600px) {
   .chart-box {
     padding: 5px;

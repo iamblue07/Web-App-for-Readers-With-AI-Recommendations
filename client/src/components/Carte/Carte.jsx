@@ -45,7 +45,7 @@ const Carte = (carteData) => {
 
     return (
         <div className="book-main-container" onClick={() => {
-            navigate(`carte/${carteData.id}`)            
+            navigate(`/cauta/carte/${carteData.id}`)            
         }}>
                 <div className="image-container">
                     <img

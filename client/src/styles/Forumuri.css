@@ -1,4 +1,3 @@
-/* Updated CSS with same color palette */
 .forum-container {
   padding: 20px;
   background-color: #FFFBFE;
@@ -183,7 +182,7 @@
 
 
 .card-header {
-  height: 40px; /* Fixed height for title row */
+  height: 40px;
   display: flex;
   align-items: center;
   margin-bottom: 5px;
@@ -222,7 +221,7 @@
 }
 
 .card-meta {
-  height: 30px; /* Fixed height for meta row */
+  height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -263,7 +262,7 @@
 }
 
 .report-section {
-  height: 30px; /* Fixed height for report row */
+  height: 30px;
   display: flex;
   align-items: center;
 }
@@ -309,7 +308,6 @@
   color: #FFFBFE;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
   .forums-grid {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -340,7 +338,6 @@
     grid-template-columns: 1fr;
   }
   
-  /* Responsive adjustments for forum cards */
   .card-header {
     height: auto;
     min-height: 40px;

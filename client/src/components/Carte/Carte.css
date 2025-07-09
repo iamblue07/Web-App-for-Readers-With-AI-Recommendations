@@ -9,15 +9,15 @@
     padding: 15px;
     box-sizing: border-box;
     cursor: pointer;
-    background-color: #FFFBFE; /* Soft background color */
+    background-color: #FFFBFE;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .book-main-container:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
-    transform: translateY(-2px); /* Lift the card slightly on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .image-container {
@@ -53,14 +53,14 @@
     text-overflow: ellipsis;
     white-space: normal;
     word-wrap: break-word;
-    color: #090C08; /* Dark text color for title */
+    color: #090C08;
 }
 
 .autor {
     font-size: 14px;
     margin-bottom: 5px;
     text-align: center;
-    color: #090C08; /* Dark text color for author */
+    color: #090C08;
 }
 
 .pret {
@@ -68,7 +68,7 @@
     font-weight: bold;
     margin-top: 10px;
     text-align: center;
-    color: #EE2E31; /* Red color for price */
+    color: #EE2E31;
 }
 
 .book-main-container .details-container p {

@@ -1,4 +1,3 @@
-// src/components/Statistici/Statistici.jsx
 import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -179,6 +178,7 @@ const Statistici = () => {
 
       {categorieStatistici === 0 && (
         <>
+          <h3>Total anunturi: {anunturiData.totalAnunt} dintre care {anunturiData.closedAnunt} inchise si {anunturiData.openAnunt} deschise.</h3>
           <h3>Distributie Pret Anunturi</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart
@@ -188,7 +188,7 @@ const Statistici = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="price"
-                label={{ value: 'Preț', position: 'insideBottomRight', offset: -5 }}
+                label={{ value: 'Pret', position: 'insideBottomRight', offset: -5 }}
               />
               <YAxis
                 label={{ value: 'Nr. volume', angle: -90, position: 'insideLeft' }}
@@ -226,7 +226,7 @@ const Statistici = () => {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <p className="chart-placeholder">Nu există date pentru genuri.</p>
+            <p className="chart-placeholder">Nu exista date pentru genuri.</p>
           )}
 
           <h3>Pret Mediu pe Gen</h3>
@@ -240,27 +240,24 @@ const Statistici = () => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line dataKey="count" stroke="#8884d8" name="Preț mediu" />
+              <Line dataKey="count" stroke="#8884d8" name="Pret mediu" />
             </LineChart>
           </ResponsiveContainer>
 
-        <h3>Boxplot Preț Anunțuri</h3>
+        <h3>Boxplot Pret Anunturi</h3>
         <ResponsiveContainer width="100%" height={350}>
             <LineChart
                 data={anunturiData.boxPlotData}
                 margin={{ top: 30, right: 40, left: 20, bottom: 5 }}
             >
-                {/* subtle grid */}
                 <CartesianGrid strokeDasharray="3 3" />
 
-                {/* X axis with padding so labels don’t hug edges */}
                 <XAxis dataKey="name" padding={{ left: 10, right: 10 }} />
 
-                {/* Y axis with label */}
                 <YAxis
                 domain={['dataMin', 'dataMax']}
                 allowDecimals={false}
-                label={{ value: 'Preț (lei)', angle: -90, position: 'insideLeft' }}
+                label={{ value: 'Pret (lei)', angle: -90, position: 'insideLeft' }}
                 />
 
                 <Tooltip formatter={value => value.toFixed(2)} />
@@ -286,7 +283,7 @@ const Statistici = () => {
                 />
                 <Line
                 dataKey="median"
-                name="Mediană"
+                name="Mediana"
                 stroke="#82ca9d"
                 strokeWidth={4}
                 dot={{ r: 5 }}
@@ -331,7 +328,7 @@ const Statistici = () => {
             <div className="statistici-col filter-box">
               <input
                 type="text"
-                placeholder="Caută autor"
+                placeholder="Cauta autor"
                 value={selectedAuthor}
                 onChange={handleAuthorChange}
                 list="authors-list"

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/postCartiData', carteController.getCartiData);
 router.post('/postCartiIDs', carteController.postCartiIDs);
+router.get('/getRandomBooks', carteController.getRandomBooks);
 router.get('/:carteId/getCarteImagine', carteController.getCarteImagine);
 router.get('/carte/:idCarte', carteController.getOneCarte);
 router.get('/carte/:idCarte/oferte', carteController.getOferteCarte);

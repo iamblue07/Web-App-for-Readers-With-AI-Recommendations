@@ -41,7 +41,6 @@ const Raport = CreateRaportEntity(sequelize, Sequelize);
 const RecomandareAI = CreateRecomandareAIEntity(sequelize, Sequelize);
 const Utilizator = CreateUtilizatorEntity(sequelize, Sequelize);
 
-// -------- RELAȚII CORECTATE -------- //
 
 // --- Relații pentru Forum și Mesaje ---
 Forum.hasMany(MesajForum, { foreignKey: 'idForum' });
@@ -93,7 +92,7 @@ OfertaCarte.belongsTo(Carte, { foreignKey: 'idCarte' });
 Carte.hasMany(RecomandareAI, { foreignKey: 'idCarte' });
 RecomandareAI.belongsTo(Carte, { foreignKey: 'idCarte' });
 
-// Sincronizare bazei de date
+// Sincronizare baza de date
 (async () => {
     try {
         await sequelize.sync({ alter: false, force: false });

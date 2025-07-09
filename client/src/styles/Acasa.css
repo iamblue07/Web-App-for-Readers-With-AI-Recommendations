@@ -1,123 +1,182 @@
+:root {
+  --color-bg: #FFFBFE;
+  --color-text: #1A1A1A;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
+  --spacing: 20px;
+  --transition-duration: 0.25s;
+  --shadow-light: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --image-max-width: 240px;
+  --image-max-height: 240px;
+}
+
+.btnStatistici {
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  margin: 10px;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  text-align: center;
+}
+
+.btnStatistici:hover {
+  transform: translateY(-3px);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
 .main-container-Acasa {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: calc(var(--spacing) * 1.5) var(--spacing);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  min-height: 400px;
-  flex-direction: column;
-  background-color: #FFFBFE;
-  color: #090C08;
-  padding: 20px;
-}
-
-.container-texts {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
 }
 
 .containerOne,
 .containerTwo {
   display: flex;
-  flex-direction: row;
+  gap: var(--spacing);
   align-items: flex-start;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+.containerOne,
+.containerTwo {
   justify-content: space-between;
 }
 
-.containerOne .textBlock,
-.containerTwo .textBlock,
-.textTypeOne,
-.textTypeTwo,
-.textThree {
+.container-texts {
   flex: 1;
-  border: 2px solid #090C08;
-  border-radius: 15px;
-  padding: 20px;
-  background-color: #FFFBFE;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
 }
 
-.containerOne .textBlock:hover,
-.containerTwo .textBlock:hover,
-.textTypeOne:hover,
-.textTypeTwo:hover,
-.textThree:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-5px);
+.textBlock {
+  background: var(--color-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing);
+  box-shadow: var(--shadow-light);
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  text-align: justify;
+}
+
+.textBlock:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.textTypeOne {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.textTypeTwo {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .pictureOne,
 .pictureTwo {
-  height: auto;
   width: 100%;
-  max-width: 300px;
-  max-height: 200px;
+  max-width: var(--image-max-width);
+  height: var(--image-max-height);
+  border-radius: var(--border-radius);
   object-fit: cover;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(238,46,49,0.6);
-}
-
-.containerOne .pictureOne {
-  margin-left: 20px;
-}
-
-.containerTwo .pictureTwo {
-  margin-right: 20px;
-}
-
-.containerTwo {
-  padding-top: 20px;
+  box-shadow: var(--shadow-light);
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  transform: translateY(-10px);
 }
 
 .pictureOne:hover,
 .pictureTwo:hover {
-  box-shadow: 0 4px 10px rgba(238,46,49,0.9);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
-.textBlock {
+.book-carousel {
   width: 100%;
-  text-align: justify;
+  overflow: hidden;
+  padding: 10 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  margin: calc(var(--spacing)) 0;
+}
+
+.book-carousel-track {
+  display: flex;
+  animation: scroll-left 120s linear infinite;
+  gap: var(--spacing);
+  padding: 0 var(--spacing);
+}
+
+.book-carousel:hover .book-carousel-track {
+  animation-play-state: paused;
+}
+
+.book-carousel-track > * {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-800%); }
+}
+
+@media (max-width: 1024px) {
+  .book-carousel-track > * {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
 }
 
 @media (max-width: 768px) {
-  .main-container-Acasa {
-    padding: 10px;
-  }
   .containerOne,
   .containerTwo {
     flex-direction: column;
     align-items: center;
   }
-  .pictureOne,
-  .pictureTwo {
-    max-width: 100%;
-    max-height: 250px;
-    margin: 10px 0;
+  .book-carousel-track > * {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
   }
 }
 
 @media (max-width: 480px) {
-  .containerOne .textBlock,
-  .containerTwo .textBlock {
-    padding: 8px 12px;
-  }
-  .pictureOne,
-  .pictureTwo {
-    max-height: 200px;
+  .main-container-Acasa {
+    padding: var(--spacing) var(--spacing);
   }
   .textBlock {
-    font-size: 12px;
+    padding: calc(var(--spacing) * 0.8);
+    font-size: 0.875rem;
+  }
+  .book-carousel-track > * {
+    flex: 0 0 50%;
+    max-width: 50%;
   }
 }

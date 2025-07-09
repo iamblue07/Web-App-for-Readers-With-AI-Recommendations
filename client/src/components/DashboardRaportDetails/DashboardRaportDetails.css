@@ -1,4 +1,4 @@
-/* Main container for the report details card */
+
 .DashboardRaportDetails-main-container {
     background-color: #FFFBFE;
     border: 2px solid #090C08;
@@ -10,14 +10,12 @@
     gap: 15px;
 }
 
-/* Paragraph styling for details */
 .Dashboard-p {
     font-size: 1rem;
     color: #090C08;
     margin: 0;
 }
 
-/* Button styling for dashboard actions */
 .Dashboard-buton {
     padding: 10px 15px;
     border: 2px solid #090C08;
@@ -30,7 +28,6 @@
     margin-top: 10px;
 }
 
-/* Hover effect for buttons */
 .Dashboard-buton:hover {
     box-shadow: 0 4px 10px rgba(238,46,49,0.9);
     transform: translateY(-3px);
@@ -46,7 +43,6 @@
     word-break: break-word;
 }
 
-/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .DashboardRaportDetails-main-container {
         padding: 15px;

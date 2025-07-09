@@ -1,121 +1,171 @@
+/* src/components/Profil-Preferinte/Preferinte.css */
 .preferinte-profil-container {
-    width: 20vw;
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  width: 20vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .preferinte-profil-table-container {
-    width: 100%;
-    flex-grow: 1;
-    overflow-y: auto;
-    overflow-x: none;
-
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: none;
 }
 
 .tabel-profil-preferinte {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: none;
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: none;
 }
 
 .tr-profil-preferinte {
-    height: 40px;
+  height: 40px;
 }
 
 .th-preferinte, .td-preferinte {
-    padding: 10px;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: left;
 }
 
 .preferinta {
-    display: inline-block;
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.3s ease;
-    min-width: 100px; /* Ensure buttons are wide enough to fit the text */
-    white-space: nowrap;
-    border: 2px solid; /* Add border */
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  white-space: nowrap;
+  border: 2px solid;
 }
 
 .preferinta.prefer {
-    border-color: #4CAF50;
-    color: #4CAF50;
+  border-color: #4CAF50;
+  color: #4CAF50;
 }
 
 .nu-prefer:hover {
-    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.8);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.8);
 }
 
 .prefer:hover {
-    box-shadow: 0 4px 8px rgba(238,46,49,0.8);
+  box-shadow: 0 4px 8px rgba(238,46,49,0.8);
 }
 
-
 .preferinta.nu-prefer {
-    border-color: #EE2E31;
-    color: #EE2E31;
+  border-color: #EE2E31;
+  color: #EE2E31;
 }
 
 .buton-preferinte {
-    width: 100%;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 2px solid #090C08;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    color: #090C08;
-    margin: 10px;
-    transition: all 0.3s ease;
-    min-width: 130px;
-    text-align: center;
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #090C08;
+  border-radius: 8px;
+  background-color: #FFFBFE;
+  color: #090C08;
+  margin: 10px;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  text-align: center;
 }
 
 .buton-preferinte:hover {
-    background-color: transparent;
-    color: rgba(76, 175, 80, 0.8);
-    border-color: rgba(76, 175, 80, 0.8);
-    box-shadow: 0 8px 12px rgba(76, 175, 80, 0.8);
+  background-color: transparent;
+  color: rgba(76, 175, 80, 0.8);
+  border-color: rgba(76, 175, 80, 0.8);
+  box-shadow: 0 8px 12px rgba(76, 175, 80, 0.8);
+}
+
+/* Mobile Responsiveness */
+@media only screen and (max-width: 900px) {
+  .preferinte-profil-container {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  
+  .preferinte-profil-table-container {
+    overflow-x: auto;
+    max-height: 300px;
+  }
+  
+  .tabel-profil-preferinte {
+    min-width: 500px;
+  }
+  
+  .th-preferinte, 
+  .td-preferinte {
+    padding: 8px;
+    font-size: 13px;
+  }
+  
+  .preferinta {
+    padding: 6px 10px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+  
+  .buton-preferinte {
+    padding: 9px 15px;
+    font-size: 14px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-    .preferinte-container {
-        height: 60vh;  /* Adjusted height for smaller screens */
-        padding: 10px;
-    }
+  .preferinte-profil-container {
+    height: auto;
+    padding: 10px;
+  }
+  
+  .tabel-profil-preferinte {
+    min-width: 450px;
+  }
+  
+  .th-preferinte, 
+  .td-preferinte {
+    padding: 6px;
+    font-size: 12px;
+  }
+  
+  .preferinta {
+    padding: 5px 8px;
+    font-size: 12px;
+    min-width: 85px;
+  }
+  
+  .buton-preferinte {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
 
-    .preferinte-table-container {
-        max-height: 180px; /* Increase table height for mobile */
-        overflow-y: auto;
-    }
-
-    .tabel-preferinte {
-        font-size: 12px;
-    }
-
-    .th-preferinte,
-    .td-preferinte {
-        padding: 6px;
-        font-size: 12px;
-    }
-
-    .preferinta {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-
-    .buton-preferinte {
-        padding: 8px 16px;
-        font-size: 14px;
-        margin: 5px;
-        min-width: 140px; /* Slightly wider button for mobile */
-    }
+@media only screen and (max-width: 480px) {
+  .tabel-profil-preferinte {
+    min-width: 380px;
+  }
+  
+  .th-preferinte, 
+  .td-preferinte {
+    padding: 5px;
+    font-size: 11px;
+  }
+  
+  .preferinta {
+    font-size: 11px;
+    min-width: 80px;
+  }
+  
+  .buton-preferinte {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
 }
