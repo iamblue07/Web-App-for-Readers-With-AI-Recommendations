@@ -1,25 +1,39 @@
+'''
 import asyncio
-
 import numpy as np
-from fastapi import FastAPI, Depends
-import pandas as pd
-import torch
 from langchain_chroma import Chroma
-from langchain.embeddings.openai import OpenAIEmbeddings
+
 from langchain_text_splitters import CharacterTextSplitter
-from sqlalchemy import text
 from fastapi.concurrency import run_in_threadpool
 from langchain.schema import Document
 from langchain.vectorstores import Chroma
 from tqdm.auto import tqdm
+'''
+
+from fastapi import FastAPI, Depends
+import pandas as pd
+'''
+#import torch
+'''
+from sqlalchemy import text
 from models import Utilizator
 from sqlalchemy.orm import Session
 from sqlalchemy import bindparam
 
 from database import engine, SessionLocal, get_db
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+from dotenv import load_dotenv
+load_dotenv()
+emotion_labels = ["anger", "disgust", "fear", "joy", "sadness", "surprise", "neutral"]
 
+from langchain.embeddings.openai import OpenAIEmbeddings
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-large",
+    #model_kwargs={'device': 'cuda'}
+)
+
+'''
+#device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 async def query_and_translate(app:FastAPI):
     sql = """
             SELECT * FROM LicentaDB.cartes
@@ -109,7 +123,7 @@ async def start_sentiment_analysis(app: FastAPI):
     await loop.run_in_executor(None, update_emotion_scores, df_scores)
     print(f"Updated {len(df_scores)} rows with emotion scores.")
 
-emotion_labels = ["anger", "disgust", "fear", "joy", "sadness", "surprise", "neutral"]
+
 async def sentiment_extraction(df: pd.DataFrame) -> pd.DataFrame:
     results = []
     for _, row in tqdm(df.iterrows(), total=len(df)):
@@ -148,14 +162,10 @@ def update_emotion_scores(df_scores: pd.DataFrame):
         conn.execute(sql, records)
 
 
-from dotenv import load_dotenv
-load_dotenv()
+
 
 text_splitter = CharacterTextSplitter(chunk_size=0, chunk_overlap=0, separator="\n")
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-large",
-    #model_kwargs={'device': 'cuda'}
-)
+
 
 async def zero_shot_classification(app: FastAPI):
     df = await query_books()
@@ -173,7 +183,7 @@ async def zero_shot_classification(app: FastAPI):
         store.add_documents([chunk])
     store.persist()
     app.state.vector_store = store
-
+'''
 
 async def retrieve_semantic_recommendations\
                 (app: FastAPI, query: str, top_k: int = 5, user_id: int = None, sentiment: str = None) \

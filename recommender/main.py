@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-import torch.multiprocessing as mp
+import multiprocessing as mp
 from fastapi.middleware.cors import CORSMiddleware
 
 mp.set_start_method('spawn', force=True)

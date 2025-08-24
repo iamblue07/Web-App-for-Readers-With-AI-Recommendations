@@ -1,10 +1,16 @@
-from fastapi import APIRouter, HTTPException, Request, status, Query, Depends
+from fastapi import APIRouter, HTTPException, Request, status, Depends
+'''
 from utils import (query_and_translate, start_sentiment_analysis,
                    zero_shot_classification, retrieve_semantic_recommendations,
+                   verify_administrator)
+from fastapi import Query
+'''
+from utils import (retrieve_semantic_recommendations,
                    verify_administrator)
 router = APIRouter()
 from middlewareAuth import authenticate_token
 
+'''
 @router.get("/translate")
 async def translate(request: Request, user_data: dict  = Depends(authenticate_token)):
     try:
@@ -45,6 +51,7 @@ async def create_vector_store(request:Request, user_data: dict  = Depends(authen
             detail="Failed to initialize vector store"
         )
 
+'''
 
 from pydantic import BaseModel, Field
 class RecommendationRequest(BaseModel):
@@ -59,6 +66,7 @@ async def request_recommendations(
                 body: RecommendationRequest,
                 user_data: dict = Depends(authenticate_token)):
     try:
+        print("Print 1")
         user_id = user_data.get("id")
         res = await retrieve_semantic_recommendations(
             request.app,
