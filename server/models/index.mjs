@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-
+import dotenv from 'dotenv';
 import CreateAnuntBazarEntity from './AnuntBazar.mjs';
 import CreateCarteEntity from './Carte.mjs';
 import CreateCarteCititaEntity from './CarteCitita.mjs';
@@ -13,10 +13,13 @@ import CreateRaportEntity from './Raport.mjs';
 import CreateRecomandareAIEntity from './RecomandareAI.mjs';
 import CreateUtilizatorEntity from './Utilizator.mjs';
 
-const sequelize = new Sequelize('LicentaDB', 'root', 'admin', {
-    host: "localhost",
-    port: 3307,
-    dialect: "mysql"
+dotenv.config()
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_URL,
+    port: process.env.DB_PORT,
+    dialect: "mysql",
+    logging: false
 });
 
 (async () => {

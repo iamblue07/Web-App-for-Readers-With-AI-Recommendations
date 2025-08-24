@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: LicentaDB
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+      - db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+
+  server:
+    image: myproject_server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env.docker
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
+  recommender:
+    image: myproject_recommender:latest
+    build:
+      context: ../recommender
+      dockerfile: Dockerfile
+    env_file:
+      - ../recommender/.env.docker
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+volumes:
+  db_data:
