@@ -17,6 +17,7 @@ const Acasa = () => {
 
     const fetchRandomBooksIDs = async () => {
         try {
+            console.log(config.API_URL);
             const response = await fetch(`${config.API_URL}/api/getRandomBooks`);
             if (!response.ok) return;
             const { ids } = await response.json();
