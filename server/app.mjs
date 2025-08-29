@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const corsOptions = {
-    origin: 'https://web-app-for-readers-with-ai-recomme.vercel.app',
+    origin: 'https://web-app-for-readers-with-ai-recommendati-ghiur-daniels-projects.vercel.app',
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type, Authorization'
 }
