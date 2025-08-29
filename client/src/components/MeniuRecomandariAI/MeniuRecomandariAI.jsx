@@ -9,7 +9,7 @@ const MeniuRecomandariAI = ({setBookIds, setTotalPages}) => {
   const [selectedSentiment, setSelectedSentiment] = useState("neutral");
   const [searchWords, setSearchWords] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const isLiteVer = true;
   const { authData } = useContext(GlobalContext)
 
   const translatedEmotions = {
@@ -149,7 +149,11 @@ const MeniuRecomandariAI = ({setBookIds, setTotalPages}) => {
           <p>Se genereaza recomandari...</p>
         </div>
       ) : (
-        <div className="buttons-wrapper">
+        isLiteVer ? (<div className="liteVerContainer">
+          <p>Din cauza limitarilor date de serviciile de Deploy disponibile,</p>
+          <p>Recomandatorul AI nu este disponibil, acesta ocupand prea multa memorie pentru serviciile gratuite</p>
+        </div>) : 
+        (<div className="buttons-wrapper">
           <button className="btnGenereaza" onClick={ () => {handleGenerateRecommendations()}}>
             Genereaza dupa optiuni
           </button>
@@ -159,7 +163,8 @@ const MeniuRecomandariAI = ({setBookIds, setTotalPages}) => {
           <button className="btnIncarcaRecAI" onClick={() => {handleLoadRecommendations()}}>
             Afiseaza recomandarile
           </button>
-        </div>
+        </div>)
+        
       )}
     </div>
   );
