@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import text from "../utils/text.js";
 import "../styles/Acasa.css";
@@ -14,10 +14,17 @@ const Acasa = () => {
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [dataFullyLoaded, setDataFullyLoaded] = useState(false);
     const navigate = useNavigate();
+    
+    // Carousel scrolling state
+    const carouselRef = useRef(null);
+    const [isScrolling, setIsScrolling] = useState(false);
+    const [scrollTimeout, setScrollTimeout] = useState(null);
 
     const fetchRandomBooksIDs = async () => {
         try {
+            console.log(config.API_URL);
             const response = await fetch(`${config.API_URL}/api/getRandomBooks`);
+            console.log(response.status);
             if (!response.ok) return;
             const { ids } = await response.json();
             setBookIDs(ids);
@@ -45,6 +52,33 @@ const Acasa = () => {
         }
     };
 
+    // Handle scroll events to pause animation while user is scrolling
+    useEffect(() => {
+        const carousel = carouselRef.current;
+        if (!carousel) return;
+
+        const handleScroll = () => {
+            setIsScrolling(true);
+            
+            // Clear any existing timeout
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+            
+            // Set a new timeout to resume animation after scrolling stops
+            const newTimeout = setTimeout(() => {
+                setIsScrolling(false);
+            }, 500);
+            
+            setScrollTimeout(newTimeout);
+        };
+
+        carousel.addEventListener('scroll', handleScroll);
+        
+        return () => {
+            carousel.removeEventListener('scroll', handleScroll);
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+        };
+    }, [scrollTimeout]);
+
     useEffect(() => {
         fetchRandomBooksIDs();
     }, []);
@@ -68,12 +102,19 @@ const Acasa = () => {
                 </div>
                 <img src={pictures.PictureOne} alt="Book on a table" className='pictureOne' />
             </div>
+            
             <Citate/>
-            <section className="book-carousel">
-                <div className="book-carousel-track">
-                    {trackItems.map((book, idx) => (
-                        <Carte key={`${book.id}-${idx}`} {...book} />
-                    ))}
+            
+            <section className="book-carousel-section">
+                <div 
+                    className="book-carousel"
+                    ref={carouselRef}
+                >
+                    <div className={`book-carousel-track ${isScrolling ? 'paused' : ''}`}>
+                        {trackItems.map((book, idx) => (
+                            <Carte key={`${book.id}-${idx}`} {...book} />
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -88,7 +129,6 @@ const Acasa = () => {
                     </div>
                 </div>
             </div>
-            <button className='btnStatistici' onClick={() => {navigate("/statistici")}}>Vizualizeaza Statistici</button>
         </div>
     );
 };
