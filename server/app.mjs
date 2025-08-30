@@ -18,16 +18,18 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // allow requests with no origin (e.g. mobile apps, curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error("CORS not allowed"), false);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, false);
   },
   methods: "GET,POST,PUT,DELETE,OPTIONS",
   allowedHeaders: "Content-Type, Authorization",
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 204
 };
-
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions))
 app.use(express.json());
