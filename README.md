@@ -1,6 +1,8 @@
 # 📚 Web App for Book Lovers With AI Recommendations
 
 A web application for book enthusiasts that offers intelligent book recommendations, a dynamic community forum, a virtual marketplace and a Price Comparison for Romanian Book Merchants — all in one place.
+A lite version of the application can be accessed here. This version doesn't include the AI Recommender service as it occupies too much space and free deployment services currently do not cover its needs:
+https://web-app-for-readers-with-ai-recomme.vercel.app
 
 ## 🛠 Tech Stack
 
