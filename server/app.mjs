@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 const allowedOrigins = [
   "https://web-app-for-readers-with-ai-recommendations-gec4i717i.vercel.app",
   "https://web-app-for-readers-with-ai-recomme.vercel.app",
+  "https://web-app-for-readers-with-ai.vercel.app",
   "http://localhost:5173"
 ];
 
