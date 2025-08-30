@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   PieChart, Pie, Cell, ResponsiveContainer
@@ -14,7 +15,7 @@ const COLORS = [
 
 const Statistici = () => {
   const [categorieStatistici, setCategorieStatistici] = useState(1);
-
+  const navigate = useNavigate();
   const [anunturiData, setAnunturiData] = useState({
     lineChartData: [], pieChartData: [], barChartData: [], boxPlotData: [],
     totalAnunt: 0, openAnunt: 0, closedAnunt: 0
@@ -89,6 +90,8 @@ const Statistici = () => {
   };
 
   useEffect(() => {
+    navigate("/acasa");
+    /*
     setIsDataLoaded(false);
     if (categorieStatistici === 0) {
       if (anunturiCache) {
@@ -105,6 +108,7 @@ const Statistici = () => {
         fetchCarti();
       }
     }
+      */
   }, [categorieStatistici]);
 
   const handleAuthorChange = (e) => {

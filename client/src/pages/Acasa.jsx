@@ -90,7 +90,7 @@ const Acasa = () => {
                     </div>
                 </div>
             </div>
-            <button className='btnStatistici' onClick={() => {navigate("/statistici")}}>Vizualizeaza Statistici</button>
+            {/*<button className='btnStatistici' onClick={() => {navigate("/statistici")}}>Vizualizeaza Statistici</button>*/}
         </div>
     );
 };
