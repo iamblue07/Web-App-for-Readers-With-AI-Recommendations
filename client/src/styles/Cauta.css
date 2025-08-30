@@ -76,9 +76,7 @@
 
 .container-cauta-rezultate {
   display: grid;
-  overflow-x: hidden;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   overflow-y: auto;
 }
@@ -164,6 +162,10 @@
 }
 
 @media (max-width: 768px) {
+  .Cauta-Main-Container {
+    padding: 10px;
+  }
+  
   .container-Search-Button {
     flex-direction: column;
     align-items: stretch;
@@ -175,8 +177,8 @@
   }
 
   .container-cauta-rezultate {
-    grid-template-columns: 1fr;
-    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
   }
 
   .container-header {
@@ -184,12 +186,20 @@
   }
 
   .pagination-container {
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .pagination-center {
+    order: 2;
     gap: 12px;
+  }
+
+  .pagination-right {
+    order: 1;
+    margin-left: 0;
+    justify-content: center;
+    width: 100%;
   }
 
   .pagination-input {
