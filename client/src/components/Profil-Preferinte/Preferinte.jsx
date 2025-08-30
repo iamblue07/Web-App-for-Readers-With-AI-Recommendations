@@ -145,15 +145,15 @@ const Preferinte = ({ userId, isAdmin, canMountDashboard, setCanMountDashboard, 
                 <table className="tabel-profil-preferinte">
                     <thead>
                         <tr>
-                            <th className="th-profil-preferinte">Gen Literar</th>
-                            <th className="th-preferinte">Preferinta</th>
+                            <th className="th-gen-literar">Gen Literar</th>
+                            <th className="th-preferinta">Preferinta</th>
                         </tr>
                     </thead>
                     <tbody>
                         {genuriLiterare.map((gen, index) => (
                             <tr className="tr-preferinte" key={index}>
-                                <td className="td-preferinte">{gen}</td>
-                                <td className="td-preferinte">
+                                <td className="td-gen-literar">{gen}</td>
+                                <td className="td-preferinta">
                                     <span 
                                         className={`preferinta ${utilizatorPreferinte.includes(gen) ? 'prefer' : 'nu-prefer'}`} 
                                         onClick={() => togglePreferinta(gen)}

@@ -1,35 +1,77 @@
 /* src/components/Profil-Preferinte/Preferinte.css */
 .preferinte-profil-container {
-  width: 20vw;
-  height: 75vh;
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin: 0 auto;
 }
 
 .preferinte-profil-table-container {
   width: 100%;
-  flex-grow: 1;
-  overflow-y: auto;
-  overflow-x: none;
+  height: 300px; /* Fixed height for vertical scrolling */
+  overflow-y: scroll; /* Vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  /* Hide scrollbar for WebKit browsers */
+  scrollbar-width: none; /* Firefox */
+}
+
+.preferinte-profil-table-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 .tabel-profil-preferinte {
   width: 100%;
   border-collapse: collapse;
-  overflow-x: none;
+  table-layout: fixed;
 }
 
 .tr-profil-preferinte {
   height: 40px;
 }
 
-.th-preferinte, .td-preferinte {
+.th-gen-literar, .th-preferinta {
   padding: 10px;
   font-size: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid #e0e0e0;
   text-align: left;
+  background-color: #FFFBFE; /* Match app background */
+  color: #090C08; /* Match app text color */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.th-gen-literar {
+  width: 60%;
+}
+
+.th-preferinta {
+  width: 40%;
+}
+
+.td-gen-literar, .td-preferinta {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.td-gen-literar {
+  width: 60%;
+  white-space: normal; /* Allow text wrapping */
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word; /* Modern alternative */
+}
+
+.td-preferinta {
+  width: 40%;
 }
 
 .preferinta {
@@ -66,15 +108,15 @@
 
 .buton-preferinte {
   width: 100%;
+  max-width: 300px;
   padding: 10px 20px;
   cursor: pointer;
   border: 2px solid #090C08;
   border-radius: 8px;
   background-color: #FFFBFE;
   color: #090C08;
-  margin: 10px;
+  margin: 10px 0;
   transition: all 0.3s ease;
-  min-width: 130px;
   text-align: center;
 }
 
@@ -88,24 +130,28 @@
 /* Mobile Responsiveness */
 @media only screen and (max-width: 900px) {
   .preferinte-profil-container {
-    width: 100%;
-    height: auto;
     padding: 15px;
   }
   
   .preferinte-profil-table-container {
-    overflow-x: auto;
-    max-height: 300px;
+    height: 250px; /* Adjusted height for medium screens */
   }
   
-  .tabel-profil-preferinte {
-    min-width: 500px;
-  }
-  
-  .th-preferinte, 
-  .td-preferinte {
+  .th-gen-literar, 
+  .td-gen-literar {
+    width: 55%;
     padding: 8px;
     font-size: 13px;
+    text-align: left;
+  }
+  
+  .th-preferinta, 
+  .td-preferinta {
+    width: 45%;
+    padding: 8px;
+    font-size: 13px;
+    text-align: right;
+    vertical-align: middle;
   }
   
   .preferinta {
@@ -122,18 +168,28 @@
 
 @media only screen and (max-width: 768px) {
   .preferinte-profil-container {
-    height: auto;
     padding: 10px;
   }
   
-  .tabel-profil-preferinte {
-    min-width: 450px;
+  .preferinte-profil-table-container {
+    height: 200px; /* Adjusted height for smaller screens */
   }
   
-  .th-preferinte, 
-  .td-preferinte {
+  .th-gen-literar, 
+  .td-gen-literar {
+    width: 50%;
     padding: 6px;
     font-size: 12px;
+    text-align: left;
+  }
+  
+  .th-preferinta, 
+  .td-preferinta {
+    width: 50%;
+    padding: 6px;
+    font-size: 12px;
+    text-align: right;
+    vertical-align: middle;
   }
   
   .preferinta {
@@ -149,23 +205,36 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .tabel-profil-preferinte {
-    min-width: 380px;
+  .preferinte-profil-table-container {
+    height: 180px; /* Adjusted height for very small screens */
   }
   
-  .th-preferinte, 
-  .td-preferinte {
+  .th-gen-literar, 
+  .td-gen-literar {
+    width: 45%;
     padding: 5px;
     font-size: 11px;
+    text-align: left;
+  }
+  
+  .th-preferinta, 
+  .td-preferinta {
+    width: 55%;
+    padding: 5px;
+    font-size: 11px;
+    text-align: right;
+    vertical-align: middle;
   }
   
   .preferinta {
     font-size: 11px;
     min-width: 80px;
+    padding: 4px 6px;
   }
   
   .buton-preferinte {
     padding: 7px 10px;
     font-size: 12px;
+    max-width: 250px;
   }
 }

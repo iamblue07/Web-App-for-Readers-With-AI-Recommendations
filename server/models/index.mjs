@@ -26,6 +26,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     try {
         await sequelize.authenticate();
         console.log('Connected to MySQL!');
+        console.log(process.env.DB_NAME);
     } catch (error) {
         console.error('Unable to connect:', error);
     }
